@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [fleet](https://github.com/bringout/oca-ocb-vertical-industry/tree/67012b24b903942c98d7048c7e426dc8e54024fd/odoo-bringout-oca-ocb-fleet)
-- [account](https://github.com/bringout/oca-ocb-accounting/tree/eb3c9b9e76fbb706c132f3bf6a9538d6d5a0b1a7/odoo-bringout-oca-ocb-account)
+- [fleet](https://github.com/bringout/oca-ocb-vertical-industry/tree/4b47952bcafb71e73014398e226e567547a7244f/odoo-bringout-oca-ocb-fleet)
+- [account](https://github.com/bringout/oca-ocb-accounting/tree/150f2ecdb69d7dcf1345d7fd66832f9d87a21860/odoo-bringout-oca-ocb-account)
