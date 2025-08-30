@@ -2,5 +2,5 @@
 
 This addon depends on:
 
-- [account](../../../../odoo-bringout-oca-ocb-account)
-- [payment](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-payment)
+- [account](https://github.com/bringout/oca-ocb-accounting)
+- [payment](https://github.com/bringout/oca-ocb-core)

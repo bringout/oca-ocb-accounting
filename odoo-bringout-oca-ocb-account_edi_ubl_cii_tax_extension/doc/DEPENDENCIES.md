@@ -2,4 +2,4 @@
 
 This addon depends on:
 
-- [account_edi_ubl_cii](../../../../odoo-bringout-oca-ocb-account_edi_ubl_cii)
+- [account_edi_ubl_cii](https://github.com/bringout/oca-ocb-accounting)

@@ -2,8 +2,8 @@
 
 This addon depends on:
 
-- [base_setup](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-base_setup)
-- [product](../../../../../oca-ocb-sale/odoo-bringout-oca-ocb-product)
-- [analytic](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-analytic)
-- [portal](../../../../../oca-ocb-website/odoo-bringout-oca-ocb-portal)
-- [digest](../../../../../oca-ocb-core/odoo-bringout-oca-ocb-digest)
+- [base_setup](https://github.com/bringout/oca-ocb-core)
+- [product](https://github.com/bringout/oca-ocb-sale)
+- [analytic](https://github.com/bringout/oca-ocb-core)
+- [portal](https://github.com/bringout/oca-ocb-website)
+- [digest](https://github.com/bringout/oca-ocb-core)
