@@ -22,25 +22,33 @@ The account_edi_ubl_cii module uses PyPDF2 for:
 
 ## Solution
 
-**This package requires NO direct patches** because it uses:
-1. `OdooPdfFileWriter` from `odoo.tools.pdf` (oca-ocb-base)
-2. `OdooPdfFileReader` from `odoo.tools.pdf` (oca-ocb-base)
+**This package includes direct fixes** for PyPDF2 3.x page copying issue:
+1. Uses `OdooPdfFileWriter` from `odoo.tools.pdf` (oca-ocb-base) for compatibility
+2. **CRITICAL FIX**: Added explicit page copying after `cloneReaderDocumentRoot()`
 
-The main compatibility layer in `oca-ocb-base` handles all PyPDF2 version compatibility automatically.
+In PyPDF2 3.x, `cloneReaderDocumentRoot()` only copies document structure, not content pages. This was causing 327-byte empty PDFs. The fix includes explicit page copying:
+
+```python
+writer.cloneReaderDocumentRoot(reader)
+# Copy all pages from the reader to the writer (required for PyPDF2 3.x)
+for page_num in range(reader.getNumPages()):
+    page = reader.getPage(page_num)
+    writer.addPage(page)
+```
 
 ## Files Using PyPDF2
 
 ### `account_edi_ubl_cii/models/ir_actions_report.py`
 - Uses `OdooPdfFileWriter` for standards-compliant PDF generation (automatically compatible)
-- Calls `writer.cloneReaderDocumentRoot(reader)`
+- **FIXED**: Added explicit page copying after `writer.cloneReaderDocumentRoot(reader)`
 - Embeds UBL/CII XML in PDF documents
 
 ## Implementation Details
 
-**No code changes needed** in this package. Compatibility is achieved through:
+**Direct code changes applied** in this package:
 
-1. **Dependency**: Requires `oca-ocb-base` with `pdfwrite` branch
-2. **Automatic compatibility**: `OdooPdfFileWriter` handles all PyPDF2 version differences
+1. **Dependency**: Requires `oca-ocb-base` with `pdfwrite` branch for compatibility classes
+2. **Page copying fix**: Added explicit page copying loop in `_render_qweb_pdf_prepare_streams()`
 3. **Standards compliance**: UBL/CII standards maintained through compatibility layer
 
 ## Testing

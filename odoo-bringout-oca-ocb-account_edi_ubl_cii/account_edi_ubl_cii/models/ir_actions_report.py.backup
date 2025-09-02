@@ -91,10 +91,6 @@ class IrActionsReport(models.Model):
                     # Post-process and embed the additional files.
                     writer = OdooPdfFileWriter()
                     writer.cloneReaderDocumentRoot(reader)
-                    # Copy all pages from the reader to the writer (required for PyPDF2 3.x)
-                    for page_num in range(reader.getNumPages()):
-                        page = reader.getPage(page_num)
-                        writer.addPage(page)
 
                     # Generate and embed Factur-X
                     xml_content, _errors = self.env['account.edi.xml.cii']._export_invoice(invoice)
