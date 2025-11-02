@@ -57,6 +57,21 @@ class ResCompany(models.Model):
         string="Tax Return Lock Date",
         tracking=True,
         help="No users can edit journal entries related to a tax prior and inclusive of this date.")
+    sale_lock_date = fields.Date(
+        string="Sales Lock Date",
+        tracking=True,
+        help="No users can post or modify customer invoices prior to and inclusive of this date."
+    )
+    purchase_lock_date = fields.Date(
+        string="Purchases Lock Date",
+        tracking=True,
+        help="No users can post or modify vendor bills prior to and inclusive of this date."
+    )
+    hard_lock_date = fields.Date(
+        string="Hard Lock Date",
+        tracking=True,
+        help="No users can post or modify any journal entries prior to and inclusive of this date."
+    )
     transfer_account_id = fields.Many2one('account.account',
         domain="[('reconcile', '=', True), ('account_type', '=', 'asset_current'), ('deprecated', '=', False)]", string="Inter-Banks Transfer Account", help="Intermediary account used when moving money from a liqity account to another")
     expects_chart_of_accounts = fields.Boolean(string='Expects a Chart of Accounts', default=True)
@@ -375,25 +390,41 @@ class ResCompany(models.Model):
         return lock_date
 
     def write(self, values):
-        #restrict the closing of FY if there are still unposted entries
+        # Restrict the closing of FY if there are still unposted entries
         self._validate_fiscalyear_lock(values)
 
-        # Reflect the change on accounts
+        result = True
         for company in self:
-            if values.get('bank_account_code_prefix'):
-                new_bank_code = values.get('bank_account_code_prefix') or company.bank_account_code_prefix
-                company.reflect_code_prefix_change(company.bank_account_code_prefix, new_bank_code)
+            company_vals = values.copy()
+            old_bank_prefix = company.bank_account_code_prefix
+            old_cash_prefix = company.cash_account_code_prefix
 
-            if values.get('cash_account_code_prefix'):
-                new_cash_code = values.get('cash_account_code_prefix') or company.cash_account_code_prefix
-                company.reflect_code_prefix_change(company.cash_account_code_prefix, new_cash_code)
-
-            #forbid the change of currency_id if there are already some accounting entries existing
-            if 'currency_id' in values and values['currency_id'] != company.currency_id.id:
-                if self.env['account.move.line'].sudo().search([('company_id', '=', company.id)]):
+            # Forbid currency change when entries already exist.
+            if 'currency_id' in company_vals and company_vals['currency_id'] != company.currency_id.id:
+                if self.env['account.move.line'].sudo().search([('company_id', '=', company.id)], limit=1):
                     raise UserError(_('You cannot change the currency of the company since some journal items already exist'))
 
-        return super(ResCompany, self).write(values)
+            sync_vals = {}
+            if 'period_lock_date' in company_vals and 'sale_lock_date' not in company_vals:
+                if not company.sale_lock_date or company.sale_lock_date == company.period_lock_date:
+                    sync_vals['sale_lock_date'] = company_vals['period_lock_date']
+                if not company.purchase_lock_date or company.purchase_lock_date == company.period_lock_date:
+                    sync_vals['purchase_lock_date'] = company_vals['period_lock_date']
+            if 'fiscalyear_lock_date' in company_vals and 'hard_lock_date' not in company_vals:
+                if not company.hard_lock_date or company.hard_lock_date == company.fiscalyear_lock_date:
+                    sync_vals['hard_lock_date'] = company_vals['fiscalyear_lock_date']
+            if sync_vals:
+                company_vals.update(sync_vals)
+
+            result &= super(ResCompany, company).write(company_vals)
+
+            if 'bank_account_code_prefix' in company_vals and company.bank_account_code_prefix != old_bank_prefix:
+                company.reflect_code_prefix_change(old_bank_prefix, company.bank_account_code_prefix or company_vals.get('bank_account_code_prefix'))
+
+            if 'cash_account_code_prefix' in company_vals and company.cash_account_code_prefix != old_cash_prefix:
+                company.reflect_code_prefix_change(old_cash_prefix, company.cash_account_code_prefix or company_vals.get('cash_account_code_prefix'))
+
+        return result
 
     @api.model
     def setting_init_bank_account_action(self):

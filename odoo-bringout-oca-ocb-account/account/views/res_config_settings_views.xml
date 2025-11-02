@@ -77,8 +77,56 @@
                                     <div class="text-muted">
                                         How total tax amount is computed in orders and invoices
                                     </div>
-                                     <div class="content-group">
+                                    <div class="content-group">
                                         <field name="tax_calculation_rounding_method" class="o_light_label mt16" widget="radio"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box" id="lock_dates_box">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Lock Dates</span>
+                                    <span class="fa fa-lg fa-building-o" title="Values set here are company-specific." aria-label="Values set here are company-specific." groups="base.group_multi_company" role="img"/>
+                                    <div class="text-muted">
+                                        Prevent posting moves before the selected cut-off dates.
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="period_lock_date" class="col-lg-6 o_light_label">Non-Advisers Lock Date</label>
+                                            <div class="col-lg-6">
+                                                <field name="period_lock_date" widget="date"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt16">
+                                            <label for="fiscalyear_lock_date" class="col-lg-6 o_light_label">All Users Lock Date</label>
+                                            <div class="col-lg-6">
+                                                <field name="fiscalyear_lock_date" widget="date"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt16">
+                                            <label for="tax_lock_date" class="col-lg-6 o_light_label">Tax Lock Date</label>
+                                            <div class="col-lg-6">
+                                                <field name="tax_lock_date" widget="date"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt16">
+                                            <label for="sale_lock_date" class="col-lg-6 o_light_label">Sales Lock Date</label>
+                                            <div class="col-lg-6">
+                                                <field name="sale_lock_date" widget="date"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt16">
+                                            <label for="purchase_lock_date" class="col-lg-6 o_light_label">Purchases Lock Date</label>
+                                            <div class="col-lg-6">
+                                                <field name="purchase_lock_date" widget="date"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt16">
+                                            <label for="hard_lock_date" class="col-lg-6 o_light_label">Hard Lock Date</label>
+                                            <div class="col-lg-6">
+                                                <field name="hard_lock_date" widget="date"/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

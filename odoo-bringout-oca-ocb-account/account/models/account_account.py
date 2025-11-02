@@ -38,6 +38,13 @@ class AccountAccount(models.Model):
     currency_id = fields.Many2one('res.currency', string='Account Currency', tracking=True,
         help="Forces all journal items in this account to have a specific currency (i.e. bank journals). If no currency is set, entries can use any currency.")
     company_currency_id = fields.Many2one(related='company_id.currency_id')
+    company_ids = fields.Many2many(
+        'res.company',
+        compute='_compute_company_ids',
+        search='_search_company_ids',
+        string='Companies',
+        compute_sudo=True,
+    )
     code = fields.Char(size=64, required=True, tracking=True, unaccent=False)
     deprecated = fields.Boolean(default=False, tracking=True)
     used = fields.Boolean(compute='_compute_used', search='_search_used')
@@ -343,6 +350,23 @@ class AccountAccount(models.Model):
         ids = set(self._search_used('=', True)[0][2])
         for record in self:
             record.used = record.id in ids
+
+    def _compute_company_ids(self):
+        for account in self:
+            account.company_ids = account.company_id
+
+    def _search_company_ids(self, operator, value):
+        if operator in ('in', 'not in'):
+            if isinstance(value, (list, tuple, set)):
+                values = list(value)
+            elif hasattr(value, 'ids'):
+                values = value.ids
+            else:
+                values = [value]
+            return [('company_id', operator, values)]
+        if hasattr(value, 'id'):
+            value = value.id
+        return [('company_id', operator, value)]
 
     @api.model
     def _search_new_account_code(self, company, digits, prefix):

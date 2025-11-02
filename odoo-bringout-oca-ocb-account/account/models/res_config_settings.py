@@ -179,6 +179,12 @@ class ResConfigSettings(models.TransientModel):
         related='company_id.account_journal_early_pay_discount_gain_account_id',
         domain="[('deprecated', '=', False), ('company_id', '=', company_id), ('account_type', 'in', ('income', 'income_other', 'expense'))]",
     )
+    period_lock_date = fields.Date(related='company_id.period_lock_date', readonly=False)
+    fiscalyear_lock_date = fields.Date(related='company_id.fiscalyear_lock_date', readonly=False)
+    tax_lock_date = fields.Date(related='company_id.tax_lock_date', readonly=False)
+    sale_lock_date = fields.Date(related='company_id.sale_lock_date', readonly=False)
+    purchase_lock_date = fields.Date(related='company_id.purchase_lock_date', readonly=False)
+    hard_lock_date = fields.Date(related='company_id.hard_lock_date', readonly=False)
 
     def set_values(self):
         super().set_values()
