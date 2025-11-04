@@ -25,41 +25,49 @@ msgstr "Account EDI proxy korisnik"
 msgid "Account Edi Proxy Client"
 msgstr "Account Edi Proxy klijent"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model_terms:ir.ui.view,arch_db:account_edi_proxy_client.view_form_account_edi_proxy_client_user
 msgid "Account Journal"
 msgstr "Dnevnik"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__active
 msgid "Active"
 msgstr "Aktivan"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_format_code
 msgid "Code"
 msgstr "Šifra"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model,name:account_edi_proxy_client.model_res_company
 msgid "Companies"
 msgstr "Tvrtke"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__company_id
 msgid "Company"
 msgstr "Tvrtka"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__display_name
 msgid "Display Name"
@@ -83,7 +91,7 @@ msgstr "EDI format"
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_format_id
 msgid "Edi Format"
-msgstr "Edi Format"
+msgstr "EDI format"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_identification
@@ -100,21 +108,25 @@ msgstr "ID"
 msgid "Id Client"
 msgstr "Id klijenta"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user____last_update
 msgid "Last Modified on"
 msgstr "Zadnja promjena"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__write_uid
 msgid "Last Updated by"
 msgstr "Promijenio"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__write_date
 msgid "Last Updated on"
 msgstr "Vrijeme promjene"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__private_key
 msgid "Private Key"
@@ -125,6 +137,7 @@ msgstr "Privatni ključ"
 msgid "Private Key Filename"
 msgstr "Naziv datoteke privatnog ključa"
 
+# taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__refresh_token
 msgid "Refresh Token"
@@ -141,32 +154,39 @@ msgid ""
 "The unique id that identifies this user for on the edi format, typically the"
 " vat"
 msgstr ""
+"Jedinstveni ID koji identifikuje ovog korisnika za EDI format, obično PDV "
+"broj"
 
 #. module: account_edi_proxy_client
 #. odoo-python
-#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
+#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py
 #, python-format
 msgid ""
 "The url that this service requested returned an error. The url it tried to "
 "contact was %s"
 msgstr ""
+"URL koji je ovaj servis zahtijevao vratio je grešku. URL koji je pokušao "
+"kontaktirati bio je %s"
 
 #. module: account_edi_proxy_client
 #. odoo-python
-#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
+#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py
 #, python-format
 msgid ""
 "The url that this service requested returned an error. The url it tried to "
 "contact was %s. %s"
 msgstr ""
+"URL koji je ovaj servis zahtijevao vratio je grešku. URL koji je pokušao "
+"kontaktirati bio je %s. %s"
 
 #. module: account_edi_proxy_client
 #. odoo-python
-#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
+#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py
 #, python-format
 msgid ""
 "The url that this service tried to contact does not exist. The url was %r"
 msgstr ""
+"URL koji je ovaj servis pokušao kontaktirati ne postoji. URL bio je %r"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.constraint,message:account_edi_proxy_client.constraint_account_edi_proxy_client_user_unique_edi_identification_per_format

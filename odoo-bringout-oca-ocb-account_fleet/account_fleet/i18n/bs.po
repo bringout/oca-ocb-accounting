@@ -15,64 +15,75 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:ir.model.fields,field_description:account_fleet.field_fleet_vehicle__account_move_ids
 msgid "Account Move"
 msgstr "Temeljnica"
 
+# taken from hr.po
 #. module: account_fleet
 #: model_terms:ir.ui.view,arch_db:account_fleet.fleet_vehicle_view_form
 msgid "Bills"
 msgstr "Računi"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:ir.model.fields,field_description:account_fleet.field_fleet_vehicle__bill_count
 msgid "Bills Count"
 msgstr "Broj računa"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_account_automatic_entry_wizard
 msgid "Create Automatic Entries"
 msgstr "Kreiraj automatska knjiženja"
 
+# taken from hr.po
 #. module: account_fleet
 #: model_terms:ir.ui.view,arch_db:account_fleet.account_move_view_tree
 msgid "Creation Date"
 msgstr "Datum kreiranja"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_account_move
 msgid "Journal Entry"
 msgstr "Temeljnica"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_account_move_line
 msgid "Journal Item"
 msgstr "Stavka dnevnika"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:ir.model.fields,field_description:account_fleet.field_account_move_line__need_vehicle
 msgid "Need Vehicle"
 msgstr "Potrebno vozilo"
 
+# taken from hr.po
 #. module: account_fleet
 #. odoo-python
-#: code:addons/account_fleet/models/account_move.py:0
+#: code:addons/account_fleet/models/account_move.py
 #, python-format
 msgid "Service Vendor Bill: %s"
 msgstr "Račun za usluge :%s"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_fleet_vehicle
-#: model:ir.model.fields,field_description:account_fleet.field_account_move_line__vehicle_id
 msgid "Vehicle"
 msgstr "Vozilo"
 
+# taken from hr.po
 #. module: account_fleet
 #: model:fleet.service.type,name:account_fleet.data_fleet_service_type_vendor_bill
 msgid "Vendor Bill"
 msgstr "Ulazni račun"
 
+# taken from hr.po
 #. module: account_fleet
 #: model_terms:ir.ui.view,arch_db:account_fleet.fleet_vehicle_view_form
 msgid "show the vendor bills for this vehicle"

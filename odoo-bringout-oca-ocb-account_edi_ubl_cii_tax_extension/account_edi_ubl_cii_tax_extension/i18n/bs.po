@@ -30,6 +30,7 @@ msgstr "B - Prenešeno (PDV), u Italiji"
 msgid ""
 "Common functions for EDI documents: generate the data, the constraints, etc"
 msgstr ""
+"Zajedničke funkcije za EDI dokumente: generisanje podataka, ograničenja, itd"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_category_code__e
@@ -66,6 +67,7 @@ msgstr "O - Usluge izvan opsega poreza"
 msgid "S - Standard rate"
 msgstr "S - Standardna stopa"
 
+# taken from hr.po
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model,name:account_edi_ubl_cii_tax_extension.model_account_tax
 msgid "Tax"
@@ -92,12 +94,15 @@ msgid ""
 "The reason why the amount is exempted from VAT or why no VAT is being "
 "charged, used for electronic invoicing purposes."
 msgstr ""
+"Razlog zašto je iznos oslobođen PDV-a ili zašto se ne naplaćuje PDV, koristi"
+" se za svrhe elektronskog fakturisanja."
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132
 msgid ""
 "VATEX-EU-132 - Exempt based on article 132 of Council Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132 - Oslobođeno na osnovu člana 132 Direktive Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1a
@@ -105,6 +110,8 @@ msgid ""
 "VATEX-EU-132-1A - Exempt based on article 132, section 1 (a) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1A - Oslobođeno na osnovu člana 132, dio 1 (a) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1b
@@ -112,6 +119,8 @@ msgid ""
 "VATEX-EU-132-1B - Exempt based on article 132, section 1 (b) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1B - Oslobođeno na osnovu člana 132, dio 1 (b) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1c
@@ -119,6 +128,8 @@ msgid ""
 "VATEX-EU-132-1C - Exempt based on article 132, section 1 (c) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1C - Oslobođeno na osnovu člana 132, dio 1 (c) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1d
@@ -126,6 +137,8 @@ msgid ""
 "VATEX-EU-132-1D - Exempt based on article 132, section 1 (d) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1D - Oslobođeno na osnovu člana 132, dio 1 (d) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1e
@@ -133,6 +146,8 @@ msgid ""
 "VATEX-EU-132-1E - Exempt based on article 132, section 1 (e) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1E - Oslobođeno na osnovu člana 132, dio 1 (e) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1f
@@ -140,6 +155,8 @@ msgid ""
 "VATEX-EU-132-1F - Exempt based on article 132, section 1 (f) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1F - Oslobođeno na osnovu člana 132, dio 1 (f) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1g
@@ -147,6 +164,8 @@ msgid ""
 "VATEX-EU-132-1G - Exempt based on article 132, section 1 (g) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1G - Oslobođeno na osnovu člana 132, dio 1 (g) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1h
@@ -154,6 +173,8 @@ msgid ""
 "VATEX-EU-132-1H - Exempt based on article 132, section 1 (h) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1H - Oslobođeno na osnovu člana 132, dio 1 (h) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1i
@@ -161,6 +182,8 @@ msgid ""
 "VATEX-EU-132-1I - Exempt based on article 132, section 1 (i) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1I - Oslobođeno na osnovu člana 132, dio 1 (i) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1j
@@ -168,6 +191,8 @@ msgid ""
 "VATEX-EU-132-1J - Exempt based on article 132, section 1 (j) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1J - Oslobođeno na osnovu člana 132, dio 1 (j) Direktive Vijeća"
+" 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1k
@@ -175,6 +200,8 @@ msgid ""
 "VATEX-EU-132-1K - Exempt based on article 132, section 1 (k) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1K - Oslobođeno na osnovu člana 132, odjeljak 1 (k) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1l
@@ -182,6 +209,8 @@ msgid ""
 "VATEX-EU-132-1L - Exempt based on article 132, section 1 (l) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1L - Oslobođeno na osnovu člana 132, odjeljak 1 (l) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1m
@@ -189,6 +218,8 @@ msgid ""
 "VATEX-EU-132-1M - Exempt based on article 132, section 1 (m) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1M - Oslobođeno na osnovu člana 132, odjeljak 1 (m) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1n
@@ -196,6 +227,8 @@ msgid ""
 "VATEX-EU-132-1N - Exempt based on article 132, section 1 (n) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1N - Oslobođeno na osnovu člana 132, odjeljak 1 (n) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1o
@@ -203,6 +236,8 @@ msgid ""
 "VATEX-EU-132-1O - Exempt based on article 132, section 1 (o) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1O - Oslobođeno na osnovu člana 132, odjeljak 1 (o) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1p
@@ -210,6 +245,8 @@ msgid ""
 "VATEX-EU-132-1P - Exempt based on article 132, section 1 (p) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1P - Oslobođeno na osnovu člana 132, odjeljak 1 (p) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1q
@@ -217,12 +254,15 @@ msgid ""
 "VATEX-EU-132-1Q - Exempt based on article 132, section 1 (q) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-132-1Q - Oslobođeno na osnovu člana 132, odjeljak 1 (q) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143
 msgid ""
 "VATEX-EU-143 - Exempt based on article 143 of Council Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143 - Oslobođeno na osnovu člana 143 Direktive Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1a
@@ -230,6 +270,8 @@ msgid ""
 "VATEX-EU-143-1A - Exempt based on article 143, section 1 (a) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1A - Oslobođeno na osnovu člana 143, odjeljak 1 (a) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1b
@@ -237,6 +279,8 @@ msgid ""
 "VATEX-EU-143-1B - Exempt based on article 143, section 1 (b) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1B - Oslobođeno na osnovu člana 143, odjeljak 1 (b) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1c
@@ -244,6 +288,8 @@ msgid ""
 "VATEX-EU-143-1C - Exempt based on article 143, section 1 (c) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1C - Oslobođeno na osnovu člana 143, odjeljak 1 (c) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1d
@@ -251,6 +297,8 @@ msgid ""
 "VATEX-EU-143-1D - Exempt based on article 143, section 1 (d) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1D - Oslobođeno na osnovu člana 143, odjeljak 1 (d) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1e
@@ -258,6 +306,8 @@ msgid ""
 "VATEX-EU-143-1E - Exempt based on article 143, section 1 (e) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1E - Oslobođeno na osnovu člana 143, odjeljak 1 (e) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1f
@@ -265,6 +315,8 @@ msgid ""
 "VATEX-EU-143-1F - Exempt based on article 143, section 1 (f) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1F - Oslobođeno na osnovu člana 143, odjeljak 1 (f) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1fa
@@ -272,6 +324,8 @@ msgid ""
 "VATEX-EU-143-1FA - Exempt based on article 143, section 1 (fa) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1FA - Oslobođeno na osnovu člana 143, odjeljak 1 (fa) Direktive"
+" Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1g
@@ -279,6 +333,8 @@ msgid ""
 "VATEX-EU-143-1G - Exempt based on article 143, section 1 (g) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1G - Oslobođeno na osnovu člana 143, odjeljak 1 (g) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1h
@@ -286,6 +342,8 @@ msgid ""
 "VATEX-EU-143-1H - Exempt based on article 143, section 1 (h) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1H - Oslobođeno na osnovu člana 143, odjeljak 1 (h) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1i
@@ -293,6 +351,8 @@ msgid ""
 "VATEX-EU-143-1I - Exempt based on article 143, section 1 (i) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1I - Oslobođeno na osnovu člana 143, odjeljak 1 (i) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1j
@@ -300,6 +360,8 @@ msgid ""
 "VATEX-EU-143-1J - Exempt based on article 143, section 1 (j) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1J - Oslobođeno na osnovu člana 143, odjeljak 1 (j) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1k
@@ -307,6 +369,8 @@ msgid ""
 "VATEX-EU-143-1K - Exempt based on article 143, section 1 (k) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1K - Oslobođeno na osnovu člana 143, odjeljak 1 (k) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143-1l
@@ -314,12 +378,15 @@ msgid ""
 "VATEX-EU-143-1L - Exempt based on article 143, section 1 (l) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-143-1L - Oslobođeno na osnovu člana 143, odjeljak 1 (l) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148
 msgid ""
 "VATEX-EU-148 - Exempt based on article 148 of Council Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148 - Oslobođeno na osnovu člana 148 Direktive Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148-a
@@ -327,6 +394,8 @@ msgid ""
 "VATEX-EU-148-A - Exempt based on article 148, section (a) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148-A - Oslobođeno na osnovu člana 148, odjeljak (a) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148-b
@@ -334,6 +403,8 @@ msgid ""
 "VATEX-EU-148-B - Exempt based on article 148, section (b) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148-B - Oslobođeno na osnovu člana 148, odjeljak (b) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148-c
@@ -341,6 +412,8 @@ msgid ""
 "VATEX-EU-148-C - Exempt based on article 148, section (c) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148-C - Oslobođeno na osnovu člana 148, odjeljak (c) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148-d
@@ -348,6 +421,8 @@ msgid ""
 "VATEX-EU-148-D - Exempt based on article 148, section (d) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148-D - Oslobođeno na osnovu člana 148, odjeljak (d) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148-e
@@ -355,6 +430,8 @@ msgid ""
 "VATEX-EU-148-E - Exempt based on article 148, section (e) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148-E - Oslobođeno na osnovu člana 148, odjeljak (e) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148-f
@@ -362,6 +439,8 @@ msgid ""
 "VATEX-EU-148-F - Exempt based on article 148, section (f) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148-F - Oslobođeno na osnovu člana 148, odjeljak (f) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-148-g
@@ -369,12 +448,15 @@ msgid ""
 "VATEX-EU-148-G - Exempt based on article 148, section (g) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-148-G - Oslobođeno na osnovu člana 148, odjeljak (g) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-151
 msgid ""
 "VATEX-EU-151 - Exempt based on article 151 of Council Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-151 - Oslobođeno na osnovu člana 151 Direktive Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-151-1a
@@ -382,6 +464,8 @@ msgid ""
 "VATEX-EU-151-1A - Exempt based on article 151, section 1 (a) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-151-1A - Oslobođeno na osnovu člana 151, odjeljak 1 (a) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-151-1aa
@@ -389,6 +473,8 @@ msgid ""
 "VATEX-EU-151-1AA - Exempt based on article 151, section 1 (aa) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-151-1AA - Oslobođeno na osnovu člana 151, odjeljak 1 (aa) Direktive"
+" Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-151-1b
@@ -396,6 +482,8 @@ msgid ""
 "VATEX-EU-151-1B - Exempt based on article 151, section 1 (b) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-151-1B - Oslobođeno na osnovu člana 151, odjeljak 1 (b) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-151-1c
@@ -403,6 +491,8 @@ msgid ""
 "VATEX-EU-151-1C - Exempt based on article 151, section 1 (c) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-151-1C - Oslobođeno na osnovu člana 151, odjeljak 1 (c) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-151-1d
@@ -410,6 +500,8 @@ msgid ""
 "VATEX-EU-151-1D - Exempt based on article 151, section 1 (d) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-151-1D - Oslobođeno na osnovu člana 151, odjeljak 1 (d) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-151-1e
@@ -417,12 +509,15 @@ msgid ""
 "VATEX-EU-151-1E - Exempt based on article 151, section 1 (e) of Council "
 "Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-151-1E - Oslobođeno na osnovu člana 151, odjeljak 1 (e) Direktive "
+"Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-309
 msgid ""
 "VATEX-EU-309 - Exempt based on article 309 of Council Directive 2006/112/EC"
 msgstr ""
+"VATEX-EU-309 - Oslobođeno na osnovu člana 309 Direktive Vijeća 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-79-c
@@ -430,6 +525,8 @@ msgid ""
 "VATEX-EU-79-C - Exempt based on article 79, point c of Council Directive "
 "2006/112/EC"
 msgstr ""
+"VATEX-EU-79-C - Oslobođeno na osnovu člana 79, tačka c Direktive Vijeća "
+"2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_ae
@@ -440,7 +537,7 @@ msgstr "VATEX-EU-AE - Obrnuto terećenje"
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_d
 msgid ""
 "VATEX-EU-D - Intra-Community acquisition from second hand means of transport"
-msgstr ""
+msgstr "VATEX-EU-D - Intrakomunitarna nabavka polovna transportna sredstva"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_f
@@ -467,6 +564,7 @@ msgstr "VATEX-EU-IC - Unutar-zajednička isporuka"
 msgid ""
 "VATEX-EU-J - Intra-Community acquisition of collectors items and antiques"
 msgstr ""
+"VATEX-EU-J - Intrakomunitarna nabavka kolekcionarskih predmeta i antikviteta"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_eu_o
@@ -479,6 +577,8 @@ msgid ""
 "VATEX-FR-CNWVAT - France domestic Credit Notes without VAT, due to supplier "
 "forfeit of VAT for discount"
 msgstr ""
+"VATEX-FR-CNWVAT - Francuske domaće kreditne note bez PDV-a, zbog odricanja "
+"dobavljača od PDV-a za popust"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex_fr-franchise

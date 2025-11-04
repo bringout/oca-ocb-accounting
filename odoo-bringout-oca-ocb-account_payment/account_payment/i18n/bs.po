@@ -15,28 +15,35 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_success
 msgid "<b>Communication: </b>"
 msgstr "<b>Komunikacija: </b>"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid ""
 "<i class=\"fa fa-arrow-circle-right\"/><span class=\"d-none d-md-inline\"> "
 "Pay Now</span>"
 msgstr ""
+"<i class=\"fa fa-arrow-circle-right\"/><span class=\"d-none d-md-inline\"> "
+"Plati sad</span>"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_page_inherit_payment
 msgid "<i class=\"fa fa-fw fa-arrow-circle-right\"/> Pay Now"
 msgstr "<i class=\"fa fa-arrow-circle-right\"/> Plati odmah"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_page_inherit_payment
 msgid "<i class=\"fa fa-fw fa-check-circle\"/> Paid"
 msgstr "<i class=\"fa fa-check-circle\"/> Plaćeno"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_page_inherit_payment
 msgid "<i class=\"fa fa-fw fa-check-circle\"/> Pending"
@@ -48,14 +55,20 @@ msgid ""
 "<i class=\"fa fa-info\"/> You have credits card registered, you can log-in "
 "to be able to use them."
 msgstr ""
+"<i class=\"fa fa-info\"/> Imate registrovane kreditne kartice, možete se "
+"prijaviti da biste mogli da ih koristite."
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid ""
 "<span class=\"badge rounded-pill text-bg-danger\"><i class=\"fa fa-fw fa-"
 "remove\"/><span class=\"d-none d-md-inline\"> Cancelled</span></span>"
 msgstr ""
+"<span class=\"badge rounded-pill text-bg-danger\"><i class=\"fa fa-fw fa-"
+"remove\"/><span class=\"d-none d-md-inline\"> Otkazano</span></span>"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid ""
@@ -63,34 +76,49 @@ msgid ""
 "clock-o\"/><span class=\"d-none d-md-inline\"> Waiting for "
 "Payment</span></span>"
 msgstr ""
+"<span class=\"badge rounded-pill text-bg-info\"><i class=\"fa fa-fw fa-"
+"clock-o\"/><span class=\"d-none d-md-inline\"> Čeka na "
+"plaćanje</span></span>"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid ""
 "<span class=\"badge rounded-pill text-bg-primary\"><i class=\"fa fa-fw fa-"
 "check\"/><span class=\"d-none d-md-inline\"> Authorized</span></span>"
 msgstr ""
+"<span class=\"badge rounded-pill text-bg-primary\"><i class=\"fa fa-fw fa-"
+"check\"/><span class=\"d-none d-md-inline\"> Autorizirano</span></span>"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid ""
 "<span class=\"badge rounded-pill text-bg-success\"><i class=\"fa fa-fw fa-"
 "check\"/><span class=\"d-none d-md-inline\"> Paid</span></span>"
 msgstr ""
+"<span class=\"badge rounded-pill text-bg-success\"><i class=\"fa fa-fw fa-"
+"check\"/><span class=\"d-none d-md-inline\"> Plaćeno</span></span>"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid ""
 "<span class=\"badge rounded-pill text-bg-success\"><i class=\"fa fa-fw fa-"
 "check\"/><span class=\"d-none d-md-inline\"> Reversed</span></span>"
 msgstr ""
+"<span class=\"badge rounded-pill text-bg-success\"><i class=\"fa fa-fw fa-"
+"check\"/><span class=\"d-none d-md-inline\"> Stornirano</span></span>"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid ""
 "<span class=\"badge rounded-pill text-bg-warning\"><span class=\"d-none "
 "d-md-inline\"> Pending</span></span>"
 msgstr ""
+"<span class=\"badge rounded-pill text-bg-warning\"><span class=\"d-none "
+"d-md-inline\"> Na čekanju</span></span>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
@@ -98,6 +126,8 @@ msgid ""
 "<strong>No suitable payment option could be found.</strong><br/>\n"
 "                                If you believe that it is an error, please contact the website administrator."
 msgstr ""
+"<strong>Nijedna pogodna opcija plaćanja nije mogla biti pronađena.</strong><br/>\n"
+"                                If you believe that it is an error, please contact the website administrator."
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_refund_wizard_view_form
@@ -106,100 +136,118 @@ msgid ""
 "                        Wait a moment for it to be processed. If the refund is still pending in a\n"
 "                        few minutes, please check your payment provider configuration."
 msgstr ""
+"<strong>Upozorenje!</strong> Postoji povrat novca na čekanju za ovu uplatu.\n"
+"                        Sačekajte trenutak da se obradi. Ako povrat novca još uvijek čeka nakon\n"
+"                        nekoliko minuta, molimo provjerite konfiguraciju vašeg provajdera plaćanja."
 
+# taken from hr.po
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/account_payment.py:0
+#: code:addons/account_payment/models/account_payment.py
 #, python-format
 msgid "A payment transaction with reference %s already exists."
 msgstr "Transakcija plaćanja sa referncom %s već postoji."
 
+# taken from hr.po
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/account_payment.py:0
+#: code:addons/account_payment/models/account_payment.py
 #, python-format
 msgid "A token is required to create a new payment transaction."
 msgstr "Token je potreban za kreiranje nove transakcije."
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__amount_available_for_refund
 msgid "Amount Available For Refund"
 msgstr "Iznos raspoloživ za povrat"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__amount_paid
-#: model:ir.model.fields,field_description:account_payment.field_account_move__amount_paid
-#: model:ir.model.fields,field_description:account_payment.field_account_payment__amount_paid
 msgid "Amount paid"
 msgstr "Plaćeni iznos"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.account_invoice_view_form_inherit_payment
 msgid ""
 "Are you sure you want to void the authorized transaction? This action can't "
 "be undone."
 msgstr ""
+"Jeste li sigurni da želite poništiti autoriziranu transakciju? Ova radnja ne"
+" može se poništiti."
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__authorized_transaction_ids
-#: model:ir.model.fields,field_description:account_payment.field_account_move__authorized_transaction_ids
-#: model:ir.model.fields,field_description:account_payment.field_account_payment__authorized_transaction_ids
 msgid "Authorized Transactions"
 msgstr "Autorizirane transkacije"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.account_invoice_view_form_inherit_payment
 msgid "Capture Transaction"
 msgstr "Zabilježi transakciju"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_refund_wizard_view_form
-#: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 msgid "Close"
 msgstr "Zatvori"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_payment_register__payment_method_code
 msgid "Code"
 msgstr "Šifra"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__currency_id
 msgid "Currency"
 msgstr "Valuta"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__display_name
 msgid "Display Name"
 msgstr "Naziv"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_success
 msgid ""
 "Done, your online payment has been successfully processed. Thank you for "
 "your order."
 msgstr ""
+"Gotovo,vaše plaćanje je uspješno obrađeno. Zahvaljujemo na Vašoj narudžbi."
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_payment_link_wizard
 msgid "Generate Sales Payment Link"
 msgstr "Generirajte link za plaćanje prodaje"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.actions.act_window,name:account_payment.action_invoice_order_generate_link
 msgid "Generate a Payment Link"
 msgstr "Generiraj link za plaćanje"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__has_pending_refund
 msgid "Has a pending refund"
@@ -216,45 +264,54 @@ msgid ""
 "In test mode, a fake payment is processed through a test payment interface.\n"
 "This mode is advised when setting up the provider."
 msgstr ""
+"U testnom režimu, lažna uplata se obrađuje kroz testni interfejs plaćanja.\n"
+"Ovaj režim se preporučuje pri postavljanju provajdera."
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_transaction_form
 msgid "Invoice(s)"
 msgstr "Račun(i)"
 
+# taken from hr.po
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/payment_transaction.py:0
-#: model:ir.model.fields,field_description:account_payment.field_payment_transaction__invoice_ids
+#: code:addons/account_payment/models/payment_transaction.py
 #, python-format
 msgid "Invoices"
 msgstr "Računi"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_transaction__invoices_count
 msgid "Invoices Count"
 msgstr "Broj računa"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_journal
 msgid "Journal"
 msgstr "Dnevnik"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_move
 msgid "Journal Entry"
 msgstr "Temeljnica"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard____last_update
 msgid "Last Modified on"
 msgstr "Zadnja promjena"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Promijenio"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__write_date
 msgid "Last Updated on"
@@ -271,6 +328,8 @@ msgid ""
 "Note that only tokens from providers allowing to capture the amount are "
 "available."
 msgstr ""
+"Napomena da su dostupni samo tokeni od provajdera koji dozvoljavaju hvatanje"
+" iznosa."
 
 #. module: account_payment
 #: model:ir.model.fields,help:account_payment.field_account_payment_register__payment_token_id
@@ -278,55 +337,65 @@ msgid ""
 "Note that tokens from providers set to only authorize transactions (instead "
 "of capturing the amount) are not available."
 msgstr ""
+"Napomena da tokeni od provajdera postavljenih da samo autorizuju transakcije"
+" (umjesto hvatanja iznosa) nisu dostupni."
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
+#, python-format
 msgid "Pay Now"
 msgstr "Plati Sad"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid "Pay now"
 msgstr "Plati odmah"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 msgid "Pay with"
 msgstr "Plati putem"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__payment_id
-#: model:ir.model.fields,field_description:account_payment.field_payment_transaction__payment_id
 msgid "Payment"
 msgstr "Plaćanje"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__payment_amount
 msgid "Payment Amount"
 msgstr "Iznos za plaćanje"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.ui.menu,name:account_payment.payment_icon_menu
 msgid "Payment Icons"
 msgstr "Ikone plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_provider__journal_id
 msgid "Payment Journal"
 msgstr "Dnevnik partnera"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_payment_method
-#: model:ir.model,name:account_payment.model_account_payment_method_line
 msgid "Payment Methods"
 msgstr "Načini plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_payment_provider
-#: model:ir.model.fields,field_description:account_payment.field_account_payment_method_line__payment_provider_id
 msgid "Payment Provider"
 msgstr "Pružatelj usluge naplate"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.ui.menu,name:account_payment.payment_provider_menu
 msgid "Payment Providers"
@@ -337,42 +406,42 @@ msgstr "Pružatelj usluge naplate"
 msgid "Payment Refund Wizard"
 msgstr "Čarobnjak povraćaja plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.ui.menu,name:account_payment.payment_token_menu
 msgid "Payment Tokens"
 msgstr "Token plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_payment_transaction
-#: model:ir.model.fields,field_description:account_payment.field_account_payment__payment_transaction_id
-#: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__transaction_id
-#: model_terms:ir.ui.view,arch_db:account_payment.account_invoice_view_form_inherit_payment
 msgid "Payment Transaction"
 msgstr "Transakcija plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.ui.menu,name:account_payment.payment_transaction_menu
 msgid "Payment Transactions"
 msgstr "Transakcija plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_payment
 msgid "Payments"
 msgstr "Plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/account_payment_method_line.py:0
+#: code:addons/account_payment/models/account_payment_method_line.py
 #, python-format
 msgid "Provider"
 msgstr "Davatelj"
 
+# taken from hr.po
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/account_payment.py:0
-#: code:addons/account_payment/models/account_payment.py:0
-#: model_terms:ir.ui.view,arch_db:account_payment.payment_refund_wizard_view_form
-#: model_terms:ir.ui.view,arch_db:account_payment.view_account_payment_form_inherit_payment
+#: code:addons/account_payment/models/account_payment.py
 #, python-format
 msgid "Refund"
 msgstr "Odobrenje"
@@ -387,6 +456,7 @@ msgstr "Iznos povraćaja"
 msgid "Refunded Amount"
 msgstr "Vraćeni iznos"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.view_account_payment_form_inherit_payment
 msgid "Refunds"
@@ -397,11 +467,13 @@ msgstr "Povrati"
 msgid "Refunds Count"
 msgstr "Broj povraćaja"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_payment_register
 msgid "Register Payment"
 msgstr "Registriraj plaćanje"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.view_account_journal_form
 msgid "SETUP"
@@ -422,6 +494,7 @@ msgstr "Sačuvan token plaćanja"
 msgid "Source Payment"
 msgstr "Izvorni plaćanje"
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_payment_method_line__payment_provider_state
 msgid "State"
@@ -429,24 +502,24 @@ msgstr "Status"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__suitable_payment_token_ids
-#: model:ir.model.fields,field_description:account_payment.field_account_payment_register__suitable_payment_token_ids
 msgid "Suitable Payment Token"
 msgstr "Prikladni token plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/controllers/payment.py:0
+#: code:addons/account_payment/controllers/payment.py
 #, python-format
 msgid "The access token is invalid."
 msgstr "Token pristupa nije ispravan."
 
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/wizards/payment_refund_wizard.py:0
+#: code:addons/account_payment/wizards/payment_refund_wizard.py
 #, python-format
 msgid ""
 "The amount to be refunded must be positive and cannot be superior to %s."
-msgstr ""
+msgstr "Iznos za povrat mora biti pozitivan i ne može biti veći od %s."
 
 #. module: account_payment
 #: model:ir.model.fields,help:account_payment.field_payment_provider__journal_id
@@ -455,17 +528,18 @@ msgstr "Dnevnik u kojem se knjižene uspješne transakcije."
 
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/payment_transaction.py:0
+#: code:addons/account_payment/models/payment_transaction.py
 #, python-format
 msgid ""
 "The payment related to the transaction with reference %(ref)s has been "
 "posted: %(link)s"
 msgstr ""
+"Uplata vezana za transakciju sa referencom %(ref)s je proknjižena: %(link)s"
 
+# taken from hr.po
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/controllers/payment.py:0
-#: code:addons/account_payment/controllers/payment.py:0
+#: code:addons/account_payment/controllers/payment.py
 #, python-format
 msgid "The provided parameters are invalid."
 msgstr "Parametri nisu valjani."
@@ -478,7 +552,8 @@ msgstr "Izvorni plaćanje povezanih povraćaja plaćanja"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_error
 msgid "There was an error processing your payment: invalid invoice."
-msgstr "Dogodila se greška prilikom obrade vašeg plaćanja: neispravna faktura."
+msgstr ""
+"Dogodila se greška prilikom obrade vašeg plaćanja: neispravna faktura."
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_error
@@ -486,30 +561,37 @@ msgid ""
 "There was an error processing your payment: issue with credit card ID "
 "validation."
 msgstr ""
+"Došlo je do greške pri obradi vaše uplate: problem sa validacijom ID "
+"kreditne kartice."
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_error
 msgid "There was an error processing your payment: transaction failed.<br/>"
-msgstr "Dogodila se greška prilikom obrade vašeg plaćanja: transakcija neuspješna.<br/>"
+msgstr ""
+"Dogodila se greška prilikom obrade vašeg plaćanja: transakcija "
+"neuspješna.<br/>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_error
 msgid "There was en error processing your payment: invalid credit card ID."
-msgstr "Dogodila se greška prilikom obrade vašeg plaćanja: neispravan ID kreditne kartice."
+msgstr ""
+"Dogodila se greška prilikom obrade vašeg plaćanja: neispravan ID kreditne "
+"kartice."
 
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/payment_provider.py:0
+#: code:addons/account_payment/models/payment_provider.py
 #, python-format
 msgid ""
 "To uninstall this module, please remove first the corresponding payment "
 "method line in the incoming payments tab defined on the bank journal."
 msgstr ""
+"Da deinstalirate ovaj modul, molimo prvo uklonite odgovarajuću liniju načina"
+" plaćanja u tabu dolaznih plaćanja definiranih na bankovnom dnevniku."
 
+# taken from hr.po
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__transaction_ids
-#: model:ir.model.fields,field_description:account_payment.field_account_move__transaction_ids
-#: model:ir.model.fields,field_description:account_payment.field_account_payment__transaction_ids
 msgid "Transactions"
 msgstr "Transakcije"
 
@@ -520,10 +602,10 @@ msgstr "Tip podržanog povraćaja"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__use_electronic_payment_method
-#: model:ir.model.fields,field_description:account_payment.field_account_payment_register__use_electronic_payment_method
 msgid "Use Electronic Payment Method"
 msgstr "Koristi elektronski metod plaćanja"
 
+# taken from hr.po
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.account_invoice_view_form_inherit_payment
 msgid "Void Transaction"
@@ -531,18 +613,22 @@ msgstr "Poništi transakciju"
 
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/account_payment_method_line.py:0
+#: code:addons/account_payment/models/account_payment_method_line.py
 #, python-format
 msgid ""
 "You can't delete a payment method that is linked to a provider in the enabled or test state.\n"
 "Linked providers(s): %s"
 msgstr ""
+"Ne možete obrisati način plaćanja koji je povezan sa provajderom u omogućenom ili testnom stanju.\n"
+"Povezani provajder(i): %s"
 
 #. module: account_payment
 #. odoo-python
-#: code:addons/account_payment/models/account_journal.py:0
+#: code:addons/account_payment/models/account_journal.py
 #, python-format
 msgid ""
 "You must first deactivate a payment provider before deleting its journal.\n"
 "Linked providers: %s"
 msgstr ""
+"Morate prvo deaktivirati provajdera plaćanja prije brisanja njegovog dnevnika.\n"
+"Povezani provajderi: %s"

@@ -15,21 +15,25 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: mrp_subcontracting_account
 #: model:ir.model,name:mrp_subcontracting_account.model_product_product
 msgid "Product Variant"
 msgstr "Varijanta proizvoda"
 
+# taken from hr.po
 #. module: mrp_subcontracting_account
 #: model:ir.model,name:mrp_subcontracting_account.model_mrp_production
 msgid "Production Order"
 msgstr "Proizvodni nalog"
 
+# taken from hr.po
 #. module: mrp_subcontracting_account
 #: model:ir.model,name:mrp_subcontracting_account.model_stock_move
 msgid "Stock Move"
 msgstr "Skladišni prijenos"
 
+# taken from hr.po
 #. module: mrp_subcontracting_account
 #: model:ir.model,name:mrp_subcontracting_account.model_stock_picking
 msgid "Transfer"

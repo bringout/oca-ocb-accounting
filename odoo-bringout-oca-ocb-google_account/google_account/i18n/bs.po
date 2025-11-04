@@ -15,23 +15,28 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: google_account
 #: model:ir.model,name:google_account.model_google_service
 msgid "Google Service"
 msgstr "Google Servis"
 
+# taken from hr.po
 #. module: google_account
 #. odoo-python
-#: code:addons/google_account/models/google_service.py:0
+#: code:addons/google_account/models/google_service.py
 #, python-format
 msgid "Method not supported [%s] not in [GET, POST, PUT, PATCH or DELETE]!"
 msgstr "Metoda nije podržana [%s] nije u [GET, POST, PUT, PATCH ili DELETE]!"
 
+# taken from hr.po
 #. module: google_account
 #. odoo-python
-#: code:addons/google_account/models/google_service.py:0
+#: code:addons/google_account/models/google_service.py
 #, python-format
 msgid ""
 "Something went wrong during your token generation. Maybe your Authorization "
 "Code is invalid or already expired"
 msgstr ""
+"Nešto nije prošlo u redu pri generiranju vašeg tokena. Možda je neispravan "
+"Kod Autorizacije ili je već istekao."

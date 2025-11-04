@@ -27,22 +27,23 @@ msgstr "42"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "<strong>Format used to import the invoice: %s</strong>"
 msgstr "<strong>Format korišćen za uvoz fakture: %s</strong>"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid ""
 "<strong>Format used to import the invoice: %s</strong> <p><li> %s </li></p>"
 msgstr ""
+"<strong>Format korišten za uvoz fakture: %s</strong> <p><li> %s </li></p>"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "A payment of %s was detected."
 msgstr "Otkriveno je plaćanje od %s."
@@ -54,15 +55,14 @@ msgstr "A-NZ BIS fakturisanje 3.0"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Articles 226 items 11 to 15 Directive 2006/112/EN"
 msgstr "Član 226 stavke 11 do 15 Direktive 2006/112/EN"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "At least one of the following fields %s is required on %s."
 msgstr "Najmanje jedno od sljedećih polja %s je obavezno na %s."
@@ -77,50 +77,52 @@ msgstr "BIS3 DE (XRechnung)"
 msgid ""
 "Common functions for EDI documents: generate the data, the constraints, etc"
 msgstr ""
+"Zajedničke funkcije za EDI dokumente: generisanje podataka, ograničenja, itd"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py
 #, python-format
 msgid "Conditional cash/payment discount"
 msgstr "Uslovni gotovinski/platni popust"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py
 #, python-format
 msgid ""
 "Could not retrieve currency: %s. Did you enable the multicurrency option and"
 " activate the currency ?"
 msgstr ""
+"Nije moguće dohvatiti valutu: %s. Da li ste omogućili opciju više valuta i "
+"aktivirali valutu?"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Could not retrieve the tax: %s %% for line '%s'."
 msgstr "Ne mogu dohvatiti porez: %s %% za liniju '%s'."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Could not retrieve the unit of measure for line with label '%s'."
 msgstr "Ne mogu dohvatiti mjernu jedinicu za liniju sa natpisom '%s'."
 
+# taken from hr.po
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Down Payment"
 msgstr "Predujam"
 
+# taken from hr.po
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Down Payments"
 msgstr "Predujmovi"
@@ -142,25 +144,26 @@ msgstr "EN 16931"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "Each invoice line shall have one and only one tax."
 msgstr "Svaka linija fakture treba imati jedan i samo jedan porez."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "Each invoice line should have a product or a label."
 msgstr "Svaka linija fakture treba imati proizvod ili natpis."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Each invoice line should have at least one tax."
 msgstr "Svaka linija fakture treba imati najmanje jedan porez."
 
+# taken from hr.po
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_mail_template
 msgid "Email Templates"
@@ -168,16 +171,18 @@ msgstr "Predlošci e-mail poruka"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_format.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_format.py
 #, python-format
 msgid ""
 "Errors occured while creating the EDI document (format: %s). The receiver "
 "might refuse it."
 msgstr ""
+"Greške se desile prilikom kreiranja EDI dokumenta (format: %s). Primalac ga "
+"može odbiti."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Export outside the EU"
 msgstr "Izvoz van EU"
@@ -189,24 +194,25 @@ msgstr "Factur-x/XRechnung CII 2.2.0"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid ""
 "For intracommunity supply, the actual delivery date or the invoicing period "
 "should be included."
 msgstr ""
+"Za intrakomunitarnu isporuku, stvarni datum isporuke ili period fakturisanja"
+" treba biti uključen."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "For intracommunity supply, the delivery address should be included."
 msgstr "Za intrakomunalnu nabavku, adresa dostave treba biti uključena."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Intra-Community supply"
 msgstr "Intra-komunalna nabavka"
@@ -218,25 +224,28 @@ msgstr "Faktura generirana od strane Odoo"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "No Electronic Address Scheme (EAS) could be found for %s."
-msgstr "Nijedna elektronska adresna šema (EAS) nije mogla biti pronađena za %s."
+msgstr ""
+"Nijedna elektronska adresna šema (EAS) nije mogla biti pronađena za %s."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid ""
 "No gross price, net price nor line subtotal amount found for line in xml"
 msgstr ""
+"Nije pronađena bruto cijena, neto cijena niti međuzbir stavke za stavku u "
+"XML-u"
 
 #. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
 msgid "Odoo"
 msgstr "Odoo"
 
+# taken from hr.po
 #. module: account_edi_ubl_cii
 #: model:ir.model,name:account_edi_ubl_cii.model_ir_actions_report
 msgid "Report Action"
@@ -254,108 +263,108 @@ msgstr "SI-UBL 2.0 (NLCIUS)"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "Tax '%s' is invalid: %s"
 msgstr "Porez '%s' je neispravan: %s"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid ""
 "The VAT number of the supplier does not seem to be valid. It should be of "
 "the form: NO179728982MVA."
 msgstr ""
+"PDV broj dobavljača izgleda nije validan. Treba biti u obliku: "
+"NO179728982MVA."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "The VAT of the %s should be prefixed with its country code."
 msgstr "PDV %s treba biti prefixovan sa kodom svoje zemlje."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "The country is required for the %s."
 msgstr "Zemlja je obavezna za %s."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py
 #, python-format
 msgid "The currency '%s' is not active."
 msgstr "Valuta '%s' nije aktivna."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "The customer %s must have a Bronnoysund company registry."
 msgstr "Kupac %s mora imati Bronnoysund kompanijski registar."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "The customer %s must have a KVK or OIN number."
 msgstr "Kupac %s mora imati KVK ili OIN broj."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "The element %s is required on %s."
 msgstr "Element %s je obavezan na %s."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py
 #, python-format
 msgid "The field %s is required on %s."
 msgstr "Polje %s je obavezno na %s."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py
 #, python-format
 msgid ""
 "The field 'Sanitized Account Number' is required on the Recipient Bank."
-msgstr ""
+msgstr "Polje 'Sanitizirani broj računa' je obavezno na banci primaoca."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py
 #, python-format
 msgid ""
 "The invoice has been converted into a credit note and the quantities have "
 "been reverted."
-msgstr ""
+msgstr "Faktura je konvertovana u odobrenje i količine su vraćene."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_format.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_format.py
 #, python-format
 msgid ""
 "The journal in which to upload should either be a sale or a purchase "
 "journal."
 msgstr ""
+"Dnevnik u koji učitavate treba biti ili dnevnik prodaje ili dnevnik nabavke."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "The supplier %s must have a Bronnoysund company registry."
 msgstr "Dobavljač %s mora imati Bronnoysund kompanijski registar."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py
 #, python-format
 msgid "The supplier %s must have a KVK or OIN number."
 msgstr "Dobavljač %s mora imati KVK ili OIN broj."
@@ -377,22 +386,27 @@ msgstr "UBL BIS fakturisanje 3.0.12"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py
 #, python-format
 msgid ""
 "When the Canary Island General Indirect Tax (IGIC) applies, the tax rate on "
 "each invoice line should be greater than 0."
 msgstr ""
+"Kada se primjenjuje opći indirektni porez Kanarskih ostrva (IGIC), stopa "
+"poreza na svakoj stavci fakture treba biti veća od 0."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
+#: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py
 #, python-format
 msgid ""
 "You should include at least one tax per invoice line. [BR-CO-04]-Each "
 "Invoice line (BG-25) shall be categorized with an Invoiced item VAT category"
 " code (BT-151)."
 msgstr ""
+"Trebate uključiti barem jedan porez po stavci fakture. [BR-CO-04]-Svaka "
+"stavka fakture (BG-25) mora biti kategorizirana sa kodom PDV kategorije "
+"fakturisane stavke (BT-151)."
 
 #. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata

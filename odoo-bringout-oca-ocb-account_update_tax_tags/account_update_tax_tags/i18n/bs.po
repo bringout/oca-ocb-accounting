@@ -80,6 +80,8 @@ msgstr "Počevši od"
 msgid ""
 "The date you chose is violating the tax lock date, do this at your own risk."
 msgstr ""
+"Datum koji ste odabrali krši datum zaključavanja poreza, uradite ovo na "
+"vlastitu odgovornost."
 
 #. module: account_update_tax_tags
 #: model_terms:ir.ui.view,arch_db:account_update_tax_tags.view_account_update_tax_tags_wizard_form
@@ -93,18 +95,19 @@ msgstr "Čarobnjak za ažuriranje poreskih oznaka"
 
 #. module: account_update_tax_tags
 #: model:ir.actions.act_window,name:account_update_tax_tags.action_open_wizard
-#: model_terms:ir.ui.view,arch_db:account_update_tax_tags.res_config_settings_view_form
 msgid "Update tax tags on existing Journal Entries"
 msgstr "Ažuriraj poreske oznake na postojećim stavkama dnevnika"
 
 #. module: account_update_tax_tags
 #. odoo-python
-#: code:addons/account_update_tax_tags/wizard/account_update_tax_tags_wizard.py:0
+#: code:addons/account_update_tax_tags/wizard/account_update_tax_tags_wizard.py
 #, python-format
 msgid ""
 "Update with children taxes that are child of multiple parents is not "
 "supported."
 msgstr ""
+"Ažuriranje sa podređenim porezima koji su dijete više roditelja nije "
+"podržano."
 
 #. module: account_update_tax_tags
 #: model_terms:ir.ui.view,arch_db:account_update_tax_tags.view_account_update_tax_tags_wizard_form
@@ -115,3 +118,8 @@ msgid ""
 "                    The update will change tax tags on your accounting history, starting from and including selected date,\n"
 "                    so that it matches with the current configuration of your taxes.<br/>"
 msgstr ""
+"Ažuriranje poreskih oznaka na postojećim knjiženjima je <b>nepovratna</b> akcija koja će uticati\n"
+"                    na vaše izvještaje.<br/>\n"
+"                    Preporučuje se da napravite sigurnosnu kopiju baze podataka unaprijed.<br/>\n"
+"                    Ažuriranje će promijeniti poreske oznake u vašoj računovodstvenoj historiji, počevši od i uključujući izabrani datum,\n"
+"                    tako da se podudaraju sa trenutnom konfiguracijom vaših poreza.<br/>"

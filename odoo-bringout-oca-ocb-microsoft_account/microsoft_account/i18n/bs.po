@@ -15,51 +15,63 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: microsoft_account
 #. odoo-python
-#: code:addons/microsoft_account/models/microsoft_service.py:0
+#: code:addons/microsoft_account/models/microsoft_service.py
 #, python-format
 msgid "Method not supported [%s] not in [GET, POST, PUT, PATCH or DELETE]!"
 msgstr "Metoda nije podržana [%s] nije u [GET, POST, PUT, PATCH ili DELETE]!"
 
+# taken from hr.po
 #. module: microsoft_account
 #: model:ir.model.fields,field_description:microsoft_account.field_res_users__microsoft_calendar_rtoken
 msgid "Microsoft Refresh Token"
 msgstr "Osvježi Microsoft token"
 
+# taken from hr.po
 #. module: microsoft_account
 #: model:ir.model,name:microsoft_account.model_microsoft_service
 msgid "Microsoft Service"
 msgstr "Microsoft servis"
 
+# taken from hr.po
 #. module: microsoft_account
 #: model:ir.model.fields,field_description:microsoft_account.field_res_users__microsoft_calendar_token_validity
 msgid "Microsoft Token Validity"
 msgstr "Valjanost Microsoft tokena"
 
+# taken from hr.po
 #. module: microsoft_account
 #: model:ir.model.fields,field_description:microsoft_account.field_res_users__microsoft_calendar_token
 msgid "Microsoft User token"
 msgstr "Microsoft korisnički token"
 
+# taken from hr.po
 #. module: microsoft_account
 #. odoo-python
-#: code:addons/microsoft_account/models/microsoft_service.py:0
+#: code:addons/microsoft_account/models/microsoft_service.py
 #, python-format
 msgid ""
 "Something went wrong during your token generation. Maybe your Authorization "
 "Code is invalid"
 msgstr ""
+"Nešto nije prošlo u redu pri generiranju vašeg tokena. Možda je neispravan "
+"Kod Autorizacije."
 
+# taken from hr.po
 #. module: microsoft_account
 #. odoo-python
-#: code:addons/microsoft_account/models/microsoft_service.py:0
+#: code:addons/microsoft_account/models/microsoft_service.py
 #, python-format
 msgid ""
 "Something went wrong during your token generation. Maybe your Authorization "
 "Code is invalid or already expired"
 msgstr ""
+"Nešto nije prošlo u redu pri generiranju vašeg tokena. Možda je neispravan "
+"Kod Autorizacije ili je već istekao."
 
+# taken from hr.po
 #. module: microsoft_account
 #: model:ir.model,name:microsoft_account.model_res_users
 msgid "User"

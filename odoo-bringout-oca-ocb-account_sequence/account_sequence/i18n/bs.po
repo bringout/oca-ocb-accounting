@@ -15,16 +15,19 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: account_sequence
 #: model:ir.model.constraint,message:account_sequence.constraint_account_move_unique_name
 msgid "Another entry with the same name already exists."
 msgstr "Već postoji zapis sa ovim nazivom."
 
+# taken from hr.po
 #. module: account_sequence
 #: model:ir.model,name:account_sequence.model_sequence_mixin
 msgid "Automatic sequence"
 msgstr "Automatska sekvenca"
 
+# taken from hr.po
 #. module: account_sequence
 #: model:ir.model,name:account_sequence.model_account_move
 msgid "Journal Entry"

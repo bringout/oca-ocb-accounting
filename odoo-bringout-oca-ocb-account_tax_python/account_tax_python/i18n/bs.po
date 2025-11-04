@@ -15,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,help:account_tax_python.field_account_tax__amount_type
 msgid ""
@@ -29,13 +30,24 @@ msgid ""
 "        e.g 200 * (1 - 10%) = 180 (price included)\n"
 "        "
 msgstr ""
+"\n"
+"    - Grupa poreza: Porez se računa iz podređenih poreza.\n"
+"    - Fiksno: Iznos poreza je uvijek isti bez obzira na cijenu.\n"
+"    - Postotak cijene: Iznos poreza je postotak cijene:\n"
+"        npr. 100 * (1 + 10%) = 110 (porez nije uključen u cijeni)\n"
+"        npr. 110 / (1 + 10%) = 100 (porez je uključen u cijenu)\n"
+"    - Postotak cijene sa uključenim porezom: porez je iznos dijeljenja postotkom:\n"
+"        npr. 180 / (1 - 10%) = 200 (porez nije uključen u cijenu)\n"
+"        npr. 200 * (1 - 10%) = 180 (porez je uključen u cijenu)\n"
+"        "
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,field_description:account_tax_python.field_account_tax__python_applicable
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax_template__python_applicable
 msgid "Applicable Code"
 msgstr "Primjenjiva šifra"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,help:account_tax_python.field_account_tax__python_compute
 msgid ""
@@ -48,7 +60,16 @@ msgid ""
 ":param product: product.product recordset singleton or None\n"
 ":param partner: res.partner recordset singleton or None"
 msgstr ""
+"Izračun iznosa poreza korištenjem varijable 'result'.\n"
+"\n"
+":parametar base_amount: decimalni broj, iznos osnovice na koju se primjenjuje porez\n"
+":parametar price_unit: decimalni broj\n"
+":parametar quantity: decimalni broj\n"
+":parametar company: res.company zapis tablice\n"
+":parametar product: product.product zapis tablice ili  None\n"
+":parametar partner: res.partner zapis tablice ili None"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,help:account_tax_python.field_account_tax_template__python_compute
 msgid ""
@@ -60,7 +81,15 @@ msgid ""
 ":param product: product.product recordset singleton or None\n"
 ":param partner: res.partner recordset singleton or None"
 msgstr ""
+"Izračun poreza korištenjem varijable 'result'.\n"
+"\n"
+":parametar base_amount: decimalni broj, iznos osnovice na koju se primjenjuje porez\n"
+":parametar price_unit: decimalni broj\n"
+":parametar quantity: decimalni broj\n"
+":parametar product: product.product zaps tablice ili None\n"
+":parametar partner: res.partner zapis tablice ili None"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,help:account_tax_python.field_account_tax__python_applicable
 msgid ""
@@ -72,7 +101,15 @@ msgid ""
 ":param product: product.product recordset singleton or None\n"
 ":param partner: res.partner recordset singleton or None"
 msgstr ""
+"Odlučuje hoće li se porez primjeniti postavljanjem varijable 'result' na True ili False.\n"
+"\n"
+":parametar price_unit: decimalni broj\n"
+":parametar: quantity: decimalni broj\n"
+":parametar company: res.company zapis tablice\n"
+":parametar product: product.product zapis tablice ili None\n"
+":parametar partner: res.partner zapis tablice ili None"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,help:account_tax_python.field_account_tax_template__python_applicable
 msgid ""
@@ -83,26 +120,32 @@ msgid ""
 ":param product: product.product recordset singleton or None\n"
 ":param partner: res.partner recordset singleton or None"
 msgstr ""
+"Odlučuje hoće li se porez primjeniti postavljanjem varijable 'resutl' na True ili False.\n"
+"\n"
+":parametar price_unit: decimalni broj\n"
+":parametar quantity: decimalni broj\n"
+":parametar product: product.product zapis tablice ili None\n"
+":parametar partner: res.partner zapis tablice ili None"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,field_description:account_tax_python.field_account_tax__python_compute
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax_template__python_compute
-#: model:ir.model.fields.selection,name:account_tax_python.selection__account_tax__amount_type__code
-#: model:ir.model.fields.selection,name:account_tax_python.selection__account_tax_template__amount_type__code
 msgid "Python Code"
 msgstr "Python Kod"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model,name:account_tax_python.model_account_tax
 msgid "Tax"
 msgstr "Porez"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model.fields,field_description:account_tax_python.field_account_tax__amount_type
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax_template__amount_type
 msgid "Tax Computation"
 msgstr "Izračunavanje poreza"
 
+# taken from hr.po
 #. module: account_tax_python
 #: model:ir.model,name:account_tax_python.model_account_tax_template
 msgid "Templates for Taxes"
@@ -110,11 +153,13 @@ msgstr "Prijedlozi poreza"
 
 #. module: account_tax_python
 #. odoo-python
-#: code:addons/account_tax_python/models/account_tax.py:0
-#: code:addons/account_tax_python/models/account_tax.py:0
+#: code:addons/account_tax_python/models/account_tax.py
 #, python-format
 msgid ""
 "You entered invalid code %r in %r taxes\n"
 "\n"
 "Error : %s"
 msgstr ""
+"Unijeli ste nevažeći kod %r u %r poreze\n"
+"\n"
+"Greška : %s"

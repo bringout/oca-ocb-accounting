@@ -15,23 +15,28 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+# taken from hr.po
 #. module: account_qr_code_sepa
 #: model:ir.model,name:account_qr_code_sepa.model_res_partner_bank
 msgid "Bank Accounts"
 msgstr "Bankovni računi"
 
+# taken from hr.po
 #. module: account_qr_code_sepa
 #. odoo-python
-#: code:addons/account_qr_code_sepa/models/res_bank.py:0
+#: code:addons/account_qr_code_sepa/models/res_bank.py
 #, python-format
 msgid "SEPA Credit Transfer QR"
 msgstr "SEPA QR kod prijenosa"
 
+# taken from hr.po
 #. module: account_qr_code_sepa
 #. odoo-python
-#: code:addons/account_qr_code_sepa/models/res_bank.py:0
+#: code:addons/account_qr_code_sepa/models/res_bank.py
 #, python-format
 msgid ""
 "The account receiving the payment must have an account holder name or "
 "partner name set."
 msgstr ""
+"Konto koji prima uplatu mora imati nositelja konta ili naziv partnera "
+"postavljen."
