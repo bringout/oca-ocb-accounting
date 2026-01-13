@@ -77,7 +77,7 @@ msgstr "Kompanije"
 #. module: snailmail_account
 #: model:ir.model,name:snailmail_account.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke konfiguracije"
+msgstr "Postavke"
 
 # taken from hr.po
 #. module: snailmail_account
@@ -101,7 +101,7 @@ msgstr "Kreirano"
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv"
 
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice__id
@@ -142,19 +142,19 @@ msgstr "Pošalji pismom po defaultu"
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Zadnja promjena"
 
 # taken from hr.po
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice__write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Promijenio"
 
 # taken from hr.po
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Vrijeme promjene"
 
 # taken from hr.po
 #. module: snailmail_account

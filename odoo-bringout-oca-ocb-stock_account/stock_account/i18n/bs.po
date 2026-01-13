@@ -226,13 +226,13 @@ msgstr "Odaberite datum da dobijete vrednovanje na tom datumu"
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer__company_id
 msgid "Company"
-msgstr "Kompanija"
+msgstr "Tvrtka"
 
 # taken from hr.po
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke konfiguracije"
+msgstr "Postavke"
 
 #. module: stock_account
 #. odoo-python
@@ -457,19 +457,19 @@ msgstr "Zavisni troškovi"
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Za refundiranje (ažuriraj SO/PO)"
 
 # taken from hr.po
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer__write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Zadnji ažurirao"
 
 # taken from hr.po
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Zadnje ažurirano"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_valuation_layer__stock_valuation_layer_id
@@ -561,7 +561,7 @@ msgstr "Kategorija proizvoda"
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr "Skladišna kretanja proizvoda(stavke)"
+msgstr "Kretanja artikala (stavka kretanja zalihe)"
 
 #. module: stock_account
 #. odoo-python
@@ -697,7 +697,7 @@ msgstr "Dnevnik zaliha"
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_move
 msgid "Stock Move"
-msgstr "Skladišno kretanje"
+msgstr "Promjena"
 
 # taken from hr.po
 #. module: stock_account

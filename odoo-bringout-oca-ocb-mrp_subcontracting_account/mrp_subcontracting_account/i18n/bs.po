@@ -31,7 +31,7 @@ msgstr "Proizvodni nalog"
 #. module: mrp_subcontracting_account
 #: model:ir.model,name:mrp_subcontracting_account.model_stock_move
 msgid "Stock Move"
-msgstr "Skladišno kretanje"
+msgstr "Skladišni prijenos"
 
 # taken from hr.po
 #. module: mrp_subcontracting_account

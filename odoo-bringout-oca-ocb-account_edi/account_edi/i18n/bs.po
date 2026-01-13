@@ -123,7 +123,7 @@ msgstr "Kreirano"
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv"
 
 #. module: account_edi
 #. odoo-python
@@ -300,19 +300,19 @@ msgstr "Stavka žurnala"
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Zadnja promjena"
 
 # taken from hr.po
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Promijenio"
 
 # taken from hr.po
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Vrijeme promjene"
 
 # taken from hr.po
 #. module: account_edi
