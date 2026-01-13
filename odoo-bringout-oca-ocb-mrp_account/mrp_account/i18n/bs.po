@@ -119,7 +119,7 @@ msgstr "Nalog za proizvodnju"
 #: code:addons/mrp_account/models/analytic_account.py
 #, python-format
 msgid "Manufacturing Orders"
-msgstr "Nalozi za proizvodnju"
+msgstr "Proizvodni nalozi"
 
 # taken from hr.po
 #. module: mrp_account
@@ -171,7 +171,7 @@ msgstr "Prikaži vrednovanje"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_stock_move
 msgid "Stock Move"
-msgstr "Skladišni prijenos"
+msgstr "Skladišno kretanje"
 
 # taken from hr.po
 #. module: mrp_account

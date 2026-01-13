@@ -53,7 +53,7 @@ msgstr "Tvrtke"
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__company_id
 msgid "Company"
-msgstr "Tvrtka"
+msgstr "Kompanija"
 
 # taken from hr.po
 #. module: account_edi_proxy_client
@@ -71,7 +71,7 @@ msgstr "Kreirano"
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__display_name
 msgid "Display Name"
-msgstr "Naziv"
+msgstr "Prikazani naziv"
 
 #. module: account_edi_proxy_client
 #: model:ir.actions.act_window,name:account_edi_proxy_client.action_tree_account_edi_proxy_client_user
@@ -112,19 +112,19 @@ msgstr "Id klijenta"
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user____last_update
 msgid "Last Modified on"
-msgstr "Zadnja promjena"
+msgstr "Zadnja izmjena na"
 
 # taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__write_uid
 msgid "Last Updated by"
-msgstr "Promijenio"
+msgstr "Zadnje ažuriranje izvršio"
 
 # taken from hr.po
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__write_date
 msgid "Last Updated on"
-msgstr "Vrijeme promjene"
+msgstr "Zadnje ažuriranje na"
 
 # taken from hr.po
 #. module: account_edi_proxy_client

@@ -18,7 +18,7 @@ msgstr ""
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__company_id
 msgid "Company"
-msgstr "Preduzeće"
+msgstr "Kompanija"
 
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__create_uid
@@ -58,17 +58,17 @@ msgstr "ID"
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena na"
 
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__write_uid
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Zadnje ažuriranje izvršio"
 
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažurirano"
+msgstr "Zadnje ažuriranje na"
 
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__date_from

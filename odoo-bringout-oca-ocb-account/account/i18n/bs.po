@@ -2191,7 +2191,7 @@ msgstr "Akcija"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__message_needaction
 msgid "Action Needed"
-msgstr "Potrebna akcija"
+msgstr "Potrebna radnja"
 
 # taken from hr.po
 #. module: account
@@ -2239,7 +2239,7 @@ msgstr "Aktivnosti"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Dekoracija iznimke aktivnosti"
+msgstr "Dekoracija izuzetka aktivnosti"
 
 # taken from hr.po
 #. module: account
@@ -2898,7 +2898,7 @@ msgstr "Analitički plan"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_move_line__analytic_precision
 msgid "Analytic Precision"
-msgstr "Preciznost analitike"
+msgstr "Analitička preciznost"
 
 # taken from hr.po
 #. module: account
@@ -3040,7 +3040,7 @@ msgstr "Prilog"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__message_attachment_count
 msgid "Attachment Count"
-msgstr "Broj zakački"
+msgstr "Broj priloga"
 
 # taken from hr.po
 #. module: account
@@ -3734,7 +3734,7 @@ msgstr "Otkaži"
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_invoice_report__state__cancel
 msgid "Cancelled"
-msgstr "Otkazan"
+msgstr "Otkazano"
 
 # taken from hr.po
 #. module: account
@@ -4324,7 +4324,7 @@ msgstr "Firme koje se vežu sa partnerom"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__company_id
 msgid "Company"
-msgstr "Preduzeće"
+msgstr "Kompanija"
 
 # taken from hr.po
 #. module: account
@@ -4422,7 +4422,7 @@ msgstr ""
 #. module: account
 #: model:ir.model,name:account.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke"
+msgstr "Postavke konfiguracije"
 
 # taken from hr.po
 #. module: account
@@ -5911,7 +5911,7 @@ msgstr "Matična država za računovodstvo"
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__res_company__account_dashboard_onboarding_state__done
 msgid "Done"
-msgstr "Gotovo"
+msgstr "Dovršeno"
 
 # taken from hr.po
 #. module: account
@@ -6737,13 +6737,13 @@ msgstr "Slijedi plaćanja klijenta"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__message_follower_ids
 msgid "Followers"
-msgstr "Pratioci"
+msgstr "Pratitelji"
 
 # taken from hr.po
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Pratioci (Partneri)"
+msgstr "Pratitelji (partneri)"
 
 # taken from hr.po
 #. module: account
@@ -7058,7 +7058,7 @@ msgstr "Grupa"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_report_line__groupby
 msgid "Group By"
-msgstr "Grupiši po"
+msgstr "Grupiši po..."
 
 # taken from hr.po
 #. module: account
@@ -8143,7 +8143,7 @@ msgstr "Urednik"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__message_is_follower
 msgid "Is Follower"
-msgstr "Je pratilac"
+msgstr "Pratilac"
 
 # taken from hr.po
 #. module: account
@@ -8598,7 +8598,7 @@ msgstr "Zadnji Hash"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena na"
 
 # taken from hr.po
 #. module: account
@@ -8616,13 +8616,13 @@ msgstr "Zadnji kvartal"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__write_uid
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Zadnje ažuriranje izvršio"
 
 # taken from hr.po
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažurirano"
+msgstr "Zadnje ažuriranje na"
 
 # taken from hr.po
 #. module: account
@@ -9154,7 +9154,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__message_ids
 msgid "Messages"
-msgstr "Poruke"
+msgstr "Nepročitane poruke"
 
 # taken from hr.po
 #. module: account
@@ -11137,7 +11137,7 @@ msgstr "Varijanta proizvoda"
 #. module: account
 #: model:ir.actions.act_window,name:account.product_product_action_purchasable
 msgid "Products"
-msgstr "Artikli"
+msgstr "Proizvodi"
 
 # taken from hr.po
 #. module: account
@@ -15960,7 +15960,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__website_message_ids
 msgid "Website Messages"
-msgstr "Poruke sa website-a"
+msgstr "Nepročitane poruke"
 
 # taken from hr.po
 #. module: account

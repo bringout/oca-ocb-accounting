@@ -34,7 +34,7 @@ msgstr "Čarobnjak dodaj terećenje"
 #. module: account_debit_note
 #: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_debit_note
 msgid "Cancel"
-msgstr "Odustani"
+msgstr "Otkaži"
 
 # taken from hr.po
 #. module: account_debit_note
@@ -81,7 +81,7 @@ msgstr "Terećenja"
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__display_name
 msgid "Display Name"
-msgstr "Naziv"
+msgstr "Prikazani naziv"
 
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__id
@@ -119,19 +119,19 @@ msgstr "Tip dnevnika"
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note____last_update
 msgid "Last Modified on"
-msgstr "Zadnja promjena"
+msgstr "Zadnja izmjena na"
 
 # taken from hr.po
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__write_uid
 msgid "Last Updated by"
-msgstr "Promijenio"
+msgstr "Zadnje ažuriranje izvršio"
 
 # taken from hr.po
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__write_date
 msgid "Last Updated on"
-msgstr "Vrijeme promjene"
+msgstr "Zadnje ažuriranje na"
 
 # taken from hr.po
 #. module: account_debit_note

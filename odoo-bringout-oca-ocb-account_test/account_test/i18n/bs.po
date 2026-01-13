@@ -201,19 +201,19 @@ msgstr "ID"
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena na"
 
 # taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__write_uid
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Zadnje ažuriranje izvršio"
 
 # taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažurirano"
+msgstr "Zadnje ažuriranje na"
 
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.accounting_assert_test_view_search

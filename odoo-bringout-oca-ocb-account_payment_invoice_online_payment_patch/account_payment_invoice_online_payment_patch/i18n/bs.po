@@ -129,7 +129,7 @@ msgstr ""
 #. module: account_payment_invoice_online_payment_patch
 #: model:ir.model,name:account_payment_invoice_online_payment_patch.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke"
+msgstr "Postavke konfiguracije"
 
 # taken from hr.po
 #. module: account_payment_invoice_online_payment_patch
