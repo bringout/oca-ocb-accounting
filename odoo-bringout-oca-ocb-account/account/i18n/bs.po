@@ -8800,7 +8800,7 @@ msgstr "Likvidnost"
 #: code:addons/account/models/chart_template.py
 #, python-format
 msgid "Liquidity Transfer"
-msgstr "Prelazni račun"
+msgstr "Prenos likvidnosti"
 
 # taken from hr.po
 #. module: account
