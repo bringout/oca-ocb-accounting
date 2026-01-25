@@ -857,9 +857,7 @@ msgstr ""
 #. module: stock_account
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_valuation_layer_report_tree
 msgid "Total Remaining Quantity"
-msgstr ""
-"Trošak od %s je trenutno jednak 0. Promijenite trošak ili konfiguraciju "
-"vašeg proizvoda da izbjegnete neispravnu valuaciju."
+msgstr "Total Remaining Quantity"
 
 #. module: stock_account
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_valuation_layer_report_tree

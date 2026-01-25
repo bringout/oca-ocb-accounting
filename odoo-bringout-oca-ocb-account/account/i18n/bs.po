@@ -3497,7 +3497,7 @@ msgid ""
 "Below text serves as a suggestion and doesn’t engage Odoo S.A. "
 "responsibility."
 msgstr ""
-"Tekst u nastavku služi kao prijedlog i Odoo S.A. ne preuzima odgovornost"
+"Tekst ispod služi kao sugestija i ne podrazumijeva odgovornost Odoo S.A."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__bank_bic
@@ -13551,9 +13551,9 @@ msgid ""
 "You will need to clear the %(model)s's %(sequence_field)s to proceed.\n"
 "In doing so, you might want to resequence your entries in order to maintain a continuous date-based sequence."
 msgstr ""
-"%(date_field)s (%(date)s) ne odgovara sekvencijalnom broju povezanog %(model)s (%(sequence)s)\n"
-"Morat ćete obrisati %(sequence_field)s od %(model)s da nastavite.\n"
-"Pritom, možda želite presekvencirati svoje unose kako bi održali kontinuirani slijed baziran na datumu."
+"The %(date_field)s (%(date)s) doesn't match the sequence number of the related %(model)s (%(sequence)s)\n"
+"You will need to clear the %(model)s's %(sequence_field)s to proceed.\n"
+"In doing so, you might want to resequence your entries in order to maintain a continuous date-based sequence."
 
 #. module: account
 #. odoo-python
