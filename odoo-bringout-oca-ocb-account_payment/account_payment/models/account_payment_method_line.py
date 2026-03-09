@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
-from odoo.osv import expression
 
 
 class AccountPaymentMethodLine(models.Model):
@@ -14,6 +12,7 @@ class AccountPaymentMethodLine(models.Model):
         compute='_compute_payment_provider_id',
         store=True,
         readonly=False,
+        domain="[('code', '=', code)]",
     )
     payment_provider_state = fields.Selection(
         related='payment_provider_id.state'

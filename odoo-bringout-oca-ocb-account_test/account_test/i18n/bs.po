@@ -1,58 +1,59 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_test
+# * account_test
 #
+# Translators:
+# Martin Trigaux, 2018
+# Boško Stojaković <bluesoft83@gmail.com>, 2018
+# Bole <bole@dajmi5.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-26 08:16+0000\n"
-"PO-Revision-Date: 2019-08-26 08:16+0000\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2018-09-21 13:17+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2018\n"
+"Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-# taken from hr.po
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.report_accounttest
 msgid ""
 "<br/>\n"
 "                        <strong>Description:</strong>"
 msgstr ""
-"<br/>\n"
-"                        <strong>Opis:</strong>"
 
-# taken from hr.po
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.report_accounttest
 msgid "<strong>Name:</strong>"
-msgstr "<strong>Naziv:</strong>"
+msgstr ""
 
 #. module: account_test
 #: model:ir.model,name:account_test.model_report_account_test_report_accounttest
 msgid "Account Test Report"
-msgstr "Izveštaj testa računa"
+msgstr ""
 
 #. module: account_test
 #: model:ir.model,name:account_test.model_accounting_assert_test
 msgid "Accounting Assert Test"
-msgstr "Test potvrde računovodstva"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.actions.act_window,name:account_test.action_accounting_assert
+#: model:ir.actions.report,name:account_test.account_assert_test_report
+#: model:ir.ui.menu,name:account_test.menu_action_license
 msgid "Accounting Tests"
-msgstr "Računovodstveni testovi"
+msgstr ""
 
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.report_accounttest
 msgid "Accounting tests on"
-msgstr "Računovodstveni testovi uključeni"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__active
 msgid "Active"
@@ -61,56 +62,42 @@ msgstr "Aktivan"
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.accounting_assert_test_view_search
 msgid "Archived"
-msgstr "Arhivirano"
+msgstr ""
 
 #. module: account_test
 #: model:accounting.assert.test,desc:account_test.account_test_03
 msgid "Check if movement lines are balanced and have the same date and period"
 msgstr ""
-"Proverava da li su linije pokreta balansirane i imaju isti datum i period"
 
 #. module: account_test
 #: model:accounting.assert.test,desc:account_test.account_test_07
-msgid ""
-"Check on bank statement that the Closing Balance = Starting Balance + sum of"
-" statement lines"
+msgid "Check on bank statement that the Closing Balance = Starting Balance + sum of statement lines"
 msgstr ""
-"Provjerite na bankovnom izvodu da je Konačno stanje = Početno stanje + suma "
-"redova izvoda"
 
 #. module: account_test
 #: model:accounting.assert.test,desc:account_test.account_test_06
 msgid "Check that paid/reconciled invoices are not in 'Open' state"
-msgstr "Proverava da plaćene/poravnate fakture nisu u 'Otvoren' stanju"
+msgstr ""
 
 #. module: account_test
 #: model:accounting.assert.test,desc:account_test.account_test_05_2
-msgid ""
-"Check that reconciled account moves, that define Payable and Receivable "
-"accounts, are belonging to reconciled invoices"
+msgid "Check that reconciled account moves, that define Payable and Receivable accounts, are belonging to reconciled invoices"
 msgstr ""
-"Provjerite da su zatvorene knjižne stavke, koje definišu konta Duguje i "
-"Potražuje, vezane za zatvorene fakture"
 
 #. module: account_test
 #: model:accounting.assert.test,desc:account_test.account_test_05
-msgid ""
-"Check that reconciled invoice for Sales/Purchases has reconciled entries for"
-" Payable and Receivable Accounts"
+msgid "Check that reconciled invoice for Sales/Purchases has reconciled entries for Payable and Receivable Accounts"
 msgstr ""
-"Provjerite da zatvorena faktura za Prodaju/Kupovinu ima zatvorene stavke za "
-"konta Duguje i Potražuje"
 
-# taken from hr.po
 #. module: account_test
 #: model:accounting.assert.test,desc:account_test.account_test_01
 msgid "Check the balance: Debit sum = Credit sum"
-msgstr "Provjeri saldo: suam dugovanja = suma potraživanja"
+msgstr ""
 
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.account_assert_form
 msgid "Code Help"
-msgstr "Pomoć za kod"
+msgstr ""
 
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.account_assert_form
@@ -136,57 +123,34 @@ msgid ""
 "    cr.execute(sql)\n"
 "    result = cr.dictfetchall()"
 msgstr ""
-"Kod uvijek treba da postavi varijablu pod nazivom `result` sa rezultatom vašeg testa, koja može biti lista ili\n"
-"riječnik. Ako je `result` prazna lista, to znači da je test bio uspješan. U suprotnom će\n"
-"pokušati da prevede i ispiše šta se nalazi unutar `result`.\n"
-"\n"
-"Ako je rezultat vašeg testa riječnik, možete postaviti varijablu pod nazivom `column_order` da odaberete\n"
-"redoslijed kojim želite ispisati sadržaj `result`.\n"
-"\n"
-"Ako vam trebaju, možete koristiti i sljedeće varijable u svom kodu:\n"
-"    * cr: cursor ka bazi podataka\n"
-"    * uid: ID trenutnog korisnika\n"
-"\n"
-"U svakom slučaju, kod mora biti validan python sa ispravnim uvlačenjem (ako je potrebno).\n"
-"\n"
-"Primjer: \n"
-"    sql = '''SELECT id, name, ref, date\n"
-"             FROM account_move_line \n"
-"             WHERE account_id IN (SELECT id FROM account_account WHERE type = 'view')\n"
-"          '''\n"
-"    cr.execute(sql)\n"
-"    result = cr.dictfetchall()"
 
 #. module: account_test
 #: model_terms:ir.actions.act_window,help:account_test.action_accounting_assert
 msgid "Create a new accounting test"
-msgstr "Kreiranje novog računovodstvenog testa"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__create_uid
 msgid "Created by"
 msgstr "Kreirao"
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__create_date
 msgid "Created on"
 msgstr "Kreirano"
 
-# taken from hr.po
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.account_assert_form
+#: model_terms:ir.ui.view,arch_db:account_test.accounting_assert_test_view_search
 msgid "Description"
 msgstr "Opis"
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__display_name
+#: model:ir.model.fields,field_description:account_test.field_report_account_test_report_accounttest__display_name
 msgid "Display Name"
 msgstr "Prikazani naziv"
 
-# taken from hr.po
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.account_assert_form
 msgid "Expression"
@@ -194,22 +158,21 @@ msgstr "Izraz"
 
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__id
+#: model:ir.model.fields,field_description:account_test.field_report_account_test_report_accounttest__id
 msgid "ID"
 msgstr "ID"
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test____last_update
+#: model:ir.model.fields,field_description:account_test.field_report_account_test_report_accounttest____last_update
 msgid "Last Modified on"
 msgstr "Zadnje mijenjano"
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__write_uid
 msgid "Last Updated by"
 msgstr "Zadnji ažurirao"
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__write_date
 msgid "Last Updated on"
@@ -218,15 +181,13 @@ msgstr "Zadnje ažurirano"
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.accounting_assert_test_view_search
 msgid "Name"
-msgstr "Naziv:"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.account_assert_form
 msgid "Python Code"
 msgstr "Python Kod"
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__code_exec
 msgid "Python code"
@@ -235,9 +196,8 @@ msgstr "Python kod"
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.accounting_assert_test_view_search
 msgid "Search Account Test"
-msgstr "Pretraga računovodstvenog testa"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__sequence
 msgid "Sequence"
@@ -246,56 +206,50 @@ msgstr "Sekvenca"
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_01
 msgid "Test 1: General balance"
-msgstr "Test 1: Opšti balans"
+msgstr ""
 
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_03
 msgid "Test 3: Movement lines"
-msgstr "Test 3: Linije pokreta"
+msgstr ""
 
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_05
-msgid ""
-"Test 5.1 : Payable and Receivable accountant lines of reconciled invoices"
-msgstr "Test 5.1 : Linije dugovanja i potraživanja zatvorenih faktura"
+msgid "Test 5.1 : Payable and Receivable accountant lines of reconciled invoices"
+msgstr ""
 
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_05_2
 msgid "Test 5.2 : Reconcilied invoices and Payable/Receivable accounts"
-msgstr "Test 5.2 : Poravnate fakture i računi platnih obaveza/potraživanja"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_06
 msgid "Test 6 : Invoices status"
-msgstr "Provjera 6 : Status računa"
+msgstr ""
 
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_07
 msgid "Test 7 : Closing balance on bank statements"
-msgstr "Test 7 : Završno stanje na bankovnim izvodima"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__desc
 msgid "Test Description"
-msgstr "Opis provjere"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__name
 msgid "Test Name"
-msgstr "Naziv testa"
+msgstr ""
 
-# taken from hr.po
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.account_assert_form
+#: model_terms:ir.ui.view,arch_db:account_test.account_assert_tree
 msgid "Tests"
 msgstr "Testovi"
 
-# taken from hr.po
 #. module: account_test
-#: code:addons/account_test/report/report_account_test.py
-#, python-format
+#: code:addons/account_test/report/report_account_test.py:0
 msgid "The test was passed successfully"
-msgstr "Test prošao uspješno"
+msgstr ""

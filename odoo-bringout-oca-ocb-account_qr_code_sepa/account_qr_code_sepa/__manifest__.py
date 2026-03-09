@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "account_qr_code_sepa",
+    'name': "Account SEPA QR Code",
 
     'description': """
-        This module adds support for SEPA Credit Transfer QR-code generation.
+This module adds support for SEPA Credit Transfer QR-code generation.
     """,
 
     'category': 'Accounting/Payment',
@@ -12,6 +12,7 @@
     # any module necessary for this one to work correctly
     'depends': ['account', 'base_iban'],
 
-    'auto_install': False,
+    'auto_install': True,
+    'author': 'Odoo S.A.',
     'license': 'LGPL-3',
 }

@@ -4,12 +4,11 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.tools import frozendict
 
 from datetime import date
-
+import json
 
 class AccountPartialReconcile(models.Model):
-    _name = "account.partial.reconcile"
+    _name = 'account.partial.reconcile'
     _description = "Partial Reconcile"
-    _rec_name = "id"
 
     # ==== Reconciliation fields ====
     debit_move_id = fields.Many2one(
@@ -22,6 +21,10 @@ class AccountPartialReconcile(models.Model):
         comodel_name='account.full.reconcile',
         string="Full Reconcile", copy=False, index='btree_not_null')
     exchange_move_id = fields.Many2one(comodel_name='account.move', index='btree_not_null')
+
+    # this field will be used upon the posting of the invoice, to know if we can keep the partial or if the
+    # user has to re-do entirely the reconciliaion (in  case fundamental values changed for the cash basis)
+    draft_caba_move_vals = fields.Json(string="Values that created the draft cash-basis entry")
 
     # ==== Currency fields ====
     company_currency_id = fields.Many2one(
@@ -55,9 +58,11 @@ class AccountPartialReconcile(models.Model):
     company_id = fields.Many2one(
         comodel_name='res.company',
         string="Company", store=True, readonly=False,
-        related='debit_move_id.company_id')
+        precompute=True,
+        compute='_compute_company_id')
     max_date = fields.Date(
         string="Max Date of Matched Lines", store=True,
+        precompute=True,
         compute='_compute_max_date')
         # used to determine at which date this reconciliation needs to be shown on the aged receivable/payable reports
 
@@ -83,6 +88,15 @@ class AccountPartialReconcile(models.Model):
                 partial.credit_move_id.date
             )
 
+    @api.depends('debit_move_id', 'credit_move_id')
+    def _compute_company_id(self):
+        for partial in self:
+            # Potential exchange diff and caba entries should be created on the invoice side if any
+            if partial.debit_move_id.move_id.is_invoice(True):
+                partial.company_id = partial.debit_move_id.company_id
+            else:
+                partial.company_id = partial.credit_move_id.company_id
+
     # -------------------------------------------------------------------------
     # LOW-LEVEL METHODS
     # -------------------------------------------------------------------------
@@ -96,13 +110,18 @@ class AccountPartialReconcile(models.Model):
         if not self:
             return True
 
-        # Retrieve the matching number to unlink.
-        full_to_unlink = self.full_reconcile_id
-
+        # Get the payments without journal entry to reset once the amount residual is reset
+        to_update_payments = self._get_to_update_payments(from_state='paid')
         # Retrieve the CABA entries to reverse.
         moves_to_reverse = self.env['account.move'].search([('tax_cash_basis_rec_id', 'in', self.ids)])
         # Same for the exchange difference entries.
         moves_to_reverse += self.exchange_move_id
+
+        # Retrieve the matching number to unlink
+        full_to_unlink = self.full_reconcile_id
+
+        # if the move is draft and can be removed, there is no need to update the matching number
+        all_reconciled = self.debit_move_id + self.credit_move_id
 
         # Unlink partials before doing anything else to avoid 'Record has already been deleted' due to the recursion.
         res = super().unlink()
@@ -110,15 +129,90 @@ class AccountPartialReconcile(models.Model):
         # Remove the matching numbers before reversing the moves to avoid trying to remove the full twice.
         full_to_unlink.unlink()
 
-        # Reverse CABA entries.
+        # Reverse or unlink CABA/exchange move entries.
         if moves_to_reverse:
+            not_draft_moves = moves_to_reverse.filtered(lambda m: m.state != 'draft')
+            draft_moves = moves_to_reverse - not_draft_moves
             default_values_list = [{
                 'date': move._get_accounting_date(move.date, move._affect_tax_report()),
-                'ref': _('Reversal of: %s') % move.name,
-            } for move in moves_to_reverse]
-            moves_to_reverse._reverse_moves(default_values_list, cancel=True)
+                'ref': move.env._('Reversal of: %s', move.name),
+            } for move in not_draft_moves]
+            not_draft_moves._reverse_moves(default_values_list, cancel=True)
+            draft_moves.unlink()
 
+        all_reconciled = all_reconciled.exists()
+        self._update_matching_number(all_reconciled)
+        to_update_payments.state = 'in_process'
         return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        partials = super().create(vals_list)
+        partials._get_to_update_payments(from_state='in_process').state = 'paid'
+        self._update_matching_number(partials.debit_move_id + partials.credit_move_id)
+        return partials
+
+    def _get_to_update_payments(self, from_state):
+        to_update = []
+        for partial in self:
+            matched_payments = (partial.credit_move_id | partial.debit_move_id).move_id.matched_payment_ids
+            to_check_payments = matched_payments.filtered(lambda payment: not payment.outstanding_account_id and payment.state == from_state)
+            for payment in to_check_payments:
+                if payment.payment_type == 'inbound':
+                    amount = partial.debit_amount_currency
+                else:
+                    amount = -partial.credit_amount_currency
+                if not payment.currency_id.compare_amounts(payment.amount_signed, amount):
+                    to_update.append(payment)
+                    break
+        return self.env['account.payment'].union(*to_update)
+
+    @api.model
+    def _update_matching_number(self, amls):
+        amls = amls._all_reconciled_lines()
+        all_partials = amls.matched_debit_ids | amls.matched_credit_ids
+
+        # The matchings form a set of graphs, which can be numbered: this is the matching number.
+        # We iterate on each edge of the graphs, giving it a number (min of its edge ids).
+        # By iterating, we either simply add a node (move line) to the graph and asign the number to
+        # it or we merge the two graphs.
+        # At the end, we have an index for the number to assign of all lines.
+        number2lines = {}
+        line2number = {}
+        for partial in all_partials.sorted('id'):
+            debit_min_id = line2number.get(partial.debit_move_id.id)
+            credit_min_id = line2number.get(partial.credit_move_id.id)
+            if debit_min_id and credit_min_id:  # merging the 2 graph into the one with smalles number
+                if debit_min_id != credit_min_id:
+                    min_min_id = min(debit_min_id, credit_min_id)
+                    max_min_id = max(debit_min_id, credit_min_id)
+                    for line_id in number2lines[max_min_id]:
+                        line2number[line_id] = min_min_id
+                    number2lines[min_min_id].extend(number2lines.pop(max_min_id))
+            elif debit_min_id:  # adding a new node to a graph
+                number2lines[debit_min_id].append(partial.credit_move_id.id)
+                line2number[partial.credit_move_id.id] = debit_min_id
+            elif credit_min_id:  # adding a new node to a graph
+                number2lines[credit_min_id].append(partial.debit_move_id.id)
+                line2number[partial.debit_move_id.id] = credit_min_id
+            else:  # creating a new graph
+                number2lines[partial.id] = [partial.debit_move_id.id, partial.credit_move_id.id]
+                line2number[partial.debit_move_id.id] = partial.id
+                line2number[partial.credit_move_id.id] = partial.id
+
+        amls.flush_recordset(['full_reconcile_id'])
+        self.env.cr.execute_values("""
+            UPDATE account_move_line l
+               SET matching_number = CASE
+                       WHEN l.full_reconcile_id IS NOT NULL THEN l.full_reconcile_id::text
+                       ELSE 'P' || source.number
+                   END
+              FROM (VALUES %s) AS source(number, ids)
+             WHERE l.id = ANY(source.ids)
+        """, list(number2lines.items()), page_size=1000)
+        processed_amls = self.env['account.move.line'].browse([_id for ids in number2lines.values() for _id in ids])
+        processed_amls.invalidate_recordset(['matching_number'])
+        (amls - processed_amls).matching_number = False
 
     # -------------------------------------------------------------------------
     # RECONCILIATION METHODS
@@ -155,7 +249,8 @@ class AccountPartialReconcile(models.Model):
 
                 if not journal:
                     raise UserError(_("There is no tax cash basis journal defined for the '%s' company.\n"
-                                      "Configure it in Accounting/Configuration/Settings") % partial.company_id.display_name)
+                                      "Configure it in Accounting/Configuration/Settings",
+                                      partial.company_id.display_name))
 
                 partial_amount = 0.0
                 partial_amount_currency = 0.0
@@ -206,12 +301,15 @@ class AccountPartialReconcile(models.Model):
                 if source_line.currency_id != counterpart_line.currency_id:
                     # When the invoice and the payment are not sharing the same foreign currency, the rate is computed
                     # on-the-fly using the payment date.
-                    payment_rate = self.env['res.currency']._get_conversion_rate(
-                        counterpart_line.company_currency_id,
-                        source_line.currency_id,
-                        counterpart_line.company_id,
-                        payment_date,
-                    )
+                    if 'forced_rate_from_register_payment' in self.env.context:
+                        payment_rate = self.env.context['forced_rate_from_register_payment']
+                    else:
+                        payment_rate = self.env['res.currency']._get_conversion_rate(
+                            counterpart_line.company_currency_id,
+                            source_line.currency_id,
+                            counterpart_line.company_id,
+                            payment_date,
+                        )
                 elif rate_amount:
                     payment_rate = rate_amount_currency / rate_amount
                 else:
@@ -223,6 +321,7 @@ class AccountPartialReconcile(models.Model):
                     'partial': partial,
                     'percentage': percentage,
                     'payment_rate': payment_rate,
+                    'both_move_posted': partial.debit_move_id.move_id.state == 'posted' and partial.credit_move_id.move_id.state == 'posted',
                 }
 
                 # Add partials.
@@ -261,6 +360,7 @@ class AccountPartialReconcile(models.Model):
             'tax_ids': [Command.set(tax_ids.ids)],
             'tax_tag_ids': [Command.set(all_tags.ids)],
             'analytic_distribution': base_line.analytic_distribution,
+            'display_type': base_line.display_type,
         }
 
     @api.model
@@ -281,6 +381,7 @@ class AccountPartialReconcile(models.Model):
             'currency_id': cb_base_line_vals['currency_id'],
             'partner_id': cb_base_line_vals['partner_id'],
             'analytic_distribution': cb_base_line_vals['analytic_distribution'],
+            'display_type': cb_base_line_vals['display_type'],
         }
 
     @api.model
@@ -294,7 +395,7 @@ class AccountPartialReconcile(models.Model):
                                 account.move.line.
         '''
         tax_ids = tax_line.tax_ids.filtered(lambda x: x.tax_exigibility == 'on_payment')
-        base_tags = tax_ids.get_tax_tags(tax_line.tax_repartition_line_id.refund_tax_id, 'base')
+        base_tags = tax_ids.get_tax_tags(tax_line.tax_repartition_line_id.filtered(lambda rl: rl.document_type == 'refund').tax_id, 'base')
         product_tags = tax_line.tax_tag_ids.filtered(lambda x: x.applicability == 'products')
         all_tags = base_tags + tax_line.tax_repartition_line_id.tag_ids + product_tags
 
@@ -311,7 +412,7 @@ class AccountPartialReconcile(models.Model):
             'currency_id': tax_line.currency_id.id,
             'partner_id': tax_line.partner_id.id,
             'analytic_distribution': tax_line.analytic_distribution,
-            # No need to set tax_tag_invert as on the base line; it will be computed from the repartition line
+            'display_type': tax_line.display_type,
         }
 
     @api.model
@@ -333,6 +434,7 @@ class AccountPartialReconcile(models.Model):
             'currency_id': cb_tax_line_vals['currency_id'],
             'partner_id': cb_tax_line_vals['partner_id'],
             'analytic_distribution': cb_tax_line_vals['analytic_distribution'],
+            'display_type': cb_tax_line_vals['display_type'],
         }
 
     @api.model
@@ -406,23 +508,27 @@ class AccountPartialReconcile(models.Model):
         tax_cash_basis_values_per_move = self._collect_tax_cash_basis_values()
         today = fields.Date.context_today(self)
 
-        moves_to_create = []
+        moves_to_create_and_post = []
+        moves_to_create_in_draft = []
         to_reconcile_after = []
         for move_values in tax_cash_basis_values_per_move.values():
             move = move_values['move']
             pending_cash_basis_lines = []
+            amount_residual_per_tax_line = {line.id: line.amount_residual_currency for line_type, line in move_values['to_process_lines'] if line_type == 'tax'}
 
             for partial_values in move_values['partials']:
                 partial = partial_values['partial']
 
                 # Init the journal entry.
-                lock_date = move.company_id._get_user_fiscal_lock_date()
-                move_date = partial.max_date if partial.max_date > (lock_date or date.min) else today
+                journal = partial.company_id.tax_cash_basis_journal_id
+                lock_date = move.company_id._get_user_fiscal_lock_date(journal)
+                move_date = partial.max_date if partial.max_date > lock_date else today
                 move_vals = {
                     'move_type': 'entry',
                     'date': move_date,
                     'ref': move.name,
-                    'journal_id': partial.company_id.tax_cash_basis_journal_id.id,
+                    'journal_id': journal.id,
+                    'company_id': partial.company_id.id,
                     'line_ids': [],
                     'tax_cash_basis_rec_id': partial.id,
                     'tax_cash_basis_origin_move_id': move.id,
@@ -434,7 +540,6 @@ class AccountPartialReconcile(models.Model):
                 partial_lines_to_create = {}
 
                 for caba_treatment, line in move_values['to_process_lines']:
-
                     # ==========================================================================
                     # Compute the balance of the current line on the cash basis entry.
                     # This balance is a percentage representing the part of the journal entry
@@ -443,6 +548,19 @@ class AccountPartialReconcile(models.Model):
 
                     # Percentage expressed in the foreign currency.
                     amount_currency = line.currency_id.round(line.amount_currency * partial_values['percentage'])
+                    if (
+                        caba_treatment == 'tax'
+                        and (
+                            move_values['is_fully_paid']
+                            or line.currency_id.compare_amounts(abs(line.amount_residual_currency), abs(amount_currency)) < 0
+                        )
+                        and partial_values == move_values['partials'][-1]
+                    ):
+                        # If the move is supposed to be fully paid, and we're on the last partial for it,
+                        # put the remaining amount to avoid rounding issues
+                        amount_currency = amount_residual_per_tax_line[line.id]
+                    if caba_treatment == 'tax':
+                        amount_residual_per_tax_line[line.id] -= amount_currency
                     balance = partial_values['payment_rate'] and amount_currency / partial_values['payment_rate'] or 0.0
 
                     # ==========================================================================
@@ -515,7 +633,7 @@ class AccountPartialReconcile(models.Model):
                         counterpart_line_vals['sequence'] = sequence + 1
 
                         if tax_line.account_id.reconcile:
-                            move_index = len(moves_to_create)
+                            move_index = len(moves_to_create_and_post) + len(moves_to_create_in_draft)
                             to_reconcile_after.append((tax_line, move_index, counterpart_line_vals['sequence']))
 
                     else:
@@ -528,12 +646,20 @@ class AccountPartialReconcile(models.Model):
 
                     move_vals['line_ids'] += [(0, 0, counterpart_line_vals), (0, 0, line_vals)]
 
-                moves_to_create.append(move_vals)
+                if partial_values['both_move_posted']:
+                    moves_to_create_and_post.append(move_vals)
+                else:
+                    moves_to_create_in_draft.append(move_vals)
 
-        moves = self.env['account.move'].create(moves_to_create)
-        moves._post(soft=False)
+        moves = self.env['account.move'].with_context(
+            skip_invoice_sync=True,
+            skip_invoice_line_sync=True,
+            skip_account_move_synchronization=True,
+        ).create(moves_to_create_and_post + moves_to_create_in_draft)
+        moves[:len(moves_to_create_and_post)]._post(soft=False)
 
         # Reconcile the tax lines being on a reconcile tax basis transfer account.
+        reconciliation_plan = []
         for lines, move_index, sequence in to_reconcile_after:
 
             # In expenses, all move lines are created manually without any grouping on tax lines.
@@ -548,6 +674,28 @@ class AccountPartialReconcile(models.Model):
             if counterpart_line.reconciled:
                 continue
 
-            (lines + counterpart_line).reconcile()
+            reconciliation_plan.append((counterpart_line + lines))
 
+        # passing add_caba_vals in the context to make sure that any exchange diff that would be created for
+        # this cash basis move would set the field draft_caba_move_vals accordingly on the partial
+        self.env['account.move.line'].with_context(add_caba_vals=True)._reconcile_plan(reconciliation_plan)
         return moves
+
+    def _get_draft_caba_move_vals(self):
+        self.ensure_one()
+        debit_vals = self.debit_move_id.move_id._collect_tax_cash_basis_values() or {}
+        credit_vals = self.credit_move_id.move_id._collect_tax_cash_basis_values() or {}
+        if not debit_vals and not credit_vals:
+            return False
+        return json.dumps({
+            'debit_caba_lines': [(aml_type, aml.id) for aml_type, aml in debit_vals.get('to_process_lines', [])],
+            'debit_total_balance': debit_vals.get('total_balance'),
+            'debit_total_amount_currency': debit_vals.get('total_amount_currency'),
+            'credit_caba_lines': [(aml_type, aml.id) for aml_type, aml in credit_vals.get('to_process_lines', [])],
+            'credit_total_balance': credit_vals.get('total_balance'),
+            'credit_total_amount_currency': credit_vals.get('total_amount_currency'),
+        })
+
+    def _set_draft_caba_move_vals(self):
+        for partial in self:
+            partial.draft_caba_move_vals = partial._get_draft_caba_move_vals()

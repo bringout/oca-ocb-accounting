@@ -6,7 +6,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
-class PrintPreNumberedChecks(models.TransientModel):
+class PrintPrenumberedChecks(models.TransientModel):
     _name = 'print.prenumbered.checks'
     _description = 'Print Pre-numbered Checks'
 
@@ -23,7 +23,7 @@ class PrintPreNumberedChecks(models.TransientModel):
         number_len = len(self.next_check_number or "")
         payments = self.env['account.payment'].browse(self.env.context['payment_ids'])
         payments.filtered(lambda r: r.state == 'draft').action_post()
-        payments.filtered(lambda r: r.state == 'posted' and not r.is_move_sent).write({'is_move_sent': True})
+        payments.filtered(lambda r: r.state == 'in_process' and not r.is_sent).write({'is_sent': True})
         for payment in payments:
             payment.check_number = '%0{}d'.format(number_len) % check_number
             check_number += 1

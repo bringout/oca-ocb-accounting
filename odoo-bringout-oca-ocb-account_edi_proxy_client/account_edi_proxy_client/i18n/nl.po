@@ -1,25 +1,35 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_edi_proxy_client
-# 
-# Translators:
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2022
-# Jolien De Paepe, 2023
-# Martin Trigaux, 2023
-# 
+# * account_edi_proxy_client
+#
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# Bren Driesen <brdri@odoo.com>, 2025, 2026.
+# Erwin van der Ploeg <erwin@odooexperts.nl>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-14 05:51+0000\n"
-"PO-Revision-Date: 2022-09-22 05:44+0000\n"
-"Last-Translator: Martin Trigaux, 2023\n"
-"Language-Team: Dutch (https://app.transifex.com/odoo/teams/41243/nl/)\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-01-14 15:12+0000\n"
+"Last-Translator: Bren Driesen <brdri@odoo.com>\n"
+"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-19/"
+"account_edi_proxy_client/nl/>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: nl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14.3\n"
+
+#. module: account_edi_proxy_client
+#. odoo-python
+#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
+msgid ""
+"A user already exists with theses credentials on our server. Please check "
+"your information."
+msgstr ""
+"Een gebruiker met deze gegevens bestaat al op onze server. Controleer je "
+"gegevens."
 
 #. module: account_edi_proxy_client
 #: model:ir.model,name:account_edi_proxy_client.model_account_edi_proxy_client_user
@@ -42,11 +52,6 @@ msgid "Active"
 msgstr "Actief"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_format_code
-msgid "Code"
-msgstr "Code"
-
-#. module: account_edi_proxy_client
 #: model:ir.model,name:account_edi_proxy_client.model_res_company
 msgid "Companies"
 msgstr "Bedrijven"
@@ -59,15 +64,27 @@ msgstr "Bedrijf"
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__create_uid
 msgid "Created by"
-msgstr "Gemaakt door"
+msgstr "Aangemaakt door"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__create_date
 msgid "Created on"
-msgstr "Gemaakt op"
+msgstr "Aangemaakt op"
+
+#. module: account_edi_proxy_client
+#: model:ir.model,name:account_edi_proxy_client.model_certificate_key
+msgid "Cryptographic Keys"
+msgstr "Cryptografische sleutels"
+
+#. module: account_edi_proxy_client
+#: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__demo
+msgid "Demo mode"
+msgstr "Demomodus"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__display_name
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__display_name
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__display_name
 msgid "Display Name"
 msgstr "Weergavenaam"
 
@@ -82,22 +99,36 @@ msgid "EDI Proxy Users"
 msgstr "EDI-proxygebruikers"
 
 #. module: account_edi_proxy_client
-#: model:ir.model,name:account_edi_proxy_client.model_account_edi_format
-msgid "EDI format"
-msgstr "EDI formaat"
-
-#. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_format_id
-msgid "Edi Format"
-msgstr "EDI formaat"
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_mode
+msgid "EDI operating mode"
+msgstr "EDI bedrijfsmodus"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_identification
 msgid "Edi Identification"
-msgstr "EDI identificatie"
+msgstr "EDI-identificatie"
+
+#. module: account_edi_proxy_client
+#. odoo-python
+#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
+msgid ""
+"Failed to connect to Odoo Access Point server. This might be due to another "
+"connection to Odoo Access Point server. It can occur if you have duplicated "
+"your database. \n"
+"\n"
+"If you are not sure how to fix this, please contact our support."
+msgstr ""
+"Verbinding met de Odoo Toegangspunt-server is mislukt. Dit kan te wijten "
+"zijn aan een andere verbinding met de Odoo Toegangspunt-server. Dit kan "
+"gebeuren als je je database hebt gedupliceerd.\n"
+"\n"
+"Neem contact op met onze support als je niet zeker weet hoe je dit kan "
+"oplossen."
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__id
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__id
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__id
 msgid "ID"
 msgstr "ID"
 
@@ -107,11 +138,6 @@ msgid "Id Client"
 msgstr "Id Client"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user____last_update
-msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
-
-#. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__write_uid
 msgid "Last Updated by"
 msgstr "Laatst bijgewerkt door"
@@ -119,17 +145,22 @@ msgstr "Laatst bijgewerkt door"
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__write_date
 msgid "Last Updated on"
-msgstr "Laatst geupdate op"
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__private_key
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__private_key_id
 msgid "Private Key"
 msgstr "Private Key"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__private_key_filename
-msgid "Private Key Filename"
-msgstr "Bestandsnaam Private Key"
+#: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__prod
+msgid "Production mode"
+msgstr "Productiemodus"
+
+#. module: account_edi_proxy_client
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__proxy_type
+msgid "Proxy Type"
+msgstr "Type proxy"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__refresh_token
@@ -137,23 +168,33 @@ msgid "Refresh Token"
 msgstr "Vernieuw token"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.fields,help:account_edi_proxy_client.field_account_edi_proxy_client_user__private_key
+#: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__test
+msgid "Test mode"
+msgstr "Test mode"
+
+#. module: account_edi_proxy_client
+#: model:ir.model.fields,help:account_edi_proxy_client.field_account_edi_proxy_client_user__private_key_id
 msgid "The key to encrypt all the user's data"
 msgstr "De sleutel om alle gegevens van de gebruiker te versleutelen"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,help:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_identification
-msgid ""
-"The unique id that identifies this user for on the edi format, typically the"
-" vat"
-msgstr ""
-"De unieke id die deze gebruiker identificeert in het edi-formaat, meestal "
-"het BTW-nummer"
+msgid "The unique id that identifies this user, typically the vat"
+msgstr "De unieke id die deze gebruiker identificeert, meestal het btw-nummer"
 
 #. module: account_edi_proxy_client
 #. odoo-python
 #: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
-#, python-format
+msgid ""
+"The url that this service requested returned an error. The url it tried to "
+"contact was %(url)s. %(error_message)s"
+msgstr ""
+"De URL die door deze service is aangevraagd, heeft een fout geretourneerd. "
+"De URL waarmee contact werd gezocht, was %(url)s. %(error_message)s"
+
+#. module: account_edi_proxy_client
+#. odoo-python
+#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
 msgid ""
 "The url that this service requested returned an error. The url it tried to "
 "contact was %s"
@@ -164,30 +205,58 @@ msgstr ""
 #. module: account_edi_proxy_client
 #. odoo-python
 #: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
-#, python-format
 msgid ""
-"The url that this service requested returned an error. The url it tried to "
-"contact was %s. %s"
+"The url that this service tried to contact does not exist. The url was “%s”"
 msgstr ""
-"De URL die door deze service is aangevraagd, heeft een fout geretourneerd. "
-"De URL waarmee contact werd gezocht, was %s. %s"
+"De URL waarmee deze service contact heeft gezocht, bestaat niet. De URL was "
+"“%s”"
 
 #. module: account_edi_proxy_client
-#. odoo-python
-#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
-#, python-format
-msgid ""
-"The url that this service tried to contact does not exist. The url was %r"
+#: model:ir.model.constraint,message:account_edi_proxy_client.constraint_account_edi_proxy_client_user_unique_active_company_proxy
+msgid "This company has an active user already created for this EDI type"
 msgstr ""
-"De url waarmee deze service contact heeft gezocht, bestaat niet. De url was "
-"%r"
+"Dit bedrijf heeft reeds een actieve gebruiker aangemaakt voor dit EDI-type"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.constraint,message:account_edi_proxy_client.constraint_account_edi_proxy_client_user_unique_edi_identification_per_format
-msgid "This edi identification is already assigned to a user"
-msgstr "Deze edi-identificatie is al toegewezen aan een gebruiker"
+#: model:ir.model.fields,help:account_edi_proxy_client.field_account_edi_proxy_client_user__is_token_out_of_sync
+msgid ""
+"This field is used to indicate that the edi user token is out of sync with "
+"the proxy server. It is set to True when the token needs to be refreshed or "
+"updated."
+msgstr ""
+"Dit veld wordt gebruikt om aan te geven dat het EDI-gebruikerstoken niet met "
+"de proxyserver gesynchroniseerd is. Het wordt ingesteld op True wanneer het "
+"token moet worden vernieuwd of bijgewerkt."
 
 #. module: account_edi_proxy_client
 #: model:ir.model.constraint,message:account_edi_proxy_client.constraint_account_edi_proxy_client_user_unique_id_client
 msgid "This id_client is already used on another user."
 msgstr "Deze id_client wordt al gebruikt door een andere gebruiker."
+
+#. module: account_edi_proxy_client
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__is_token_out_of_sync
+msgid "Token Out of Sync"
+msgstr "Token niet gesynchroniseerd"
+
+#. module: account_edi_proxy_client
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__token_sync_version
+msgid "Token Sync Version"
+msgstr "Token synchronisatieversie"
+
+#~ msgid ""
+#~ "Invalid signature for request. This might be due to another connection to "
+#~ "odoo Access Point server. It can occur if you have duplicated your "
+#~ "database. \n"
+#~ "\n"
+#~ "If you are not sure how to fix this, please contact our support."
+#~ msgstr ""
+#~ "Ongeldige handtekening voor het verzoek. Dit kan veroorzaakt worden door "
+#~ "een andere verbinding met de Odoo Access Point-server, bijvoorbeeld "
+#~ "wanneer de database is gedupliceerd.\n"
+#~ "\n"
+#~ "Als je niet zeker weet hoe je dit kunt oplossen, neem dan contact op met "
+#~ "onze support."
+
+#~ msgid "This edi identification is already assigned to an active user"
+#~ msgstr ""
+#~ "Deze EDI-identificatie is reeds toegewezen aan een actieve gebruiker"

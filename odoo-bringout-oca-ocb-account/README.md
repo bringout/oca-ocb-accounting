@@ -1,78 +1,34 @@
-# Invoicing (Account)
+# Invoicing
 
-Production‑ready Odoo 16 Invoicing module packaged as a standard Python distribution. Provides invoicing, payments, reconciliation, journals, taxes, and analytics integration.
 
-## Features
+Invoicing & Payments
+====================
+The specific and easy-to-use Invoicing system in Odoo allows you to keep track of your accounting, even when you are not an accountant. It provides an easy way to follow up on your vendors and customers.
 
-- Core: customer/vendor invoices, credit notes, journals, taxes
-- Payments: registration, reconciliation, bank statements
-- Analytics: analytic accounts, distributions, reporting
-- Web UI: dashboards, portals, email templates, reports
-- Packaging: install via pip/uv, wheel distribution
+You could use this simplified accounting in case you work with an (external) account to keep your books, and you still want to keep track of payments. This module also offers you an easy method of registering payments, without having to encode complete abstracts of account.
+    
 
 ## Installation
 
 ```bash
 pip install odoo-bringout-oca-ocb-account
-# or
-uv pip install odoo-bringout-oca-ocb-account
 ```
-
-## Quick Start
-
-Using this repository’s helper (from repo root):
-
-```bash
-python3 scripts/odoo_web_server.py \
-  --db-name mydb \
-  --addon account
-
-# then open http://localhost:8069 (admin / developer101)
-```
-
-Notes:
-- The server always includes base addons (base, web, mail, base_setup).
-- Add more addons with repeated `--addon` flags.
 
 ## Dependencies
 
-Functional dependencies (from manifest): base_setup, product, analytic, portal, digest.
-
-Python packages satisfied by this monorepo:
-- odoo-bringout-oca-ocb-base_setup
-- odoo-bringout-oca-ocb-product
-- odoo-bringout-oca-ocb-analytic
-- odoo-bringout-oca-ocb-portal
-- odoo-bringout-oca-ocb-digest
-
-## Compatibility
-
-- Odoo: 16.0 (OCA/OCB)
-- Python: 3.11–3.12
-
-## Documentation
-
-- Overview: doc/OVERVIEW.md
-- Architecture: doc/ARCHITECTURE.md
-- Models: doc/MODELS.md
-- Controllers: doc/CONTROLLERS.md
-- Wizards: doc/WIZARDS.md
-- Install: doc/INSTALL.md
-- Usage: doc/USAGE.md
-- Configuration: doc/CONFIGURATION.md
-- Dependencies: doc/DEPENDENCIES.md
-- Troubleshooting: doc/TROUBLESHOOTING.md
-- FAQ: doc/FAQ.md
-
-## Troubleshooting
-
-If you hit errors about payment provider icons/files during installation, see:
-packages/odoo-bringout-oca-ocb-payment/doc/PATCH_REMOVE_PAYMENT_PROVIDERS.md
+- base_setup
+- onboarding
+- product
+- analytic
+- portal
+- digest
 
 ## Source
 
-Based on OCA/OCB 16.0, addon `account`.
+- Repository: https://github.com/OCA/OCB
+- Branch: 19.0
+- Path: addons/account
 
 ## License
 
-LGPL‑3, preserved from upstream Odoo.
+This package preserves the original LGPL-3 license.

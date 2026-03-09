@@ -1,179 +1,37 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import Command
-from odoo.addons.mrp.tests.common import TestMrpCommon
-from odoo.addons.stock_account.tests.test_account_move import TestAccountMoveStockCommon
-from odoo.tests import Form, tagged
+from datetime import timedelta
+
+from odoo.addons.mrp_account.tests.common import TestBomPriceCommon, TestBomPriceOperationCommon
+from odoo.tests import Form
+from odoo.tests.common import new_test_user
+from odoo.tools import float_compare, float_round
+from odoo import fields
 
 
-class TestMrpAccount(TestMrpCommon):
-
-    @classmethod
-    def setUpClass(cls):
-        super(TestMrpAccount, cls).setUpClass()
-        cls.source_location_id = cls.stock_location_14.id
-        cls.warehouse = cls.env.ref('stock.warehouse0')
-        # setting up alternative workcenters
-        cls.wc_alt_1 = cls.env['mrp.workcenter'].create({
-            'name': 'Nuclear Workcenter bis',
-            'default_capacity': 3,
-            'time_start': 9,
-            'time_stop': 5,
-            'time_efficiency': 80,
-        })
-        cls.wc_alt_2 = cls.env['mrp.workcenter'].create({
-            'name': 'Nuclear Workcenter ter',
-            'default_capacity': 1,
-            'time_start': 10,
-            'time_stop': 5,
-            'time_efficiency': 85,
-        })
-        cls.product_4.uom_id = cls.uom_unit
-        cls.planning_bom = cls.env['mrp.bom'].create({
-            'product_id': cls.product_4.id,
-            'product_tmpl_id': cls.product_4.product_tmpl_id.id,
-            'product_uom_id': cls.uom_unit.id,
-            'product_qty': 4.0,
-            'consumption': 'flexible',
-            'operation_ids': [
-                (0, 0, {'name': 'Gift Wrap Maching', 'workcenter_id': cls.workcenter_1.id, 'time_cycle': 15, 'sequence': 1}),
-            ],
-            'type': 'normal',
-            'bom_line_ids': [
-                (0, 0, {'product_id': cls.product_2.id, 'product_qty': 2}),
-                (0, 0, {'product_id': cls.product_1.id, 'product_qty': 4})
-            ]})
-        cls.dining_table = cls.env['product.product'].create({
-            'name': 'Table (MTO)',
-            'type': 'product',
-            'tracking': 'serial',
-        })
-        cls.product_table_sheet = cls.env['product.product'].create({
-            'name': 'Table Top',
-            'type': 'product',
-            'tracking': 'serial',
-        })
-        cls.product_table_leg = cls.env['product.product'].create({
-            'name': 'Table Leg',
-            'type': 'product',
-            'tracking': 'lot',
-        })
-        cls.product_bolt = cls.env['product.product'].create({
-            'name': 'Bolt',
-            'type': 'product',
-        })
-        cls.product_screw = cls.env['product.product'].create({
-            'name': 'Screw',
-            'type': 'product',
-        })
-
-        cls.mrp_workcenter = cls.env['mrp.workcenter'].create({
-            'name': 'Assembly Line 1',
-            'resource_calendar_id': cls.env.ref('resource.resource_calendar_std').id,
-        })
-        cls.mrp_bom_desk = cls.env['mrp.bom'].create({
-            'product_tmpl_id': cls.dining_table.product_tmpl_id.id,
-            'product_uom_id': cls.env.ref('uom.product_uom_unit').id,
-            'sequence': 3,
-            'consumption': 'flexible',
-            'operation_ids': [
-                (0, 0, {'workcenter_id': cls.mrp_workcenter.id, 'name': 'Manual Assembly'}),
-            ],
-        })
-        cls.mrp_bom_desk.write({
-            'bom_line_ids': [
-                (0, 0, {
-                    'product_id': cls.product_table_sheet.id,
-                    'product_qty': 1,
-                    'product_uom_id': cls.env.ref('uom.product_uom_unit').id,
-                    'sequence': 1,
-                    'operation_id': cls.mrp_bom_desk.operation_ids.id}),
-                (0, 0, {
-                    'product_id': cls.product_table_leg.id,
-                    'product_qty': 4,
-                    'product_uom_id': cls.env.ref('uom.product_uom_unit').id,
-                    'sequence': 2,
-                    'operation_id': cls.mrp_bom_desk.operation_ids.id}),
-                (0, 0, {
-                    'product_id': cls.product_bolt.id,
-                    'product_qty': 4,
-                    'product_uom_id': cls.env.ref('uom.product_uom_unit').id,
-                    'sequence': 3,
-                    'operation_id': cls.mrp_bom_desk.operation_ids.id}),
-                (0, 0, {
-                    'product_id': cls.product_screw.id,
-                    'product_qty': 10,
-                    'product_uom_id': cls.env.ref('uom.product_uom_unit').id,
-                    'sequence': 4,
-                    'operation_id': cls.mrp_bom_desk.operation_ids.id}),
-            ]
-        })
-        cls.mrp_workcenter_1 = cls.env['mrp.workcenter'].create({
-            'name': 'Drill Station 1',
-            'resource_calendar_id': cls.env.ref('resource.resource_calendar_std').id,
-        })
-        cls.mrp_workcenter_3 = cls.env['mrp.workcenter'].create({
-            'name': 'Assembly Line 1',
-            'resource_calendar_id': cls.env.ref('resource.resource_calendar_std').id,
-        })
-        cls.categ_standard = cls.env['product.category'].create({
-            'name': 'STANDARD',
-            'property_cost_method': 'standard'
-        })
-        cls.categ_real = cls.env['product.category'].create({
-            'name': 'REAL',
-            'property_cost_method': 'fifo'
-        })
-        cls.categ_average = cls.env['product.category'].create({
-            'name': 'AVERAGE',
-            'property_cost_method': 'average'
-        })
-        cls.dining_table.categ_id = cls.categ_real.id
-        cls.product_table_sheet.categ_id = cls.categ_real.id
-        cls.product_table_leg.categ_id = cls.categ_average.id
-        cls.product_bolt.categ_id = cls.categ_standard.id
-        cls.product_screw.categ_id = cls.categ_standard.id
-        cls.env['stock.move'].search([('product_id', 'in', [cls.product_bolt.id, cls.product_screw.id])])._do_unreserve()
-        (cls.product_bolt + cls.product_screw).write({'type': 'product'})
-        cls.dining_table.tracking = 'none'
+class TestMrpAccount(TestBomPriceCommon):
 
     def test_00_production_order_with_accounting(self):
-        self.product_table_sheet.standard_price = 20.0
-        self.product_table_leg.standard_price = 15.0
-        self.product_bolt.standard_price = 10.0
-        self.product_screw.standard_price = 0.1
-        self.product_table_leg.tracking = 'none'
-        self.product_table_sheet.tracking = 'none'
         # Inventory Product Table
-        quants = self.env['stock.quant'].with_context(inventory_mode=True).create({
-            'product_id': self.product_table_sheet.id,  # tracking serial
+        quants = self.env['stock.quant'].with_context(inventory_mode=True).create([{
+            'product_id': self.leg.id,
             'inventory_quantity': 20,
-            'location_id': self.source_location_id,
-        })
-        quants |= self.env['stock.quant'].with_context(inventory_mode=True).create({
-            'product_id': self.product_table_leg.id,  # tracking lot
+            'location_id': self.stock_location.id,
+        }, {
+            'product_id': self.glass.id,
             'inventory_quantity': 20,
-            'location_id': self.source_location_id,
-        })
-        quants |= self.env['stock.quant'].with_context(inventory_mode=True).create({
-            'product_id': self.product_bolt.id,
-            'inventory_quantity': 20,
-            'location_id': self.source_location_id,
-        })
-        quants |= self.env['stock.quant'].create({
-            'product_id': self.product_screw.id,
+            'location_id': self.stock_location.id,
+        }, {
+            'product_id': self.screw.id,
             'inventory_quantity': 200000,
-            'location_id': self.source_location_id,
-        })
+            'location_id': self.stock_location.id,
+        }])
         quants.action_apply_inventory()
 
-        bom = self.mrp_bom_desk.copy()
-        bom.bom_line_ids.manual_consumption = False
-        bom.operation_ids = False
         production_table_form = Form(self.env['mrp.production'])
         production_table_form.product_id = self.dining_table
-        production_table_form.bom_id = bom
+        production_table_form.bom_id = self.bom_1
         production_table_form.product_qty = 1
         production_table = production_table_form.save()
 
@@ -183,172 +41,421 @@ class TestMrpAccount(TestMrpCommon):
         mo_form = Form(production_table)
         mo_form.qty_producing = 1
         production_table = mo_form.save()
-        production_table._post_inventory()
-        move_value = production_table.move_finished_ids.filtered(lambda x: x.state == "done").stock_valuation_layer_ids.value
+        production_table.button_mark_done()
+        move_value = production_table.move_finished_ids.filtered(lambda x: x.state == "done").value
 
-        # 1 table head at 20 + 4 table leg at 15 + 4 bolt at 10 + 10 screw at 10 + 1*20 (extra cost)
-        self.assertEqual(move_value, 141, 'Thing should have the correct price')
+        # 1 table head at 468.75 + 4 table leg at 25 + 1 glass at 100 + 5 screw at 10 + 1*20 (extra cost)
+        self.assertEqual(move_value, 738.75, 'Thing should have the correct price')
 
-
-@tagged("post_install", "-at_install")
-class TestMrpAccountMove(TestAccountMoveStockCommon):
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.product_B = cls.env["product.product"].create(
-            {
-                "name": "Product B",
-                "type": "product",
-                "default_code": "prda",
-                "categ_id": cls.auto_categ.id,
-                "taxes_id": [(5, 0, 0)],
-                "supplier_taxes_id": [(5, 0, 0)],
-                "lst_price": 100.0,
-                "standard_price": 10.0,
-                "property_account_income_id": cls.company_data["default_account_revenue"].id,
-                "property_account_expense_id": cls.company_data["default_account_expense"].id,
-            }
+    def test_stock_user_without_account_permissions_can_create_bom(self):
+        mrp_manager = new_test_user(
+            self.env, 'temp_mrp_manager', 'mrp.group_mrp_manager,product.group_product_variant',
         )
-        cls.bom = cls.env['mrp.bom'].create({
-            'product_id': cls.product_A.id,
-            'product_tmpl_id': cls.product_A.product_tmpl_id.id,
-            'product_qty': 1.0,
-            'bom_line_ids': [
-                (0, 0, {'product_id': cls.product_B.id, 'product_qty': 1}),
-            ]})
+
+        bom_form = Form(self.env['mrp.bom'].with_user(mrp_manager))
+        bom_form.product_id = self.dining_table
+
+    def test_two_productions_unbuild_one_sell_other_fifo(self):
+        """ Unbuild orders, when supplied with a specific MO record, should restrict their value
+        consumption to moves originating from that MO record.
+        """
+        mo_1 = self._create_mo(self.bom_1, 1)
+        mo_1.action_confirm()
+        mo_1.action_assign()
+        mo_1.button_mark_done()
+        self.assertRecordValues(
+            self.env['stock.move'].search([('product_id', '=', self.dining_table.id)]),
+            # MO_1
+            [{'remaining_qty': 1.0, 'value': 718.75}],
+        )
+
+        self.plywood_sheet.standard_price = 400
+        mo_2 = self._create_mo(self.bom_1, 1)
+        mo_2.action_confirm()
+        mo_2.action_assign()
+        mo_2.button_mark_done()
+        self.assertRecordValues(
+            self.env['stock.move'].search([('product_id', '=', self.dining_table.id)]),
+            [
+                {'remaining_qty': 1.0, 'value': 718.75},
+                # MO_2 new value to reflect change of component's `standard_price`
+                {'remaining_qty': 1.0, 'value': 918.75},
+            ],
+        )
+        unbuild_form = Form(self.env['mrp.unbuild'])
+        unbuild_form.product_id = self.dining_table
+        unbuild_form.bom_id = self.bom_1
+        unbuild_form.product_qty = 1
+        unbuild_form.mo_id = mo_2
+        unbuild_order = unbuild_form.save()
+        unbuild_order.action_unbuild()
+        self.assertRecordValues(
+            self.env['stock.move'].search([('product_id', '=', self.dining_table.id)]),
+            [
+                {'remaining_qty': 0.0, 'value': 718.75, 'quantity': 1.0},
+                {'remaining_qty': 1.0, 'value': 918.75, 'quantity': 1.0},
+                # Unbuild move value is derived from MO_2, as precised on the unbuild form
+                {'remaining_qty': 0.0, 'value': 718.75, 'quantity': 1.0},
+            ],
+        )
+        self._make_out_move(self.dining_table, 1)
+        self.assertRecordValues(
+            self.env['stock.move'].search([('product_id', '=', self.dining_table.id)]),
+            [
+                {'remaining_qty': 0.0, 'value': 718.75, 'quantity': 1.0},
+                {'remaining_qty': 0.0, 'value': 918.75, 'quantity': 1.0},
+                {'remaining_qty': 0.0, 'value': 718.75, 'quantity': 1.0},
+                # Out move value is derived from MO_1, the only candidate origin with some `remaining_qty`
+                {'remaining_qty': 0.0, 'value': 918.75, 'quantity': 1.0},
+            ],
+        )
 
     def test_unbuild_account_00(self):
         """Test when after unbuild, the journal entries are the reversal of the
         journal entries created when produce the product.
         """
         # build
-        production_form = Form(self.env['mrp.production'])
-        production_form.product_id = self.product_A
-        production_form.bom_id = self.bom
-        production_form.product_qty = 1
-        production = production_form.save()
-        production.action_confirm()
-        mo_form = Form(production)
-        mo_form.qty_producing = 1
-        production = mo_form.save()
-        production._post_inventory()
+        production = self._create_mo(self.bom_1, 1)
         production.button_mark_done()
 
         # finished product move
-        productA_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product A'), ('credit', '=', 0)])
-        productA_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product A'), ('debit', '=', 0)])
-        self.assertEqual(productA_debit_line.account_id, self.stock_valuation_account)
-        self.assertEqual(productA_credit_line.account_id, self.stock_input_account)
-        # component move
-        productB_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product B'), ('credit', '=', 0)])
-        productB_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product B'), ('debit', '=', 0)])
-        self.assertEqual(productB_debit_line.account_id, self.stock_output_account)
-        self.assertEqual(productB_credit_line.account_id, self.stock_valuation_account)
+        productA_debit_line = self.env['account.move.line'].search([('product_id', '=', self.dining_table.id), ('credit', '=', 0)])
+        productA_credit_line = self.env['account.move.line'].search([('product_id', '=', self.dining_table.id), ('debit', '=', 0)])
+        self.assertEqual(productA_debit_line.account_id, self.account_stock_valuation)
+        self.assertEqual(productA_credit_line.account_id, self.account_production)
+        # one of component move
+        productB_debit_line = self.env['account.move.line'].search([('product_id', '=', self.glass.id), ('credit', '=', 0)])
+        productB_credit_line = self.env['account.move.line'].search([('product_id', '=', self.glass.id), ('debit', '=', 0)])
+        self.assertEqual(productB_debit_line.account_id, self.account_production)
+        self.assertEqual(productB_credit_line.account_id, self.account_stock_valuation)
 
         # unbuild
-        res_dict = production.button_unbuild()
-        wizard = Form(self.env[res_dict['res_model']].with_context(res_dict['context'])).save()
-        wizard.action_validate()
+        Form.from_action(self.env, production.button_unbuild()).save().action_validate()
 
         # finished product move
-        productA_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product A'), ('credit', '=', 0)])
-        productA_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product A'), ('debit', '=', 0)])
-        self.assertEqual(productA_debit_line.account_id, self.stock_input_account)
-        self.assertEqual(productA_credit_line.account_id, self.stock_valuation_account)
+        productA_debit_line = self.env['account.move.line'].search([
+            ('product_id', '=', self.dining_table.id),
+            ('credit', '=', 0),
+            ('name', 'ilike', 'UB'),
+        ])
+        productA_credit_line = self.env['account.move.line'].search([
+            ('product_id', '=', self.dining_table.id),
+            ('debit', '=', 0),
+            ('name', 'ilike', 'UB'),
+        ])
+        self.assertEqual(productA_debit_line.account_id, self.account_production)
+        self.assertEqual(productA_credit_line.account_id, self.account_stock_valuation)
         # component move
-        productB_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product B'), ('credit', '=', 0)])
-        productB_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product B'), ('debit', '=', 0)])
-        self.assertEqual(productB_debit_line.account_id, self.stock_valuation_account)
-        self.assertEqual(productB_credit_line.account_id, self.stock_output_account)
+        productB_debit_line = self.env['account.move.line'].search([
+            ('product_id', '=', self.glass.id),
+            ('credit', '=', 0),
+            ('name', 'ilike', 'UB'),
+        ])
+        productB_credit_line = self.env['account.move.line'].search([
+            ('product_id', '=', self.glass.id),
+            ('debit', '=', 0),
+            ('name', 'ilike', 'UB'),
+        ])
+        self.assertEqual(productB_debit_line.account_id, self.account_stock_valuation)
+        self.assertEqual(productB_credit_line.account_id, self.account_production)
 
-    def test_unbuild_account_01(self):
-        """Test when production location has its valuation accounts. After unbuild,
-        the journal entries are the reversal of the journal entries created when
-        produce the product.
+    def test_mo_overview_comp_different_uom(self):
+        """ Test that the overview takes into account the uom of the component in the price computation
         """
-        # set accounts for production location
-        production_location = self.product_A.property_stock_production
-        wip_incoming_account = self.env['account.account'].create({
-            'name': 'wip incoming',
-            'code': '000001',
-            'account_type': 'asset_current',
-        })
-        wip_outgoing_account = self.env['account.account'].create({
-            'name': 'wip outgoing',
-            'code': '000002',
-            'account_type': 'asset_current',
-        })
-        production_location.write({
-            'valuation_in_account_id': wip_incoming_account.id,
-            'valuation_out_account_id': wip_outgoing_account.id,
-        })
+        self.screw.uom_id = self.env.ref('uom.product_uom_pack_6')
+        self.bom_1.bom_line_ids.filtered(lambda l: l.product_id == self.screw).product_uom_id = self.env.ref('uom.product_uom_unit')
+        mo = self._create_mo(self.bom_1, 1)
+        overview_values = self.env['report.mrp.report_mo_overview'].get_report_values(mo.id)
+        self.assertEqual(round(overview_values['data']['summary']['mo_cost'], 2), 677.08, "718.75 - 50 + 50/6")
+        mo.button_mark_done()
+        overview_values = self.env['report.mrp.report_mo_overview'].get_report_values(mo.id)
+        self.assertEqual(round(overview_values['data']['summary']['mo_cost'], 2), 677.08)
 
-        # build
-        production_form = Form(self.env['mrp.production'])
-        production_form.product_id = self.product_A
-        production_form.bom_id = self.bom
-        production_form.product_qty = 1
-        production = production_form.save()
-        production.action_confirm()
-        mo_form = Form(production)
-        mo_form.qty_producing = 1
-        production = mo_form.save()
-        production._post_inventory()
+    def test_mrp_user_without_account_permissions_can_create_bom(self):
+        mrp_user = new_test_user(self.env, 'temp_mrp_user', 'mrp.group_mrp_user')
+        mo_1 = self._create_mo(self.bom_1, 1)
+        mo_1.with_user(mrp_user).button_mark_done()
+
+
+class TestMrpAccountWorkorder(TestBomPriceOperationCommon):
+
+    def test_01_compute_price_operation_cost(self):
+        self.assertEqual(self.dining_table.standard_price, 1000, "Initial price of the Product should be 1000")
+        self.dining_table.button_bom_cost()
+        # Total cost of Dining Table = (550) + Total cost of operations (321.25) = 871.25
+        # byproduct have 1%+12% of cost share so the final cost is 757.99
+        self.assertEqual(float_round(self.dining_table.standard_price, precision_digits=2), 757.99)
+        self.Product.browse([self.dining_table.id, self.table_head.id]).action_bom_cost()
+        # Total cost of Dining Table = (718.75) + Total cost of all operations (321.25 + 25.52) = 1065.52
+        # byproduct have 1%+12% of cost share so the final cost is 927
+        self.assertEqual(float_compare(self.dining_table.standard_price, 927, precision_digits=2), 0)
+
+    def test_labor_cost_posting_is_not_rounded_incorrectly(self):
+        """ Test to ensure that labor costs are posted accurately without rounding errors."""
+        # Build
+        self.glass.qty_available = 1
+        self.workcenter.costs_hour = 0.01
+        production = self._create_mo(self.bom_1, 1)
+        production.qty_producing = 1
+        workorder = production.workorder_ids
+        workorder.duration = 30.2
+        workorder.time_ids.write({'duration': 30.2})
+
+        production.move_raw_ids.picked = True
         production.button_mark_done()
 
-        # finished product move
-        productA_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product A'), ('credit', '=', 0)])
-        productA_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product A'), ('debit', '=', 0)])
-        self.assertEqual(productA_debit_line.account_id, self.stock_valuation_account)
-        self.assertEqual(productA_credit_line.account_id, wip_outgoing_account)
-        # component move
-        productB_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product B'), ('credit', '=', 0)])
-        productB_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'MO%Product B'), ('debit', '=', 0)])
-        self.assertEqual(productB_debit_line.account_id, wip_incoming_account)
-        self.assertEqual(productB_credit_line.account_id, self.stock_valuation_account)
+        self.assertEqual(production.workorder_ids.mapped('time_ids').mapped('account_move_line_id').mapped('credit'), [
+            0.06,
+        ])
 
-        # unbuild
-        res_dict = production.button_unbuild()
-        wizard = Form(self.env[res_dict['res_model']].with_context(res_dict['context'])).save()
-        wizard.action_validate()
+    def test_02_compute_byproduct_price(self):
+        """Test BoM cost when byproducts with cost share"""
 
-        productA_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product A'), ('credit', '=', 0)])
-        productA_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product A'), ('debit', '=', 0)])
-        self.assertEqual(productA_debit_line.account_id, wip_outgoing_account)
-        self.assertEqual(productA_credit_line.account_id, self.stock_valuation_account)
-        # component move
-        productB_debit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product B'), ('credit', '=', 0)])
-        productB_credit_line = self.env['account.move.line'].search([('ref', 'ilike', 'UB%Product B'), ('debit', '=', 0)])
-        self.assertEqual(productB_debit_line.account_id, self.stock_valuation_account)
-        self.assertEqual(productB_credit_line.account_id, wip_incoming_account)
+        self.assertEqual(self.dining_table.standard_price, 1000, "Initial price of the Product should be 1000")
+        self.assertEqual(self.scrap_wood.standard_price, 30, "Initial price of the By-Product should be 30")
+        # bom price is 871.25. Byproduct cost share is 12%+1% = 13% -> 113.26 for 8+12 units -> 5.66
+        self.scrap_wood.button_bom_cost()
+        self.assertAlmostEqual(self.scrap_wood.standard_price, 5.663125, "After computing price from BoM price should be 20.63")
 
-
-@tagged("post_install", "-at_install")
-class TestMrpAnalyticAccount(TestMrpCommon):
-    def test_mo_analytic_account(self):
+    def test_wip_accounting_00(self):
+        """ Test that posting a WIP accounting entry works as expected.
+        WIP MO = MO with some time completed on WOs and/or 'consumed' components
         """
-            Check that an mrp user without accounting rights is able to mark as done
-            an MO linked to an analytic account.
-        """
-        if not (self.env.ref('mrp_account_enterprise.account_assembly_hours', raise_if_not_found=False) and self.env.ref('hr_timesheet.group_hr_timesheet_user', raise_if_not_found=False)):
-            self.skipTest("This test requires the installation of hr_timesheet")
-        mrp_user = self.user_mrp_user
-        mrp_user.groups_id = [Command.set([self.ref('mrp.group_mrp_user'), self.ref('hr_timesheet.group_hr_timesheet_user')])]
-        analytic_account = self.env.ref('mrp_account_enterprise.account_assembly_hours')
-        bom = self.bom_4
-        product = bom.product_id
-        bom.bom_line_ids.product_id.standard_price = 1.0
-        bom.analytic_account_id = analytic_account
-        mo = self.env['mrp.production'].with_user(mrp_user.id).create({
-            'product_id': product.id,
-            'product_uom_id': product.uom_id.id,
-            'bom_id': bom.id
+        self.glass.qty_available = 2
+        mo = self._create_mo(self.bom_1, 1, confirm=False)
+
+        # post a WIP for an invalid MO, i.e. draft/cancelled/done results in a "Manual Entry"
+        wizard = Form(self.env['mrp.account.wip.accounting'].with_context({'active_ids': [mo.id]}))
+        wizard.save().confirm()
+        wip_manual_entry1 = self.env['account.move'].search([('ref', 'ilike', 'WIP - Manual Entry')])
+        self.assertEqual(len(wip_manual_entry1), 2, "Should be 2 journal entries: 1 for the WIP accounting + 1 for its reversal")
+        self.assertEqual(wip_manual_entry1[0].wip_production_count, 0, "Non-WIP MOs shouldn't be linked to manual entry")
+        self.assertEqual(len(wip_manual_entry1.line_ids), 6, "Should be 3 lines per journal entry: 1 for 'Component Value', 1 for '(WO) overhead', 1 for WIP")
+        self.assertRecordValues(wip_manual_entry1.line_ids, [
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 0.0},
+        ])
+
+        # post a WIP for a valid MO - no WO time completed or components consumed => nothing to debit/credit
+        mo.action_confirm()
+        wizard = Form(self.env['mrp.account.wip.accounting'].with_context({'active_ids': [mo.id]}))
+        wizard.save().confirm()
+        wip_empty_entries = self.env['account.move'].search([('ref', 'ilike', 'WIP - ' + mo.name)])
+        self.assertEqual(len(wip_empty_entries), 2, "Should be 2 journal entries: 1 for the WIP accounting + 1 for its reversal")
+        self.assertEqual(wip_empty_entries[0].wip_production_count, 1, "WIP MOs should be linked to entries even if no 'done' work")
+        self.assertEqual(len(wip_empty_entries.line_ids), 6, "Should be 3 lines per journal entry: 1 for 'Component Value', 1 for '(WO) overhead', 1 for WIP")
+        self.assertRecordValues(wip_empty_entries.line_ids, [
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 0.0},
+        ])
+
+        # WO time completed + components consumed
+        mo_form = Form(mo)
+        mo_form.qty_producing = mo.product_qty
+        mo = mo_form.save()
+        now = fields.Datetime.now()
+        workorder = mo.workorder_ids[0]
+        self.env['mrp.workcenter.productivity'].create({
+            'workcenter_id': self.workcenter.id,
+            'workorder_id': workorder.id,
+            'date_start': now - timedelta(hours=1),
+            'date_end': now,
+            'loss_id': self.env.ref('mrp.block_reason7').id,
         })
-        mo.with_user(mrp_user.id).action_confirm()
-        action = mo.with_user(mrp_user.id).button_mark_done()
-        wizard = Form(self.env[action['res_model']].with_context(action['context']).with_user(mrp_user.id)).save()
-        wizard.with_user(mrp_user.id).process()
-        self.assertTrue(mo.move_raw_ids.move_line_ids)
-        self.assertEqual(mo.move_raw_ids.quantity_done, bom.bom_line_ids.product_qty)
-        self.assertEqual(mo.move_raw_ids.state, 'done')
+        workorder.button_finish()
+        wizard = Form(self.env['mrp.account.wip.accounting'].with_context({'active_ids': [mo.id]}))
+        wizard.save().confirm()
+        wip_entries1 = self.env['account.move'].search([('ref', 'ilike', 'WIP - ' + mo.name), ('id', 'not in', wip_empty_entries.ids)])
+        self.assertEqual(len(wip_entries1), 2, "Should be 2 journal entries: 1 for the WIP accounting + 1 for its reversal")
+        self.assertEqual(wip_entries1[0].wip_production_count, 1, "WIP MOs should be linked to entry")
+        self.assertEqual(len(wip_entries1.line_ids), 6, "Should be 3 lines per journal entry: 1 for 'Component Value', 1 for '(WO) overhead', 1 for WIP")
+        total_component_price = sum(m.product_qty * m.product_id.standard_price for m in mo.move_raw_ids)
+        self.assertRecordValues(wip_entries1.line_ids, [
+            {'account_id': self.account_stock_valuation.id, 'debit': total_component_price, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 100.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 100.0 + total_component_price},
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': total_component_price},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 100.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 100.0 + total_component_price, 'credit': 0.0},
+        ])
+
+        # Multi-records case
+        previous_wip_ids = wip_entries1.ids + wip_empty_entries.ids
+        mo_2 = self._create_mo(self.bom_1, 1, confirm=False)
+        mos = (mo | mo_2)
+
+        # Draft MOs should be ignored when selecting multiple MOs
+        wizard = Form(self.env['mrp.account.wip.accounting'].with_context({'active_ids': mos.ids}))
+        wizard.save().confirm()
+        wip_entries2 = self.env['account.move'].search([('ref', 'ilike', 'WIP - ' + mo.name), ('id', 'not in', previous_wip_ids)])
+        self.assertEqual(len(wip_entries2), 2, "Should be 2 journal entries: 1 for the WIP accounting + 1 for its reversal, for 1 MO")
+        self.assertTrue(mo_2.name not in wip_entries2[0].ref, "Draft MO should be completely disregarded by wizard")
+        self.assertEqual(wip_entries2[0].wip_production_count, 1, "Only WIP MOs should be linked to entry")
+        self.assertEqual(len(wip_entries2.line_ids), 6, "Should be 3 lines per journal entry: 1 for 'Component Value', 1 for '(WO) overhead', 1 for WIP")
+        self.assertRecordValues(wip_entries2.line_ids, [
+            {'account_id': self.account_stock_valuation.id, 'debit': total_component_price, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 100.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 100.0 + total_component_price},
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': total_component_price},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 100.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 100.0 + total_component_price, 'credit': 0.0},
+        ])
+        previous_wip_ids += wip_entries2.ids
+
+        # MOs' WIP amounts should be aggregated
+        mo_2.action_confirm()
+        mo_2.qty_producing = mo_2.product_qty
+        wizard = Form(self.env['mrp.account.wip.accounting'].with_context({'active_ids': mos.ids}))
+        wizard.save().confirm()
+        wip_entries3 = self.env['account.move'].search([('ref', 'ilike', 'WIP - ' + mo.name), ('id', 'not in', previous_wip_ids)])
+        self.assertEqual(len(wip_entries3), 2, "Should be 2 journal entries: 1 for the WIP accounting + 1 for its reversal, for both MOs")
+        self.assertTrue(mo_2.name in wip_entries3[0].ref, "Both MOs should have been considered")
+        self.assertEqual(wip_entries3[0].wip_production_count, 2, "Both WIP MOs should be linked to entry")
+        self.assertEqual(len(wip_entries3.line_ids), 6, "Should be 3 lines per journal entry: 1 for 'Component Value', 1 for '(WO) overhead', 1 for WIP")
+        total_component_price = sum(m.quantity * m.product_id.standard_price for m in mo_2.move_raw_ids)
+        self.assertRecordValues(wip_entries3.line_ids, [
+            {'account_id': self.account_stock_valuation.id, 'debit': total_component_price, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 100.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 100.0 + total_component_price},
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': total_component_price},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 100.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 100.0 + total_component_price, 'credit': 0.0},
+        ])
+        previous_wip_ids += wip_entries3.ids
+
+        # Done MO should be ignored
+        mo_2.move_raw_ids.picked = True
+        mo_2.button_mark_done()
+        wizard = Form(self.env['mrp.account.wip.accounting'].with_context({'active_ids': mos.ids}))
+        wizard.save().confirm()
+        wip_entries4 = self.env['account.move'].search([('ref', 'ilike', 'WIP - ' + mo.name), ('id', 'not in', previous_wip_ids)])
+        self.assertEqual(len(wip_entries4), 2, "Should be 2 journal entries: 1 for the WIP accounting + 1 for its reversal, for 1 MO")
+        self.assertTrue(mo_2.name not in wip_entries4[0].ref, "Done MO should be completely disregarded by wizard")
+        self.assertEqual(wip_entries4[0].wip_production_count, 1, "Only WIP MOs should be linked to entry")
+        self.assertEqual(len(wip_entries4.line_ids), 6, "Should be 3 lines per journal entry: 1 for 'Component Value', 1 for '(WO) overhead', 1 for WIP")
+        total_component_price = sum(m.product_qty * m.product_id.standard_price for m in mo.move_raw_ids)
+        self.assertRecordValues(wip_entries4.line_ids, [
+            {'account_id': self.account_stock_valuation.id, 'debit': total_component_price, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 100.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 100.0 + total_component_price},
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': total_component_price},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 100.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 100.0 + total_component_price, 'credit': 0.0},
+        ])
+        previous_wip_ids += wip_entries4.ids
+
+        # WO time completed + components consumed, but WIP date is for before they were done => nothing to debit/credit
+        wizard = Form(self.env['mrp.account.wip.accounting'].with_context({'active_ids': [mo.id]}))
+        wizard.date = now - timedelta(days=2)
+        wizard.save().confirm()
+        wip_entries5 = self.env['account.move'].search([('ref', 'ilike', 'WIP - ' + mo.name), ('id', 'not in', previous_wip_ids)])
+        self.assertEqual(len(wip_entries5), 2, "Should be 2 journal entries: 1 for the WIP accounting + 1 for its reversal")
+        self.assertEqual(wip_entries5[0].wip_production_count, 1, "WIP MOs should be linked to entry")
+        self.assertEqual(len(wip_entries5.line_ids), 6, "Should be 3 lines per journal entry: 1 for 'Component Value', 1 for '(WO) overhead', 1 for WIP")
+        self.assertRecordValues(wip_entries5.line_ids, [
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.account_stock_valuation.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_overhead_account_id.id, 'debit': 0.0, 'credit': 0.0},
+            {'account_id': self.env.company.account_production_wip_account_id.id, 'debit': 0.0, 'credit': 0.0},
+        ])
+
+    def test_labor_cost_balancing(self):
+        """ When the workcenter_cost ends up like x.xx5 with a currency rounding of 0.01,
+        the valuation 'account.move' was unbalanced.
+        This happened because the credit value rounded up twice, and instead of having -0.005 + 0.005 => 0,
+        we had -0 + 0.01 => +0.01, which made the credit differ from the debit by 0.01.
+        This test ensures that if the workcenter_cost is rounded to 0.01, then the credit value is correctly
+        decremented by 0.01.
+        """
+        # Build
+        self.dining_table.categ_id = self.category_avco_auto
+        self.glass.qty_available = 1
+        production = self._create_mo(self.bom_1, 1)
+        production.qty_producing = 1
+        workorder = production.workorder_ids
+        workorder.duration = 0.03  # ~= 2 seconds (1.8 seconds exactly)
+        workorder.time_ids.write({'duration': 0.03})  # Ensure that the duration is correct
+        self.assertEqual(workorder._cal_cost(), (len(workorder) * 2 / 3600) * 100)  # 2 seconds at $100/h
+
+        production.move_raw_ids.picked = True
+        production.button_mark_done()
+
+        # value = finished product value + labour cost - byproduct cost share
+        account_move = production.move_finished_ids.account_move_id
+        self.assertRecordValues(account_move.line_ids, [
+            {'credit': 625.6, 'debit': 0.00},  # Credit Line
+            {'credit': 0.00, 'debit': 625.6},  # Debit Line
+        ])
+        labour_move = workorder.time_ids.account_move_line_id.move_id
+        # sum of workorder costs but rounded at company currency
+        self.assertRecordValues(labour_move.line_ids, [
+            {'credit': 0.36, 'debit': 0.00},
+            {'credit': 0.00, 'debit': 0.36},
+        ])
+
+    def test_labor_cost_over_consumption(self):
+        """ Test the labour accounting entries creation is independent of consumption variation"""
+        self.glass.qty_available = 1
+        production = self._create_mo(self.bom_1, 1)
+        production.workorder_ids.duration = 60
+
+        production.qty_producing = 1
+
+        # overconsume one component to get a warning wizard
+        production.move_raw_ids[0].quantity += 2
+
+        production.move_raw_ids.picked = True
+        action = production.button_mark_done()
+        consumption_warning = Form(self.env['mrp.consumption.warning'].with_context(**action['context'])).save()
+        consumption_warning.action_confirm()
+
+        mo_aml = self.env['account.move.line'].search([('name', 'like', production.name)])
+        labour = 600
+        compo_price = 718.75 + 2 * 200
+        cost_share = 0.13
+        self.assertEqual(len(mo_aml), 6, "2 Labour + 2 finished product + 7 for the components")
+        self.assertRecordValues(mo_aml, [
+            {'name': production.name + ' - Labour', 'debit': 0.0, 'credit': labour},
+            {'name': production.name + ' - Labour', 'debit': labour, 'credit': 0.0},
+            {'name': production.name + ' - ' + self.dining_table.name, 'debit': 0.0, 'credit': (labour + compo_price) * (1 - cost_share)},
+            {'name': production.name + ' - ' + self.dining_table.name, 'debit': (labour + compo_price) * (1 - cost_share), 'credit': 0.0},
+            {'name': production.name + ' - ' + self.glass.name, 'debit': 0.0, 'credit': 100.0},
+            {'name': production.name + ' - ' + self.glass.name, 'debit': 100.0, 'credit': 0.0},
+        ])
+
+    def test_estimated_cost_valuation(self):
+        """ Test that operations with 'estimated' cost correctly compute the cost.
+        The cost should be equal to workcenter.costs_hour * workorder.duration_expected. """
+        mo = self._create_mo(self.bom_1, 1)
+        self.bom_1.operation_ids.cost_mode = 'actual'
+        mo.workorder_ids.duration = 60
+        self.assertEqual(mo.workorder_ids._cal_cost(), 600)
+
+        # Cost should stay the same for a done MO if nothing else is changed
+        mo.move_raw_ids.picked = True
+        mo.button_mark_done()
+        self.workcenter.costs_hour = 333
+        self.assertEqual(mo.workorder_ids._cal_cost(), 600)
+
+    def test_mo_without_finished_moves(self):
+        """Test that a MO without finished moves can post inventory and be completed."""
+        mo = self._create_mo(self.bom_1, 1)
+        workorder = mo.workorder_ids
+        workorder.duration = 60
+        self.assertEqual(workorder._cal_cost(), 600)
+        # Simulate missing finished moves
+        mo.move_finished_ids.unlink()
+        # Post inventory and complete MO
+        mo.move_raw_ids.picked = True
+        mo.button_mark_done()
+        self.assertEqual(mo.state, 'done')

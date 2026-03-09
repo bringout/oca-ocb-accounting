@@ -6,6 +6,7 @@ from odoo.tools import date_utils
 class ResCompany(models.Model):
     _inherit = "res.company"
 
+    @api.readonly
     @api.model
     def get_fiscal_dates(self, payload):
         companies = self.env["res.company"].browse(
@@ -13,7 +14,7 @@ class ResCompany(models.Model):
         )
         existing_companies = companies.exists()
         # prefetch both fields
-        existing_companies.read(["fiscalyear_last_day", "fiscalyear_last_month"])
+        existing_companies.fetch(["fiscalyear_last_day", "fiscalyear_last_month"])
         results = []
 
         for data, company in zip(payload, companies):

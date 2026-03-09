@@ -1,35 +1,48 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* microsoft_account
-# 
-# Translators:
-# Jiří Podhorecký, 2022
-# Jakub Smolka, 2023
-# 
+# * microsoft_account
+#
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# "Marta (wacm)" <wacm@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-20 09:02+0000\n"
-"PO-Revision-Date: 2022-09-22 05:53+0000\n"
-"Last-Translator: Jakub Smolka, 2023\n"
-"Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-01-29 09:08+0000\n"
+"Last-Translator: \"Marta (wacm)\" <wacm@odoo.com>\n"
+"Language-Team: Czech <https://translate.odoo.com/projects/odoo-19/"
+"microsoft_account/cs/>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: cs\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: microsoft_account
+#: model:ir.model.fields,field_description:microsoft_account.field_microsoft_service__display_name
+#: model:ir.model.fields,field_description:microsoft_account.field_res_users__display_name
+msgid "Display Name"
+msgstr "Zobrazovací název"
+
+#. module: microsoft_account
+#: model:ir.model.fields,field_description:microsoft_account.field_microsoft_service__id
+#: model:ir.model.fields,field_description:microsoft_account.field_res_users__id
+msgid "ID"
+msgstr "ID"
+
+#. module: microsoft_account
+#. odoo-python
 #: code:addons/microsoft_account/models/microsoft_service.py:0
-#, python-format
 msgid "Method not supported [%s] not in [GET, POST, PUT, PATCH or DELETE]!"
 msgstr "Metoda není podporována [%s] v [GET, POST, PUT, PATCH nebo DELETE]!"
 
 #. module: microsoft_account
 #: model:ir.model.fields,field_description:microsoft_account.field_res_users__microsoft_calendar_rtoken
 msgid "Microsoft Refresh Token"
-msgstr ""
+msgstr "Obnovovací token Microsoft"
 
 #. module: microsoft_account
 #: model:ir.model,name:microsoft_account.model_microsoft_service
@@ -39,32 +52,22 @@ msgstr "Microsoft služba"
 #. module: microsoft_account
 #: model:ir.model.fields,field_description:microsoft_account.field_res_users__microsoft_calendar_token_validity
 msgid "Microsoft Token Validity"
-msgstr ""
+msgstr "Platnost tokenu Microsoft"
 
 #. module: microsoft_account
 #: model:ir.model.fields,field_description:microsoft_account.field_res_users__microsoft_calendar_token
 msgid "Microsoft User token"
-msgstr ""
+msgstr "Token uživatele Microsoft"
 
 #. module: microsoft_account
+#. odoo-python
 #: code:addons/microsoft_account/models/microsoft_service.py:0
-#, python-format
 msgid ""
 "Something went wrong during your token generation. Maybe your Authorization "
 "Code is invalid"
 msgstr ""
-"Během vaší generace tokenů se něco pokazilo. Možná je váš autorizační kód "
-"neplatný"
-
-#. module: microsoft_account
-#: code:addons/microsoft_account/models/microsoft_service.py:0
-#, python-format
-msgid ""
-"Something went wrong during your token generation. Maybe your Authorization "
-"Code is invalid or already expired"
-msgstr ""
-"Během vaší generace tokenů se něco pokazilo. Možná je váš autorizační kód "
-"neplatný nebo již vypršel"
+"Během generování vašeho tokenu se něco pokazilo. Možná je váš autorizační "
+"kód neplatný"
 
 #. module: microsoft_account
 #: model:ir.model,name:microsoft_account.model_res_users
