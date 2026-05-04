@@ -141,7 +141,7 @@ msgstr "Online plaćanje računa"
 #. module: account_payment_invoice_online_payment_patch
 #: model:ir.model,name:account_payment_invoice_online_payment_patch.model_account_move
 msgid "Journal Entry"
-msgstr "Temeljnica"
+msgstr "Stavka dnevnika"
 
 # taken from hr.po
 #. module: account_payment_invoice_online_payment_patch

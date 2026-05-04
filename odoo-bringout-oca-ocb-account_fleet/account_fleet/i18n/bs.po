@@ -49,13 +49,13 @@ msgstr "Datum kreiranja"
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_account_move
 msgid "Journal Entry"
-msgstr "Temeljnica"
+msgstr "Stavka dnevnika"
 
 # taken from hr.po
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_account_move_line
 msgid "Journal Item"
-msgstr "Stavka dnevnika"
+msgstr "Stavka žurnala"
 
 # taken from hr.po
 #. module: account_fleet
@@ -66,7 +66,7 @@ msgstr "Potrebno vozilo"
 # taken from hr.po
 #. module: account_fleet
 #. odoo-python
-#: code:addons/account_fleet/models/account_move.py
+#: code:addons/account_fleet/models/account_move.py:0
 #, python-format
 msgid "Service Vendor Bill: %s"
 msgstr "Račun za usluge :%s"
@@ -88,3 +88,65 @@ msgstr "Ulazni račun"
 #: model_terms:ir.ui.view,arch_db:account_fleet.fleet_vehicle_view_form
 msgid "show the vendor bills for this vehicle"
 msgstr "prikaži ulazne račune za ovo vozilo"
+
+#. module: account_fleet
+#: model_terms:ir.ui.view,arch_db:account_fleet.fleet_vehicle_log_services_view_form
+msgid ""
+"<span class=\"o_stat_text text-success\" invisible=\"account_move_state != 'posted'\" title=\"Service's Bill\">Service's Bill</span>\n"
+"                            <span class=\"o_stat_text text-warning\" invisible=\"account_move_state == 'posted'\" title=\"Service's Bill\">Service's Bill</span>"
+msgstr ""
+"<span class=\"o_stat_text text-success\" invisible=\"account_move_state != 'posted'\" title=\"Račun usluge\">Račun usluge</span>\n"
+"                            <span class=\"o_stat_text text-warning\" invisible=\"account_move_state == 'posted'\" title=\"Račun usluge\">Račun usluge</span>"
+
+#. module: account_fleet
+#: model:ir.model.fields,field_description:account_fleet.field_fleet_vehicle_log_services__account_move_line_id
+msgid "Account Move Line"
+msgstr "Stavka knjiženja"
+
+#. module: account_fleet
+#: code:addons/account_fleet/models/fleet_vehicle_log_services.py:0
+msgid "Bill"
+msgstr "Račun"
+
+#. module: account_fleet
+#: model:ir.model.fields,field_description:account_fleet.field_fleet_vehicle_log_services__amount
+msgid "Cost"
+msgstr "Trošak"
+
+#. module: account_fleet
+#: model:ir.model.fields,field_description:account_fleet.field_account_automatic_entry_wizard__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: account_fleet
+#: model:ir.model.fields,field_description:account_fleet.field_account_automatic_entry_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_fleet
+#: model:ir.model,name:account_fleet.model_fleet_vehicle_log_services
+msgid "Services for vehicles"
+msgstr "Servisi za vozila"
+
+#. module: account_fleet
+#: model:ir.model.fields,field_description:account_fleet.field_fleet_vehicle_log_services__account_move_state
+msgid "Status"
+msgstr "Status"
+
+#. module: account_fleet
+#: code:addons/account_fleet/models/fleet_vehicle_log_services.py:0
+msgid ""
+"You cannot delete log services records because one or more of them were bill"
+" created."
+msgstr ""
+"Ne možete izbrisati zapise dnevnika usluga jer je za jedan ili više njih "
+"kreiran račun."
+
+#. module: account_fleet
+#: code:addons/account_fleet/models/fleet_vehicle_log_services.py:0
+msgid ""
+"You cannot modify amount of services linked to an account move line. Do it "
+"on the related accounting entry instead."
+msgstr ""
+"Ne možete mijenjati iznos usluga povezanih sa stavkom knjiženja. Učinite to "
+"na povezanoj računovodstvenoj stavci."

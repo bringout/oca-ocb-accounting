@@ -24,7 +24,7 @@ msgstr "Bankovni računi"
 # taken from hr.po
 #. module: account_qr_code_sepa
 #. odoo-python
-#: code:addons/account_qr_code_sepa/models/res_bank.py
+#: code:addons/account_qr_code_sepa/models/res_bank.py:0
 #, python-format
 msgid "SEPA Credit Transfer QR"
 msgstr "SEPA QR kod prijenosa"
@@ -32,7 +32,7 @@ msgstr "SEPA QR kod prijenosa"
 # taken from hr.po
 #. module: account_qr_code_sepa
 #. odoo-python
-#: code:addons/account_qr_code_sepa/models/res_bank.py
+#: code:addons/account_qr_code_sepa/models/res_bank.py:0
 #, python-format
 msgid ""
 "The account receiving the payment must have an account holder name or "
@@ -40,3 +40,28 @@ msgid ""
 msgstr ""
 "Konto koji prima uplatu mora imati nositelja konta ili naziv partnera "
 "postavljen."
+
+#. module: account_qr_code_sepa
+#: code:addons/account_qr_code_sepa/models/res_bank.py:0
+msgid "Can't generate a SEPA QR Code with the %s currency."
+msgstr "Nije moguće generisati SEPA QR kod sa valutom %s."
+
+#. module: account_qr_code_sepa
+#: code:addons/account_qr_code_sepa/models/res_bank.py:0
+msgid "Can't generate a SEPA QR code if the account type isn't IBAN."
+msgstr "Nije moguće generisati SEPA QR kod ako tip računa nije IBAN."
+
+#. module: account_qr_code_sepa
+#: code:addons/account_qr_code_sepa/models/res_bank.py:0
+msgid "Can't generate a SEPA QR code with a non SEPA iban."
+msgstr "Nije moguće generisati SEPA QR kod sa ne-SEPA IBAN-om."
+
+#. module: account_qr_code_sepa
+#: model:ir.model.fields,field_description:account_qr_code_sepa.field_res_partner_bank__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: account_qr_code_sepa
+#: model:ir.model.fields,field_description:account_qr_code_sepa.field_res_partner_bank__id
+msgid "ID"
+msgstr "ID"

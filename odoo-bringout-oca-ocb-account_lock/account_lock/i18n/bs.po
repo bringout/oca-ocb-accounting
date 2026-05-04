@@ -18,7 +18,7 @@ msgstr ""
 # taken from hr.po
 #. module: account_lock
 #. odoo-python
-#: code:addons/account_lock/models/res_company.py
+#: code:addons/account_lock/models/res_company.py:0
 #, python-format
 msgid ""
 "Any new All Users Lock Date must be posterior (or equal) to the previous "
@@ -36,7 +36,7 @@ msgstr "Tvrtke"
 # taken from hr.po
 #. module: account_lock
 #. odoo-python
-#: code:addons/account_lock/models/res_company.py
+#: code:addons/account_lock/models/res_company.py:0
 #, python-format
 msgid "The lock date for accountants is irreversible and can't be removed."
 msgstr ""
@@ -45,7 +45,7 @@ msgstr ""
 # taken from hr.po
 #. module: account_lock
 #. odoo-python
-#: code:addons/account_lock/models/res_company.py
+#: code:addons/account_lock/models/res_company.py:0
 #, python-format
 msgid "The new tax lock date must be set after the previous lock date."
 msgstr ""
@@ -54,7 +54,7 @@ msgstr ""
 # taken from hr.po
 #. module: account_lock
 #. odoo-python
-#: code:addons/account_lock/models/res_company.py
+#: code:addons/account_lock/models/res_company.py:0
 #, python-format
 msgid "The tax lock date is irreversible and can't be removed."
 msgstr "Datum zaključavanja je ireverzibilan i nije ga moguće ukloniti."
@@ -62,7 +62,7 @@ msgstr "Datum zaključavanja je ireverzibilan i nije ga moguće ukloniti."
 # taken from hr.po
 #. module: account_lock
 #. odoo-python
-#: code:addons/account_lock/models/res_company.py
+#: code:addons/account_lock/models/res_company.py:0
 #, python-format
 msgid ""
 "You cannot lock a period that has not yet ended. Therefore, the All Users "
@@ -75,7 +75,7 @@ msgstr ""
 # taken from hr.po
 #. module: account_lock
 #. odoo-python
-#: code:addons/account_lock/models/res_company.py
+#: code:addons/account_lock/models/res_company.py:0
 #, python-format
 msgid ""
 "You cannot lock a period that has not yet ended. Therefore, the tax lock "
@@ -88,7 +88,7 @@ msgstr ""
 # taken from hr.po
 #. module: account_lock
 #. odoo-python
-#: code:addons/account_lock/models/res_company.py
+#: code:addons/account_lock/models/res_company.py:0
 #, python-format
 msgid ""
 "You cannot set stricter restrictions on accountants than on users. "

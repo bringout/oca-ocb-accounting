@@ -153,7 +153,7 @@ msgstr "Prijedlozi poreza"
 
 #. module: account_tax_python
 #. odoo-python
-#: code:addons/account_tax_python/models/account_tax.py
+#: code:addons/account_tax_python/models/account_tax.py:0
 #, python-format
 msgid ""
 "You entered invalid code %r in %r taxes\n"
@@ -163,3 +163,121 @@ msgstr ""
 "Unijeli ste nevažeći kod %r u %r poreze\n"
 "\n"
 "Greška : %s"
+
+#. module: account_tax_python
+#: model:ir.model.fields,help:account_tax_python.field_account_tax__amount_type
+msgid ""
+"\n"
+"    - Group of Taxes: The tax is a set of sub taxes.\n"
+"    - Fixed: The tax amount stays the same whatever the price.\n"
+"    - Percentage: The tax amount is a % of the price:\n"
+"        e.g 100 * (1 + 10%) = 110 (not price included)\n"
+"        e.g 110 / (1 + 10%) = 100 (price included)\n"
+"    - Percentage Tax Included: The tax amount is a division of the price:\n"
+"        e.g 180 / (1 - 10%) = 200 (not price included)\n"
+"        e.g 200 * (1 - 10%) = 180 (price included)\n"
+"        "
+msgstr ""
+"\n"
+"    - Grupa poreza: Porez je skup pod-poreza.\n"
+"    - Fiksni: Iznos poreza ostaje isti bez obzira na cijenu.\n"
+"    - Postotak: Iznos poreza je % cijene:\n"
+"        npr. 100 * (1 + 10%) = 110 (cijena bez poreza)\n"
+"        npr. 110 / (1 + 10%) = 100 (cijena s porezom)\n"
+"    - Postotak porez uključen: Iznos poreza je dio cijene:\n"
+"        npr. 180 / (1 - 10%) = 200 (cijena bez poreza)\n"
+"        npr. 200 * (1 - 10%) = 180 (cijena s porezom)\n"
+"        "
+
+#. module: account_tax_python
+#: model:ir.model.fields,help:account_tax_python.field_account_tax__formula
+msgid ""
+"Compute the amount of the tax.\n"
+"\n"
+":param base: float, actual amount on which the tax is applied\n"
+":param price_unit: float\n"
+":param quantity: float\n"
+":param product: A object representing the product\n"
+msgstr ""
+"Izračunaj iznos poreza.\n"
+"\n"
+":param base: float, stvarni iznos na koji se primjenjuje porez\n"
+":param price_unit: float\n"
+":param quantity: float\n"
+":param product: Objekt koji predstavlja proizvod\n"
+
+#. module: account_tax_python
+#: model:ir.model.fields.selection,name:account_tax_python.selection__account_tax__amount_type__code
+msgid "Custom Formula"
+msgstr "Prilagođena formula"
+
+#. module: account_tax_python
+#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Field '%s' is not accessible"
+msgstr "Polje '%s' nije dostupno"
+
+#. module: account_tax_python
+#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__formula
+msgid "Formula"
+msgstr "Formula"
+
+#. module: account_tax_python
+#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__formula_decoded_info
+msgid "Formula Decoded Info"
+msgstr "Dekodirane informacije formule"
+
+#. module: account_tax_python
+#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Invalid AST node: %s"
+msgstr "Nevažeći AST čvor: %s"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Invalid formula"
+msgstr "Nevažeća formula"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Kwargs are not allowed"
+msgstr "Kwargs nisu dozvoljeni"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Only int, float or None are allowed as constant values"
+msgstr "Samo int, float ili None su dozvoljeni kao konstantne vrijednosti"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/models/account_tax.py:0
+msgid "Only primitive types are allowed in python tax formula context."
+msgstr ""
+"Samo primitivni tipovi su dozvoljeni u kontekstu python porezne formule."
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Only product['string'] or uom['string'] read-access is allowed"
+msgstr "Dozvoljen je samo pristup čitanju product['string'] ili uom['string']"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Only read access to identifiers is allowed"
+msgstr "Dozvoljen je samo pristup čitanju identifikatora"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Unknown function call"
+msgstr "Nepoznat poziv funkcije"
+
+#. module: account_tax_python
+#: code:addons/account_tax_python/tools/formula_utils.py:0
+msgid "Unknown identifier: %s"
+msgstr "Nepoznat identifikator: %s"

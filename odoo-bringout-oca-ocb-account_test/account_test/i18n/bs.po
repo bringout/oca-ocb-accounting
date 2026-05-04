@@ -56,7 +56,7 @@ msgstr "Računovodstveni testovi uključeni"
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__active
 msgid "Active"
-msgstr "Aktivan"
+msgstr "Aktivno"
 
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.accounting_assert_test_view_search
@@ -184,7 +184,7 @@ msgstr "Opis"
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv za prikaz"
 
 # taken from hr.po
 #. module: account_test
@@ -201,7 +201,7 @@ msgstr "ID"
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena"
 
 # taken from hr.po
 #. module: account_test
@@ -218,7 +218,7 @@ msgstr "Zadnje ažurirano"
 #. module: account_test
 #: model_terms:ir.ui.view,arch_db:account_test.accounting_assert_test_view_search
 msgid "Name"
-msgstr "Naziv:"
+msgstr "Naziv"
 
 # taken from hr.po
 #. module: account_test
@@ -241,7 +241,7 @@ msgstr "Pretraga računovodstvenog testa"
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test__sequence
 msgid "Sequence"
-msgstr "Sekvenca"
+msgstr "Redoslijed"
 
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_01
@@ -295,7 +295,7 @@ msgstr "Testovi"
 
 # taken from hr.po
 #. module: account_test
-#: code:addons/account_test/report/report_account_test.py
+#: code:addons/account_test/report/report_account_test.py:0
 #, python-format
 msgid "The test was passed successfully"
 msgstr "Test prošao uspješno"

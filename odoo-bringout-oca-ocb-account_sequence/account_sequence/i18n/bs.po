@@ -31,4 +31,4 @@ msgstr "Automatska sekvenca"
 #. module: account_sequence
 #: model:ir.model,name:account_sequence.model_account_move
 msgid "Journal Entry"
-msgstr "Temeljnica"
+msgstr "Stavka dnevnika"

@@ -17,14 +17,14 @@ msgstr ""
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_datasource.js
+#: code:addons/spreadsheet_account/static/src/plugins/accounting_plugin.js:0
 #, python-format
 msgid "%s is not a valid year."
 msgstr "%s nije važeća godina."
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_functions.js
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 #, python-format
 msgid ""
 "'%s' is not a valid period. Supported formats are \"21/12/2022\", "
@@ -37,7 +37,7 @@ msgstr ""
 #. module: spreadsheet_account
 #: model:ir.model,name:spreadsheet_account.model_account_account
 msgid "Account"
-msgstr "Konto"
+msgstr "Naziv konta"
 
 # taken from hr.po
 #. module: spreadsheet_account
@@ -47,42 +47,42 @@ msgstr "Tvrtke"
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_functions.js
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 #, python-format
 msgid "Get the total balance for the specified account(s) and period."
 msgstr "Dohvati ukupan saldo za navedeni račun(e) i period."
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_functions.js
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 #, python-format
 msgid "Get the total credit for the specified account(s) and period."
 msgstr "Dohvati ukupan kredit za navedeni račun(e) i period."
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_functions.js
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 #, python-format
 msgid "Get the total debit for the specified account(s) and period."
 msgstr "Dohvati ukupan dug za navedeni račun(e) i period."
 
 #. module: spreadsheet_account
 #. odoo-python
-#: code:addons/spreadsheet_account/models/account.py
+#: code:addons/spreadsheet_account/models/account.py:0
 #, python-format
 msgid "Journal items for account prefix %s"
 msgstr "Stavke dnevnika za prefiks računa %s"
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_functions.js
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 #, python-format
 msgid "Returns the account ids of a given group."
 msgstr "Vraća ID-ove računa date grupe."
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_functions.js
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 #, python-format
 msgid ""
 "Returns the ending date of the fiscal year encompassing the provided date."
@@ -90,7 +90,7 @@ msgstr "Vraća krajnji datum fiskalne godine koja obuhvata navedeni datum."
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_functions.js
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 #, python-format
 msgid ""
 "Returns the starting date of the fiscal year encompassing the provided date."
@@ -98,14 +98,221 @@ msgstr "Vraća početni datum fiskalne godine koja obuhvata navedeni datum."
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/index.js
+#: code:addons/spreadsheet_account/static/src/index.js:0
 #, python-format
 msgid "See records"
 msgstr "Pogledaj zapise"
 
 #. module: spreadsheet_account
 #. odoo-javascript
-#: code:addons/spreadsheet_account/static/src/accounting_datasource.js
+#: code:addons/spreadsheet_account/static/src/plugins/accounting_plugin.js:0
 #, python-format
 msgid "The company fiscal year could not be found."
 msgstr "Fiskalna godina kompanije nije mogla biti pronađena."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Bank and Cash"
+msgstr "Banka i gotovina"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/models/account.py:0
+msgid "Cell Audit"
+msgstr "Revizija ćelije"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Cost of Revenue"
+msgstr "Trošak prihoda"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Credit Card"
+msgstr "Kreditna kartica"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Current Assets"
+msgstr "Tekuća imovina"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Current Liabilities"
+msgstr "Tekuće obaveze"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Current Year Earnings"
+msgstr "Zarada tekuće godine"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Depreciation"
+msgstr "Amortizacija"
+
+#. module: spreadsheet_account
+#: model:ir.model.fields,field_description:spreadsheet_account.field_account_account__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Equity"
+msgstr "Kapital"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Expenses"
+msgstr "Troškovi"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Fixed Assets"
+msgstr "Stalna sredstva"
+
+#. module: spreadsheet_account
+#: model:ir.model.fields,field_description:spreadsheet_account.field_account_account__id
+msgid "ID"
+msgstr "ID"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Income"
+msgstr "Prihod"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Non-current Assets"
+msgstr "Stalna imovina"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Non-current Liabilities"
+msgstr "Dugoročne obaveze"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Off-Balance Sheet"
+msgstr "Vanbilansno"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "Offset applied to the years."
+msgstr "Odstupanje primijenjeno na godine."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Other Income"
+msgstr "Ostali prihodi"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Payable"
+msgstr "Obaveze"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Prepayments"
+msgstr "Predujmovi"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
+msgid "Receivable"
+msgstr "Potraživanja"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "Return the balance of accounts for the specified tag(s) and period"
+msgstr "Vraća saldo konta za navedenu oznaku/oznake i period"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "Return the partner balance for the specified account(s) and period"
+msgstr "Vraća saldo partnera za navedeno konto/konta i period"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "Return the residual amount for the specified account(s) and period"
+msgstr "Vraća rezidualni iznos za navedeno konto/konta i period"
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "Returns the account codes of a given group."
+msgstr "Vraća šifre konta zadane grupe."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "Set to TRUE to include unposted entries."
+msgstr "Postavite na TRUE za uključivanje neknjiženih unosa."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/plugins/accounting_plugin.js:0
+msgid "The balance for given account tag could not be computed."
+msgstr "Saldo za zadanu oznaku konta nije moguće izračunati."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/plugins/accounting_plugin.js:0
+msgid "The balance for given partners could not be computed."
+msgstr "Saldo za zadane partnere nije moguće izračunati."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The company to target (Advanced)."
+msgstr "Ciljana kompanija (Napredno)."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The company."
+msgstr "Kompanija."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid ""
+"The date range. Supported formats are \"21/12/2022\", \"Q1/2022\", "
+"\"12/2022\", and \"2022\"."
+msgstr ""
+"Vremenski raspon. Podržani formati su \"21/12/2022\", \"Q1/2022\", "
+"\"12/2022\" i \"2022\"."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The day from which to extract the fiscal year end."
+msgstr "Dan iz kojeg se izvlači kraj fiskalne godine."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The day from which to extract the fiscal year start."
+msgstr "Dan iz kojeg se izvlači početak fiskalne godine."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The partner ids (separated by a comma)."
+msgstr "ID-jevi partnera (odvojeni zarezom)."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The prefix of the accounts."
+msgstr "Prefiks konta."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid ""
+"The prefix of the accounts. If none provided, all receivable and payable "
+"accounts will be used."
+msgstr ""
+"Prefiks konta. Ako nije naveden, koristit će se sva potraživanja i obaveze."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/plugins/accounting_plugin.js:0
+msgid "The residual amount for given accounts could not be computed."
+msgstr "Rezidualni iznos za zadana konta nije moguće izračunati."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The tag ids (separated by a comma)."
+msgstr "ID-jevi oznaka (odvojeni zarezom)."
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
+msgid "The technical account type (possible values are: %s)."
+msgstr "Tehnički tip konta (moguće vrijednosti su: %s)."

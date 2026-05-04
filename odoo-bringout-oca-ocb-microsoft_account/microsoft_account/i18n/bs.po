@@ -18,7 +18,7 @@ msgstr ""
 # taken from hr.po
 #. module: microsoft_account
 #. odoo-python
-#: code:addons/microsoft_account/models/microsoft_service.py
+#: code:addons/microsoft_account/models/microsoft_service.py:0
 #, python-format
 msgid "Method not supported [%s] not in [GET, POST, PUT, PATCH or DELETE]!"
 msgstr "Metoda nije podržana [%s] nije u [GET, POST, PUT, PATCH ili DELETE]!"
@@ -50,7 +50,7 @@ msgstr "Microsoft korisnički token"
 # taken from hr.po
 #. module: microsoft_account
 #. odoo-python
-#: code:addons/microsoft_account/models/microsoft_service.py
+#: code:addons/microsoft_account/models/microsoft_service.py:0
 #, python-format
 msgid ""
 "Something went wrong during your token generation. Maybe your Authorization "
@@ -62,7 +62,7 @@ msgstr ""
 # taken from hr.po
 #. module: microsoft_account
 #. odoo-python
-#: code:addons/microsoft_account/models/microsoft_service.py
+#: code:addons/microsoft_account/models/microsoft_service.py:0
 #, python-format
 msgid ""
 "Something went wrong during your token generation. Maybe your Authorization "
@@ -76,3 +76,13 @@ msgstr ""
 #: model:ir.model,name:microsoft_account.model_res_users
 msgid "User"
 msgstr "Korisnik"
+
+#. module: microsoft_account
+#: model:ir.model.fields,field_description:microsoft_account.field_microsoft_service__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: microsoft_account
+#: model:ir.model.fields,field_description:microsoft_account.field_microsoft_service__id
+msgid "ID"
+msgstr "ID"

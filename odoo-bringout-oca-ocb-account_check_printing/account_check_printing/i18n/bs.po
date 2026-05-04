@@ -18,7 +18,7 @@ msgstr ""
 # taken from hr.po
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_journal.py
+#: code:addons/account_check_printing/models/account_journal.py:0
 #, python-format
 msgid " : Check Number Sequence"
 msgstr " : Provjerite brojvni krug"
@@ -26,7 +26,7 @@ msgstr " : Provjerite brojvni krug"
 #. module: account_check_printing
 #: model_terms:ir.ui.view,arch_db:account_check_printing.account_journal_dashboard_kanban_view_inherited
 msgid "<span>&amp;nbsp;</span>"
-msgstr "<span>&amp;nbsp;</span>"
+msgstr ""
 
 #. module: account_check_printing
 #: model:ir.model.fields,help:account_check_printing.field_res_company__account_check_printing_margin_left
@@ -49,7 +49,7 @@ msgid "Cancel"
 msgstr "Otkaži"
 
 #. module: account_check_printing
-#: model:ir.model.fields,field_description:account_check_printing.field_res_company__account_check_printing_layout
+#: model:ir.model.fields,field_description:account_check_printing.field_account_journal__bank_check_printing_layout
 msgid "Check Layout"
 msgstr "Raspored čeka"
 
@@ -88,7 +88,7 @@ msgstr "Gornja margina čeka"
 
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid "Check numbers can only consist of digits"
 msgstr "Brojevi čekova mogu se sastojati samo od cifara"
@@ -106,7 +106,7 @@ msgstr "Ček za ispis"
 
 # taken from hr.po
 #. module: account_check_printing
-#: model:account.payment.method,name:account_check_printing.account_payment_method_check
+#: code:addons/account_check_printing/models/account_payment.py:0
 msgid "Checks"
 msgstr "Kontrole"
 
@@ -119,7 +119,7 @@ msgstr "Brojevni krug čekova"
 # taken from hr.po
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_journal.py
+#: code:addons/account_check_printing/models/account_journal.py:0
 #, python-format
 msgid "Checks to Print"
 msgstr "Čekovi za ispis"
@@ -162,27 +162,27 @@ msgstr "Kreirano"
 
 # taken from hr.po
 #. module: account_check_printing
-#: model:ir.model.fields,field_description:account_check_printing.field_print_prenumbered_checks__display_name
+#: model:ir.model.fields,field_description:account_check_printing.field_account_journal__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv za prikaz"
 
 # taken from hr.po
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid "Go to the configuration panel"
 msgstr "Idi na ploču za konfiguriranje"
 
 #. module: account_check_printing
-#: model:ir.model.fields,field_description:account_check_printing.field_print_prenumbered_checks__id
+#: model:ir.model.fields,field_description:account_check_printing.field_account_journal__id
 msgid "ID"
 msgstr "ID"
 
 # taken from hr.po
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid ""
 "In order to print multiple checks at once, they must belong to the same bank"
@@ -195,19 +195,19 @@ msgstr ""
 #. module: account_check_printing
 #: model:ir.model,name:account_check_printing.model_account_journal
 msgid "Journal"
-msgstr "Dnevnik knjiženja"
+msgstr "Dnevnik"
 
 # taken from hr.po
 #. module: account_check_printing
 #: model:ir.model,name:account_check_printing.model_account_move
 msgid "Journal Entry"
-msgstr "Temeljnica"
+msgstr "Stavka dnevnika"
 
 # taken from hr.po
 #. module: account_check_printing
 #: model:ir.model.fields,field_description:account_check_printing.field_print_prenumbered_checks____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena"
 
 # taken from hr.po
 #. module: account_check_printing
@@ -257,7 +257,7 @@ msgstr "Sljedeći broj čeka"
 
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_journal.py
+#: code:addons/account_check_printing/models/account_journal.py:0
 #, python-format
 msgid "Next Check Number should only contains numbers."
 msgstr "Sljedeći broj čeka treba sadržavati samo brojeve."
@@ -272,7 +272,7 @@ msgstr "Ništa"
 #. module: account_check_printing
 #: model:ir.model.fields,field_description:account_check_printing.field_account_payment__payment_method_line_id
 msgid "Payment Method"
-msgstr "Način plaćanja"
+msgstr "Metoda plaćanja"
 
 # taken from hr.po
 #. module: account_check_printing
@@ -288,7 +288,7 @@ msgstr "Plaćanja"
 
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid ""
 "Payments to print as a checks must have 'Check' selected as payment method "
@@ -348,7 +348,7 @@ msgstr "Natpis za datum ispisa"
 # taken from hr.po
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid "Print Pre-numbered Checks"
 msgstr "Ispiši pred-numerirane čekove"
@@ -392,7 +392,7 @@ msgstr "Prikaži broj čeka"
 
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid ""
 "Something went wrong with Check Layout, please select another layout in "
@@ -403,7 +403,7 @@ msgstr ""
 
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid ""
 "The following numbers are already used:\n"
@@ -415,7 +415,7 @@ msgstr ""
 # taken from hr.po
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_journal.py
+#: code:addons/account_check_printing/models/account_journal.py:0
 #, python-format
 msgid ""
 "The last check number was %s. In order to avoid a check being rejected by "
@@ -473,7 +473,7 @@ msgstr "Poništi ček"
 
 #. module: account_check_printing
 #. odoo-python
-#: code:addons/account_check_printing/models/account_payment.py
+#: code:addons/account_check_printing/models/account_payment.py:0
 #, python-format
 msgid ""
 "You have to choose a check layout. For this, go in Invoicing/Accounting "
@@ -481,3 +481,76 @@ msgid ""
 msgstr ""
 "Morate odabrati raspored čeka. Za ovo, idite u postavke "
 "Fakturisanje/Računovodstvo, pretražite 'Raspored čekova' i postavite jedan."
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_journal.py:0
+msgid "%(journal)s: Check Number Sequence"
+msgstr "%(journal)s: Sekvenca broja čeka"
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_payment.py:0
+msgid "%(number)s in journal %(journal)s"
+msgstr "%(number)s u dnevniku %(journal)s"
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_payment.py:0
+msgid "Bills"
+msgstr "Računi"
+
+#. module: account_check_printing
+#: model_terms:ir.ui.view,arch_db:account_check_printing.view_account_journal_form_inherited
+msgid "Default"
+msgstr "Podrazumijevano"
+
+#. module: account_check_printing
+#: model:ir.model.fields,field_description:account_check_printing.field_account_payment__check_layout_available
+msgid "Has Check Layout"
+msgstr "Ima izgled čeka"
+
+#. module: account_check_printing
+#: model:ir.model.fields,help:account_check_printing.field_account_payment__payment_method_line_id
+msgid ""
+"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Payment Providers: Each payment provider has its own Payment Method. Request a transaction on/to a card thanks to a payment token saved by the partner when buying or subscribing online.\n"
+"Check: Pay bills by check and print it from Odoo.\n"
+"Batch Deposit: Collect several customer checks at once generating and submitting a batch deposit to your bank. Module account_batch_payment is necessary.\n"
+"SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit Transfer file to your bank. Module account_iso20022 is necessary.\n"
+"SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your partner will have granted to you. Module account_iso20022 is necessary.\n"
+"U.S. ISO20022: Pay in the US by submitting an ISO20022 file to your bank. Module account_iso20022 is necessary.\n"
+msgstr ""
+"Ručno: Plaćajte ili primajte plaćanja bilo kojom metodom van Odoo-a.\n"
+"Provajderi plaćanja: Svaki provajder plaćanja ima vlastitu metodu plaćanja. Zatražite transakciju na/sa kartice zahvaljujući tokenu plaćanja koji je partner sačuvao prilikom online kupovine ili pretplate.\n"
+"Ček: Plaćajte račune čekom i štampajte ga iz Odoo-a.\n"
+"Batch Deposit: Prikupite više čekova kupaca odjednom generišući i šaljući batch depozit u vašu banku. Potreban je modul account_batch_payment.\n"
+"SEPA Credit Transfer: Plaćajte u SEPA zoni slanjem SEPA Credit Transfer datoteke vašoj banci. Potreban je modul account_iso20022.\n"
+"SEPA Direct Debit: Primajte plaćanja u SEPA zoni zahvaljujući mandatu koji vam je partner dao. Potreban je modul account_iso20022.\n"
+"U.S. ISO20022: Plaćajte u SAD-u slanjem ISO20022 datoteke vašoj banci. Potreban je modul account_iso20022.\n"
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_payment.py:0
+msgid "Refunds"
+msgstr "Povrati"
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_journal.py:0
+msgid ""
+"The check number you entered (%(num)s) exceeds the maximum allowed value of "
+"%(max)d. Please enter a smaller number."
+msgstr ""
+"Broj čeka koji ste unijeli (%(num)s) premašuje maksimalnu dozvoljenu "
+"vrijednost od %(max)d. Molimo unesite manji broj."
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_payment.py:0
+msgid "check_number"
+msgstr "check_number"
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_payment.py:0
+msgid "out_refund"
+msgstr "out_refund"
+
+#. module: account_check_printing
+#: code:addons/account_check_printing/models/account_payment.py:0
+msgid "sep"
+msgstr "sep"

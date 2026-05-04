@@ -18,7 +18,7 @@ msgstr ""
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__company_id
 msgid "Company"
-msgstr "Preduzeće"
+msgstr "Kompanija"
 
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__create_uid
@@ -48,7 +48,7 @@ msgstr "Prikaži upozorenje za zaključani datum"
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__display_name
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv za prikaz"
 
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__id
@@ -58,7 +58,7 @@ msgstr "ID"
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard____last_update
 msgid "Last Modified on"
-msgstr "Zadnje mijenjano"
+msgstr "Zadnja izmjena"
 
 #. module: account_update_tax_tags
 #: model:ir.model.fields,field_description:account_update_tax_tags.field_account_update_tax_tags_wizard__write_uid
@@ -100,7 +100,7 @@ msgstr "Ažuriraj poreske oznake na postojećim stavkama dnevnika"
 
 #. module: account_update_tax_tags
 #. odoo-python
-#: code:addons/account_update_tax_tags/wizard/account_update_tax_tags_wizard.py
+#: code:addons/account_update_tax_tags/wizard/account_update_tax_tags_wizard.py:0
 #, python-format
 msgid ""
 "Update with children taxes that are child of multiple parents is not "

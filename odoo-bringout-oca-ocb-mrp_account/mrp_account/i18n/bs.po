@@ -18,7 +18,7 @@ msgstr ""
 # taken from hr.po
 #. module: mrp_account
 #. odoo-python
-#: code:addons/mrp_account/models/mrp_production.py
+#: model:ir.model,name:mrp_account.model_account_analytic_account
 #, python-format
 msgid "Analytic Account"
 msgstr "Analitički konto"
@@ -56,7 +56,7 @@ msgstr "Sastavnica"
 # taken from hr.po
 #. module: mrp_account
 #. odoo-python
-#: code:addons/mrp_account/models/analytic_account.py
+#: code:addons/mrp_account/models/analytic_account.py:0
 #, python-format
 msgid "Bills of Materials"
 msgstr "Sastavnica"
@@ -105,18 +105,18 @@ msgstr "Dodatni trošak po jedinici"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_account_move_line
 msgid "Journal Item"
-msgstr "Stavka dnevnika"
+msgstr "Stavka žurnala"
 
 # taken from hr.po
 #. module: mrp_account
-#: model:ir.model.fields.selection,name:mrp_account.selection__account_analytic_line__category__manufacturing_order
+#: model:ir.model,name:mrp_account.model_mrp_production
 msgid "Manufacturing Order"
 msgstr "Nalog za proizvodnju"
 
 # taken from hr.po
 #. module: mrp_account
 #. odoo-python
-#: code:addons/mrp_account/models/analytic_account.py
+#: code:addons/mrp_account/models/analytic_account.py:0
 #, python-format
 msgid "Manufacturing Orders"
 msgstr "Nalozi za proizvodnju"
@@ -129,7 +129,7 @@ msgstr "Broj proizvodnih naloga"
 
 # taken from hr.po
 #. module: mrp_account
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__mo_analytic_account_line_id
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__mo_analytic_account_line_ids
 msgid "Mo Analytic Account Line"
 msgstr "Analitička stavka PN"
 
@@ -187,7 +187,7 @@ msgstr "Vrednovanje"
 
 # taken from hr.po
 #. module: mrp_account
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__wc_analytic_account_line_id
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__wc_analytic_account_line_ids
 msgid "Wc Analytic Account Line"
 msgstr "RN stavka analitike"
 
@@ -218,7 +218,7 @@ msgstr "Broj radnih naloga"
 # taken from hr.po
 #. module: mrp_account
 #. odoo-python
-#: code:addons/mrp_account/models/analytic_account.py
+#: code:addons/mrp_account/models/analytic_account.py:0
 #, python-format
 msgid "Work Orders"
 msgstr "Radni nalozi"
@@ -238,7 +238,7 @@ msgstr "Radni centri"
 # taken from hr.po
 #. module: mrp_account
 #. odoo-python
-#: code:addons/mrp_account/models/stock_move.py
+#: code:addons/mrp_account/models/stock_move.py:0
 #, python-format
 msgid "[Raw] %s"
 msgstr "[Sirov] %s"
@@ -246,7 +246,422 @@ msgstr "[Sirov] %s"
 # taken from hr.po
 #. module: mrp_account
 #. odoo-python
-#: code:addons/mrp_account/models/mrp_production.py
+#: code:addons/mrp_account/models/mrp_production.py:0
 #, python-format
 msgid "[WC] %s"
 msgstr "[RC] %s"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "$1000"
+msgstr "$1000"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "$5000"
+msgstr "$5000"
+
+#. module: mrp_account
+#: code:addons/mrp_account/models/stock_move.py:0
+msgid "%(value)s for %(quantity)s %(unit)s from %(production)s"
+msgstr "%(value)s za %(quantity)s %(unit)s iz %(production)s"
+
+#. module: mrp_account
+#: code:addons/mrp_account/models/mrp_production.py:0
+msgid "%s - Labour"
+msgstr "%s - Rad"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "2023-08-15"
+msgstr "2023-08-15"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.view_move_form_inherit_mrp_account
+msgid "<span class=\"o_stat_text\">Manufacturing</span>"
+msgstr "<span class=\"o_stat_text\">Proizvodnja</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.mrp_production_form_view_inherited
+msgid "<span class=\"o_stat_text\">WIP</span>"
+msgstr "<span class=\"o_stat_text\">WIP</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span style=\"margin-right: 15px;\">Total</span>"
+msgstr "<span style=\"margin-right: 15px;\">Ukupno</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Amount</span>"
+msgstr "<span>Iznos</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Date</span>"
+msgstr "<span>Datum</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Product</span>"
+msgstr "<span>Proizvod</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Quantity</span>"
+msgstr "<span>Količina</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Ref.</span>"
+msgstr "<span>Ref.</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Unit of Measure</span>"
+msgstr "<span>Jedinica mjere</span>"
+
+#. module: mrp_account
+#: model:ir.model.constraint,message:mrp_account.constraint_mrp_account_wip_accounting_line_check_debit_credit
+msgid "A single line cannot be both credit and debit."
+msgstr "Jedna stavka ne može biti istovremeno potražna i dugovna."
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__account_id
+msgid "Account"
+msgstr "Konto"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter_productivity__account_move_line_id
+msgid "Account Move Line"
+msgstr "Stavka knjiženja"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting_line
+msgid "Account move line to be created when posting WIP account move"
+msgstr "Stavka knjiženja koja se kreira pri knjiženju WIP knjiženja"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "Acme Corp."
+msgstr "Acme Corp."
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__analytic_distribution
+msgid "Analytic Distribution"
+msgstr "Analitička raspodjela"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_account_analytic_applicability
+msgid "Analytic Plan's Applicabilities"
+msgstr "Primjenjivosti analitičkog plana"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__analytic_precision
+msgid "Analytic Precision"
+msgstr "Analitička preciznost"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__bom_ids
+msgid "Bom"
+msgstr "Sastavnica"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_res_company
+msgid "Companies"
+msgstr "Kompanije"
+
+#. module: mrp_account
+#: code:addons/mrp_account/report/stock_valuation_report.py:0
+msgid "Cost of Production"
+msgstr "Trošak proizvodnje"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__costs_hour_account_ids
+msgid "Costs Hour Account"
+msgstr "Konto troškova po satu"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__create_uid
+msgid "Created by"
+msgstr "Kreirao"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__create_date
+msgid "Created on"
+msgstr "Kreirano"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__credit
+msgid "Credit"
+msgstr "Potražuje"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__date
+msgid "Date"
+msgstr "Datum"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__debit
+msgid "Debit"
+msgstr "Duguje"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
+msgid "Discard"
+msgstr "Odbaci"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr "Analitički konto raspodjele"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_applicability__business_domain
+msgid "Domain"
+msgstr "Domena"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__expense_account_id
+msgid "Expense Account"
+msgstr "Konto troška"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__journal_id
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_account_move
+msgid "Journal Entry"
+msgstr "Stavka dnevnika"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__label
+msgid "Label"
+msgstr "Oznaka"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "Laptop"
+msgstr "Laptop"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__write_uid
+msgid "Last Updated by"
+msgstr "Posljednji put ažurirao"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__write_date
+msgid "Last Updated on"
+msgstr "Posljednji put ažurirano"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_report_mrp_report_mo_overview
+msgid "MO Overview Report"
+msgstr "Pregledni izvještaj proizvodnih naloga"
+
+#. module: mrp_account
+#: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
+msgid "Manual Entry"
+msgstr "Ručni unos"
+
+#. module: mrp_account
+#: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
+msgid "Manufacturing WIP - %(orders_list)s"
+msgstr "Proizvodnja WIP - %(orders_list)s"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__mo_ids
+msgid "Mo"
+msgstr "Mo"
+
+#. module: mrp_account
+#: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
+msgid ""
+"Please make sure the total credit amount equals the total debit amount."
+msgstr ""
+"Molimo provjerite da ukupni potražni iznos jednak ukupnom dugovnom iznosu."
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
+msgid "Post Manufacturing WIP"
+msgstr "Knjiži proizvodnju WIP"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
+msgid "Post WIP"
+msgstr "Knjiži WIP"
+
+#. module: mrp_account
+#: model:ir.actions.act_window,name:mrp_account.action_wip_accounting
+msgid "Post WIP Accounting Entry"
+msgstr "Knjiži WIP računovodstveni unos"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_product_category
+msgid "Product Category"
+msgstr "Kategorija proizvoda"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__production_ids
+msgid "Production"
+msgstr "Proizvodnja"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_product_category__property_stock_account_production_cost_id
+msgid "Production Account"
+msgstr "Konto proizvodnje"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "REF123"
+msgstr "REF123"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__reference
+msgid "Reference"
+msgstr "Referenca"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_bank_statement_line__wip_production_ids
+msgid "Relevant WIP MOs"
+msgstr "Relevantni WIP proizvodni nalozi"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__reversal_date
+msgid "Reversal Date"
+msgstr "Datum storniranja"
+
+#. module: mrp_account
+#: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
+msgid "Reversal date must be after the posting date."
+msgstr "Datum storniranja mora biti nakon datuma knjiženja."
+
+#. module: mrp_account
+#: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
+msgid "Reversal of: %s"
+msgstr "Storniranje od: %s"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_stock_account_stock_valuation_report
+msgid "Stock Valuation"
+msgstr "Vrednovanje zaliha"
+
+#. module: mrp_account
+#: model:ir.model.fields,help:mrp_account.field_account_bank_statement_line__wip_production_ids
+msgid ""
+"The MOs that this WIP entry was based on. Expected to be set at time of WIP "
+"entry creation."
+msgstr ""
+"Proizvodni nalozi na kojima je zasnovan ovaj WIP unos. Očekuje se da se "
+"postavi u vrijeme kreiranja WIP unosa."
+
+#. module: mrp_account
+#: model:ir.model.fields,help:mrp_account.field_mrp_workcenter__expense_account_id
+msgid ""
+"The expense is accounted for when the manufacturing order is marked as done."
+" If not set, it is the expense account of the final product that will be "
+"used instead."
+msgstr ""
+"Trošak se knjiži kada je proizvodni nalog označen kao završen. Ako nije "
+"postavljen, koristit će se konto troška konačnog proizvoda."
+
+#. module: mrp_account
+#: model:ir.model.fields,help:mrp_account.field_product_category__property_stock_account_production_cost_id
+msgid ""
+"This account will be used as a valuation counterpart for both components and final products for manufacturing orders.\n"
+"                If there are any workcenter/employee costs, this value will remain on the account once the production is completed."
+msgstr ""
+"Ovaj konto će se koristiti kao protustavka vrednovanja kako za komponente tako i za konačne proizvode za proizvodne naloge.\n"
+"                Ako postoje troškovi radnog centra/zaposlenika, ova vrijednost će ostati na kontu nakon završetka proizvodnje."
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
+msgid "Total Credit"
+msgstr "Ukupno potražuje"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
+msgid "Total Debit"
+msgstr "Ukupno duguje"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "Units"
+msgstr "Jedinice"
+
+#. module: mrp_account
+#: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
+msgid "WIP - Component Value"
+msgstr "WIP - Vrijednost komponente"
+
+#. module: mrp_account
+#: code:addons/mrp_account/wizard/mrp_wip_accounting.py:0
+msgid "WIP - Overhead"
+msgstr "WIP - Režijski troškovi"
+
+#. module: mrp_account
+#: code:addons/mrp_account/models/mrp_production.py:0
+msgid "WIP Entries of %s"
+msgstr "WIP unosi za %s"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__wip_move_count
+msgid "WIP Journal Entry Count"
+msgstr "Broj WIP knjiženja"
+
+#. module: mrp_account
+#: code:addons/mrp_account/models/account_move.py:0
+msgid "WIP MOs of %s"
+msgstr "WIP proizvodni nalozi za %s"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "WIP Report for"
+msgstr "WIP izvještaj za"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__line_ids
+msgid "WIP accounting lines"
+msgstr "WIP računovodstvene stavke"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__wip_accounting_id
+msgid "WIP accounting wizard"
+msgstr "WIP računovodstveni čarobnjak"
+
+#. module: mrp_account
+#: model:ir.actions.report,name:mrp_account.wip_report
+msgid "WIP report"
+msgstr "WIP izvještaj"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__wip_move_ids
+msgid "Wip Move"
+msgstr "Wip kretanje"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting
+msgid "Wizard to post Manufacturing WIP account move"
+msgstr "Čarobnjak za knjiženje WIP knjiženja proizvodnje"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__workcenter_ids
+msgid "Workcenter"
+msgstr "Radni centar"

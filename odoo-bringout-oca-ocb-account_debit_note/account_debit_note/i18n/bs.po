@@ -34,7 +34,7 @@ msgstr "Čarobnjak dodaj terećenje"
 #. module: account_debit_note
 #: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_debit_note
 msgid "Cancel"
-msgstr "Odustani"
+msgstr "Otkaži"
 
 # taken from hr.po
 #. module: account_debit_note
@@ -72,7 +72,7 @@ msgstr "Datum terećenja"
 
 #. module: account_debit_note
 #. odoo-python
-#: code:addons/account_debit_note/models/account_move.py
+#: code:addons/account_debit_note/models/account_move.py:0
 #, python-format
 msgid "Debit Notes"
 msgstr "Terećenja"
@@ -81,7 +81,7 @@ msgstr "Terećenja"
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__display_name
 msgid "Display Name"
-msgstr "Naziv"
+msgstr "Naziv za prikaz"
 
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__id
@@ -107,7 +107,7 @@ msgstr ""
 #. module: account_debit_note
 #: model:ir.model,name:account_debit_note.model_account_move
 msgid "Journal Entry"
-msgstr "Temeljnica"
+msgstr "Stavka dnevnika"
 
 # taken from hr.po
 #. module: account_debit_note
@@ -119,25 +119,25 @@ msgstr "Tip dnevnika"
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note____last_update
 msgid "Last Modified on"
-msgstr "Zadnja promjena"
+msgstr "Zadnja izmjena"
 
 # taken from hr.po
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__write_uid
 msgid "Last Updated by"
-msgstr "Promijenio"
+msgstr "Zadnji ažurirao"
 
 # taken from hr.po
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__write_date
 msgid "Last Updated on"
-msgstr "Vrijeme promjene"
+msgstr "Zadnje ažurirano"
 
 # taken from hr.po
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__move_ids
 msgid "Move"
-msgstr "Temeljnica"
+msgstr "Knjiženje"
 
 # taken from hr.po
 #. module: account_debit_note
@@ -178,7 +178,7 @@ msgstr "Terećenja kreirana za ovu fakturu"
 
 #. module: account_debit_note
 #. odoo-python
-#: code:addons/account_debit_note/models/account_move.py
+#: code:addons/account_debit_note/models/account_move.py:0
 #, python-format
 msgid "This debit note was created from: %s"
 msgstr "Ovo terećenje je kreirano od: %s"
@@ -191,7 +191,53 @@ msgstr "Koristi specifični dnevnik"
 
 #. module: account_debit_note
 #. odoo-python
-#: code:addons/account_debit_note/wizard/account_debit_note.py
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
 #, python-format
 msgid "You can only debit posted moves."
 msgstr "Možete terećiti samo knjižene pokrete."
+
+#. module: account_debit_note
+#: model:ir.model.fields,help:account_debit_note.field_account_journal__debit_sequence
+msgid ""
+"Check this box if you don't want to share the same sequence for invoices and"
+" debit notes made from this journal"
+msgstr ""
+"Označite ovo polje ako ne želite dijeliti istu sekvencu za fakture i "
+"terećenja iz ovog dnevnika"
+
+#. module: account_debit_note
+#: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_move_filter_debit
+msgid "Debit Note"
+msgstr "Terećenje"
+
+#. module: account_debit_note
+#: model:ir.model.fields,field_description:account_debit_note.field_account_journal__debit_sequence
+msgid "Dedicated Debit Note Sequence"
+msgstr "Posebna sekvenca terećenja"
+
+#. module: account_debit_note
+#: model:ir.model,name:account_debit_note.model_account_journal
+msgid "Journal"
+msgstr "Dnevnik"
+
+#. module: account_debit_note
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
+msgid ""
+"You can make a debit note only for a Customer Invoice, a Customer Credit "
+"Note, a Vendor Bill or a Vendor Credit Note."
+msgstr ""
+"Terećenje možete kreirati samo za fakturu kupca, knjižno odobrenje kupca, "
+"račun dobavljača ili knjižno odobrenje dobavljača."
+
+#. module: account_debit_note
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
+msgid ""
+"You can't make a debit note for an invoice that is already linked to a debit"
+" note."
+msgstr ""
+"Ne možete kreirati terećenje za fakturu koja je već povezana s terećenjem."
+
+#. module: account_debit_note
+#: code:addons/account_debit_note/models/account_move.py:0
+msgid "debit_origin_id"
+msgstr "debit_origin_id"

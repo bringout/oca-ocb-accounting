@@ -24,7 +24,7 @@ msgstr "Google Servis"
 # taken from hr.po
 #. module: google_account
 #. odoo-python
-#: code:addons/google_account/models/google_service.py
+#: code:addons/google_account/models/google_service.py:0
 #, python-format
 msgid "Method not supported [%s] not in [GET, POST, PUT, PATCH or DELETE]!"
 msgstr "Metoda nije podržana [%s] nije u [GET, POST, PUT, PATCH ili DELETE]!"
@@ -32,7 +32,7 @@ msgstr "Metoda nije podržana [%s] nije u [GET, POST, PUT, PATCH ili DELETE]!"
 # taken from hr.po
 #. module: google_account
 #. odoo-python
-#: code:addons/google_account/models/google_service.py
+#: code:addons/google_account/models/google_service.py:0
 #, python-format
 msgid ""
 "Something went wrong during your token generation. Maybe your Authorization "
@@ -40,3 +40,13 @@ msgid ""
 msgstr ""
 "Nešto nije prošlo u redu pri generiranju vašeg tokena. Možda je neispravan "
 "Kod Autorizacije ili je već istekao."
+
+#. module: google_account
+#: model:ir.model.fields,field_description:google_account.field_google_service__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: google_account
+#: model:ir.model.fields,field_description:google_account.field_google_service__id
+msgid "ID"
+msgstr "ID"

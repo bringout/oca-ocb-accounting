@@ -38,3 +38,18 @@ msgstr "Skladišni prijenos"
 #: model:ir.model,name:mrp_subcontracting_account.model_stock_picking
 msgid "Transfer"
 msgstr "Prijenos"
+
+#. module: mrp_subcontracting_account
+#: model:ir.model.fields,field_description:mrp_subcontracting_account.field_mrp_production__display_name
+msgid "Display Name"
+msgstr "Naziv za prikaz"
+
+#. module: mrp_subcontracting_account
+#: model:ir.model.fields,field_description:mrp_subcontracting_account.field_mrp_production__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mrp_subcontracting_account
+#: model:ir.model,name:mrp_subcontracting_account.model_mrp_production
+msgid "Manufacturing Order"
+msgstr "Proizvodni nalog"
