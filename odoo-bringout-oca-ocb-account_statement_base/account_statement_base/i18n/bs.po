@@ -15,7 +15,7 @@ msgstr "<span class=\"o_stat_text\">Stavke dnevnika</span>"
 #. module: account_statement_base
 #: model:ir.model,name:account_statement_base.model_account_bank_statement
 msgid "Bank Statement"
-msgstr ""
+msgstr "Bankovni izvod"
 
 #. module: account_statement_base
 #: model:ir.model,name:account_statement_base.model_account_bank_statement_line
@@ -25,7 +25,7 @@ msgstr "Linija bankovnog izvoda"
 #. module: account_statement_base
 #: model:ir.actions.act_window,name:account_statement_base.account_bank_statement_line_action
 msgid "Bank Statement Lines"
-msgstr ""
+msgstr "Stavke bankovnog izvoda"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_search
@@ -46,12 +46,12 @@ msgstr "Stavke dnevnika"
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_search
 msgid "Label, Ref, Notes or Amount"
-msgstr ""
+msgstr "Oznaka, ref, napomene ili iznos"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_search
 msgid "Not Reconciled"
-msgstr ""
+msgstr "Nije usklađeno"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_form
@@ -61,12 +61,12 @@ msgstr "Bilješke"
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_tree
 msgid "Open Journal Entry"
-msgstr ""
+msgstr "Otvori knjiženje"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.view_bank_statement_tree
 msgid "Open Statement Lines"
-msgstr ""
+msgstr "Otvori stavke izvoda"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_search
@@ -76,34 +76,34 @@ msgstr "Partner"
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_search
 msgid "Reconciled"
-msgstr ""
+msgstr "Usklađeno"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_tree
 msgid "Revert reconciliation"
-msgstr ""
+msgstr "Poništi uskladu"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_form
 msgid "Technical Information"
-msgstr ""
+msgstr "Tehničke informacije"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_search
 msgid "To check"
-msgstr ""
+msgstr "Za provjeru"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.account_bank_statement_line_search
 msgid "Transaction Type"
-msgstr ""
+msgstr "Vrsta transakcije"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.view_bank_statement_form
 msgid "Transactions"
-msgstr ""
+msgstr "Transakcije"
 
 #. module: account_statement_base
 #: model_terms:ir.ui.view,arch_db:account_statement_base.view_bank_statement_form
 msgid "e.g. BNK/2021/0001"
-msgstr ""
+msgstr "npr. BNK/2021/0001"
