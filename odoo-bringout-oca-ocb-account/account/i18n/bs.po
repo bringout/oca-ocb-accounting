@@ -2010,6 +2010,7 @@ msgstr ""
 # taken from hr.po
 #. module: account
 #: model:account.account,name:account.2_account_account_us_accounting
+#: model:ir.ui.menu,name:account.menu_finance
 msgid "Accounting"
 msgstr "Računovodstvo"
 
