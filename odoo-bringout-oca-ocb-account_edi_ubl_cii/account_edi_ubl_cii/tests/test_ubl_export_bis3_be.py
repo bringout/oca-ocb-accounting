@@ -1,9 +1,6 @@
 from odoo import Command
 from odoo.addons.account_edi_ubl_cii.tests.common import TestUblBis3Common, TestUblCiiBECommon
-try:
-    from odoo.addons.test_mimetypes.tests.test_guess_mimetypes import contents
-except ImportError:
-    contents = None
+from odoo.addons.base.tests.files import DOCX_RAW, XLSX_RAW
 
 from odoo.exceptions import UserError
 from odoo.tests import tagged
@@ -35,11 +32,10 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
         self._assert_invoice_ubl_file(invoice, 'test_invoice_item_description_name')
 
     def test_invoice_payee_financial_account(self):
-        bank_kbc = self.env['res.bank'].create({
-            'name': 'KBC',
-            'bic': 'KREDBEBB',
+        self.env.company.bank_ids[0].write({
+            'bank_name': 'KBC',
+            'bank_bic': 'KREDBEBB',
         })
-        self.env.company.bank_ids[0].bank_id = bank_kbc
 
         tax_21 = self.percent_tax(21.0)
         product = self._create_product(lst_price=100.0, taxes_id=tax_21)
@@ -72,6 +68,8 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
 
     def test_invoice_price_unit_more_decimals(self):
         tax_21 = self.percent_tax(21.0)
+        decimal_precision = self.env['decimal.precision'].search([('name', '=', 'Product Price')], limit=1)
+        decimal_precision.digits = 4
         product = self._create_product(lst_price=0.4567, taxes_id=tax_21)
         invoice = self._create_invoice_one_line(
             product_id=product,
@@ -86,6 +84,8 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
     def test_invoice_BR_CO_10_line_extension_amount_sum_lines(self):
         """ [BR_CO_10] Sum of Invoice line net amount (BT-106) = Σ Invoice line net amount (BT-131). """
         tax_21 = self.percent_tax(21.0)
+        decimal_precision = self.env['decimal.precision'].search([('name', '=', 'Product Price')], limit=1)
+        decimal_precision.digits = 4
         product = self._create_product(lst_price=0.4567, taxes_id=tax_21)
         invoice = self._create_invoice(
             partner_id=self.partner_be,
@@ -558,8 +558,7 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
         self._assert_invoice_ubl_file(invoice, 'test_invoice_sent_to_luxembourg_dig')
 
     def test_invoice_sent_to_partner_with_gln(self):
-        self.ensure_installed('account_add_gln')
-        self.partner_be.global_location_number = "222222222222"
+        self.partner_be.global_location_number = '9780471117094'
 
         tax_21 = self.percent_tax(21.0)
         product = self._create_product(
@@ -577,7 +576,7 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
 
     def test_invoice_send_and_print_additional_documents(self):
         """ Ensure an additional document is added to the UBL under AdditionalDocumentReference. """
-        self.ensure_installed('test_mimetypes')
+        self.ensure_installed('test_orm')
 
         tax_21 = self.percent_tax(21.0)
         product = self._create_product(lst_price=1039.99, taxes_id=tax_21)
@@ -590,18 +589,18 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
         # Supported
         xlsx_attachment = self.env['ir.attachment'].create({
             'name': 'xlsx attachment',
-            'raw': contents('xlsx'),
+            'raw': XLSX_RAW,
             'mimetype': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         })
         # Not supported
         docx_attachment = self.env['ir.attachment'].create({
             'name': 'docx attachment',
-            'raw': contents('docx'),
+            'raw': DOCX_RAW,
             'mimetype': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         })
         xml_attachment = self.env['ir.attachment'].create({
             'name': 'xml attachment',
-            'raw': "<?xml version='1.0' encoding='UTF-8'?><test/>",
+            'raw': b"<?xml version='1.0' encoding='UTF-8'?><test/>",
             'mimetype': 'application/xml',
         })
         txt_attachment = self.env['ir.attachment'].create({
@@ -673,12 +672,12 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
         self._assert_invoice_ubl_file(invoice, 'test_invoice_product_commodity_code_unspsc')
 
     def test_invoice_product_commodity_code_cpv(self):
-        self.ensure_installed('l10n_ro_cpv_code')
+        self.ensure_installed('l10n_ro_edi')
         tax_21 = self.percent_tax(21.0)
         product = self._create_product(
             lst_price=10.0,
             taxes_id=tax_21,
-            cpv_code_id=self.env.ref('l10n_ro_cpv_code.351131100'),
+            cpv_code_id=self.env.ref('l10n_ro_edi.351131100'),
         )
         invoice = self._create_invoice_one_line(
             product_id=product,
@@ -858,6 +857,53 @@ class TestUblExportBis3BE(TestUblBis3Common, TestUblCiiBECommon):
 
         self._generate_invoice_ubl_file(invoice)
         self._assert_invoice_ubl_file(invoice, 'test_invoice_BR_E_08_line_extension_amount')
+
+    def test_invoice_customer_license_plate(self):
+        """
+        Test if vehicle is set on lines, its license plate should be exported in the XML under
+        AdditionalItemProperty/Value with AdditionalItemProperty/Name == 'PlateNumber'
+        """
+        self.ensure_installed('fleet')
+        self.env.user.group_ids |= self.env.ref('fleet.fleet_group_manager')
+        brand = self.env['fleet.vehicle.model.brand'].create({  # noqa: OLS03001
+            'name': 'Test Brand',
+        })
+        model = self.env['fleet.vehicle.model'].create({  # noqa: OLS03001
+            'name': 'Test Model',
+            'brand_id': brand.id,
+        })
+        car = self.env['fleet.vehicle'].create({  # noqa: OLS03001
+            'model_id': model.id,
+            'license_plate': '1-ABC-123',
+        })
+        car2 = self.env['fleet.vehicle'].create({  # noqa: OLS03001
+            'model_id': model.id,
+            'license_plate': '2-DEF-456',
+        })
+        tax_21 = self.percent_tax(21.0)
+        invoice = self._create_invoice(
+            partner_id=self.partner_be,
+            invoice_line_ids=[
+                self._prepare_invoice_line(
+                    product_id=self.product_a,
+                    price_unit=200.0,
+                    quantity=1.0,
+                    tax_ids=tax_21,
+                    vehicle_id=car,
+                ),
+                self._prepare_invoice_line(
+                    product_id=self.product_a,
+                    price_unit=200.0,
+                    quantity=1.0,
+                    tax_ids=tax_21,
+                    vehicle_id=car2,
+                ),
+            ],
+            post=True,
+        )
+
+        self._generate_invoice_ubl_file(invoice)
+        self._assert_invoice_ubl_file(invoice, 'test_invoice_with_vehicle_license_plate')
 
     def test_invoice_tax_subtotal_exempt_amount(self):
         """ Test that the taxable amount for exempt taxes is correctly computed,

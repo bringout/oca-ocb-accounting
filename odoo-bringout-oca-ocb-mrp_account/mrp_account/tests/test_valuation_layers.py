@@ -2,7 +2,7 @@
 """ Implementation of "INVENTORY VALUATION TESTS (With valuation layers)" spreadsheet. """
 
 from odoo.addons.mrp_account.tests.common import TestBomPriceCommon
-from odoo.tests import Form
+from odoo.tests import Form, tagged
 
 PRICE = 718.75 - 100  # total price minus glass
 
@@ -146,10 +146,12 @@ class TestMrpValuationStandard(TestBomPriceCommon):
         self._make_in_move(self.glass, 1, 20)
         mo = self._create_mo(self.bom_1, 2)
         self._produce(mo, 1)
-        mo._post_inventory()
+        action = mo.button_mark_done()
+        backorder = Form(self.env['mrp.production.backorder'].with_context(**action['context']))
+        backorder.save().action_backorder()
+        mo = mo.production_group_id.production_ids[-1]
         self.assertEqual(self.glass.total_value, 20)
         self.assertEqual(self.dining_table.total_value, 8.8)
-        self._produce(mo)
         mo.button_mark_done()
         self.assertEqual(self.glass.total_value, 0)
         self.assertEqual(self.dining_table.total_value, 8.8 * 2)
@@ -177,7 +179,10 @@ class TestMrpValuationStandard(TestBomPriceCommon):
         self._make_in_move(self.glass, 1)
         mo = self._create_mo(self.bom_1, 2)
         self._produce(mo, 1)
-        mo._post_inventory()
+        action = mo.button_mark_done()
+        backorder = Form(self.env['mrp.production.backorder'].with_context(**action['context']))
+        backorder.save().action_backorder()
+        mo = mo.production_group_id.production_ids[-1]
         self.assertEqual(self.glass.total_value, 100)
         self.assertEqual(self.dining_table.total_value, PRICE + 100)
         self._produce(mo)
@@ -219,7 +224,10 @@ class TestMrpValuationStandard(TestBomPriceCommon):
         self._make_in_move(self.glass, 1)
         mo = self._create_mo(self.bom_1, 2)
         self._produce(mo, 1)
-        mo._post_inventory()
+        action = mo.button_mark_done()
+        backorder = Form(self.env['mrp.production.backorder'].with_context(**action['context']))
+        backorder.save().action_backorder()
+        mo = mo.production_group_id.production_ids[-1]
         self.assertEqual(self.glass.total_value, 100)
         self.assertEqual(self.dining_table.total_value, 1000)
         self._produce(mo)
@@ -249,7 +257,10 @@ class TestMrpValuationStandard(TestBomPriceCommon):
         self._make_in_move(self.glass, 1, 20)
         mo = self._create_mo(self.bom_1, 2)
         self._produce(mo, 1)
-        mo._post_inventory()
+        action = mo.button_mark_done()
+        backorder = Form(self.env['mrp.production.backorder'].with_context(**action['context']))
+        backorder.save().action_backorder()
+        mo = mo.production_group_id.production_ids[-1]
         self.assertEqual(self.glass.total_value, 15)
         self.assertEqual(self.dining_table.total_value, PRICE + 15)
         self._produce(mo)
@@ -288,7 +299,7 @@ class TestMrpValuationStandard(TestBomPriceCommon):
             'move_line_ids': [(0, 0, {
                 'product_id': self.table_head.id,
                 'quantity': 12,
-                'product_uom_id': self.table_head.uom_id.id,
+                'uom_id': self.table_head.uom_id.id,
                 'location_id': self.customer_location.id,
                 'location_dest_id': self.stock_location.id,
             })],

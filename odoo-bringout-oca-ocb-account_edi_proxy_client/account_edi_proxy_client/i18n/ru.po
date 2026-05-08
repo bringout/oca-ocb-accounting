@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"POT-Creation-Date: 2026-03-12 18:36+0000\n"
 "PO-Revision-Date: 2025-11-14 15:21+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
@@ -55,10 +55,6 @@ msgstr "Активный"
 
 #. module: account_edi_proxy_client
 #: model:ir.model,name:account_edi_proxy_client.model_res_company
-msgid "Companies"
-msgstr "Компании"
-
-#. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__company_id
 msgid "Company"
 msgstr "Компания"
@@ -74,18 +70,12 @@ msgid "Created on"
 msgstr "Дата создания:"
 
 #. module: account_edi_proxy_client
-#: model:ir.model,name:account_edi_proxy_client.model_certificate_key
-msgid "Cryptographic Keys"
-msgstr "Криптографические ключи"
-
-#. module: account_edi_proxy_client
 #: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__demo
 msgid "Demo mode"
 msgstr "Демонстрационный режим"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__display_name
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__display_name
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__display_name
 msgid "Display Name"
 msgstr "Отображаемое имя"
@@ -123,7 +113,6 @@ msgstr ""
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__id
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__id
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__id
 msgid "ID"
 msgstr "ID"
@@ -240,21 +229,3 @@ msgstr "Token Out of Sync"
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__token_sync_version
 msgid "Token Sync Version"
 msgstr ""
-
-#~ msgid "Private Key Filename"
-#~ msgstr "Имя файла закрытого ключа"
-
-#~ msgid ""
-#~ "The url that this service requested returned an error. The url it tried "
-#~ "to contact was %s. %s"
-#~ msgstr ""
-#~ "Url, который запрашивала эта служба, вернул ошибку. Url, с которым он "
-#~ "пытался связаться, был %s. %s"
-
-#~ msgid ""
-#~ "The url that this service tried to contact does not exist. The url was %r"
-#~ msgstr ""
-#~ "Url, с которым пыталась связаться эта служба, не существует. Url был %r"
-
-#~ msgid "This edi identification is already assigned to an active user"
-#~ msgstr "Этот идентификатор edi уже назначен активному пользователю"

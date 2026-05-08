@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 17:36+0000\n"
-"PO-Revision-Date: 2026-04-23 14:21+0000\n"
+"POT-Creation-Date: 2026-03-12 18:36+0000\n"
+"PO-Revision-Date: 2026-02-14 12:04+0000\n"
 "Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Arabic <https://translate.odoo.com/projects/odoo-s19-1/"
 "account_edi_ubl_cii/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -50,31 +50,19 @@ msgid "(Un)Group lines by tax"
 msgstr ""
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "<span class=\"text-muted\">FROM</span>"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "<span class=\"text-muted\">TO</span>"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
-msgid "A"
-msgstr ""
+msgid "1.0"
+msgstr "1.0"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "A payment of %s was detected."
 msgstr "تم رصد دفع بقيمة %s"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "A rounding amount of %s was detected."
 msgstr "تم رصد تقريب بنسبة %s."
 
@@ -94,16 +82,6 @@ msgid "AS2 exchange"
 msgstr "AS2 exchange"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send
-msgid "Account Move Send"
-msgstr "إرسال حركة الحساب"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send_wizard
-msgid "Account Move Send Wizard"
-msgstr "معالج إرسال حركات الحساب"
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9923
 msgid "Albania VAT"
 msgstr "Albania VAT"
@@ -116,9 +94,15 @@ msgstr "Andorra VAT"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid "Articles 226 items 11 to 15 Directive 2006/112/EN"
+msgstr "Articles 226 items 11 to 15 Directive 2006/112/EN"
+
+#. module: account_edi_ubl_cii
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
 msgid ""
-"At least one of the following fields %(field_list)s is required on %"
-"(record)s."
+"At least one of the following fields %(field_list)s is required on "
+"%(record)s."
 msgstr ""
 "حقل واحد على الأقل من الحقول التالية %(field_list)s مطلوب في %(record)s."
 
@@ -257,7 +241,6 @@ msgstr "جهة الاتصال"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid ""
 "Could not retrieve a partner corresponding to '%s'. A new partner was "
 "created."
@@ -268,7 +251,6 @@ msgstr ""
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid ""
 "Could not retrieve currency: %s. Did you enable the multicurrency option and "
 "activate the currency?"
@@ -282,8 +264,8 @@ msgid ""
 "Could not retrieve partner with details: Name: %(name)s, Vat: %(vat)s, "
 "Phone: %(phone)s, Email: %(email)s"
 msgstr ""
-"تعذر استرداد الشريك مع التفاصيل: الاسم:%(name)s، ضريبة القيمة المضافة: %"
-"(vat)s، رقم الهاتف: %(phone)s، عنوان البريد الإلكتروني: %(email)s"
+"تعذر استرداد الشريك مع التفاصيل: الاسم:%(name)s، ضريبة القيمة المضافة: "
+"%(vat)s، رقم الهاتف: %(phone)s، عنوان البريد الإلكتروني: %(email)s"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -294,14 +276,12 @@ msgstr "Could not retrieve the tax: %(amount)s %% for line '%(line)s'."
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Could not retrieve the tax: %(tax_percentage)s %% for line '%(line)s'."
 msgstr "Could not retrieve the tax: %(tax_percentage)s %% for line '%(line)s'."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Could not retrieve the tax: %s for the document level allowance/charge."
 msgstr ""
 "Could not retrieve the tax: %s for the document level allowance/charge."
@@ -452,7 +432,6 @@ msgstr "Estonia VAT"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
 msgid "Exempt from tax"
 msgstr "معفى من الضرائب"
 
@@ -517,12 +496,6 @@ msgstr "Format used to import the document: %s"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
-msgid "Format used to import the invoice: %s"
-msgstr "التنسيق المستخدم لاستيراد الفاتورة:%s"
-
-#. module: account_edi_ubl_cii
-#. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
 msgid "Format: %s"
 msgstr "التنسيق: %s"
@@ -571,11 +544,6 @@ msgstr "GS1 identification keys"
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Generated by Odoo"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0246
-msgid "German Electronic Business Address"
 msgstr ""
 
 #. module: account_edi_ubl_cii
@@ -788,6 +756,12 @@ msgid "Malta VAT"
 msgstr "Malta VAT"
 
 #. module: account_edi_ubl_cii
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid "Missing '_title' for multi-level constraints."
+msgstr ""
+
+#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9940
 msgid "Monaco VAT"
 msgstr "Monaco VAT"
@@ -818,9 +792,13 @@ msgid "Netherlands VAT"
 msgstr "Netherlands VAT"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0244
-msgid "Nigeria Tax Identification"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid ""
+"No gross price, net price nor line subtotal amount found for line in xml"
 msgstr ""
+"لم يتم العثور على السعر الإجمالي أو السعر الصافي أو الإجمالي الفرعي للبند في "
+"ملف xml"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0192
@@ -843,9 +821,10 @@ msgid "Odoo"
 msgstr "أودو"
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.view_partner_property_form
-msgid "Peppol Address"
-msgstr "Peppol Address"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid "Other Errors:"
+msgstr ""
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__peppol_endpoint
@@ -854,15 +833,10 @@ msgid "Peppol Endpoint"
 msgstr "Peppol Endpoint"
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.view_partner_property_form
-msgid "Peppol ID"
-msgstr "Peppol ID"
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__peppol_eas
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_users__peppol_eas
-msgid "Peppol e-address (EAS)"
-msgstr "Peppol e-address (EAS)"
+msgid "Peppol ID"
+msgstr "Peppol ID"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -910,7 +884,6 @@ msgstr "Romania VAT"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Rounding"
 msgstr "التقريب"
 
@@ -945,19 +918,24 @@ msgid "SIA Object Identifiers"
 msgstr "SIA Object Identifiers"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0245
-msgid "SK Tax identification number (DIČ)"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9951
 msgid "San Marino VAT"
 msgstr "San Marino VAT"
 
 #. module: account_edi_ubl_cii
+#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send_wizard
+msgid "Send Invoice Wizard"
+msgstr ""
+
+#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9948
 msgid "Serbia VAT"
 msgstr "Serbia VAT"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send
+msgid "Shared Send Invoice Wizard Functions"
+msgstr ""
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__ubl_sg
@@ -1021,14 +999,14 @@ msgid "Tax Category Code"
 msgstr "رمز فئة الضريبة"
 
 #. module: account_edi_ubl_cii
+#: model:ir.model.fields,field_description:account_edi_ubl_cii.field_account_tax__ubl_cii_tax_exemption_reason
+msgid "Tax Exemption Reason"
+msgstr "سبب الإعفاء الضريبي"
+
+#. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_account_tax__ubl_cii_tax_exemption_reason_code
 msgid "Tax Exemption Reason Code"
 msgstr "رمز سبب الإعفاء الضريبي"
-
-#. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "Tax ID"
-msgstr ""
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -1037,8 +1015,8 @@ msgid ""
 "Tax with matching exigibility could not be retrieved: '%(exigibility)s' for "
 "line '%(line)s'."
 msgstr ""
-"تعذر استرداد الضريبة ذات الاستحقاق المطابق: '%(exigibility)s' للسطر '%"
-"(line)s'."
+"تعذر استرداد الضريبة ذات الاستحقاق المطابق: '%(exigibility)s' للسطر "
+"'%(line)s'."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -1098,7 +1076,6 @@ msgstr "The VAT of the %s should be prefixed with its country code."
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "The bank account couldn't be fetched: %s"
 msgstr ""
 
@@ -1111,7 +1088,6 @@ msgstr "الدولة مطلوبة لـ %s."
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "The currency '%s' is not active."
 msgstr "العملة '%s' غير نشطة."
 
@@ -1135,7 +1111,6 @@ msgstr "الحقل 'رقم الحساب السليم' مطلوب في الحسا
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
 msgid ""
@@ -1213,7 +1188,7 @@ msgstr "Ubl Cii Requires Exemption Reason"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move.py:0
-msgid "Ungrouped lines from %s"
+msgid "Ungrouped lines from origin file"
 msgstr ""
 
 #. module: account_edi_ubl_cii
@@ -1407,13 +1382,6 @@ msgid ""
 msgstr ""
 "VATEX-EU-132-1Q - Exempt based on article 132, section 1 (q) of Council "
 "Directive 2006/112/EC"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-135-1
-msgid ""
-"VATEX-EU-135-1 - Exempt based on article 135, section 1 of Council Directive "
-"2006/112/EC"
-msgstr ""
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143
@@ -1690,7 +1658,8 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-153
 msgid ""
 "VATEX-EU-153 - Exempt based on article 153 of Council Directive 2006/112/EC"
-msgstr "VATEX-EU-153 - معفى بموجب المادة 153 من توجيه المجلس 2006/112/EC"
+msgstr ""
+"VATEX-EU-153 - Exempt based on article 153 of Council Directive 2006/112/EC"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-159
@@ -1916,12 +1885,10 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-fr-cgi261d-3
 msgid ""
 "VATEX-FR-CGI261D-3 - Exempt based on 3° of article 261 D of the Code Général "
-"des Impôts (CGI ; General tax code) Exonération de TVA - Article 261 D-3° du "
-"Code Général des Impôts"
+"des Impôts (CGI ; General tax code)"
 msgstr ""
-"VATEX-FR-CGI261D-3 - معفى بموجب الفقرة 3 من المادة 261 د من القانون العام "
-"للضرائب (CGI) إعفاء من ضريبة القيمة المضافة - المادة 261 د-3 من القانون "
-"العام للضرائب"
+"VATEX-FR-CGI261D-3 - Exempt based on 3° of article 261 D of the Code Général "
+"des Impôts (CGI ; General tax code)"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-fr-cgi261d-4
@@ -1929,7 +1896,8 @@ msgid ""
 "VATEX-FR-CGI261D-4 - Exempt based on 4° of article 261 D of the Code Général "
 "des Impôts (CGI ; General tax code)"
 msgstr ""
-"VATEX-FR-CGI261D-4 - معفى بموجب المادة 261 دال من القانون العام للضرائب (CGI)"
+"VATEX-FR-CGI261D-4 - Exempt based on 4° of article 261 D of the Code Général "
+"des Impôts (CGI ; General tax code)"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-fr-cgi261e-1
@@ -1996,11 +1964,6 @@ msgid "Vatican VAT"
 msgstr "Vatican VAT"
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "Vendor Bill"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
 msgid "View Partner(s)"
@@ -2030,7 +1993,7 @@ msgstr ""
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move.py:0
-msgid "You can only group lines of an invoice"
+msgid "You can only (un)group lines of a incoming invoice (vendor bill)"
 msgstr ""
 
 #. module: account_edi_ubl_cii
@@ -2069,49 +2032,3 @@ msgstr "fx"
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
 msgid "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
 msgstr "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
-
-#~ msgid "1.0"
-#~ msgstr "1.0"
-
-#~ msgid ""
-#~ "VATEX-FR-CGI261D-3 - Exempt based on 3° of article 261 D of the Code "
-#~ "Général des Impôts (CGI ; General tax code)"
-#~ msgstr ""
-#~ "VATEX-FR-CGI261D-3 - Exempt based on 3° of article 261 D of the Code "
-#~ "Général des Impôts (CGI ; General tax code)"
-
-#~ msgid "Articles 226 items 11 to 15 Directive 2006/112/EN"
-#~ msgstr "Articles 226 items 11 to 15 Directive 2006/112/EN"
-
-#~ msgid ""
-#~ "No gross price, net price nor line subtotal amount found for line in xml"
-#~ msgstr ""
-#~ "لم يتم العثور على السعر الإجمالي أو السعر الصافي أو الإجمالي الفرعي للبند "
-#~ "في ملف xml"
-
-#~ msgid ""
-#~ "The following bank account numbers got retrieved during the import : %s"
-#~ msgstr "تم استرداد أرقام الحسابات المصرفية التالية أثناء الاستيراد: %s"
-
-#~ msgid ""
-#~ "[PEPPOL-EN16931-R010] An electronic address (EAS) must be provided on the "
-#~ "customer '%s'."
-#~ msgstr ""
-#~ "[PEPPOL-EN16931-R010] يجب تقديم عنوان إلكتروني (EAS) في نموذج \"%s\" "
-#~ "الخاص بالعميل."
-
-#~ msgid ""
-#~ "[PEPPOL-EN16931-R020] An electronic address (EAS) must be provided on the "
-#~ "company '%s'."
-#~ msgstr ""
-#~ "[PEPPOL-EN16931-R020] يجب تقديم عنوان إلكتروني (EAS) على موقع الشركة "
-#~ "\"%s\"."
-
-#~ msgid "Your endpoint"
-#~ msgstr "Your endpoint"
-
-#~ msgid "Australia BIS Billing 3.0 A-NZ"
-#~ msgstr "Australia BIS Billing 3.0 A-NZ"
-
-#~ msgid "Singapore BIS Billing 3.0 SG"
-#~ msgstr "Singapore BIS Billing 3.0 SG"

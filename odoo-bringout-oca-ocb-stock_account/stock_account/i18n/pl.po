@@ -26,10 +26,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-10 18:38+0000\n"
-"PO-Revision-Date: 2026-02-25 14:48+0000\n"
+"POT-Creation-Date: 2026-02-27 18:36+0000\n"
+"PO-Revision-Date: 2026-01-16 05:55+0000\n"
 "Last-Translator: \"Marta (wacm)\" <wacm@odoo.com>\n"
-"Language-Team: Polish <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Polish <https://translate.odoo.com/projects/odoo-s19-1/"
 "stock_account/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -60,6 +60,11 @@ msgstr ""
 
 #. module: stock_account
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+msgid "6.00"
+msgstr "6.00"
+
+#. module: stock_account
+#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "<span>Product</span>"
 msgstr "<span>Produkt</span>"
 
@@ -72,14 +77,6 @@ msgstr "<span>Ilość</span>"
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "<span>SN/LN</span>"
 msgstr "<span>SN/LN</span>"
-
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
-msgid ""
-"A lot/serial number is required for product '%s' as it has lot valuation "
-"enabled."
-msgstr ""
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__avco_value
@@ -178,8 +175,8 @@ msgstr "Linia kont analitycznych"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_account_analytic_plan
-msgid "Analytic Plans"
-msgstr "Plany analityczne"
+msgid "Analytic Plan"
+msgstr ""
 
 #. module: stock_account
 #. odoo-javascript
@@ -226,6 +223,12 @@ msgid "Bacon"
 msgstr "Bekon"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__closing_datetime
+#: model:ir.model.fields,field_description:stock_account.field_account_move__closing_datetime
+msgid "Closing Date"
+msgstr ""
+
+#. module: stock_account
 #. odoo-python
 #: code:addons/stock_account/models/res_company.py:0
 msgid "Closing: Location Reclassification - [%(account)s]"
@@ -250,10 +253,6 @@ msgstr "Pochodzenie trybów"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_res_company
-msgid "Companies"
-msgstr "Firmy"
-
-#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_product_value__company_id
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__company_id
 msgid "Company"
@@ -281,7 +280,7 @@ msgstr ""
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_res_config_settings
 msgid "Config Settings"
-msgstr "Konfiguracja ustawień"
+msgstr "Ustawienia konfiguracji"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_lot__standard_price
@@ -453,8 +452,6 @@ msgid ""
 "Expense account used to re-qualify products removed from stock and sent to "
 "this location"
 msgstr ""
-"Konto wydatków używane do ponownej kwalifikacji produktów usuniętych z "
-"zasobów i wysłanych do tej lokacji"
 
 #. module: stock_account
 #: model:ir.model.fields.selection,name:stock_account.selection__product_category__property_cost_method__fifo
@@ -545,9 +542,15 @@ msgid "Inventory Adjustment Reference / Reason"
 msgstr "Numer referencyjny / powód korekty zapasów"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__inventory_closing
+#: model:ir.model.fields,field_description:stock_account.field_account_move__inventory_closing
+msgid "Inventory Closing"
+msgstr ""
+
+#. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_location
-msgid "Inventory Locations"
-msgstr "Strefy Magazynowe"
+msgid "Inventory Location"
+msgstr ""
 
 #. module: stock_account
 #. odoo-javascript
@@ -823,8 +826,8 @@ msgstr "Rachunek kosztów ogólnych produkcji WIP"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_quant
-msgid "Quants"
-msgstr "Kwanty"
+msgid "Quant"
+msgstr ""
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__reference
@@ -1122,6 +1125,19 @@ msgstr ""
 "        Służy do obliczania marży na zamówieniach sprzedaży."
 
 #. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_stock_move__standard_price
+msgid ""
+"Value of the product (automatically computed in AVCO).\n"
+"        Used to value the product when the purchase cost is not known (e.g. "
+"inventory adjustment).\n"
+"        Used to compute margins on sale orders."
+msgstr ""
+"Wartość produktu (obliczana automatycznie w AVCO).\n"
+"Służy do wyceny produktu, gdy koszt zakupu nie jest znany (np. korekta "
+"zapasów).\n"
+"Służy do obliczania marży na zamówieniach sprzedaży."
+
+#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_variation_id
 msgid "Variation Account"
 msgstr ""
@@ -1175,15 +1191,6 @@ msgstr ""
 
 #. module: stock_account
 #. odoo-python
-#: code:addons/stock_account/models/product.py:0
-msgid ""
-"You cannot enable lot valuation because the following products have on-hand "
-"quantities without a lot/serial number:\n"
-"%s"
-msgstr ""
-
-#. module: stock_account
-#. odoo-python
 #: code:addons/stock_account/models/stock_picking.py:0
 msgid ""
 "You cannot modify the scheduled date of operation %s because it falls within "
@@ -1199,139 +1206,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "units"
 msgstr "jednostki"
-
-#~ msgid "6.00"
-#~ msgstr "6.00"
-
-#~ msgid ""
-#~ "Value of the product (automatically computed in AVCO).\n"
-#~ "        Used to value the product when the purchase cost is not known "
-#~ "(e.g. inventory adjustment).\n"
-#~ "        Used to compute margins on sale orders."
-#~ msgstr ""
-#~ "Wartość produktu (obliczana automatycznie w AVCO).\n"
-#~ "Służy do wyceny produktu, gdy koszt zakupu nie jest znany (np. korekta "
-#~ "zapasów).\n"
-#~ "Służy do obliczania marży na zamówieniach sprzedaży."
-
-#~ msgid ""
-#~ "Manual: The accounting entries to value the inventory are not posted "
-#~ "automatically.\n"
-#~ "        Automated: An accounting entry is automatically created to value "
-#~ "the inventory when a product enters or leaves the company.\n"
-#~ "        "
-#~ msgstr ""
-#~ "Ręcznie: Wpisy księgowe do wyceny zapasów nie są księgowane "
-#~ "automatycznie.\n"
-#~ "Automatycznie: Wpis księgowy jest automatycznie tworzony w celu wyceny "
-#~ "zapasów, gdy produkt wchodzi lub wychodzi z firmy.\n"
-#~ "        "
-
-#~ msgid "Account Move"
-#~ msgstr "Konto przesunięcia"
-
-#~ msgid "Account Stock Properties"
-#~ msgstr "Właściwości konta zapasów"
-
-#~ msgid "Accounting Entries"
-#~ msgstr "Zapisy księgowe"
-
-#~ msgid "Automated"
-#~ msgstr "Automatyczne"
-
-#~ msgid "Cancel"
-#~ msgstr "Anuluj"
-
-#~ msgid "Counterpart Account"
-#~ msgstr "Konto przeciwstawne"
-
-#~ msgid "Default unit of measure used for all stock operations."
-#~ msgstr ""
-#~ "Domyślna jednostka miary stosowana dla wszystkich operacji magazynowych."
-
-#~ msgid "Group by..."
-#~ msgstr "Grupuj wg..."
-
-#~ msgid "Incoming"
-#~ msgstr "Przychodzące"
-
-#~ msgid "Invoice Line"
-#~ msgstr "Pozycja faktury"
-
-#~ msgid "Journal"
-#~ msgstr "Dziennik"
-
-#~ msgid "Moved Quantity"
-#~ msgstr "Przeniesiona ilość"
-
-#~ msgid "Other Info"
-#~ msgstr "Inne informacje"
-
-#~ msgid "Outgoing"
-#~ msgstr "Wychodząca"
-
-#~ msgid "Product Template"
-#~ msgstr "Szablon produktu"
-
-#~ msgid "Quantity"
-#~ msgstr "Ilość"
-
-#~ msgid "Reason"
-#~ msgstr "Przyczyna"
-
-#~ msgid "Remaining Qty"
-#~ msgstr "Ilość pozostała"
-
-#~ msgid "Return Picking"
-#~ msgstr "Pobranie zwrotne"
-
-#~ msgid "Stock Input Account"
-#~ msgstr "Konto dla zapasów wchodzących"
-
-#~ msgid "Stock Output Account"
-#~ msgstr "Konto dla zapasów wychodzących"
-
-#~ msgid "Stock Quantity History"
-#~ msgstr "Historia ilości zasobów"
-
-#~ msgid "Stock Valuation Account (Incoming)"
-#~ msgstr "Konto wyceny zapasów (wchodzących)"
-
-#~ msgid "Stock Valuation Account (Outgoing)"
-#~ msgstr "Konto wyceny zapasów (wydania)"
-
-#~ msgid "Unit of Measure"
-#~ msgstr "Jednostka miary"
-
-#~ msgid ""
-#~ "Used for real-time inventory valuation. When set on a virtual location "
-#~ "(non internal type), this account will be used to hold the value of "
-#~ "products being moved from an internal location into this location, "
-#~ "instead of the generic Stock Output Account set on the product. This has "
-#~ "no effect for internal locations."
-#~ msgstr ""
-#~ "Stosowane przy wycenie w czasie rzeczywistym. Jeśli ustawione w strefie "
-#~ "wirtualnej, to konto to będzie stosowane do wartości produktów "
-#~ "przesuwanych ze strefy wewnętrznej (do wirtualnej)  zamiast konta dla "
-#~ "wychodzących ustawionego w produkcie."
-
-#~ msgid ""
-#~ "Used for real-time inventory valuation. When set on a virtual location "
-#~ "(non internal type), this account will be used to hold the value of "
-#~ "products being moved out of this location and into an internal location, "
-#~ "instead of the generic Stock Output Account set on the product. This has "
-#~ "no effect for internal locations."
-#~ msgstr ""
-#~ "Stosowane przy wycenie w czasie rzeczywistym. Jeśli ustawione w strefie "
-#~ "wirtualnej, to konto to będzie stosowane do wartości produktów "
-#~ "przesuwanych z tej strefy wirtualnej (do wewnętrznej) zamiast konta dla "
-#~ "wychodzących ustawionego w produkcie."
-
-#~ msgid "Warning"
-#~ msgstr "Ostrzeżenie"
-
-#~ msgid "by"
-#~ msgstr "przez"
-
-#~ msgid "for"
-#~ msgstr "do"

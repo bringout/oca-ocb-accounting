@@ -18,7 +18,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
 
         cls.other_currency = cls.setup_other_currency('EUR')
 
-        cls.invoice = cls.init_invoice('in_invoice', products=cls.product_a+cls.product_b)
+        cls.invoice = cls.init_invoice('in_invoice', products=cls.product_a + cls.product_b)
 
         cls.product_line_vals_1 = {
             'name': 'product_a',
@@ -31,7 +31,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
             'price_unit': 800.0,
             'price_subtotal': 800.0,
             'price_total': 920.0,
-            'tax_ids': cls.product_a.supplier_taxes_id.ids,
+            'tax_ids': cls.product_a.supplier_taxes_id.filtered(lambda t: t.company_id == cls.invoice.company_id).ids,
             'tax_line_id': False,
             'currency_id': cls.company_data['currency'].id,
             'amount_currency': 800.0,
@@ -50,7 +50,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
             'price_unit': 160.0,
             'price_subtotal': 160.0,
             'price_total': 208.0,
-            'tax_ids': cls.product_b.supplier_taxes_id.ids,
+            'tax_ids': cls.product_b.supplier_taxes_id.filtered(lambda t: t.company_id == cls.invoice.company_id).ids,
             'tax_line_id': False,
             'currency_id': cls.company_data['currency'].id,
             'amount_currency': 160.0,
@@ -1144,7 +1144,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
         self.invoice.action_post()
 
         bank1 = self.env['res.partner.bank'].create({
-            'acc_number': 'BE43798822936101',
+            'account_number': 'BE43798822936101',
             'partner_id': self.company_data['company'].partner_id.id,
             'allow_out_payment': True,
         })
@@ -1967,13 +1967,11 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
                 'name': 'Accrual Expense Account',
                 'code': '234567',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
             'revenue_accrual_account': self.env['account.account'].create({
                 'name': 'Accrual Revenue Account',
                 'code': '765432',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
         })
         wizard_res = wizard.do_action()
@@ -2038,7 +2036,6 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
             'name': 'TAX_WAIT',
             'code': 'TWAIT',
             'account_type': 'liability_current',
-            'reconcile': True,
         })
         tax_final_account = self.env['account.account'].create({
             'name': 'TAX_TO_DEDUCT',
@@ -2161,7 +2158,6 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
             'name': 'TAX_WAIT',
             'code': 'TWAIT',
             'account_type': 'liability_current',
-            'reconcile': True,
         })
         tax_final_account = self.env['account.account'].create({
             'name': 'TAX_TO_DEDUCT',
@@ -2311,7 +2307,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
         self.assertFalse(move_form.invoice_date)
 
         # Fiduciary mode enabled, date suggestion
-        self.env.company.quick_edit_mode = "out_and_in_invoices"
+        self.env.company.quick_edit_mode_enabled = True
 
         # We are June 17th. No Lock date. Bill Date of the most recent Vendor Bill : March 15th
         # ==> Default New Vendor Bill date = March 31st (last day of March)
@@ -2411,7 +2407,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
                 })
             reversal = move_reversal.refund_moves()
             reverse_move = self.env['account.move'].browse(reversal['res_id'])
-            if reverse_move.move_type in ('out_refund', 'in_refund'):
+            if reverse_move.is_refund():
                 reverse_move.write({
                     'invoice_line_ids': [
                         Command.update(reverse_move.invoice_line_ids.id, {'price_unit': amount}),
@@ -2791,7 +2787,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
             'standard_price': 110.0,
             'seller_ids': [Command.create({
                 'partner_id': self.partner_a.id,
-                'product_uom_id': uom_kgm.id,
+                'uom_id': uom_kgm.id,
             })]
         })
         # customer invoice should have sale uom
@@ -2818,17 +2814,17 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
                 Command.create({
                     'partner_id': self.partner_a.id,
                     'company_id': self.env.company.id,
-                    'product_uom_id': uom_unit.id,
+                    'uom_id': uom_unit.id,
                 }),
                 Command.create({
                     'partner_id': self.partner_a.id,
                     'company_id': self.env.company.id,
-                    'product_uom_id': uom_gram.id,
+                    'uom_id': uom_gram.id,
                 }),
                 Command.create({
                     'partner_id': self.partner_a.id,
                     'company_id': other_company.id,
-                    'product_uom_id': uom_kgm.id,
+                    'uom_id': uom_kgm.id,
                 }),
             ]
         })
@@ -2966,7 +2962,7 @@ class TestAccountMoveInInvoiceOnchanges(AccountTestInvoicingCommon):
         self.assertEqual(receipt.invoice_line_ids.tax_ids, account_tax)
 
     def test_reverse_and_create_invoice_copied_main_attachment(self):
-        attachment_vals = [{'name': 'Attachment', 'mimetype': 'text/plain', 'res_model': 'account.move', 'datas': b''}]
+        attachment_vals = [{'name': 'Attachment', 'mimetype': 'text/plain', 'res_model': 'account.move'}]
         attachment = self.env['ir.attachment'].create(attachment_vals)
         move1, move2 = self.env['account.move'].create([
             {

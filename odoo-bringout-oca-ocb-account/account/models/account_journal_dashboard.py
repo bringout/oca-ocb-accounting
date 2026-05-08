@@ -2,7 +2,6 @@ import ast
 from babel.dates import format_datetime, format_date
 from collections import defaultdict
 from datetime import datetime, timedelta
-import base64
 import json
 import random
 
@@ -458,7 +457,7 @@ class AccountJournal(models.Model):
              WHERE st_line.journal_id IN %s
                AND st_line.company_id IN %s
                AND st_line.is_reconciled IS NOT TRUE
-               AND st_line_move.checked IS TRUE
+               AND (st_line_move.review_state IS NULL OR st_line_move.review_state NOT IN ('todo', 'anomaly'))
                AND st_line_move.state = 'posted'
           GROUP BY st_line.journal_id
         """, [tuple(bank_cash_journals.ids), tuple(self.env.companies.ids)])
@@ -506,7 +505,7 @@ class AccountJournal(models.Model):
                 domain=[
                     ('journal_id', 'in', bank_cash_journals.ids),
                     ('move_id.company_id', 'in', self.env.companies.ids),
-                    ('move_id.checked', '=', False),
+                    ('move_id.review_state', 'in', ('todo', 'anomaly')),
                     ('move_id.state', '=', 'posted'),
                 ],
                 groupby=['journal_id'],
@@ -752,7 +751,7 @@ class AccountJournal(models.Model):
         query = self.env['account.move']._search([
             *self.env['account.move']._check_company_domain(self.env.companies),
             ('journal_id', 'in', self.ids),
-            ('checked', '=', False),
+            ('review_state', 'in', ('todo', 'anomaly')),
             ('state', '=', 'posted'),
         ], bypass_access=True)
         selects = [
@@ -943,7 +942,6 @@ class AccountJournal(models.Model):
             raise UserError(_('You may only use samples in demo mode, try uploading one of your invoices instead.'))
         context['default_move_type'] = 'in_invoice'
         invoice_date = fields.Date.today() - timedelta(days=12)
-        partner = self.env.ref('base.res_partner_2', raise_if_not_found=False)
         company = purchase_journal.company_id
         default_expense_account = company.expense_account_id
         ref = 'DE%s' % invoice_date.strftime('%Y%m')
@@ -988,13 +986,16 @@ class AccountJournal(models.Model):
                 'invoice_date': invoice_date,
                 'invoice_due_date': invoice_date + timedelta(days=30),
             })
-            bodies = self.env['ir.actions.report']._prepare_html(html)[0]
-            content = self.env['ir.actions.report']._run_wkhtmltopdf(bodies)
+            report_service = self.env['ir.actions.report']
+            bodies = report_service._prepare_html(html)[0]
+            report = self.env['account.move.send'].with_company(company)._get_default_pdf_report_id(bill)
+            engine_name = report_service._get_pdf_engine(report)
+            content = report_service._run_pdf_engine_without_processing(engine_name, bodies)
             attachment = self.env['ir.attachment'].create({
                 'type': 'binary',
                 'name': 'INV-%s-0001.pdf' % invoice_date.strftime('%Y-%m'),
                 'res_model': 'mail.compose.message',
-                'datas': base64.encodebytes(content),
+                'raw': content,
             })
             bill.message_post(attachment_ids=attachment.ids)
         return {
@@ -1012,7 +1013,7 @@ class AccountJournal(models.Model):
         return self.env['account.bank.statement.line'].search([
             ('journal_id', '=', self.id),
             ('move_id.company_id', 'in', self.env.companies.ids),
-            ('move_id.checked', '=', False),
+            ('move_id.review_state', 'in', ('todo', 'anomaly')),
             ('move_id.state', '=', 'posted'),
         ])
 
@@ -1165,7 +1166,7 @@ class AccountJournal(models.Model):
     def show_unhashed_entries(self):
         self.ensure_one()
         chains_to_hash = self._get_moves_to_hash(include_pre_last_hash=True, early_stop=False)
-        moves = self.env['account.move'].concat(*[chain_moves['moves'] for chain_moves in chains_to_hash])
+        moves = self.env['account.move'].concat(chain_moves['moves'] for chain_moves in chains_to_hash)
         action = {
             'type': 'ir.actions.act_window',
             'name': _('Journal Entries to Hash'),

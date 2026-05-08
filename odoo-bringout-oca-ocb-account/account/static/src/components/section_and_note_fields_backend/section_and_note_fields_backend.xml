@@ -7,11 +7,11 @@
     </t>
     <t t-name="account.SectionAndNoteListRenderer.RecordRow" t-inherit="web.ListRenderer.RecordRow">
         <xpath expr="//td[hasclass('o_list_record_remove')]" position="attributes">
-            <attribute name="t-if">!isSection(record)</attribute>
+            <attribute name="t-if">!this.isSection(record)</attribute>
         </xpath>
         <xpath expr="//td[hasclass('o_list_record_remove')]" position="after">
             <td t-else="" class="o_list_section_options w-print-0 p-print-0 text-center">
-                <Dropdown position="'bottom-end'" t-if="!props.readonly">
+                <Dropdown position="'bottom-end'" t-if="!this.props.readonly">
                     <button class="btn d-table-cell border-0 py-0 px-1 cursor-pointer">
                         <i class="fa fa-ellipsis-v"/>
                     </button>
@@ -21,35 +21,37 @@
                                 <i class="me-1 fa fa-fw fa-plus"/><span>Add a line</span>
                             </DropdownItem>
                             <t t-if="this.isTopSection(record)">
-                                <t t-if="props.subsections">
+                                <t t-if="this.props.subsections">
                                     <DropdownItem onSelected="() => this.addRowInSection(record, true)">
                                         <i class="me-1 fa fa-fw fa-level-down"/><span>Add a subsection</span>
                                     </DropdownItem>
                                 </t>
                             </t>
                             <DropdownItem
-                                t-if="props.hidePrices"
+                                t-if="this.props.hidePrices"
                                 onSelected="() => this.toggleCollapse(record, 'collapse_prices')"
-                                attrs="{ 'class': disablePricesButton ? 'disabled' : '' }"
+                                attrs="{ 'class': this.disablePricesButton(record) ? 'disabled' : '' }"
                             >
-                                <i class="me-1 fa fa-fw" t-att-class="hidePrices ? 'fa-eye' : 'fa-eye-slash'"/>
-                                <span t-if="hidePrices">Show Prices</span>
+                                <i class="me-1 fa fa-fw" t-att-class="this.hidePrices(record) ? 'fa-eye' : 'fa-eye-slash'"/>
+                                <span t-if="this.hidePrices(record)">Show Prices</span>
                                 <span t-else="">Hide Prices</span>
                             </DropdownItem>
                             <t t-name="composition_button">
                                 <DropdownItem
-                                    t-if="props.hideComposition"
+                                    t-if="this.props.hideComposition"
                                     onSelected="() => this.toggleCollapse(record, 'collapse_composition')"
-                                    attrs="{ 'class': disableCompositionButton ? 'disabled' : '' }"
+                                    attrs="{ 'class': this.disableCompositionButton(record) ? 'disabled' : '' }"
                                 >
-                                    <i class="me-1 fa fa-fw" t-att-class="hideComposition ? 'fa-eye' : 'fa-eye-slash'"/>
-                                    <span t-if="hideComposition">Show Composition</span>
+                                    <i class="me-1 fa fa-fw" t-att-class="this.hideComposition(record) ? 'fa-expand' : 'fa-compress'"/>
+                                    <span t-if="this.hideComposition(record)">Show Composition</span>
                                     <span t-else="">Hide Composition</span>
                                 </DropdownItem>
                             </t>
-                            <DropdownItem onSelected="() => this.addNoteInSection(record)">
-                                <i class="me-1 fa fa-fw fa-sticky-note-o"/><span>Add a note</span>
-                            </DropdownItem>
+                            <t t-name="add_note_button">
+                                <DropdownItem onSelected="() => this.addNoteInSection(record)">
+                                    <i class="me-1 fa fa-fw fa-sticky-note-o"/><span>Add a note</span>
+                                </DropdownItem>
+                            </t>
                             <DropdownItem t-if="this.hasPreviousSection(record)" onSelected="() => this.moveSectionUp(record)">
                                 <i class="me-1 fa fa-fw fa-arrow-up"/><span>Move Up</span>
                             </DropdownItem>
@@ -80,7 +82,7 @@
     </t>
 
     <t t-name="account.SectionAndNoteText">
-        <t t-component="componentToUse" t-props="props"/>
+        <t t-component="this.componentToUse" t-props="this.props"/>
     </t>
 
 </templates>

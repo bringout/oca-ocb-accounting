@@ -1,17 +1,29 @@
 from collections import defaultdict
+from datetime import datetime, time
 from dateutil.relativedelta import relativedelta
 
 from odoo import Command, _, api, fields, models
 from odoo.fields import Domain
 from odoo.exceptions import UserError
+from odoo.addons.base.models.res_company import company_default_for
 
 
 class ResCompany(models.Model):
     _inherit = "res.company"
 
-    account_stock_journal_id = fields.Many2one('account.journal', string='Stock Journal', check_company=True)
+    account_stock_journal_id = fields.Many2one(
+        'account.journal',
+        string='Stock Journal',
+        **company_default_for('account_stock_journal_id', 'product.category', 'property_stock_journal'),
+        check_company=True,
+    )
 
-    account_stock_valuation_id = fields.Many2one('account.account', string='Stock Valuation Account', check_company=True)
+    account_stock_valuation_id = fields.Many2one(
+        'account.account',
+        string='Stock Valuation Account',
+        **company_default_for('account_stock_valuation_id', 'product.category', 'property_stock_valuation_account_id'),
+        check_company=True,
+    )
 
     account_production_wip_account_id = fields.Many2one('account.account', string='Production WIP Account', check_company=True)
     account_production_wip_overhead_account_id = fields.Many2one('account.account', string='Production WIP Overhead Account', check_company=True)
@@ -32,6 +44,7 @@ class ResCompany(models.Model):
             ('periodic', 'Periodic (at closing)'),
             ('real_time', 'Perpetual (at invoicing)'),
         ],
+        **company_default_for('inventory_valuation', 'product.category', 'property_valuation'),
         default='periodic',
     )
 
@@ -42,6 +55,7 @@ class ResCompany(models.Model):
             ('fifo', "First In First Out (FIFO)"),
             ('average', "Average Cost (AVCO)"),
         ],
+        **company_default_for('cost_method', 'product.category', 'property_cost_method'),
         default='standard',
         required=True,
     )
@@ -66,11 +80,12 @@ class ResCompany(models.Model):
         moves_vals = {
             'journal_id': self.account_stock_journal_id.id,
             'date': at_date or fields.Date.today(),
+            'closing_datetime': datetime.combine(at_date, time.max) if at_date else fields.Datetime.now(),
             'ref': _('Stock Closing'),
+            'inventory_closing': True,
             'line_ids': [Command.create(aml_vals) for aml_vals in aml_vals_list],
         }
         account_move = self.env['account.move'].create(moves_vals)
-        self._save_closing_id(account_move.id)
         if auto_post:
             account_move._post()
 
@@ -100,7 +115,8 @@ class ResCompany(models.Model):
         account_data = defaultdict(float)
         stock_valuation_accounts_ids = set()
         for dummy, accounts in accounts_by_product.items():
-            stock_valuation_accounts_ids.add(accounts['valuation'].id)
+            if accounts['valuation']:
+                stock_valuation_accounts_ids.add(accounts['valuation'].id)
         stock_valuation_accounts = self.env['account.account'].browse(stock_valuation_accounts_ids)
         domain = Domain([
             ('account_id', 'in', stock_valuation_accounts.ids),
@@ -232,10 +248,7 @@ class ResCompany(models.Model):
 
         extra_balance = self._get_extra_balance(extra_aml_vals_list)
 
-        if 'inventory_data' in self.env.context:
-            inventory_data = self.env.context.get('inventory_data')
-        else:
-            inventory_data = self.stock_value(accounts_by_product, at_date)
+        inventory_data = self.stock_value(accounts_by_product, at_date)
         accounting_data = self.stock_accounting_value(accounts_by_product, at_date)
 
         accounts = inventory_data.keys() | accounting_data.keys()
@@ -331,36 +344,11 @@ class ResCompany(models.Model):
 
     def _get_last_closing_date(self):
         self.ensure_one()
-        key = f'{self.id}.stock_valuation_closing_ids'
-        closing_ids = self.env['ir.config_parameter'].sudo().get_param(key)
-        closing_ids = closing_ids.split(',') if closing_ids else []
-        closing = self.env['account.move']
-        while not closing and closing_ids:
-            closing_id = closing_ids.pop(-1)
-            closing_id = int(closing_id)
-            closing = self.env['account.move'].browse(closing_id).exists().filtered(lambda am: am.state == 'posted')
+        closing = self.env['account.move'].search_fetch([
+            ('inventory_closing', '=', True),
+            ('state', '=', 'posted'),
+            ('company_id', '=', self.id),
+        ], ['closing_datetime'], limit=1, order='closing_datetime desc, id desc')
         if not closing:
             return False
-        am_state_field = self.env['ir.model.fields'].sudo().search([('model', '=', 'account.move'), ('name', '=', 'state')], limit=1)
-        state_tracking = closing.message_ids.sudo().tracking_value_ids.filtered(lambda t: t.field_id == am_state_field).sorted('id')
-        create_date = state_tracking[-1:].create_date
-        if create_date and create_date.date() == closing.date:
-            return create_date
-        return fields.Datetime.to_datetime(closing.date)
-
-    def _save_closing_id(self, move_id):
-        self.ensure_one()
-        key = f'{self.id}.stock_valuation_closing_ids'
-        closing_ids = self.env['ir.config_parameter'].sudo().get_param(key)
-        ids = closing_ids.split(',') if closing_ids else []
-        ids.append(str(move_id))
-        if len(ids) > 10:
-            ids = ids[1:]
-        self.env['ir.config_parameter'].sudo().set_param(key, ','.join(ids))
-
-    def _set_category_defaults(self):
-        for company in self:
-            self.env['ir.default'].set('product.category', 'property_valuation', company.inventory_valuation, company_id=company.id)
-            self.env['ir.default'].set('product.category', 'property_cost_method', company.cost_method, company_id=company.id)
-            self.env['ir.default'].set('product.category', 'property_stock_journal', company.account_stock_journal_id.id, company_id=company.id)
-            self.env['ir.default'].set('product.category', 'property_stock_valuation_account_id', company.account_stock_valuation_id.id, company_id=company.id)
+        return closing.closing_datetime

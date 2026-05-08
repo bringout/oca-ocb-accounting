@@ -186,13 +186,13 @@ class AccountMoveSend(models.AbstractModel):
 
         # Post-process.
         writer = OdooPdfFileWriter()
-        writer.cloneReaderDocumentRoot(reader)
+        writer.clone_reader_document_root(reader)
 
         attachment_name = 'factur-x.xml'
         if invoice.commercial_partner_id.country_code == 'DE' and invoice.commercial_partner_id.peppol_eas != '0204':
             attachment_name = 'zugferd-invoice.xml'
 
-        writer.addAttachment(attachment_name, xml_facturx, subtype='text/xml')
+        writer.add_attachment(attachment_name, xml_facturx, subtype='text/xml')
 
         # PDF-A.
         if ((invoice_data.get('ubl_cii_xml_options', {}).get('ubl_cii_format') in ('facturx', 'zugferd')
@@ -241,7 +241,7 @@ class AccountMoveSend(models.AbstractModel):
         Inside CreditNote, the ProjectReference element is not used in xml.
         So we look for OriginatorDocumentReference instead.
         """
-        tree = etree.fromstring(invoice_data['ubl_cii_xml_attachment_values']['raw'])
+        tree = etree.fromstring(bytes(invoice_data['ubl_cii_xml_attachment_values']['raw']))
 
         localname = etree.QName(tree).localname
         anchor_xpath = {
@@ -277,7 +277,7 @@ class AccountMoveSend(models.AbstractModel):
         ] if invoice_data.get('mail_attachments_widget') else []
         attachments_to_embed.append({
             'filename': pdf_values['name'],
-            'raw': pdf_values['raw'],
+            'raw': bytes(pdf_values['raw']),
             'mimetype': pdf_values['mimetype'],
             'document_type_node': doc_type_code_node,
         })
@@ -312,5 +312,5 @@ class AccountMoveSend(models.AbstractModel):
         ]
         if attachments_vals:
             attachments = self.env['ir.attachment'].with_user(SUPERUSER_ID).create(attachments_vals)
-            res_ids = attachments.mapped('res_id')
+            res_ids = [a.res_id for a in attachments if a.res_id]
             self.env['account.move'].browse(res_ids).invalidate_recordset(fnames=['ubl_cii_xml_id', 'ubl_cii_xml_file'])

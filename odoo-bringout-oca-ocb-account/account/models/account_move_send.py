@@ -16,7 +16,7 @@ class AccountMoveSend(models.AbstractModel):
     and 'account.move.send.wizard' for single invoice sending wizard (sync).
     """
     _name = 'account.move.send'
-    _description = "Account Move Send"
+    _description = "Shared Send Invoice Wizard Functions"
 
     # -------------------------------------------------------------------------
     # DEFAULTS
@@ -336,7 +336,7 @@ class AccountMoveSend(models.AbstractModel):
         if move.state != 'posted':
             constraints['not_posted'] = _("You can't generate invoices that are not posted.")
         if not move.is_sale_document(include_receipts=True):
-            constraints['not_sale_document'] = _("You can only generate sales documents.")
+            constraints['not_sale_document'] = _("You can only generate sales documents or purchase documents for self-billing.")
         return constraints
 
     @api.model
@@ -737,7 +737,7 @@ class AccountMoveSend(models.AbstractModel):
         }
 
         # Use batch to avoid memory error
-        batch_size = self.env['ir.config_parameter'].sudo().get_param('account.pdf_generation_batch', '80')
+        batch_size = self.env['ir.config_parameter'].sudo().get_int('account.pdf_generation_batch') or 80
         batches = []
         pdf_to_generate = {}
         for invoice, invoice_data in invoices_data_pdf.items():

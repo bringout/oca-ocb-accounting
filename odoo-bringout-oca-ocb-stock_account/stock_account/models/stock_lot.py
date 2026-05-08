@@ -18,21 +18,23 @@ class StockLot(models.Model):
         Used to compute margins on sale orders."""
     )
 
-    @api.depends('product_id.lot_valuated', 'product_id.product_tmpl_id.lot_valuated', 'product_id.stock_move_ids.value', 'standard_price')
+    @api.depends('product_id.lot_valuated', 'product_id.product_tmpl_id.lot_valuated', 'product_id.stock_move_ids.value')
     @api.depends_context('to_date', 'company', 'warehouse_id')
     def _compute_value(self):
         """Compute totals of multiple svl related values"""
         company_id = self.env.company
         self.company_currency_id = company_id.currency_id
         at_date = fields.Datetime.to_datetime(self.env.context.get('to_date'))
+
         for lot in self:
             if not lot.lot_valuated:
                 lot.total_value = 0.0
                 lot.avg_cost = 0.0
                 continue
+
             valuated_product = lot.product_id.with_context(at_date=at_date, lot_id=lot.id)
-            qty_valued = lot.product_qty
-            qty_available = lot.with_context(warehouse_id=False).product_qty
+            qty_valued = valuated_product.qty_available
+            qty_available = valuated_product.with_context(warehouse_id=False).qty_available
             if valuated_product.uom_id.is_zero(qty_valued):
                 lot.total_value = 0
                 lot.avg_cost = 0.0
@@ -82,10 +84,7 @@ class StockLot(models.Model):
                 if not lot.standard_price:
                     lot.standard_price = lot.product_id.standard_price
                 continue
-            elif lot.product_id.cost_method == 'average':
-                lot.standard_price = lot.product_id._run_avco(lot=lot)[0]
-            else:
-                lot.standard_price = lot.product_id._run_fifo_batch(lot=lot)[0].get(lot.product_id.id, lot.standard_price)
+            lot.standard_price = lot.product_id._run_avco(lot=lot)[0]
 
     def _change_standard_price(self, old_price):
         """Helper to create the stock valuation layers and the account moves
@@ -107,4 +106,5 @@ class StockLot(models.Model):
                 'description': _('%(lot)s price update from %(old_price)s to %(new_price)s by %(user)s',
                     lot=lot.name, old_price=old_price, new_price=lot.standard_price, user=self.env.user.name)
             })
+
         self.env['product.value'].sudo().create(product_values)

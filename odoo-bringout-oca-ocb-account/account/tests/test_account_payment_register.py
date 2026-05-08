@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.exceptions import UserError
 from odoo.tests import tagged, users
 from odoo import fields, Command
@@ -12,12 +11,12 @@ from odoo.exceptions import UserError
 from odoo.tests import tagged, Form
 from odoo.tests.common import Like
 
-from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+from odoo.addons.account.tests.common import AccountTestInvoicingWithBanksCommon
 from odoo.addons.payment.tests.common import PaymentCommon
 
 
 @tagged('post_install', '-at_install')
-class TestAccountPaymentRegister(AccountTestInvoicingCommon, PaymentCommon):
+class TestAccountPaymentRegister(AccountTestInvoicingWithBanksCommon, PaymentCommon):
 
     @classmethod
     def setUpClass(cls):
@@ -26,7 +25,7 @@ class TestAccountPaymentRegister(AccountTestInvoicingCommon, PaymentCommon):
         cls.current_year = fields.Date.today().year
 
         cls.other_currency = cls.setup_other_currency('EUR')
-        cls.other_currency_2 = cls.setup_other_currency('CAD', rates=[('2016-01-01', 3.0), ('2017-01-01', 0.01)])
+        cls.other_currency_2 = cls.setup_other_currency('CAD', rates=[('2015-12-31', 3.0), ('2016-12-31', 0.01)])
 
         cls.payment_debit_account_id = cls.copy_account(cls.inbound_payment_method_line.payment_account_id)
         cls.payment_credit_account_id = cls.copy_account(cls.outbound_payment_method_line.payment_account_id)
@@ -56,29 +55,6 @@ class TestAccountPaymentRegister(AccountTestInvoicingCommon, PaymentCommon):
                 Command.create({'value': 'percent', 'value_amount': 30.0, 'nb_days': 5}),
                 Command.create({'value': 'percent', 'value_amount': 60.0, 'nb_days': 10}),
             ],
-        })
-
-        cls.partner_bank_account1 = cls.env['res.partner.bank'].create({
-            'acc_number': "0123456789",
-            'partner_id': cls.partner_a.id,
-            'acc_type': 'bank',
-        })
-        cls.partner_bank_account2 = cls.env['res.partner.bank'].create({
-            'acc_number': "9876543210",
-            'partner_id': cls.partner_a.id,
-            'acc_type': 'bank',
-        })
-        cls.comp_bank_account1 = cls.env['res.partner.bank'].create({
-            'acc_number': "985632147",
-            'partner_id': cls.env.company.partner_id.id,
-            'acc_type': 'bank',
-            'allow_out_payment': True,
-        })
-        cls.comp_bank_account2 = cls.env['res.partner.bank'].create({
-            'acc_number': "741258963",
-            'partner_id': cls.env.company.partner_id.id,
-            'acc_type': 'bank',
-            'allow_out_payment': True,
         })
 
         # Customer invoices sharing the same batch.
@@ -585,12 +561,12 @@ class TestAccountPaymentRegister(AccountTestInvoicingCommon, PaymentCommon):
     def test_register_payment_multiple_batch_grouped_with_credit_note(self):
         ''' Do not batch payments if multiple partner_bank_id '''
         bank1 = self.env['res.partner.bank'].create({
-            'acc_number': 'BE43798822936101',
+            'account_number': 'BE43798822936101',
             'partner_id': self.partner_a.id,
             'allow_out_payment': True,
         })
         bank2 = self.env['res.partner.bank'].create({
-            'acc_number': 'BE85812541345906',
+            'account_number': 'BE85812541345906',
             'partner_id': self.partner_a.id,
             'allow_out_payment': True,
         })
@@ -733,9 +709,8 @@ class TestAccountPaymentRegister(AccountTestInvoicingCommon, PaymentCommon):
         '''
         partner_b = self.partner_b.copy({'property_account_position_id': False})
         partner_b_bank_account = self.env['res.partner.bank'].create({
-            'acc_number': "123454321",
+            'account_number': "123454321",
             'partner_id': partner_b.id,
-            'acc_type': 'bank',
         })
         invoice_1 = self.in_invoice_1
         invoice_2 = invoice_1.copy({
@@ -873,7 +848,7 @@ class TestAccountPaymentRegister(AccountTestInvoicingCommon, PaymentCommon):
         ''' When registering a payment manually with a payment register,
         we shouldn't sent email notification automatically.
         '''
-        self.env['ir.config_parameter'].set_param('sale.automatic_invoice', True)
+        self.env['ir.config_parameter'].set_bool('sale.automatic_invoice', True)
         if self.env['ir.module.module']._get('payment_demo').state == 'installed':
             payment_token = self._create_token(provider_id=self._prepare_provider(code='demo').id,
                                                demo_simulated_state='done')
@@ -1188,7 +1163,6 @@ class TestAccountPaymentRegister(AccountTestInvoicingCommon, PaymentCommon):
             'code': 'cash.basis.transfer.account',
             'name': 'cash_basis_transfer_account',
             'account_type': 'income',
-            'reconcile': True,
         })
         default_tax.tax_exigibility = 'on_payment'
 

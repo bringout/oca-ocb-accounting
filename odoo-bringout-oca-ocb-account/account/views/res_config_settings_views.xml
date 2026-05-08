@@ -62,7 +62,8 @@
                                     </div>
                                 </div>
                             </setting>
-                            <setting id="rounding_method" company_dependent="1" string="Rounding Method" help="How total tax amount is computed in orders and invoices" title="A rounding per line is advised if your prices are tax-included. That way, the sum of line subtotals equals the total with taxes.">
+                            <setting id="rounding_method" company_dependent="1" string="Rounding Method" help="How total tax amount is computed in orders and invoices" title="- A rounding per tax is advised if your prices are tax-excluded. This minimizes cumulative rounding errors because it totals all unrounded tax amounts first and only rounds the final tax total once.\n
+                                                                                                                                                                               - A rounding per line is advised if your prices are tax-included. That way, the sum of line subtotal equals the total with taxes.">
                                 <field name="tax_calculation_rounding_method" class="o_light_label mt16" widget="radio"/>
                             </setting>
                             <setting id="eu_service" title="If you sell goods and services to customers in a
@@ -84,7 +85,7 @@
                                     </div>
                                     <div class="row mt16">
                                         <label for="account_cash_basis_base_account_id" class="col-lg-3 o_light_label"/>
-                                        <field name="account_cash_basis_base_account_id"/>
+                                        <field name="account_cash_basis_base_account_id" decoration-muted="not account_cash_basis_base_account_active"/>
                                     </div>
                                 </div>
                             </setting>
@@ -170,7 +171,7 @@
                                 <div class="content-group mt-2" invisible="not account_use_credit_limit">
                                     <div class="row">
                                         <label for="account_default_credit_limit" class="col-lg-4 o_light_label"/>
-                                        <field name="account_default_credit_limit"/>
+                                        <field name="account_default_credit_limit" widget="monetary"/>
                                     </div>
                                 </div>
                             </setting>
@@ -262,11 +263,11 @@
                                         </div>
                                         <div class="row mt8">
                                             <label for="income_currency_exchange_account_id" string="Gain" class="col-lg-4 o_light_label"/>
-                                            <field name="income_currency_exchange_account_id"/>
+                                            <field name="income_currency_exchange_account_id" decoration-muted="not income_currency_exchange_account_active"/>
                                         </div>
                                         <div class="row mt8">
                                             <label for="expense_currency_exchange_account_id" string="Loss" class="col-lg-4 o_light_label"/>
-                                            <field name="expense_currency_exchange_account_id"/>
+                                            <field name="expense_currency_exchange_account_id" decoration-muted="not expense_currency_exchange_account_active"/>
                                         </div>
                                     </div>
                                 </setting>
@@ -274,11 +275,11 @@
                                     <div class="content-group">
                                         <div class="row mt8">
                                             <label for="account_journal_suspense_account_id" class="col-lg-5 o_light_label"/>
-                                            <field name="account_journal_suspense_account_id"/>
+                                            <field name="account_journal_suspense_account_id" decoration-muted="not account_journal_suspense_account_active"/>
                                         </div>
                                         <div class="row mt8">
                                             <label for="transfer_account_id" class="col-lg-5 o_light_label"/>
-                                            <field name="transfer_account_id"/>
+                                            <field name="transfer_account_id" decoration-muted="not transfer_account_active"/>
                                         </div>
                                     </div>
                                 </setting>
@@ -287,11 +288,11 @@
                                     <div class="content-group">
                                         <div class="row mt8">
                                             <label for="account_discount_expense_allocation_id" class="col-lg-5 o_light_label" string="Customer Invoices"/>
-                                            <field name="account_discount_expense_allocation_id" placeholder="Same Account as product"/>
+                                            <field name="account_discount_expense_allocation_id" placeholder="Same Account as product" decoration-muted="not account_discount_expense_allocation_active"/>
                                         </div>
                                         <div class="row mt8" id="account_discount_income_allocation">
                                             <label for="account_discount_income_allocation_id" class="col-lg-5 o_light_label" string="Vendor Bills"/>
-                                            <field name="account_discount_income_allocation_id" placeholder="Same Account as product"/>
+                                            <field name="account_discount_income_allocation_id" placeholder="Same Account as product" decoration-muted="not account_discount_income_allocation_active"/>
                                         </div>
                                     </div>
                                 </setting>
@@ -299,11 +300,11 @@
                                     <div class="content-group">
                                         <div class="row mt8">
                                             <label for="account_journal_early_pay_discount_gain_account_id" class="col-lg-5 o_light_label"/>
-                                            <field name="account_journal_early_pay_discount_gain_account_id"/>
+                                            <field name="account_journal_early_pay_discount_gain_account_id" decoration-muted="not account_journal_early_pay_discount_gain_account_active"/>
                                         </div>
                                         <div class="row mt8">
                                             <label for="account_journal_early_pay_discount_loss_account_id" class="col-lg-5 o_light_label"/>
-                                            <field name="account_journal_early_pay_discount_loss_account_id"/>
+                                            <field name="account_journal_early_pay_discount_loss_account_id" decoration-muted="not account_journal_early_pay_discount_loss_account_active"/>
                                         </div>
                                     </div>
                                 </setting>
@@ -311,11 +312,11 @@
                                     <div class="content-group">
                                         <div class="row mt8">
                                             <label for="income_account_id" class="col-lg-5 o_light_label"/>
-                                            <field name="income_account_id"/>
+                                            <field name="income_account_id" decoration-muted="not income_account_active"/>
                                         </div>
                                         <div class="row mt8">
                                             <label for="expense_account_id" class="col-lg-5 o_light_label"/>
-                                            <field name="expense_account_id"/>
+                                            <field name="expense_account_id" decoration-muted="not expense_account_active"/>
                                         </div>
                                     </div>
                                 </setting>
@@ -333,9 +334,6 @@
                         <t groups="account.group_account_user">
                             <block title="Fiscal Periods" id="accounting_reports">
                                 <setting id="fiscalyear" invisible="1" groups="account.group_account_user"/>
-                                <setting id="dynamic_report" groups="account.group_account_user" help="Navigate easily through reports and see what is behind the numbers">
-                                    <field name="module_account_reports" widget="upgrade_boolean"/>
-                                </setting>
                             </block>
                         </t>
                         <block title="Analytics" id="analytic" groups="account.group_account_user">
@@ -351,7 +349,7 @@
                                 <field name="module_product_margin"/>
                             </setting>
                         </block>
-                        <block title="Reporting" id="account_reports_settings" groups="account.group_account_user" invisible="not module_account_reports">
+                        <block title="Reporting" id="account_reports_settings" groups="account.group_account_user">
                             <setting string="Restrictive Audit Trail" company_dependent="1" invisible="force_restrictive_audit_trail" help="Log changes to posted journal entries immutably">
                                 <field name="restrictive_audit_trail"/>
                             </setting>
@@ -375,14 +373,16 @@
                                 <field name="account_storno"/>
                             </setting>
                         </block>
-                        <block title="Accounting Firms mode" id="quick_edit_mode">
-                            <div class="text-muted">
-                                <p style="margin-bottom: 0">Accounting firm mode will change invoice/bill encoding:</p>
-                                <p style="margin-bottom: 0"> - The document's sequence becomes editable on all documents.</p>
-                                <p style="margin-bottom: 0"> - A new field « Total (tax inc.) » to speed up and control the encoding by automating line creation with the right account &amp; tax.</p>
-                            </div>
-                            <setting company_dependent="1">
-                                <field name="quick_edit_mode" placeholder="Disabled"/>
+                        <block title="Accounting Firms mode">
+                            <setting  id="quick_edit_mode_enabled" company_dependent="1" help="A new field 'Total (tax inc.)' to speed up and control the encoding by automating line creation with the right account and tax.">
+                                <field name="quick_edit_mode_enabled"/>
+                                <field name="quick_edit_mode" required="quick_edit_mode_enabled" invisible="not quick_edit_mode_enabled"/>
+                            </setting>
+                            <setting  id="document_sequence_editable" company_dependent="1" help="The document's sequence becomes editable on all documents.">
+                                <field name="document_sequence_editable"/>
+                            </setting>
+                            <setting  id="set_to_review_documents" company_dependent="1" help="Review all the modification done by the user with right under bookkeeper.">
+                                <field name="set_to_review_documents"/>
                             </setting>
                         </block>
                     </app>

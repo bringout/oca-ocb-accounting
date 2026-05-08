@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"POT-Creation-Date: 2025-12-12 18:35+0000\n"
 "PO-Revision-Date: 2025-11-16 15:03+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
@@ -158,9 +158,3 @@ msgstr "未知的函數召用"
 #: code:addons/account_tax_python/tools/formula_utils.py:0
 msgid "Unknown identifier: %s"
 msgstr "未知的識別碼：%s"
-
-#~ msgid "Only product['string'] read-access is allowed"
-#~ msgstr "只允許讀取存取 product['string']"
-
-#~ msgid "Malformed formula '%(formula)s' at position %(position)s"
-#~ msgstr "算式格式錯誤：%(formula)s，位置：%(position)s"

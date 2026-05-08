@@ -13,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-10 18:38+0000\n"
-"PO-Revision-Date: 2026-01-30 07:44+0000\n"
+"POT-Creation-Date: 2026-02-27 18:36+0000\n"
+"PO-Revision-Date: 2026-01-31 12:42+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
-"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-s19-1/"
 "stock_account/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -36,14 +36,19 @@ msgstr " [ %sに会計処理済]"
 #: code:addons/stock_account/models/stock_lot.py:0
 msgid "%(lot)s price update from %(old_price)s to %(new_price)s by %(user)s"
 msgstr ""
-"%(lot)s の価格が%(old_price)s から %(new_price)s に変更されました。変更者： %"
-"(user)s"
+"%(lot)s の価格が%(old_price)s から %(new_price)s に変更されました。変更者： "
+"%(user)s"
 
 #. module: stock_account
 #. odoo-python
 #: code:addons/stock_account/models/stock_move.py:0
 msgid "%(quantity)s %(uom)s at product's cost"
 msgstr "%(quantity)s %(uom)s プロダクトの原価で"
+
+#. module: stock_account
+#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+msgid "6.00"
+msgstr "6.00"
 
 #. module: stock_account
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
@@ -59,14 +64,6 @@ msgstr "<span>数量</span>"
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "<span>SN/LN</span>"
 msgstr "<span>シリアル番号/ロット番号</span>"
-
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
-msgid ""
-"A lot/serial number is required for product '%s' as it has lot valuation "
-"enabled."
-msgstr ""
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__avco_value
@@ -163,7 +160,7 @@ msgstr "分析勘定明細"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_account_analytic_plan
-msgid "Analytic Plans"
+msgid "Analytic Plan"
 msgstr "分析プラン"
 
 #. module: stock_account
@@ -211,6 +208,12 @@ msgid "Bacon"
 msgstr "ベーコン"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__closing_datetime
+#: model:ir.model.fields,field_description:stock_account.field_account_move__closing_datetime
+msgid "Closing Date"
+msgstr ""
+
+#. module: stock_account
 #. odoo-python
 #: code:addons/stock_account/models/res_company.py:0
 msgid "Closing: Location Reclassification - [%(account)s]"
@@ -235,10 +238,6 @@ msgstr "売上原価元"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_res_company
-msgid "Companies"
-msgstr "会社"
-
-#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_product_value__company_id
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__company_id
 msgid "Company"
@@ -529,8 +528,14 @@ msgid "Inventory Adjustment Reference / Reason"
 msgstr "在庫調整参照/理由"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__inventory_closing
+#: model:ir.model.fields,field_description:stock_account.field_account_move__inventory_closing
+msgid "Inventory Closing"
+msgstr "在庫期末処理"
+
+#. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_location
-msgid "Inventory Locations"
+msgid "Inventory Location"
 msgstr "在庫ロケーション"
 
 #. module: stock_account
@@ -817,8 +822,8 @@ msgstr "生産 WIP(仕掛品) 間接費 勘定"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_quant
-msgid "Quants"
-msgstr "保管ロット"
+msgid "Quant"
+msgstr "在庫数量"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__reference
@@ -1113,6 +1118,19 @@ msgstr ""
 "　販売オーダのマージンを計算するために使用されます。"
 
 #. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_stock_move__standard_price
+msgid ""
+"Value of the product (automatically computed in AVCO).\n"
+"        Used to value the product when the purchase cost is not known (e.g. "
+"inventory adjustment).\n"
+"        Used to compute margins on sale orders."
+msgstr ""
+"プロダクトの価値（AVCO で自動的に計算される）。\n"
+"　仕入原価が不明な場合（在庫調整など）に、プロダクトの価値を算出するために使"
+"用されます。\n"
+"　販売オーダのマージンを計算するために使用されます。"
+
+#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_variation_id
 msgid "Variation Account"
 msgstr "在庫差額勘定"
@@ -1158,23 +1176,14 @@ msgid ""
 "You can only get the standard price at a given date for products with "
 "'Standard Price' as cost method."
 msgstr ""
-"特定の日付時点の標準原価を取得できるのは、原価計算方法が「標準原価」に設定さ"
-"れているプロダクトのみです。"
+"「標準価格」を原価計算方法とするプロダクトについてのみ、特定の日付における標"
+"準価格を取得できます。"
 
 #. module: stock_account
 #. odoo-python
 #: code:addons/stock_account/models/product.py:0
 msgid "You can only use the '=' operator to search on valuation field."
 msgstr "評価フィールドの検索には '=' 演算子しか使えません。"
-
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/product.py:0
-msgid ""
-"You cannot enable lot valuation because the following products have on-hand "
-"quantities without a lot/serial number:\n"
-"%s"
-msgstr ""
 
 #. module: stock_account
 #. odoo-python
@@ -1193,211 +1202,3 @@ msgstr "stock_move_id"
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "units"
 msgstr "単位"
-
-#~ msgid "6.00"
-#~ msgstr "6.00"
-
-#~ msgid ""
-#~ "Value of the product (automatically computed in AVCO).\n"
-#~ "        Used to value the product when the purchase cost is not known "
-#~ "(e.g. inventory adjustment).\n"
-#~ "        Used to compute margins on sale orders."
-#~ msgstr ""
-#~ "プロダクトの価値（AVCO で自動的に計算される）。\n"
-#~ "　仕入原価が不明な場合（在庫調整など）に、プロダクトの価値を算出するために"
-#~ "使用されます。\n"
-#~ "　販売オーダのマージンを計算するために使用されます。"
-
-#~ msgid ""
-#~ "You cannot modify the scheduled date of this operation because it falls "
-#~ "within a locked fiscal period."
-#~ msgstr ""
-#~ "このオペレーションの予定日は、ロックされた会計期間内であるため、変更できま"
-#~ "せん。"
-
-#~ msgid "%(quantity)s %(uom)s at product's standard price %(price)s"
-#~ msgstr "%(quantity)s %(uom)s プロダクトの標準価格： %(price)s"
-
-#~ msgid "AVCO Justification"
-#~ msgstr "AVCO(平均原価法)に関する根拠"
-
-#~ msgid ""
-#~ "Manual: The accounting entries to value the inventory are not posted "
-#~ "automatically.\n"
-#~ "        Automated: An accounting entry is automatically created to value "
-#~ "the inventory when a product enters or leaves the company.\n"
-#~ "        "
-#~ msgstr ""
-#~ "手動: 在庫を評価するための会計仕訳は自動的に計上されません。\n"
-#~ "自動: プロダクトの入出庫時に、在庫を評価するための会計項目が自動的に作成さ"
-#~ "れます。\n"
-#~ "        "
-
-#~ msgid "<b>Set other input/output accounts on specific </b>"
-#~ msgstr ""
-#~ "<b>その他のロケーションごとの入庫/出庫勘定はロケーションで設定します。 </"
-#~ "b>"
-
-#~ msgid "Account Move"
-#~ msgstr "会計仕訳"
-
-#~ msgid "Account Stock Properties"
-#~ msgstr "在庫関連勘定属性"
-
-#~ msgid "Accounting Entries"
-#~ msgstr "会計仕訳"
-
-#~ msgid "Automated"
-#~ msgstr "自動"
-
-#~ msgid "Cancel"
-#~ msgstr "取消"
-
-#~ msgid ""
-#~ "Cannot find a stock input account for the product %s. You must define one "
-#~ "on the product category, or on the location, before processing this "
-#~ "operation."
-#~ msgstr ""
-#~ "商品 %sの在庫入力勘定を見つけることができません。 この操作を処理する前に、"
-#~ "製品カテゴリまたはロケーションを定義する必要があります。"
-
-#~ msgid ""
-#~ "Cannot find a stock output account for the product %s. You must define "
-#~ "one on the product category, or on the location, before processing this "
-#~ "operation."
-#~ msgstr ""
-#~ "商品 %sの在庫出力勘定を見つけることができません。 この操作を処理する前に、"
-#~ "製品カテゴリまたはロケーションを定義する必要があります。"
-
-#~ msgid ""
-#~ "Changing your cost method is an important change that will impact your "
-#~ "inventory valuation. Are you sure you want to make that change?"
-#~ msgstr ""
-#~ "原価方法の変更は在庫評価に影響するため、慎重に行ってください。本当に変更し"
-#~ "ますか？"
-
-#~ msgid "Choose a date to get the valuation at that date"
-#~ msgstr "日付を選択すると、その日付での評価額が表示されます。"
-
-#~ msgid ""
-#~ "Configuration error. Please configure the price difference account on the "
-#~ "product or its category to process this operation."
-#~ msgstr ""
-#~ "構成エラー。 この操作を処理するには、製品またはそのカテゴリの価格差異勘定"
-#~ "を設定してください。"
-
-#~ msgid "Counterpart Account"
-#~ msgstr "相手方口座"
-
-#~ msgid "Default unit of measure used for all stock operations."
-#~ msgstr "すべての在庫操作に使用されるデフォルトの測定単位。"
-
-#~ msgid "Group by..."
-#~ msgstr "グル―プ化…"
-
-#~ msgid "Incoming"
-#~ msgstr "入荷"
-
-#~ msgid "Invoice Line"
-#~ msgstr "請求書行"
-
-#~ msgid "Journal"
-#~ msgstr "仕訳帳"
-
-#~ msgid "Moved Quantity"
-#~ msgstr "移動数量"
-
-#~ msgid "Other Info"
-#~ msgstr "その他情報"
-
-#~ msgid "Outgoing"
-#~ msgstr "出庫"
-
-#~ msgid "Product Template"
-#~ msgstr "プロダクトテンプレート"
-
-#~ msgid "Quantity"
-#~ msgstr "数量"
-
-#~ msgid "Reason"
-#~ msgstr "理由"
-
-#~ msgid "Remaining Qty"
-#~ msgstr "残数量"
-
-#~ msgid "Return Picking"
-#~ msgstr "ピッキングの戻し"
-
-#~ msgid "Stock Input Account"
-#~ msgstr "在庫受入勘定"
-
-#~ msgid "Stock Output Account"
-#~ msgstr "在庫払出勘定"
-
-#~ msgid "Stock Quantity History"
-#~ msgstr "在庫数量履歴"
-
-#~ msgid "Stock Valuation Account (Incoming)"
-#~ msgstr "在庫評価勘定 (入庫)"
-
-#~ msgid "Stock Valuation Account (Outgoing)"
-#~ msgstr "在庫評価勘定(出庫)"
-
-#~ msgid "Unit Value"
-#~ msgstr "単位価格"
-
-#~ msgid "Unit of Measure"
-#~ msgstr "単位"
-
-#~ msgid ""
-#~ "Used for real-time inventory valuation. When set on a virtual location "
-#~ "(non internal type), this account will be used to hold the value of "
-#~ "products being moved from an internal location into this location, "
-#~ "instead of the generic Stock Output Account set on the product. This has "
-#~ "no effect for internal locations."
-#~ msgstr ""
-#~ "リアルタイム在庫評価のために使用されます。仮想の場所 (非内部タイプ) に設定"
-#~ "されている場合、このアカウントは製品にセットされる一般的な在庫出力アカウン"
-#~ "トの代わりに、内部の場所からこの場所に移動される製品の価値を保持するために"
-#~ "使用されます。"
-
-#~ msgid ""
-#~ "Used for real-time inventory valuation. When set on a virtual location "
-#~ "(non internal type), this account will be used to hold the value of "
-#~ "products being moved out of this location and into an internal location, "
-#~ "instead of the generic Stock Output Account set on the product. This has "
-#~ "no effect for internal locations."
-#~ msgstr ""
-#~ "リアルタイム在庫評価のために使用されます。仮想の場所 (非内部タイプ) に設定"
-#~ "されている場合、このアカウントは製品にセットされる一般的な在庫出力アカウン"
-#~ "トの代わりに、この場所から内部の場所に移動される製品の価値を保持するために"
-#~ "使用されます。"
-
-#~ msgid "Valuation at Date"
-#~ msgstr "日付指定評価"
-
-#~ msgid "Warning"
-#~ msgstr "警告"
-
-#~ msgid ""
-#~ "You don't have any input valuation account defined on your product "
-#~ "category. You must define one before processing this operation."
-#~ msgstr ""
-#~ "プロダクトカテゴリに入庫評価勘定が定義されていません。この操作を行う前に、"
-#~ "入庫評価勘定を定義する必要があります。"
-
-#~ msgid ""
-#~ "You don't have any stock valuation account defined on your product "
-#~ "category. You must define one before processing this operation."
-#~ msgstr ""
-#~ "プロダクトカテゴリに定義されている在庫評価勘定はありません。 この操作を処"
-#~ "理する前に定義する必要があります。"
-
-#~ msgid "by"
-#~ msgstr "by"
-
-#~ msgid "for"
-#~ msgstr "for"
-
-#~ msgid "locations"
-#~ msgstr "ロケーション"

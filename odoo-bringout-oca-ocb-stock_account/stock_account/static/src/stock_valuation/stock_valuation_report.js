@@ -1,3 +1,4 @@
+import { useChildSubEnv, useState } from "@web/owl2/utils";
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
@@ -7,7 +8,7 @@ import { standardActionServiceProps } from "@web/webclient/actions/action_servic
 import { serializeDate } from "@web/core/l10n/dates";
 const { DateTime } = luxon;
 
-import { Component, onWillStart, useChildSubEnv, useState } from "@odoo/owl";
+import { Component, onWillStart } from "@odoo/owl";
 
 import { StockValuationReportButtonsBar } from "../stock_valuation/buttons_bar/buttons_bar"
 import { StockValuationReportController } from "../stock_valuation/controller"

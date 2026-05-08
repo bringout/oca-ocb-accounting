@@ -1,4 +1,5 @@
-import { Component, useEffect, onWillRender } from "@odoo/owl";
+import { useLayoutEffect, onWillRender } from "@web/owl2/utils";
+import { Component } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { x2ManyCommands } from "@web/core/orm_service";
 import { registry } from "@web/core/registry";
@@ -16,11 +17,6 @@ const DISPLAY_TYPES = {
     SECTION: "line_section",
     SUBSECTION: "line_subsection",
 };
-
-export function getParentSectionRecord(list, record) {
-    const { sectionIndex } = getRecordsUntilSection(list, record, false, record.data.display_type !== DISPLAY_TYPES.SUBSECTION);
-    return list.records[sectionIndex];
-}
 
 function getPreviousSectionRecords(list, record) {
     const { sectionRecords } = getRecordsUntilSection(list, record, false);
@@ -96,7 +92,7 @@ export class SectionAndNoteListRenderer extends ListRenderer {
         // invisible fields to force copy when duplicating a section
         this.copyFields = ["display_type", "collapse_composition", "collapse_prices"];
         this.parentSectionMap = new Map();
-        useEffect(
+        useLayoutEffect(
             (editedRecord) => this.focusToName(editedRecord),
             () => [this.editedRecord]
         );
@@ -113,20 +109,26 @@ export class SectionAndNoteListRenderer extends ListRenderer {
         return SHOW_ALL_ITEMS_TOOLTIP;
     }
 
-    get hidePrices() {
-        return this.record.data.collapse_prices;
+    hidePrices(record) {
+        return record.data.collapse_prices;
     }
 
-    get hideComposition() {
-        return this.record.data.collapse_composition;
+    hideComposition(record) {
+        return record.data.collapse_composition;
     }
 
-    get disablePricesButton() {
-        return this.shouldCollapse(this.record, 'collapse_prices') || this.disableCompositionButton;
+    disablePricesButton(record) {
+        return (
+            this.shouldCollapse(record, 'collapse_prices') || this.disableCompositionButton(record)
+        );
     }
 
-    get disableCompositionButton() {
-        return this.shouldCollapse(this.record, 'collapse_composition');
+    disableCompositionButton(record) {
+        return this.shouldCollapse(record, 'collapse_composition');
+    }
+
+    get sectionColumns() {
+        return [...this.props.aggregatedFields, 'section_state'];
     }
 
     buildParentSectionMap() {
@@ -309,14 +311,12 @@ export class SectionAndNoteListRenderer extends ListRenderer {
     }
 
     isSectionOrNote(record = null) {
-        record = record || this.record;
         return [DISPLAY_TYPES.SECTION, DISPLAY_TYPES.SUBSECTION, DISPLAY_TYPES.NOTE].includes(
             record.data.display_type
         );
     }
 
     isSection(record = null) {
-        record = record || this.record;
         return [DISPLAY_TYPES.SECTION, DISPLAY_TYPES.SUBSECTION].includes(record.data.display_type);
     }
 
@@ -417,7 +417,7 @@ export class SectionAndNoteListRenderer extends ListRenderer {
     getColumns(record) {
         const columns = super.getColumns(record);
         if (this.isSectionOrNote(record)) {
-            return this.getSectionColumns(columns, record);
+            return this.getSectionAndNoteColumns(columns, record);
         }
         return columns;
     }
@@ -437,12 +437,12 @@ export class SectionAndNoteListRenderer extends ListRenderer {
         return super.getFormattedValue(column, record);
     }
 
-    getSectionColumns(columns, record) {
+    getSectionAndNoteColumns(columns, record) {
         const sectionCols = columns.filter(
             (col) =>
                 col.widget === "handle"
                 || col.name === this.titleField
-                || (this.isSection(record) && this.props.aggregatedFields.includes(col.name))
+                || (this.isSection(record) && this.sectionColumns.includes(col.name))
         );
         return sectionCols.map((col) => {
             if (col.name === this.titleField) {

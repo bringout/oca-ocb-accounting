@@ -12,7 +12,7 @@ class MrpProduction(models.Model):
 
     extra_cost = fields.Float(copy=False, string='Extra Unit Cost')
     show_valuation = fields.Boolean(compute='_compute_show_valuation')
-    wip_move_ids = fields.Many2many('account.move', 'wip_move_production_rel', 'production_id', 'move_id')
+    wip_move_ids = fields.Many2many('account.move', 'wip_move_production_rel', 'production_id', 'move_id', copy=False)
     wip_move_count = fields.Integer("WIP Journal Entry Count", compute='_compute_wip_move_count')
 
     def _compute_show_valuation(self):
@@ -69,7 +69,7 @@ class MrpProduction(models.Model):
             finished_move.ensure_one()
             for work_order in self.workorder_ids:
                 work_center_cost += work_order._cal_cost()
-            quantity = finished_move.product_uom._compute_quantity(
+            quantity = finished_move.uom_id._compute_quantity(
                 finished_move.quantity, finished_move.product_id.uom_id)
             extra_cost = self.extra_cost * quantity
 
@@ -81,7 +81,7 @@ class MrpProduction(models.Model):
                     continue
                 byproduct_cost_share += byproduct.cost_share
                 if byproduct.product_id.cost_method in ('fifo', 'average'):
-                    byproduct.price_unit = total_cost * byproduct.cost_share / 100 / byproduct.product_uom._compute_quantity(byproduct.quantity, byproduct.product_id.uom_id)
+                    byproduct.price_unit = total_cost * byproduct.cost_share / 100 / byproduct.uom_id._compute_quantity(byproduct.quantity, byproduct.product_id.uom_id)
             finished_move.price_unit = total_cost * float_round(1 - byproduct_cost_share / 100, precision_rounding=0.0001) / quantity
         return True
 

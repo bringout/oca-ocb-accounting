@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"POT-Creation-Date: 2026-03-12 18:36+0000\n"
 "PO-Revision-Date: 2021-06-03 13:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,11 +57,6 @@ msgstr "Faol"
 
 #. module: account_edi_proxy_client
 #: model:ir.model,name:account_edi_proxy_client.model_res_company
-#, fuzzy
-msgid "Companies"
-msgstr "Kompaniyalar"
-
-#. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__company_id
 #, fuzzy
 msgid "Company"
@@ -80,18 +75,12 @@ msgid "Created on"
 msgstr "Yaratilgan sana"
 
 #. module: account_edi_proxy_client
-#: model:ir.model,name:account_edi_proxy_client.model_certificate_key
-msgid "Cryptographic Keys"
-msgstr ""
-
-#. module: account_edi_proxy_client
 #: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__demo
 msgid "Demo mode"
 msgstr ""
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__display_name
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__display_name
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__display_name
 #, fuzzy
 msgid "Display Name"
@@ -131,7 +120,6 @@ msgstr ""
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__id
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__id
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__id
 #, fuzzy
 msgid "ID"

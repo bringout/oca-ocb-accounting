@@ -1,7 +1,11 @@
-from odoo.addons.account_edi_ubl_cii.tests.common import TestUblBis3Common, TestUblCiiBECommon
-from odoo.tests import tagged
+from unittest.mock import patch
 
 from freezegun import freeze_time
+
+from odoo.tests import tagged
+from odoo.tools.misc import file_open
+
+from odoo.addons.account_edi_ubl_cii.tests.common import TestUblBis3Common, TestUblCiiBECommon
 
 
 @tagged('post_install_l10n', 'post_install', '-at_install')
@@ -98,6 +102,54 @@ class TestUblImportBis3InvoiceBE(TestUblBis3Common, TestUblCiiBECommon):
                     'amount_untaxed': 233.34,
                     'amount_tax': 49.0,
                     'amount_total': 282.34,
+                },
+            ],
+        )
+
+    def test_generate_pdf_when_xml_does_not_provide_one(self):
+        def _run_pdf_engine_without_processing(*args, **kwargs):
+            return file_open(f'{self.test_module}/tests/test_files/import/bis3/invoice/be/test_import_invoice_auto_generate_pdf.pdf', 'rb').read()
+
+        # Import the document that doesn't contain an embedded PDF
+        with patch.object(self.env.registry['ir.actions.report'], '_run_pdf_engine_without_processing', _run_pdf_engine_without_processing):
+            bill = self._import_invoice_as_attachment_on(
+                test_name='test_import_without_embedded_attachment',
+                journal=self.company_data["default_journal_purchase"].with_context(force_report_rendering=True),
+            )
+
+        self.assertTrue(bill)
+
+        # Ensure the created move has 2 attachments: the original XML and a generated PDF
+        self.assertTrue(bill.ubl_cii_xml_id)  # Original XML
+        self.assertEqual(len(bill.attachment_ids), 1)  # Generated PDF
+        self.assertTrue(any('pdf' in attachment.mimetype for attachment in bill.attachment_ids))
+
+    @freeze_time('2020-01-01')
+    def test_invoice_two_tax_subtotals_because_of_multi_currency(self):
+        """ In PINT, when dealing with multi-currency invoice, there are 2 TaxSubtotal, one per currency. """
+        tax_21 = self.percent_tax(21.0)
+        invoice = self._import_invoice_as_attachment_on(
+            test_name='test_invoice_two_tax_subtotals_because_of_multi_currency',
+            journal=self.company_data['default_journal_sale'],
+        )
+
+        self.assertRecordValues(
+            invoice.invoice_line_ids,
+            [
+                {
+                    'quantity': 1.0,
+                    'price_unit': 899.99,
+                    'tax_ids': tax_21.ids,
+                },
+            ],
+        )
+        self.assertRecordValues(
+            invoice,
+            [
+                {
+                    'amount_untaxed': 899.99,
+                    'amount_tax': 189.01,
+                    'amount_total': 1089.0,
                 },
             ],
         )

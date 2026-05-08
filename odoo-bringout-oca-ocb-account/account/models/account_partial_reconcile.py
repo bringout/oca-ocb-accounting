@@ -57,7 +57,7 @@ class AccountPartialReconcile(models.Model):
     # ==== Other fields ====
     company_id = fields.Many2one(
         comodel_name='res.company',
-        string="Company", store=True, readonly=False,
+        string="Company", store=True, readonly=False, index=True,
         precompute=True,
         compute='_compute_company_id')
     max_date = fields.Date(
@@ -111,7 +111,7 @@ class AccountPartialReconcile(models.Model):
             return True
 
         # Get the payments without journal entry to reset once the amount residual is reset
-        to_update_payments = self._get_to_update_payments(from_state='paid')
+        to_update_payments = self._get_to_update_payments(from_state='reconciled')
         # Retrieve the CABA entries to reverse.
         moves_to_reverse = self.env['account.move'].search([('tax_cash_basis_rec_id', 'in', self.ids)])
         # Same for the exchange difference entries.
@@ -142,13 +142,13 @@ class AccountPartialReconcile(models.Model):
 
         all_reconciled = all_reconciled.exists()
         self._update_matching_number(all_reconciled)
-        to_update_payments.state = 'in_process'
+        to_update_payments.state = 'paid'
         return res
 
     @api.model_create_multi
     def create(self, vals_list):
         partials = super().create(vals_list)
-        partials._get_to_update_payments(from_state='in_process').state = 'paid'
+        partials._get_to_update_payments(from_state='paid').state = 'reconciled'
         self._update_matching_number(partials.debit_move_id + partials.credit_move_id)
         return partials
 
@@ -165,7 +165,7 @@ class AccountPartialReconcile(models.Model):
                 if not payment.currency_id.compare_amounts(payment.amount_signed, amount):
                     to_update.append(payment)
                     break
-        return self.env['account.payment'].union(*to_update)
+        return self.env['account.payment'].union(to_update)
 
     @api.model
     def _update_matching_number(self, amls):
@@ -636,9 +636,8 @@ class AccountPartialReconcile(models.Model):
                         counterpart_line_vals = self._prepare_cash_basis_counterpart_tax_line_vals(tax_line, line_vals)
                         counterpart_line_vals['sequence'] = sequence + 1
 
-                        if tax_line.account_id.reconcile:
-                            move_index = len(moves_to_create_and_post) + len(moves_to_create_in_draft)
-                            to_reconcile_after.append((tax_line, move_index, counterpart_line_vals['sequence']))
+                        move_index = len(moves_to_create_and_post) + len(moves_to_create_in_draft)
+                        to_reconcile_after.append((tax_line, move_index, counterpart_line_vals['sequence']))
 
                     else:
                         # Base line.
@@ -664,6 +663,7 @@ class AccountPartialReconcile(models.Model):
 
         # Reconcile the tax lines being on a reconcile tax basis transfer account.
         reconciliation_plan = []
+        exchange_account_per_move = self.env.context.get('exchange_account_per_move', {})
         for lines, move_index, sequence in to_reconcile_after:
 
             # In expenses, all move lines are created manually without any grouping on tax lines.
@@ -678,7 +678,8 @@ class AccountPartialReconcile(models.Model):
             if counterpart_line.reconciled:
                 continue
 
-            reconciliation_plan.append((counterpart_line + lines))
+            reconciliation_plan.append(counterpart_line + lines)
+            exchange_account_per_move[moves[move_index]] = exchange_account_per_move.get(lines.move_id)
 
         # passing add_caba_vals in the context to make sure that any exchange diff that would be created for
         # this cash basis move would set the field draft_caba_move_vals accordingly on the partial

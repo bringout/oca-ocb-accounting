@@ -11,15 +11,14 @@ class AccountChartTemplate(models.AbstractModel):
 
         :return: all the values that are not stored but are used to instancieate
                  the chart of accounts. Common keys are:
-                 * property_*
+                 * name
+                 * country
                  * code_digits
         :rtype: dict
         """
         return {
-            'name': _("Generic Chart of Accounts"),
+            'name': _("Generic (Minimal) Chart of Accounts"),
             'country': None,
-            'property_account_receivable_id': 'receivable',
-            'property_account_payable_id': 'payable',
         }
 
     @template('generic_coa', 'res.company')
@@ -46,7 +45,9 @@ class AccountChartTemplate(models.AbstractModel):
                 'account_journal_early_pay_discount_gain_account_id': 'cash_discount_gain',
                 'expense_account_id': 'expense',
                 'income_account_id': 'income',
-                'account_stock_journal_id': 'inventory_valuation',
+                'receivable_account_id': 'receivable',
+                'payable_account_id': 'payable',
+                'deferred_expense_account_id': 'prepayments',
                 'account_stock_valuation_id': 'stock_valuation',
                 'account_production_wip_account_id': 'wip',
                 'account_production_wip_overhead_account_id': 'cost_of_production',

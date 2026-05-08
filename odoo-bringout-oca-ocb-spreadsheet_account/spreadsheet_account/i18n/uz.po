@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2026-02-04 18:36+0000\n"
 "PO-Revision-Date: 2025-10-08 18:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -64,9 +64,8 @@ msgstr "Hujayra tekshiruvi"
 
 #. module: spreadsheet_account
 #: model:ir.model,name:spreadsheet_account.model_res_company
-#, fuzzy
-msgid "Companies"
-msgstr "Kompaniyalar"
+msgid "Company"
+msgstr ""
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -88,6 +87,12 @@ msgstr "Kredit karta"
 #, fuzzy
 msgid "Current Assets"
 msgstr "Joriy aktivlar"
+
+#. module: spreadsheet_account
+#. odoo-javascript
+#: code:addons/spreadsheet_account/static/src/fiscal_year_global_filter.js:0
+msgid "Current Fiscal Year"
+msgstr ""
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -130,6 +135,12 @@ msgstr "Kapital"
 #, fuzzy
 msgid "Expenses"
 msgstr "Xarajatlar"
+
+#. module: spreadsheet_account
+#. odoo-javascript
+#: code:addons/spreadsheet_account/static/src/fiscal_year_global_filter.js:0
+msgid "Fiscal Year"
+msgstr ""
 
 #. module: spreadsheet_account
 #. odoo-javascript

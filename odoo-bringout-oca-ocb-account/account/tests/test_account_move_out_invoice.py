@@ -1781,7 +1781,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
         self.invoice.action_post()
 
         bank1 = self.env['res.partner.bank'].create({
-            'acc_number': 'BE43798822936101',
+            'account_number': 'BE43798822936101',
             'partner_id': self.partner_a.id,
             "allow_out_payment": True,
         })
@@ -2625,7 +2625,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
         # Test to check that when switching from out_invoice to out_refund the bank partner is changed accordingly
         bank = self.env["res.partner.bank"].create({
             "bank_name": "FAKE",
-            "acc_number": "1234567890",
+            "account_number": "1234567890",
             "partner_id": self.partner_a.id,
             "allow_out_payment": True,
         })
@@ -2748,13 +2748,11 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
                 'name': 'Accrual Expense Account',
                 'code': '234567',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
             'revenue_accrual_account': self.env['account.account'].create({
                 'name': 'Accrual Revenue Account',
                 'code': '765432',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
         })
         wizard_res = wizard.do_action()
@@ -2886,13 +2884,11 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
                 'name': 'Accrual Expense Account',
                 'code': '234567',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
             'revenue_accrual_account': self.env['account.account'].create({
                 'name': 'Accrual Revenue Account',
                 'code': '765432',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
         })
         wizard_res = wizard.do_action()
@@ -3048,13 +3044,11 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
                 'name': 'Accrual Expense Account',
                 'code': '234567',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
             'revenue_accrual_account': self.env['account.account'].create({
                 'name': 'Accrual Revenue Account',
                 'code': '765432',
                 'account_type': 'expense',
-                'reconcile': True,
             }).id,
         })
         wizard_res = wizard.do_action()
@@ -3413,7 +3407,6 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             'name': 'TAX_WAIT',
             'code': 'TWAIT',
             'account_type': 'liability_current',
-            'reconcile': True,
         })
         tax_final_account = self.env['account.account'].create({
             'name': 'TAX_TO_DEDUCT',
@@ -3536,7 +3529,6 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             'name': 'TAX_WAIT',
             'code': 'TWAIT',
             'account_type': 'liability_current',
-            'reconcile': True,
         })
         tax_final_account = self.env['account.account'].create({
             'name': 'TAX_TO_DEDUCT',
@@ -3678,7 +3670,6 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             'name': 'TAX_WAIT',
             'code': 'TWAIT',
             'account_type': 'liability_current',
-            'reconcile': True,
         })
         caba_tax = self.env['account.tax'].create({
             'name': 'cash basis 10%',
@@ -3687,7 +3678,6 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             'tax_exigibility': 'on_payment',
             'cash_basis_transition_account_id': tax_waiting_account.id,
         })
-        caba_tax.invoice_repartition_line_ids.account_id.reconcile = True
         invoice = self.env['account.move'].create({
             'move_type': 'out_invoice',
             'partner_id': self.partner_a.id,
@@ -3760,7 +3750,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
         self.assertEqual(len(invoice.invoice_line_ids), 0)
 
         # Quick edit total amount activated
-        self.env.company.quick_edit_mode = "out_and_in_invoices"
+        self.env.company.quick_edit_mode_enabled = True
         self.env.company.account_sale_tax_id = self.env['account.tax'].create({
             'name': '21%',
             'amount': 21,
@@ -3798,7 +3788,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
         move_form.invoice_date = fields.Date.from_string('2022-01-01')
 
         # Quick edit total amount activated
-        self.env.company.quick_edit_mode = "out_and_in_invoices"
+        self.env.company.quick_edit_mode_enabled = True
         # 21% sale tax
         self.env.company.account_sale_tax_id = self.env['account.tax'].create({
             'name': '21%',
@@ -3857,7 +3847,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
                 Command.create({'repartition_type': 'tax', 'factor_percent': -100.0}),
             ],
         })
-        self.env.company.quick_edit_mode = "out_and_in_invoices"
+        self.env.company.quick_edit_mode_enabled = True
         self.env.company.account_sale_tax_id = tax
 
         move_form = Form(self.env['account.move'].with_context(default_move_type='out_invoice'))
@@ -4376,8 +4366,8 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             )
 
         currency = self.setup_other_currency('EUR', rates=[
-            ('2016-01-01', 3.0),
-            ('2017-01-01', 2.0),
+            ('2015-12-31', 3.0),
+            ('2016-12-31', 2.0),
         ])
         self.assertRecordValues(invoice('2015-01-01'), [{
             'amount_total': 1000.0,
@@ -4397,7 +4387,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
     def test_on_quick_encoding_non_accounting_lines(self):
         """ Ensure that quick encoding values are only applied to accounting lines) """
 
-        self.env.company.quick_edit_mode = "out_and_in_invoices"
+        self.env.company.quick_edit_mode_enabled = True
         move_form = Form(
             self.env['account.move'].with_context(default_move_type='out_invoice')
         )
@@ -4600,13 +4590,13 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
         company_2 = self.company_data_2['company']
         bank = self.env["res.partner.bank"].create({
             "bank_name": "FAKE",
-            "acc_number": "1234567890",
+            "account_number": "1234567890",
             "partner_id": company_1.partner_id.id,
             "allow_out_payment": True,
         })
         bank_2 = self.env["res.partner.bank"].create({
             "bank_name": "FAKE 2",
-            "acc_number": "1234567890",
+            "account_number": "1234567890",
             "partner_id": company_2.partner_id.id,
             "allow_out_payment": True,
         })
@@ -4703,8 +4693,8 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
 
     def test_lines_recomputation_after_currency_rate_change(self):
         currency = self.setup_other_currency('EUR', rates=[
-            ('2025-01-01', 0.5),
-            ('2025-02-01', 0.4),
+            ('2024-12-31', 0.5),
+            ('2025-01-31', 0.4),
         ])
 
         with Form(self.env['account.move'].with_context(default_move_type='out_invoice')) as move_form:
@@ -4742,7 +4732,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
 
     def test_narration_preserved_when_use_invoice_terms_disabled(self):
         """ Ensure narration is preserved when partner changes and invoice terms are disabled. """
-        self.env['ir.config_parameter'].sudo().set_param('account.use_invoice_terms', False)
+        self.env['ir.config_parameter'].sudo().set_bool('account.use_invoice_terms', False)
         invoice = self.invoice.copy({
             'narration': 'Manually written terms by user',
         })
@@ -4757,7 +4747,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
 
     def test_narration_translation_on_partner_language_change(self):
         """Ensure narration translates when partner.lang changes (HTML terms link)."""
-        self.env['ir.config_parameter'].sudo().set_param('account.use_invoice_terms', True)
+        self.env['ir.config_parameter'].sudo().set_bool('account.use_invoice_terms', True)
         self.env['res.lang']._activate_lang('fr_FR')
 
         self.env.company.terms_type = 'html'
@@ -4918,10 +4908,11 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             })],
         })
         invoice.action_post()
-        invoice = invoice.with_context(active_model='account.move', active_id=invoice.id)
         discounted_amount = invoice.invoice_payment_term_id._get_amount_due_after_discount(
-            total_amount=invoice.amount_total,
-            untaxed_amount=invoice.amount_tax,
+            invoice.amount_total,
+            invoice.amount_tax,
+            currency=invoice.currency_id,
+            cash_rounding=invoice.invoice_cash_rounding_id,
         )
         self.assertEqual(discounted_amount, 52.95)
 
@@ -5030,6 +5021,7 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
                 {'name': '2026-01-01', 'rate': 2.0, 'currency_id': self.other_currency.id, 'company_id': self.env.company.id},
             ]
         )
+        self.assertEqual(self.env['account.move'].get_currency_rate(self.env.company.id, self.other_currency.id, '2026-01-01'), 2.0)
         with (freeze_time('2025-01-02'), patch.object(self.env.cr, 'now', lambda: fields.Datetime.to_datetime("2025-01-02 10:00:00"))):
             move = self.env['account.move'].create({
                 'move_type': 'out_invoice',
@@ -5125,3 +5117,53 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             'product_id': self.product_a.id,
             'name': 'product_a',
         }])
+
+    def test_out_invoice_fiscal_position_branch_taxes(self):
+        """Price should be recomputed when tax inclusion changes via fiscal position"""
+        # Create price-included taxes
+        tax_10_incl = self.env['account.tax'].create({
+            'name': '10% incl',
+            'type_tax_use': 'sale',
+            'amount_type': 'percent',
+            'amount': 10,
+            'price_include_override': 'tax_included',
+            'include_base_amount': True,
+        })
+        self.product_a.write({
+            'lst_price': 1100.0,
+            'taxes_id': [Command.set(tax_10_incl.ids)],
+        })
+
+        # Create fiscal position mapping 10% -> 5%
+        fiscal_position = self.env['account.fiscal.position'].create({
+            'name': 'Test FP',
+        })
+        self.tax_sale_a.write({
+            'fiscal_position_ids': [Command.set(fiscal_position.ids)],
+            'original_tax_ids': [Command.set(tax_10_incl.ids)],
+        })
+
+        # create a new branch
+        self.env.company.write({
+            'child_ids': [
+                Command.create({'name': 'Branch A'}),
+            ],
+        })
+        self.cr.precommit.run()  # load the CoA
+
+        # create an invoice on the new branch
+        branch_a = self.env.company.child_ids
+
+        # Create invoice - product will auto-apply price_unit from product with tax
+        move_form = Form(self.env['account.move'].with_company(branch_a).with_context(default_move_type='out_invoice'))
+        move_form.partner_id = self.partner_a
+        move_form.invoice_date = fields.Date.from_string('2019-01-01')
+        move_form.fiscal_position_id = fiscal_position
+        with move_form.invoice_line_ids.new() as line_form:
+            line_form.product_id = self.product_a
+        invoice = move_form.save()
+        self.assertEqual(
+            invoice.invoice_line_ids[0].price_unit,
+            1000.00,
+            msg="Price should be tax included"
+        )

@@ -53,10 +53,12 @@ class ProductTemplate(models.Model):
         string="Income Account",
         domain=ACCOUNT_DOMAIN,
         help="Keep this field empty to use the default value from the product category.")
+    property_account_income_active = fields.Boolean(related='property_account_income_id.active', string="Income Account Active")
     property_account_expense_id = fields.Many2one('account.account', company_dependent=True, ondelete='restrict',
         string="Expense Account",
         domain=ACCOUNT_DOMAIN,
         help="Keep this field empty to use the default value from the product category. If anglo-saxon accounting with automated valuation method is configured, the expense account on the product category will be used.")
+    property_account_expense_active = fields.Boolean(related='property_account_expense_id.active', string="Expense Account Active")
     account_tag_ids = fields.Many2many(
         string="Account Tags",
         comodel_name='account.account.tag',
@@ -249,9 +251,11 @@ class ProductProduct(models.Model):
                 return 0.0
         if product_taxes is None:
             if document_type == 'sale':
-                product_taxes = product.taxes_id.filtered(lambda x: x.company_id == company)
+                product_taxes = product.taxes_id
             elif document_type == 'purchase':
-                product_taxes = product.supplier_taxes_id.filtered(lambda x: x.company_id == company)
+                product_taxes = product.supplier_taxes_id
+        if product_taxes:
+            product_taxes = product_taxes._filter_taxes_by_company(company)
         # Apply unit of measure.
         if product_uom and product.uom_id != product_uom:
             product_price_unit = product.uom_id._compute_price(product_price_unit, product_uom)
@@ -322,9 +326,7 @@ class ProductProduct(models.Model):
 
             # Get similarity threshold from system parameter, fallback to 0.9 if missing, invalid, or out of range (0, 1].
             try:
-                similarity_threshold = float(
-                    self.env['ir.config_parameter'].sudo().get_param('account.product_name_similarity_threshold', '0.9')
-                )
+                similarity_threshold = self.env['ir.config_parameter'].sudo().get_float('account.product_name_similarity_threshold', 0.9)
                 if similarity_threshold <= 0.0 or similarity_threshold > 1.0:
                     similarity_threshold = 0.9
             except ValueError:

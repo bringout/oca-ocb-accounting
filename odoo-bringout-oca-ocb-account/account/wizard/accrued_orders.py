@@ -165,6 +165,7 @@ class AccountAccruedOrdersWizard(models.TransientModel):
             else:
                 accrual_entry_date = self.env.context.get('accrual_entry_date')
                 accrual_entry_date = fields.Date.from_string(accrual_entry_date) if accrual_entry_date else self.date
+                precision_digits = self.env['decimal.precision'].precision_get('Product Unit')
                 order_lines = lines.with_context(accrual_entry_date=accrual_entry_date).filtered(
                     # We only want non-comment lines (no sections, notes, ...) and include all lines
                     # for purchase orders but exclude downpayment lines for sales orders.
@@ -173,7 +174,7 @@ class AccountAccruedOrdersWizard(models.TransientModel):
                     fields.Float.compare(
                         l.amount_to_invoice_at_date,
                         0,
-                        precision_rounding=l.product_uom_id.rounding,
+                        precision_digits=precision_digits,
                     ) != 0
                 )
                 for order_line in order_lines:
@@ -181,7 +182,7 @@ class AccountAccruedOrdersWizard(models.TransientModel):
                     if is_purchase:
                         # Compute the price unit from the amount to invoice if there is one,
                         # otherwise use the PO line price unit.
-                        price_unit = order_line._get_gross_price_unit()
+                        price_unit = order_line.price_unit
                         quantity_to_invoice = order_line.qty_invoiced_at_date - order_line.qty_received_at_date
                         if quantity_to_invoice >= 1:
                             posted_invoice_lines = order_line.invoice_lines.filtered(lambda ivl:
@@ -198,7 +199,7 @@ class AccountAccruedOrdersWizard(models.TransientModel):
                             # As included taxes are not taken into account in the price_unit, we need to compute the price_subtotal
                             qty_to_invoice = order_line.qty_received_at_date - order_line.qty_invoiced_at_date
                             price_subtotal = order_line.tax_ids.compute_all(
-                                order_line._get_gross_price_unit(),
+                                price_unit,
                                 currency=order_line.order_id.currency_id,
                                 quantity=qty_to_invoice,
                                 product=order_line.product_id,
@@ -213,7 +214,7 @@ class AccountAccruedOrdersWizard(models.TransientModel):
                             order_line=_ellipsis(order_line.name, 20),
                             quantity_billed=order_line.qty_invoiced_at_date,
                             quantity_received=order_line.qty_received_at_date,
-                            unit_price=formatLang(self.env, order_line._get_gross_price_unit(), currency_obj=order.currency_id),
+                            unit_price=formatLang(self.env, price_unit, currency_obj=order.currency_id),
                         )
 
                         # Generate price diff account move lines if needed.
@@ -248,7 +249,7 @@ class AccountAccruedOrdersWizard(models.TransientModel):
                         qty_to_invoice = order_line.qty_delivered_at_date - order_line.qty_invoiced_at_date
                         expense_account, stock_variation_account = self._get_product_expense_and_stock_var_accounts(product)
                         account = self._get_computed_account(order, product, is_purchase)
-                        price_unit = order_line._get_gross_price_unit()
+                        price_unit = order_line.price_unit
                         if qty_to_invoice > 0:
                             # Invoices to be issued.
                             amount_currency = order_line.amount_to_invoice_at_date

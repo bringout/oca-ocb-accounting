@@ -9,7 +9,7 @@ from odoo.tests import Form, users
 from odoo.tests.common import tagged
 
 
-@tagged('post_install', '-at_install')
+@tagged('mail_track', 'post_install', '-at_install')
 class TestTracking(AccountTestInvoicingCommon, MailCase):
 
     @classmethod
@@ -27,24 +27,23 @@ class TestTracking(AccountTestInvoicingCommon, MailCase):
         account_move.action_post()
         account_move.button_draft()
         old_value = account_move.invoice_line_ids.account_id
+        self.flush_tracking()
 
-        with Form(account_move) as account_move_form:
+        with self.mock_mail_app(), self.mock_mail_gateway(), Form(account_move) as account_move_form:
             with account_move_form.invoice_line_ids.edit(0) as line_form:
                 line_form.account_id = self.company_data['default_account_assets']
+            account_move_form.save()
+            self.flush_tracking()
         new_value = account_move.invoice_line_ids.account_id
 
-        self.flush_tracking()
-        # Isolate the tracked value for the invoice line because changing the account has recomputed the taxes.
-        tracking_value = account_move.message_ids.sudo().tracking_value_ids\
-            .filtered(lambda t: t.field_id.name == 'account_id' and t.old_value_integer == old_value.id)
-        self.assertTracking(tracking_value.mail_message_id, [
-            ('account_id', 'many2one', old_value, new_value),
-        ])
-
-        self.assertEqual(len(tracking_value), 1)
-        self.assertTrue(tracking_value.field_id)
-        field = self.env[tracking_value.field_id.model]._fields[tracking_value.field_id.name]
-        self.assertFalse(field.groups, "There is no group on account.move.line.account_id")
+        tracking_msg = self._new_msgs
+        self.assertMessageFields(
+            tracking_msg, {
+                'tracking_values': [
+                    ('account_id', 'many2one', old_value, new_value, {'html_string': 'Account'}),
+                ],
+            }
+        )
 
     @users('admin')
     def test_invite_follower_account_moves(self):
@@ -75,7 +74,7 @@ class TestTracking(AccountTestInvoicingCommon, MailCase):
         ]
         for move in multiple_account_moves:
             with self.subTest(move['description']):
-                account_moves = self.env['account.move'].with_context(self._test_context).create(move['account_moves'])
+                account_moves = self.env['account.move'].create(move['account_moves'])
                 mail_invite = self.env['mail.followers.edit'].with_context({
                     'default_res_model': 'account.move',
                     'default_res_ids': account_moves.ids,

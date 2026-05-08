@@ -4,21 +4,22 @@
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# "Thi Huong Nguyen (thng)" <thng@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 17:36+0000\n"
-"PO-Revision-Date: 2025-11-08 21:59+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/"
+"POT-Creation-Date: 2026-03-12 18:36+0000\n"
+"PO-Revision-Date: 2026-01-31 12:23+0000\n"
+"Last-Translator: \"Thi Huong Nguyen (thng)\" <thng@odoo.com>\n"
+"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-s19-1/"
 "account_edi_ubl_cii/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -48,31 +49,19 @@ msgid "(Un)Group lines by tax"
 msgstr ""
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "<span class=\"text-muted\">FROM</span>"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "<span class=\"text-muted\">TO</span>"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
-msgid "A"
-msgstr ""
+msgid "1.0"
+msgstr "1.0"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "A payment of %s was detected."
 msgstr "Đã phát hiện khoản thanh toán %s."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "A rounding amount of %s was detected."
 msgstr ""
 
@@ -92,16 +81,6 @@ msgid "AS2 exchange"
 msgstr ""
 
 #. module: account_edi_ubl_cii
-#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send
-msgid "Account Move Send"
-msgstr "Account Move Send"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send_wizard
-msgid "Account Move Send Wizard"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9923
 msgid "Albania VAT"
 msgstr "Thuế GTGT của Albania"
@@ -114,9 +93,15 @@ msgstr "Thuế GTGT của Andorra"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid "Articles 226 items 11 to 15 Directive 2006/112/EN"
+msgstr "Điều 226 mục 11 đến 15 Chỉ thị 2006/112/EN"
+
+#. module: account_edi_ubl_cii
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
 msgid ""
-"At least one of the following fields %(field_list)s is required on %"
-"(record)s."
+"At least one of the following fields %(field_list)s is required on "
+"%(record)s."
 msgstr ""
 "Yêu cầu ít nhất một trong các trường sau %(field_list)s trên %(record)s."
 
@@ -254,7 +239,6 @@ msgstr "Liên hệ"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid ""
 "Could not retrieve a partner corresponding to '%s'. A new partner was "
 "created."
@@ -264,7 +248,6 @@ msgstr ""
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid ""
 "Could not retrieve currency: %s. Did you enable the multicurrency option and "
 "activate the currency?"
@@ -279,8 +262,8 @@ msgid ""
 "Could not retrieve partner with details: Name: %(name)s, Vat: %(vat)s, "
 "Phone: %(phone)s, Email: %(email)s"
 msgstr ""
-"Không thể truy xuất đối tác với các thông tin: Tên: %(name)s, Mã số thuế: %"
-"(vat)s, Số điện thoại: %(phone)s, Email: %(email)s."
+"Không thể truy xuất đối tác với các thông tin: Tên: %(name)s, Mã số thuế: "
+"%(vat)s, Số điện thoại: %(phone)s, Email: %(email)s."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -291,14 +274,12 @@ msgstr "Không thể truy xuất thuế: %(amount)s %% cho dòng '%(line)s'."
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Could not retrieve the tax: %(tax_percentage)s %% for line '%(line)s'."
 msgstr "Không thể truy xuất thuế: %(tax_percentage)s %% cho dòng '%(line)s'."
 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Could not retrieve the tax: %s for the document level allowance/charge."
 msgstr "Không thể truy xuất thuế: %s cho khoản phụ cấp/phụ phí trong chứng từ."
 
@@ -351,7 +332,7 @@ msgstr "Đoàn uỷ viên của Ủy ban Châu Âu"
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Discount"
-msgstr ""
+msgstr "Chiết khấu"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_account_edi_common__display_name
@@ -447,7 +428,6 @@ msgstr "Thuế GTGT của Estonia"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_bis3.py:0
 msgid "Exempt from tax"
 msgstr "Miễn thuế"
 
@@ -512,12 +492,6 @@ msgstr "Định dạng được sử dụng để nhập tài liệu: %s"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
-msgid "Format used to import the invoice: %s"
-msgstr "Định dạng được sử dụng để nhập hóa đơn: %s"
-
-#. module: account_edi_ubl_cii
-#. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
 msgid "Format: %s"
 msgstr ""
@@ -566,11 +540,6 @@ msgstr "Khoá định danh GS1"
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Generated by Odoo"
-msgstr ""
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0246
-msgid "German Electronic Business Address"
 msgstr ""
 
 #. module: account_edi_ubl_cii
@@ -782,6 +751,12 @@ msgid "Malta VAT"
 msgstr "Thuế GTGT của Malta"
 
 #. module: account_edi_ubl_cii
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid "Missing '_title' for multi-level constraints."
+msgstr ""
+
+#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9940
 msgid "Monaco VAT"
 msgstr "Thuế GTGT của Monaco"
@@ -812,9 +787,13 @@ msgid "Netherlands VAT"
 msgstr "Thuế GTGT của Hà Lan"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0244
-msgid "Nigeria Tax Identification"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid ""
+"No gross price, net price nor line subtotal amount found for line in xml"
 msgstr ""
+"Không tìm thấy tổng giá, giá ròng cũng như thành tiền của dòng cho dòng "
+"trong xml"
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0192
@@ -837,9 +816,10 @@ msgid "Odoo"
 msgstr "Odoo"
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.view_partner_property_form
-msgid "Peppol Address"
-msgstr "Địa chỉ Peppol"
+#. odoo-python
+#: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
+msgid "Other Errors:"
+msgstr ""
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__peppol_endpoint
@@ -848,15 +828,10 @@ msgid "Peppol Endpoint"
 msgstr "Endpoint Peppol"
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.view_partner_property_form
-msgid "Peppol ID"
-msgstr "ID Peppol"
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_partner__peppol_eas
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_res_users__peppol_eas
-msgid "Peppol e-address (EAS)"
-msgstr "Địa chỉ điện tử Peppol (EAS)"
+msgid "Peppol ID"
+msgstr "ID Peppol"
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -904,7 +879,6 @@ msgstr "Thuế GTGT của Romania"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "Rounding"
 msgstr "Làm tròn"
 
@@ -939,19 +913,24 @@ msgid "SIA Object Identifiers"
 msgstr "Mã định danh đối tượng SIA"
 
 #. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__0245
-msgid "SK Tax identification number (DIČ)"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9951
 msgid "San Marino VAT"
 msgstr "Thuế GTGT của San Marino"
 
 #. module: account_edi_ubl_cii
+#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send_wizard
+msgid "Send Invoice Wizard"
+msgstr ""
+
+#. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__peppol_eas__9948
 msgid "Serbia VAT"
 msgstr "Thuế GTGT của Serbia"
+
+#. module: account_edi_ubl_cii
+#: model:ir.model,name:account_edi_ubl_cii.model_account_move_send
+msgid "Shared Send Invoice Wizard Functions"
+msgstr ""
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__res_partner__invoice_edi_format__ubl_sg
@@ -1015,14 +994,14 @@ msgid "Tax Category Code"
 msgstr "Mã danh mục thuế"
 
 #. module: account_edi_ubl_cii
+#: model:ir.model.fields,field_description:account_edi_ubl_cii.field_account_tax__ubl_cii_tax_exemption_reason
+msgid "Tax Exemption Reason"
+msgstr ""
+
+#. module: account_edi_ubl_cii
 #: model:ir.model.fields,field_description:account_edi_ubl_cii.field_account_tax__ubl_cii_tax_exemption_reason_code
 msgid "Tax Exemption Reason Code"
 msgstr "Mã lý do miễn thuế"
-
-#. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "Tax ID"
-msgstr ""
 
 #. module: account_edi_ubl_cii
 #. odoo-python
@@ -1087,7 +1066,6 @@ msgstr "Thuế GTGT của %s phải được bắt đầu bằng mã quốc gia 
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "The bank account couldn't be fetched: %s"
 msgstr ""
 
@@ -1100,7 +1078,6 @@ msgstr "Yêu cầu có quốc gia cho cho %s."
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_edi_common.py:0
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 msgid "The currency '%s' is not active."
 msgstr "Tiền tệ '%s' không hoạt động."
 
@@ -1125,7 +1102,6 @@ msgstr ""
 
 #. module: account_edi_ubl_cii
 #. odoo-python
-#: code:addons/account_edi_ubl_cii/models/account_edi_ubl.py:0
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_cii_facturx.py:0
 #: code:addons/account_edi_ubl_cii/models/account_edi_xml_ubl_20.py:0
 msgid ""
@@ -1203,7 +1179,7 @@ msgstr "UBL CII yêu cầu lý do miễn thuế"
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move.py:0
-msgid "Ungrouped lines from %s"
+msgid "Ungrouped lines from origin file"
 msgstr ""
 
 #. module: account_edi_ubl_cii
@@ -1398,13 +1374,6 @@ msgid ""
 msgstr ""
 "VATEX-EU-132-1Q - Miễn trừ dựa trên điều 1323, mục 1 (q) của Chỉ thị Hội "
 "đồng 2006/112/EC"
-
-#. module: account_edi_ubl_cii
-#: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-135-1
-msgid ""
-"VATEX-EU-135-1 - Exempt based on article 135, section 1 of Council Directive "
-"2006/112/EC"
-msgstr ""
 
 #. module: account_edi_ubl_cii
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-143
@@ -1868,8 +1837,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-fr-cgi261d-3
 msgid ""
 "VATEX-FR-CGI261D-3 - Exempt based on 3° of article 261 D of the Code Général "
-"des Impôts (CGI ; General tax code) Exonération de TVA - Article 261 D-3° du "
-"Code Général des Impôts"
+"des Impôts (CGI ; General tax code)"
 msgstr ""
 
 #. module: account_edi_ubl_cii
@@ -1934,11 +1902,6 @@ msgid "Vatican VAT"
 msgstr "Thuế GTGT của Vatican"
 
 #. module: account_edi_ubl_cii
-#: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.report_invoice_document
-msgid "Vendor Bill"
-msgstr ""
-
-#. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move_send.py:0
 msgid "View Partner(s)"
@@ -1968,7 +1931,7 @@ msgstr ""
 #. module: account_edi_ubl_cii
 #. odoo-python
 #: code:addons/account_edi_ubl_cii/models/account_move.py:0
-msgid "You can only group lines of an invoice"
+msgid "You can only (un)group lines of a incoming invoice (vendor bill)"
 msgstr ""
 
 #. module: account_edi_ubl_cii
@@ -2008,18 +1971,3 @@ msgstr "fx"
 #: model_terms:ir.ui.view,arch_db:account_edi_ubl_cii.account_invoice_pdfa_3_facturx_metadata
 msgid "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
 msgstr "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#"
-
-#~ msgid "1.0"
-#~ msgstr "1.0"
-
-#~ msgid "Articles 226 items 11 to 15 Directive 2006/112/EN"
-#~ msgstr "Điều 226 mục 11 đến 15 Chỉ thị 2006/112/EN"
-
-#~ msgid ""
-#~ "No gross price, net price nor line subtotal amount found for line in xml"
-#~ msgstr ""
-#~ "Không tìm thấy tổng giá, giá ròng cũng như thành tiền của dòng cho dòng "
-#~ "trong xml"
-
-#~ msgid "Your endpoint"
-#~ msgstr "Endpoint của bạn"

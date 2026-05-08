@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-
 from ast import literal_eval
 from unittest.mock import patch
 
-from odoo import http
 from odoo.tools import hash_sign
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.addons.account.models.account_payment_method import AccountPaymentMethod
@@ -56,7 +53,7 @@ class TestAccountJournal(AccountTestInvoicingCommon, HttpCase):
         invoice_invalid.journal_id = journal
         invoice_invalid.action_post()
         self.assertTrue(invoice_invalid.payment_reference, "A payment reference should be generated.")
-        self.assertIn(str(journal.id), invoice_invalid.payment_reference, "The reference should fall back to using the journal ID.")
+        self.assertIn(str(journal.id), ''.join(invoice_invalid.payment_reference.split()), "The reference should fall back to using the journal ID.")
 
         # Case 3: Code is non-ASCII but alphanumeric (e.g., Greek letter 'INVα'). # noqa: RUF003
         journal.code = 'INVα'
@@ -64,7 +61,7 @@ class TestAccountJournal(AccountTestInvoicingCommon, HttpCase):
         invoice_unicode.journal_id = journal
         invoice_unicode.action_post()
         self.assertTrue(invoice_unicode.payment_reference, "A payment reference should be generated.")
-        self.assertIn(str(journal.id), invoice_unicode.payment_reference, "The reference should fall back to using the journal ID for non-ASCII codes.")
+        self.assertIn(str(journal.id), ''.join(invoice_unicode.payment_reference.split()), "The reference should fall back to using the journal ID for non-ASCII codes.")
 
     def test_changing_journal_company(self):
         ''' Ensure you can't change the company of an account.journal if there are some journal entries '''
@@ -136,7 +133,7 @@ class TestAccountJournal(AccountTestInvoicingCommon, HttpCase):
             {"name": "OD_BLABLU"},
         ])
 
-        self.assertEqual(sorted(new_journals.mapped("code")), ["MISC1", "OD_BL"], "The journals should be set correctly")
+        self.assertEqual(sorted(new_journals.mapped("code")), ["MISC1", "OD_BLAB"], "The journals should be set correctly")
 
     def test_archive_used_journal(self):
         journal = self.env['account.journal'].create({
@@ -185,7 +182,7 @@ class TestAccountJournal(AccountTestInvoicingCommon, HttpCase):
         self.authenticate(self.env.user.login, self.env.user.login)
         res = self.url_open(
             f'/my/journal/{journal.id}/unsubscribe',
-            data={'csrf_token': http.Request.csrf_token(self)},
+            data={'csrf_token': self.csrf_token()},
             method='POST',
         )
         res.raise_for_status()
@@ -206,7 +203,7 @@ class TestAccountJournal(AccountTestInvoicingCommon, HttpCase):
 
         res = self.url_open(
             f'/my/journal/{journal.id}/unsubscribe?token={token}',
-            data={'csrf_token': http.Request.csrf_token(self)},
+            data={'csrf_token': self.csrf_token()},
             method='POST',
         )
         res.raise_for_status()
@@ -229,7 +226,7 @@ class TestAccountJournal(AccountTestInvoicingCommon, HttpCase):
         def _unsubscribe(token, journal_id=journal.id):
             return self.url_open(
                 f'/my/journal/{journal_id}/unsubscribe?token={token}',
-                data={'csrf_token': http.Request.csrf_token(self)},
+                data={'csrf_token': self.csrf_token()},
                 method='POST',
             )
 
@@ -458,7 +455,7 @@ class TestAccountJournalAlias(AccountTestInvoicingCommon, MailCommon):
 
         expected_id = str(invoice_non_latin.journal_id.id)
         ref_parts_non_latin = invoice_non_latin.payment_reference.split()
-        self.assertEqual(ref_parts_non_latin[1][:len(expected_id)], expected_id, "The reference should start with " + expected_id)
+        self.assertEqual(''.join(ref_parts_non_latin[1:])[:len(expected_id)], expected_id, "The reference should start with " + expected_id)
 
         ref_parts_latin = invoice_latin.payment_reference.split()
         self.assertIn(ref_parts_latin[1][:3], latin_code, f"Expected journal code '{latin_code}' in second part of reference")
@@ -521,7 +518,10 @@ class TestAccountJournalAlias(AccountTestInvoicingCommon, MailCommon):
     def test_alias_uniqueness_without_domain(self):
         """Ensure alias_name is unique even if alias_domain is not defined."""
         default_account = self.env['account.account'].search(
-            domain=[('account_type', 'in', ('income', 'income_other'))],
+            domain=[
+                *self.env['account.account']._check_company_domain(self.env.company),
+                ('account_type', 'in', ('income', 'income_other')),
+            ],
             limit=1,
         )
         with Form(self.env['account.journal']) as journal_form:

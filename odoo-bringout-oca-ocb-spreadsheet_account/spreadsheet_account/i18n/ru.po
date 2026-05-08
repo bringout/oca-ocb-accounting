@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"POT-Creation-Date: 2026-01-04 18:36+0000\n"
 "PO-Revision-Date: 2025-12-03 08:35+0000\n"
 "Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
 "Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
@@ -59,8 +59,8 @@ msgstr "Аудит ячеек"
 
 #. module: spreadsheet_account
 #: model:ir.model,name:spreadsheet_account.model_res_company
-msgid "Companies"
-msgstr "Компании"
+msgid "Company"
+msgstr ""
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -79,6 +79,12 @@ msgstr "Кредитная карта"
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Current Assets"
 msgstr "Текущие активы"
+
+#. module: spreadsheet_account
+#. odoo-javascript
+#: code:addons/spreadsheet_account/static/src/fiscal_year_global_filter.js:0
+msgid "Current Fiscal Year"
+msgstr ""
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -115,6 +121,12 @@ msgstr "Капитал"
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Expenses"
 msgstr "Расходы"
+
+#. module: spreadsheet_account
+#. odoo-javascript
+#: code:addons/spreadsheet_account/static/src/fiscal_year_global_filter.js:0
+msgid "Fiscal Year"
+msgstr ""
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -342,18 +354,3 @@ msgstr ""
 #: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 msgid "The technical account type (possible values are: %s)."
 msgstr "Технический тип счета (возможные значения: %s)."
-
-#~ msgid "Account type."
-#~ msgstr "Тип счета."
-
-#~ msgid "Journal items for account prefix %s"
-#~ msgstr "Статьи журнала для префикса счета %s"
-
-#~ msgid "Reference date."
-#~ msgstr "Дата обращения."
-
-#~ msgid "Returns the account ids of a given group."
-#~ msgstr "Возвращает идентификаторы учетных записей заданной группы."
-
-#~ msgid "Year offset applied to date_range."
-#~ msgstr "Смещение года, применяемое к диапазону дат."

@@ -5,10 +5,10 @@ from odoo import _, api, models
 from odoo.tools import html2plaintext
 from odoo.tools.misc import formatLang, NON_BREAKING_SPACE
 from odoo.addons.account.tools import dict_to_xml
+from odoo.addons.account.tools.country_groups import EUROPEAN_ECONOMIC_AREA_COUNTRY_CODES
 from odoo.addons.account_edi_ubl_cii.models.account_edi_common import (
     FloatFmt,
     GST_COUNTRY_CODES,
-    EUROPEAN_ECONOMIC_AREA_COUNTRY_CODES,
 )
 from odoo.addons.account_edi_ubl_cii.models.account_edi_xml_ubl_20 import UBL_NAMESPACES
 
@@ -30,9 +30,9 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
     * Official doc for EHF Billing 3.0 is the OpenPeppol BIS 3 doc +
       https://anskaffelser.dev/postaward/g3/spec/current/billing-3.0/norway/
 
-        "Based on work done in PEPPOL BIS Billing 3.0, Difi has included Norwegian rules in PEPPOL BIS Billing 3.0 and
+        "Based on work done in Peppol BIS Billing 3.0, Difi has included Norwegian rules in Peppol BIS Billing 3.0 and
         does not see a need to implement a different CIUS targeting the Norwegian market. Implementation of EHF Billing
-        3.0 is therefore done by implementing PEPPOL BIS Billing 3.0 without extensions or extra rules."
+        3.0 is therefore done by implementing Peppol BIS Billing 3.0 without extensions or extra rules."
 
     Thus, EHF 3 and Bis 3 are actually the same format. The specific rules for NO defined in Bis 3 are added in Bis 3.
 
@@ -878,9 +878,7 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
         customer = vals['customer']
         supplier = vals['supplier']
         if (
-            invoice
-            and invoice.invoice_date
-            and customer.country_id.code in EUROPEAN_ECONOMIC_AREA_COUNTRY_CODES
+            customer.country_id.code in EUROPEAN_ECONOMIC_AREA_COUNTRY_CODES
             and supplier.country_id.code in EUROPEAN_ECONOMIC_AREA_COUNTRY_CODES
             and supplier.country_id != customer.country_id
         ):
@@ -1173,7 +1171,7 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
                 })
 
         if vals['supplier'].country_id.code == 'NO':
-            vat = vals['supplier'].vat
+            vat = vals['document_node']['cac:AccountingSupplierParty']['cac:Party'].get('supplierCompanyID')
             constraints.update({
                 # NO-R-001: For Norwegian suppliers, a VAT number MUST be the country code prefix NO followed by a
                 # valid Norwegian organization number (nine numbers) followed by the letters MVA.

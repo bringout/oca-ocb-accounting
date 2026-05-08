@@ -63,29 +63,22 @@
             <field name="priority">5</field>
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="arch" type="xml">
-                <div name="options" position='inside'>
-                    <span class="d-inline-flex" invisible="type == 'combo'">
-                        <field name="purchase_ok"/>
-                        <label for="purchase_ok"/>
-                    </span>
-                </div>
                 <xpath expr="//field[@name='company_id']" position="after">
                     <field name="fiscal_country_codes" invisible="1"/>
                 </xpath>
                 <page name="inventory" position="after">
                     <page string="Accounting" name="invoicing" groups="account.group_account_readonly">
-                        <group name="properties" groups="account.group_account_readonly">
-                            <group string="Cost and Revenue">
+                        <group name="accounting" groups="account.group_account_readonly,account.group_account_invoice">
+                            <group string="Cost and Revenue" groups="account.group_account_readonly">
                                 <field name="property_account_income_id" placeholder="From Category"
-                                    groups="account.group_account_readonly"/>
+                                    groups="account.group_account_readonly" decoration-muted="not property_account_income_active"/>
                                 <field name="property_account_expense_id" placeholder="From Category"
-                                    groups="account.group_account_readonly"/>
+                                    groups="account.group_account_readonly" decoration-muted="not property_account_expense_active"/>
                             </group>
                         </group>
-                        <group name="accounting" groups="account.group_account_readonly,account.group_account_invoice"/>
                     </page>
                 </page>
-                <div name="list_price_uom" position="after">
+                <div name="list_price_per_uom_id" position="after">
                     <label for="taxes_id" invisible="type == 'combo'"/>
                     <div name="taxes_div" class="o_row" invisible="type == 'combo'">
                         <field

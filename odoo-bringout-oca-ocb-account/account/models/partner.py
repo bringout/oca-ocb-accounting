@@ -1,5 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+import json
 import logging
 import re
 
@@ -10,17 +11,20 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Domain
 from odoo.tools import SQL, unique
+from odoo.tools.translate import LazyGettext
 from odoo.addons.account.models.account_move import BYPASS_LOCK_CHECK
+from odoo.addons.account.tools.partner_identifiers import (
+    get_additional_identifiers_metadata_of_country,
+    get_deduced_identifiers,
+    get_identifier_metadata,
+    get_tin_metadata_of_country,
+    is_identifier_void,
+    validate_identifier,
+    validation_error_message,
+)
 from odoo.addons.base_vat.models.res_partner import _ref_vat
 
 _logger = logging.getLogger(__name__)
-
-
-_ref_company_registry = {
-    'jp': '7000012050002',
-    'dk': '58403288',
-    'fi': '8763054-9',
-}
 
 
 class AccountFiscalPosition(models.Model):
@@ -39,7 +43,7 @@ class AccountFiscalPosition(models.Model):
         string='Company', required=True, readonly=True, index=True,
         default=lambda self: self.env.company)
     account_ids = fields.One2many('account.fiscal.position.account', 'position_id', string='Account Mapping', copy=True)
-    account_map = fields.Binary(compute='_compute_account_map')
+    account_map = fields.Json(compute='_compute_account_map')
     tax_ids = fields.Many2many(
         comodel_name='account.tax',
         relation='account_fiscal_position_account_tax_rel',
@@ -47,7 +51,7 @@ class AccountFiscalPosition(models.Model):
         column2='account_tax_id',
         string='Taxes',
     )
-    tax_map = fields.Binary(compute='_compute_tax_map')
+    tax_map = fields.Json(compute='_compute_tax_map')
     note = fields.Html('Notes', translate=True, help="Legal mentions that have to be printed on the invoices.")
     auto_apply = fields.Boolean(string='Detect Automatically', help="Apply tax & account mappings on invoices automatically if the matching criterias (VAT/Country) are met.")
     vat_required = fields.Boolean(string='VAT required', help="Apply only if partner has a VAT number.")
@@ -93,7 +97,7 @@ class AccountFiscalPosition(models.Model):
                 template_code = self.env['account.chart.template']._guess_chart_template(fiscal_position.country_id)
                 template = self.env['account.chart.template']._get_chart_template_mapping()[template_code]
                 # 'no_template' kept for compatibility in stable. To remove in master
-                fiscal_position.foreign_vat_header_mode = 'templates_found' if template['installed'] else 'no_template'
+                fiscal_position.foreign_vat_header_mode = 'templates_found' if template['module'] in self.env['ir.module.module']._installed() else 'no_template'
 
     @api.depends('tax_ids')
     def _compute_tax_map(self):
@@ -154,16 +158,23 @@ class AccountFiscalPosition(models.Model):
     def map_tax(self, taxes):
         if not self:
             return taxes
+        self.ensure_one()
         if not self.tax_ids and taxes.fiscal_position_ids:  # empty fiscal positions (like those created by tax units) remove all taxes
             return self.env['account.tax']
+        tax_map = self.tax_map or {}
         return self.env['account.tax'].browse(unique(
             tax_id
             for tax in taxes
-            for tax_id in (self.tax_map or {}).get(tax.id, [tax.id])
+            for tax_id in tax_map.get(
+                str(tax.id),
+                # If not in tax_map, a tax is mapped to itself if it has 'self' as fiscal position
+                # or it has no fiscal position. Else it's removed.
+                [tax.id] if self in tax.fiscal_position_ids or not tax.fiscal_position_ids else [],
+            )
         ))
 
     def map_account(self, account):
-        return self.env['account.account'].browse((self.account_map or {}).get(account.id, account.id))
+        return self.env['account.account'].browse((self.account_map or {}).get(str(account.id), account.id))
 
     @api.onchange('country_id')
     def _onchange_country_id(self):
@@ -293,7 +304,7 @@ class AccountFiscalPosition(models.Model):
         self.ensure_one()
         template_code = self.env['account.chart.template']._guess_chart_template(self.country_id)
         template = self.env['account.chart.template']._get_chart_template_mapping()[template_code]
-        if not template['installed']:
+        if template['module'] not in self.env['ir.module.module']._installed():
             localization_module = self.env['ir.module.module'].search([('name', '=', template['module'])])
             localization_module.sudo().button_immediate_install()
         created_records = self.env["account.chart.template"]._instantiate_foreign_taxes(self.country_id, self.company_id)
@@ -329,8 +340,7 @@ class ResPartner(models.Model):
     fiscal_country_codes = fields.Char(compute='_compute_fiscal_country_codes')
     fiscal_country_group_codes = fields.Json(compute='_compute_fiscal_country_group_codes')
     partner_vat_placeholder = fields.Char(compute='_compute_partner_vat_placeholder')
-    partner_company_registry_placeholder = fields.Char(compute='_compute_partner_company_registry_placeholder')
-    duplicate_bank_partner_ids = fields.Many2many(related="bank_ids.duplicate_bank_partner_ids")
+    duplicate_bank_partner_ids = fields.Many2many('res.partner', compute='_compute_duplicate_bank_partner_ids')
 
     @api.depends('company_id', 'country_code')
     @api.depends_context('allowed_company_ids')
@@ -539,11 +549,13 @@ class ResPartner(models.Model):
         string="Account Payable",
         domain="[('account_type', '=', 'liability_payable')]",
         ondelete='restrict')
+    property_account_payable_active = fields.Boolean(related='property_account_payable_id.active', string="Account Payable Active")
     property_account_receivable_id = fields.Many2one('account.account', company_dependent=True,
         check_company=True,
         string="Account Receivable",
         domain="[('account_type', '=', 'asset_receivable')]",
         ondelete='restrict')
+    property_account_receivable_active = fields.Boolean(related='property_account_receivable_id.active', string="Account Receivable Active")
     property_account_position_id = fields.Many2one('account.fiscal.position', company_dependent=True,
         check_company=True,
         string="Fiscal Position",
@@ -566,6 +578,15 @@ class ResPartner(models.Model):
     trust = fields.Selection([('good', 'Good Debtor'), ('normal', 'Normal Debtor'), ('bad', 'Bad Debtor')], string='Degree of trust you have in this debtor', company_dependent=True)
     ignore_abnormal_invoice_date = fields.Boolean(company_dependent=True)
     ignore_abnormal_invoice_amount = fields.Boolean(company_dependent=True)
+    vat = fields.Char(inverse='_inverse_vat', store=True)
+    additional_identifiers = fields.Json(string="Additional Identifiers", copy=False)
+    available_additional_identifiers_metadata = fields.Json(compute='_compute_available_additional_identifiers_metadata')
+    global_location_number = fields.Char(
+        string="GLN",
+        help="Global Location Number",
+        compute='_compute_global_location_number',
+        inverse='_inverse_global_location_number',
+    )
     invoice_sending_method = fields.Selection(
         string="Invoice sending",
         selection=[
@@ -621,6 +642,17 @@ class ResPartner(models.Model):
         domain=lambda self: [('journal_id.active', '=', True), ('payment_type', '=', 'inbound'), ('company_id', 'parent_of', self.env.company.id)],
     )
 
+    @api.constrains('additional_identifiers')
+    def _check_additional_identifiers(self):
+        """Safety guard for paths that bypass `_clean_additional_identifiers`, so malformed values
+        never reach the JSON.
+        """
+        for partner in self:
+            for key, value in (partner.additional_identifiers or {}).items():
+                result = validate_identifier(key, value)
+                if not result['valid']:
+                    raise ValidationError(validation_error_message(self.env, key, result['example']))
+
     def _compute_bank_count(self):
         bank_data = self.env['res.partner.bank']._read_group([('partner_id', 'in', self.ids)], ['partner_id'], ['__count'])
         mapped_data = {partner.id: count for partner, count in bank_data}
@@ -647,6 +679,37 @@ class ResPartner(models.Model):
                 if partner.id in self_ids:
                     partner.supplier_invoice_count += count
                 partner = partner.parent_id
+
+    @api.onchange('vat', 'country_id')
+    def _onchange_vat(self):
+        self._check_vat(validation=False)
+
+    def _inverse_vat(self):
+        self._check_vat()
+        self._deduce_additional_identifiers_from_vat()
+
+    @api.depends('country_id')
+    def _compute_available_additional_identifiers_metadata(self):
+        for partner in self:
+            metadata = partner.get_available_additional_identifiers_metadata(partner.country_code)
+            # Resolve lazy translations now: JSON would otherwise stringify them in a frame where
+            # no language can be detected.
+            partner.available_additional_identifiers_metadata = {
+                key: {
+                    k: str(v) if isinstance(v, LazyGettext) else v
+                    for k, v in entry.items()
+                }
+                for key, entry in metadata.items()
+            }
+
+    @api.depends('additional_identifiers')
+    def _compute_global_location_number(self):
+        for partner in self:
+            partner.global_location_number = partner._get_additional_identifier('EAN_GLN')
+
+    def _inverse_global_location_number(self):
+        for partner in self:
+            partner._set_additional_identifier('EAN_GLN', partner.global_location_number)
 
     @api.depends_context('company')
     @api.depends('country_code')
@@ -687,7 +750,7 @@ class ResPartner(models.Model):
         if not self.env.user.has_group('account.group_account_invoice'):
             return data_list
         for partner in self.filtered(lambda p: p._get_account_statistics_count()):
-            stat_info = {'iconClass': 'fa-pencil-square-o', 'value': partner._get_account_statistics_count(), 'label': _('Invoices/Bills/Mandates'), 'tagClass': 'o_tag_color_9'}
+            stat_info = {'iconClass': 'fa-pencil-square-o', 'value': partner._get_account_statistics_count(), 'label': _('Invoices/Bills/Mandates')}
             data_list[partner.id].append(stat_info)
         return data_list
 
@@ -747,6 +810,8 @@ class ResPartner(models.Model):
         )
 
     def write(self, vals):
+        self._clean_additional_identifiers(vals)
+
         if 'parent_id' in vals:
             partner2move_lines = self.sudo().env['account.move.line'].search([('partner_id', 'in', self.ids)]).grouped('partner_id')
             parent_vat = self.env['res.partner'].browse(vals['parent_id']).vat
@@ -768,6 +833,9 @@ class ResPartner(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        for vals in vals_list:
+            self._clean_additional_identifiers(vals)
+
         search_partner_mode = self.env.context.get('res_partner_search_mode')
         is_customer = search_partner_mode == 'customer'
         is_supplier = search_partner_mode == 'supplier'
@@ -864,6 +932,103 @@ class ResPartner(models.Model):
         """ Hook for determining VAT validity with more complex VAT requirements. (like VIES)"""
         self.ensure_one()
         return bool(self.vat)
+
+    @api.model
+    def get_available_additional_identifiers_metadata(self, country_code, seq_min=0, seq_max=199):
+        return get_additional_identifiers_metadata_of_country(country_code, seq_min=seq_min, seq_max=seq_max)
+
+    def _get_additional_identifier(self, identifier_type):
+        """Convenience getter for an entry of the JSON."""
+        self.ensure_one()
+        return (self.additional_identifiers or {}).get(identifier_type)
+
+    def _set_additional_identifier(self, identifier_type, value):
+        """ Write helper for adding identifier in the JSON.
+        It validates, normalizes, deduce siblings and inserts the value.
+        """
+        self.ensure_one()
+        if not identifier_type:
+            return
+        identifiers = self.additional_identifiers or {}
+        if not value:
+            identifiers.pop(identifier_type, None)
+            self.additional_identifiers = identifiers
+            return
+        validation = validate_identifier(identifier_type, value)
+        if not validation['valid']:
+            raise ValidationError(validation_error_message(self.env, identifier_type, validation['example']))
+        normalized_value = validation['value']
+        identifiers[identifier_type] = normalized_value  # set the normalized value
+        deduced_identifiers = get_deduced_identifiers(identifier_type, normalized_value)
+        self.additional_identifiers = {**identifiers, **deduced_identifiers}  # json needs to be fully reassigned each time
+
+    def _get_all_identifiers(self, enrich=False):
+        """Combined VAT + additional identifiers of the commercial partner, ready to feed
+        EDI/Peppol senders that don't care about how the values are stored. With `enrich`,
+        also include identifiers derivable from the stored ones (e.g. FR_SIRET → FR_SIREN)
+        so downstream pickers see every form a recipient might match against."""
+        self.ensure_one()
+        partner = self.commercial_partner_id
+        identifiers = partner.additional_identifiers or {}
+        if partner.vat and partner.country_code:
+            key = get_tin_metadata_of_country(partner.country_code).get('key', 'TIN')
+            identifiers = {key: partner.vat, **identifiers}
+        enriched_identifiers = {}
+        if enrich:
+            for identifier_type, value in identifiers.items():
+                enriched_identifiers.update(get_deduced_identifiers(identifier_type, value))
+        return {**identifiers, **enriched_identifiers}
+
+    def _deduce_additional_identifiers_from_vat(self):
+        """Populate companion identifiers freely derivable from the VAT (e.g. BE_VAT → BE_EN,
+        AT_VAT → AT_EN) so users only enter the VAT and don't have to retype the same digits.
+        Pre-existing entries are kept as-is and tracking is muted to avoid recomputing
+        VAT-tracked computed fields mid-inverse."""
+        for partner in self:
+            if not partner.vat or not partner.country_code:
+                continue
+            vat_key = get_tin_metadata_of_country(partner.country_code).get('key')
+            if not vat_key:
+                continue
+            deduced_identifiers = get_deduced_identifiers(vat_key, partner.vat)
+            identifiers = partner.additional_identifiers or {}
+            new_identifiers = {k: v for k, v in deduced_identifiers.items() if k not in identifiers}
+            if not new_identifiers:
+                continue
+            try:
+                # Use mail_notrack to avoid triggering mail tracking, which would
+                # recompute tracked computed fields (e.g. vies_valid) mid-inverse.
+                partner.with_context(mail_notrack=True).additional_identifiers = {**identifiers, **new_identifiers}
+            except ValidationError:
+                _logger.info("Skipped %s: deduced identifier from %s could not be validated.", deduced_identifiers, vat_key)
+                continue
+
+    def _clean_additional_identifiers(self, vals):
+        """ Pre-write filter on a `vals` dict:
+        - drop unknown keys (with a warning log)
+        - reject malformed values (raises ValidationError)
+        - normalize
+        - add deduced identifiers.
+        Mutates `vals` in place.
+        """
+        if 'additional_identifiers' not in vals or not isinstance(vals['additional_identifiers'], dict):
+            return vals
+        cleaned = {}
+        for key, value in vals['additional_identifiers'].items():
+            if not get_identifier_metadata(key):
+                _logger.warning(" Skipped %s: identifier %s is not in supported identifiers.", value, key)
+                continue
+            if not value:
+                continue
+            result = validate_identifier(key, value)
+            if not result['valid']:
+                raise ValidationError(validation_error_message(self.env, key, result['example']))
+            cleaned[key] = result['value']
+        # Compute deduced identifiers (e.g. FR_SIRET => FR_SIREN)
+        for key, value in list(cleaned.items()):
+            if deduced_vals := get_deduced_identifiers(key, value):
+                cleaned.update(deduced_vals)
+        vals['additional_identifiers'] = cleaned
 
     # TODO accounting/JCO, seems strange that this address validation logic is only there for pos, and
     # not for standard address management on portal/ecommerce
@@ -962,7 +1127,7 @@ class ResPartner(models.Model):
 
         return {
             'criteria': [{
-                'domain': [('email', '=', email)],
+                'domain': [('phone', '=', email)],
             }],
         }
 
@@ -975,6 +1140,33 @@ class ResPartner(models.Model):
         return {
             'criteria': [{
                 'domain': [('name', 'ilike', name)],
+            }],
+        }
+
+    @api.model
+    def _import_retrieve_customer_from_additional_identifiers(self, customer_values):
+        additional_identifiers = customer_values.get('additional_identifiers')
+        if not additional_identifiers:
+            return None
+
+        json_col = self._field_to_sql(self._table, 'additional_identifiers')
+        conditions = [
+            SQL("%s @> %s::jsonb", json_col, json.dumps({key: value}))
+            for key, value in additional_identifiers.items()
+            if not is_identifier_void(value)
+        ]
+        if not conditions:
+            return None
+
+        def search_additional_identifiers(values):
+            query = self._search([('active', '=', True)], limit=2)
+            query.add_where(SQL("(%s)", SQL(" OR ").join(conditions)))
+            rows = list(query)
+            return self.browse(rows) if len(rows) == 1 else None
+
+        return {
+            'criteria': [{
+                'search_method': search_additional_identifiers,
             }],
         }
 
@@ -1037,6 +1229,11 @@ class ResPartner(models.Model):
         return self._retrieve_partner(vat=vat)
 
     @api.model
+    def _retrieve_partner_with_additional_identifiers(self, additional_identifiers, extra_domain):
+        # DEPRECATED: TO BE REMOVED IN MASTER
+        return self._retrieve_partner(additional_identifiers=additional_identifiers)
+
+    @api.model
     def _retrieve_partner_with_phone_email(self, phone, email, extra_domain):
         # DEPRECATED: TO BE REMOVED IN MASTER
         return self._retrieve_partner(phone=phone, email=email)
@@ -1046,12 +1243,14 @@ class ResPartner(models.Model):
         # DEPRECATED: TO BE REMOVED IN MASTER
         return self._retrieve_partner(name=name)
 
-    def _retrieve_partner(self, name=None, phone=None, email=None, vat=None, domain=None, company=None):
+    def _retrieve_partner(self, name=None, phone=None, email=None, vat=None,
+                          additional_identifiers=None, domain=None, company=None):
         '''Search all partners and find one that matches one of the parameters.
         :param name:    The name of the partner.
         :param phone:   The phone or mobile of the partner.
         :param mail:    The mail of the partner.
         :param vat:     The vat number of the partner.
+        :param additional_identifiers: A dict of additional identifiers to match against.
         :param domain:  An extra domain to apply.
         :param company: The company of the partner.
         :returns:       A partner or an empty recordset if not found.
@@ -1105,14 +1304,10 @@ class ResPartner(models.Model):
 
             partner.partner_vat_placeholder = placeholder
 
-    @api.depends('country_id')
-    def _compute_partner_company_registry_placeholder(self):
-        """ Provides a dynamic placeholder on the company registry field for countries that may need it.
-        Add your country and the value you want in the _ref_company_registry map.
-        """
+    @api.depends('bank_ids.duplicate_bank_partner_ids')
+    def _compute_duplicate_bank_partner_ids(self):
         for partner in self:
-            country_code = partner.country_id.code or ''
-            partner.partner_company_registry_placeholder = _ref_company_registry.get(country_code.lower(), '')
+            partner.duplicate_bank_partner_ids = partner.bank_ids.duplicate_bank_partner_ids
 
     def _compute_account_move_count(self):
         # retrieve all children partners and prefetch 'parent_id' on them

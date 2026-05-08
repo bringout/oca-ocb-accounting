@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"POT-Creation-Date: 2026-03-12 18:36+0000\n"
 "PO-Revision-Date: 2025-12-02 14:55+0000\n"
 "Last-Translator: \"Chloe Wang (chwa)\" <chwa@odoo.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
@@ -50,10 +50,6 @@ msgstr "有效"
 
 #. module: account_edi_proxy_client
 #: model:ir.model,name:account_edi_proxy_client.model_res_company
-msgid "Companies"
-msgstr "公司"
-
-#. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__company_id
 msgid "Company"
 msgstr "公司"
@@ -69,18 +65,12 @@ msgid "Created on"
 msgstr "创建日期"
 
 #. module: account_edi_proxy_client
-#: model:ir.model,name:account_edi_proxy_client.model_certificate_key
-msgid "Cryptographic Keys"
-msgstr "加密密钥"
-
-#. module: account_edi_proxy_client
 #: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__demo
 msgid "Demo mode"
 msgstr "演示模式"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__display_name
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__display_name
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__display_name
 msgid "Display Name"
 msgstr "显示名称"
@@ -122,7 +112,6 @@ msgstr ""
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__id
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_certificate_key__id
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_res_company__id
 msgid "ID"
 msgstr "ID"
@@ -227,18 +216,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__token_sync_version
 msgid "Token Sync Version"
 msgstr ""
-
-#~ msgid ""
-#~ "Invalid signature for request. This might be due to another connection to "
-#~ "odoo Access Point server. It can occur if you have duplicated your "
-#~ "database. \n"
-#~ "\n"
-#~ "If you are not sure how to fix this, please contact our support."
-#~ msgstr ""
-#~ "请求签名无效。这可能是由于与 odoo 访问点服务器的另一个连接造成的。如果您复"
-#~ "制了数据库，可能出现这种情况。\n"
-#~ "\n"
-#~ "如果您不确定如何解决这个问题，请联系我们的支持人员。"
-
-#~ msgid "This edi identification is already assigned to an active user"
-#~ msgstr "此 EDI 已分配给活动用户"

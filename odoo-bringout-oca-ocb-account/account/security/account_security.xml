@@ -137,12 +137,6 @@
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
 
-    <record id="journal_group_comp_rule" model="ir.rule">
-        <field name="name">Multi-ledger multi-company</field>
-        <field name="model_id" ref="model_account_journal_group"/>
-        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'parent_of', company_ids)]</field>
-    </record>
-
     <record id="journal_comp_rule" model="ir.rule">
         <field name="name">Journal multi-company</field>
         <field name="model_id" ref="model_account_journal"/>
@@ -155,12 +149,6 @@
         <field name="domain_force">[('company_ids', 'parent_of', company_ids)]</field>
     </record>
 
-    <record id="account_group_comp_rule" model="ir.rule">
-        <field name="name">Account Group multi-company</field>
-        <field name="model_id" ref="model_account_group"/>
-        <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
-    </record>
-
     <record id="tax_group_comp_rule" model="ir.rule">
         <field name="name">Tax group multi-company</field>
         <field name="model_id" ref="model_account_tax_group"/>
@@ -171,6 +159,12 @@
         <field name="name">Tax multi-company</field>
         <field name="model_id" ref="model_account_tax"/>
         <field name="domain_force">[('company_id', 'parent_of', company_ids)]</field>
+    </record>
+
+    <record id="account_cash_rounding_comp_rule" model="ir.rule">
+        <field name="name">Account cash rounding multi-company</field>
+        <field name="model_id" ref="model_account_cash_rounding" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
 
     <record id="tax_rep_comp_rule" model="ir.rule">
@@ -278,6 +272,13 @@
         <field name="perm_write" eval="False"/>
         <field name="perm_create" eval="False"/>
         <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="base_user_account_move_line_rule" model="ir.rule">
+        <field name="name">Normal User Account Move Line</field>
+        <field name="model_id" ref="account.model_account_move_line"/>
+        <field name="domain_force">[('move_id', 'access', 'read')]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
     </record>
 
     <!-- Some modules (i.e. sale) restrict the access for some users

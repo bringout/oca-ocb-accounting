@@ -16,12 +16,12 @@ class ProductValue(models.Model):
 
     product_id = fields.Many2one('product.product', string='Product')
     lot_id = fields.Many2one('stock.lot', string='Lot')
-    move_id = fields.Many2one('stock.move', string='Move')
+    move_id = fields.Many2one('stock.move', string='Move', index='btree_not_null')
 
     value = fields.Monetary(string='Value', currency_field='currency_id', required=True)
     company_id = fields.Many2one(
         'res.company', string='Company', compute='_compute_company_id',
-        store=True, required=True, precompute=True, readonly=False)
+        store=True, required=True, index=True, precompute=True, readonly=False)
     currency_id = fields.Many2one('res.currency', related='company_id.currency_id', string='Currency')
     date = fields.Datetime(string='Date', default=fields.Datetime.now, required=True)
     user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.user, required=True)
@@ -55,7 +55,7 @@ class ProductValue(models.Model):
                 continue
             move = product_value.move_id
             quantity = move.quantity
-            uom = move.product_uom.name
+            uom = move.uom_id.name
             price_unit = move.value / move.quantity
             product_value.current_value_details = _("For %(quantity)s %(uom)s (%(price_unit)s per %(uom)s)",
                 quantity=quantity, uom=uom, price_unit=price_unit)
@@ -88,7 +88,7 @@ class ProductValue(models.Model):
         if products:
             moves_by_product = products._get_remaining_moves()
             for qty_by_move in moves_by_product.values():
-                move_ids.update(self.env['stock.move'].concat(*qty_by_move.keys()).ids)
+                move_ids.update(self.env['stock.move'].concat(qty_by_move.keys()).ids)
 
         res = super().create(vals_list)
         if move_ids:

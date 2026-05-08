@@ -10,21 +10,22 @@
 # Martin Trigaux, 2022
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-10 18:38+0000\n"
-"PO-Revision-Date: 2025-11-08 21:55+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/"
+"POT-Creation-Date: 2026-02-27 18:36+0000\n"
+"PO-Revision-Date: 2026-01-16 05:56+0000\n"
+"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
+"Language-Team: Thai <https://translate.odoo.com/projects/odoo-s19-1/"
 "stock_account/th/>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.14.3\n"
 
 #. module: stock_account
 #. odoo-python
@@ -46,6 +47,11 @@ msgstr ""
 
 #. module: stock_account
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+msgid "6.00"
+msgstr "6.00"
+
+#. module: stock_account
+#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "<span>Product</span>"
 msgstr "<span>สินค้า</span>"
 
@@ -58,14 +64,6 @@ msgstr "<span>จำนวน</span>"
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "<span>SN/LN</span>"
 msgstr "<span>SN/LN</span>"
-
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
-msgid ""
-"A lot/serial number is required for product '%s' as it has lot valuation "
-"enabled."
-msgstr ""
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__avco_value
@@ -161,8 +159,8 @@ msgstr "รายการบัญชีวิเคราะห์"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_account_analytic_plan
-msgid "Analytic Plans"
-msgstr "แผนการวิเคราะห์"
+msgid "Analytic Plan"
+msgstr ""
 
 #. module: stock_account
 #. odoo-javascript
@@ -209,6 +207,12 @@ msgid "Bacon"
 msgstr "เบคอน"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__closing_datetime
+#: model:ir.model.fields,field_description:stock_account.field_account_move__closing_datetime
+msgid "Closing Date"
+msgstr ""
+
+#. module: stock_account
 #. odoo-python
 #: code:addons/stock_account/models/res_company.py:0
 msgid "Closing: Location Reclassification - [%(account)s]"
@@ -233,10 +237,6 @@ msgstr "ต้นกำเนิดของฟันเฟือง"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_res_company
-msgid "Companies"
-msgstr "บริษัท"
-
-#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_product_value__company_id
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__company_id
 msgid "Company"
@@ -524,9 +524,15 @@ msgid "Inventory Adjustment Reference / Reason"
 msgstr "การอ้างอิงการปรับสินค้าคงคลัง / เหตุผล"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__inventory_closing
+#: model:ir.model.fields,field_description:stock_account.field_account_move__inventory_closing
+msgid "Inventory Closing"
+msgstr ""
+
+#. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_location
-msgid "Inventory Locations"
-msgstr "ตำแหน่งคลังสินค้า"
+msgid "Inventory Location"
+msgstr ""
 
 #. module: stock_account
 #. odoo-javascript
@@ -802,8 +808,8 @@ msgstr ""
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_quant
-msgid "Quants"
-msgstr "วิเคราะห์เชิงปริมาณ"
+msgid "Quant"
+msgstr ""
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__reference
@@ -1096,6 +1102,18 @@ msgstr ""
 "        ใช้ในการคำนวณมาร์จิ้นในการสั่งซื้อสินค้า"
 
 #. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_stock_move__standard_price
+msgid ""
+"Value of the product (automatically computed in AVCO).\n"
+"        Used to value the product when the purchase cost is not known (e.g. "
+"inventory adjustment).\n"
+"        Used to compute margins on sale orders."
+msgstr ""
+"มูลค่าของสินค้า (คำนวณโดยอัตโนมัติใน AVCO)\n"
+"       ใช้เพื่อประเมินมูลค่าสินค้าเมื่อไม่ทราบต้นทุนการซื้อ (เช่น การปรับปรุงสินค้าคงคลัง)\n"
+"       ใช้เพื่อคำนวณอัตรากำไรจากคำสั่งซื้อขาย"
+
+#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_variation_id
 msgid "Variation Account"
 msgstr ""
@@ -1148,15 +1166,6 @@ msgstr ""
 
 #. module: stock_account
 #. odoo-python
-#: code:addons/stock_account/models/product.py:0
-msgid ""
-"You cannot enable lot valuation because the following products have on-hand "
-"quantities without a lot/serial number:\n"
-"%s"
-msgstr ""
-
-#. module: stock_account
-#. odoo-python
 #: code:addons/stock_account/models/stock_picking.py:0
 msgid ""
 "You cannot modify the scheduled date of operation %s because it falls within "
@@ -1172,91 +1181,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
 msgid "units"
 msgstr "หน่วย"
-
-#~ msgid "6.00"
-#~ msgstr "6.00"
-
-#~ msgid ""
-#~ "Value of the product (automatically computed in AVCO).\n"
-#~ "        Used to value the product when the purchase cost is not known "
-#~ "(e.g. inventory adjustment).\n"
-#~ "        Used to compute margins on sale orders."
-#~ msgstr ""
-#~ "มูลค่าของสินค้า (คำนวณโดยอัตโนมัติใน AVCO)\n"
-#~ "       ใช้เพื่อประเมินมูลค่าสินค้าเมื่อไม่ทราบต้นทุนการซื้อ (เช่น การปรับปรุงสินค้าคงคลัง)\n"
-#~ "       ใช้เพื่อคำนวณอัตรากำไรจากคำสั่งซื้อขาย"
-
-#~ msgid ""
-#~ "Manual: The accounting entries to value the inventory are not posted "
-#~ "automatically.\n"
-#~ "        Automated: An accounting entry is automatically created to value "
-#~ "the inventory when a product enters or leaves the company.\n"
-#~ "        "
-#~ msgstr ""
-#~ "ด้วยตนเอง: รายการบัญชีเพื่อประเมินมูลค่าสินค้าคงคลังจะไม่ผ่านรายการโดยอัตโนมัติ\n"
-#~ "อัตโนมัติ: "
-#~ "รายการทางบัญชีจะถูกสร้างขึ้นโดยอัตโนมัติเพื่อประเมินมูลค่าสินค้าคงคลังเมื่อสินค้าเข้าหรือออกจากบริษัท\n"
-#~ "        "
-
-#~ msgid "Account Move"
-#~ msgstr "ย้ายบัญชี"
-
-#~ msgid "Accounting Entries"
-#~ msgstr "รายการบัญชี"
-
-#~ msgid "Cancel"
-#~ msgstr "ยกเลิก"
-
-#~ msgid "Counterpart Account"
-#~ msgstr "บัญชีคู่"
-
-#~ msgid "Default unit of measure used for all stock operations."
-#~ msgstr "หน่วยวัดเริ่มต้นที่ใช้สำหรับการปฏิบัติการสต๊อกทั้งหมด"
-
-#~ msgid "Group by..."
-#~ msgstr "จัดกลุ่มโดย…"
-
-#~ msgid "Incoming"
-#~ msgstr "สายเข้า"
-
-#~ msgid "Invoice Line"
-#~ msgstr "รายการในใบแจ้งหนี้"
-
-#~ msgid "Journal"
-#~ msgstr "สมุดบันทึก"
-
-#~ msgid "Other Info"
-#~ msgstr "ข้อมูลอื่น ๆ"
-
-#~ msgid "Outgoing"
-#~ msgstr "ขาออก"
-
-#~ msgid "Product Template"
-#~ msgstr "เทมเพลตสินค้า"
-
-#~ msgid "Quantity"
-#~ msgstr "ปริมาณ"
-
-#~ msgid "Reason"
-#~ msgstr "เหตุผล"
-
-#~ msgid "Remaining Qty"
-#~ msgstr "ปริมาณคงเหลือ"
-
-#~ msgid "Return Picking"
-#~ msgstr "ส่งคืนการรับ"
-
-#~ msgid "Stock Quantity History"
-#~ msgstr "ประวัติปริมาณสต็อค"
-
-#~ msgid "Unit of Measure"
-#~ msgstr "หน่วยวัด"
-
-#~ msgid "Warning"
-#~ msgstr "คำเตือน"
-
-#~ msgid "by"
-#~ msgstr "โดย"
-
-#~ msgid "for"
-#~ msgstr "สำหรับ"

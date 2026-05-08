@@ -7,13 +7,13 @@
 # Larissa Manderfeld, 2023
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
+# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-17 18:38+0000\n"
-"PO-Revision-Date: 2026-04-24 11:59+0000\n"
+"POT-Creation-Date: 2026-02-20 09:01+0000\n"
+"PO-Revision-Date: 2025-11-28 14:26+0000\n"
 "Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
 "Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
 "mrp_account/de/>\n"
@@ -22,7 +22,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 5.14.3\n"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "$1000"
+msgstr "1000 €"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "$5000"
+msgstr "5000 €"
 
 #. module: mrp_account
 #. odoo-python
@@ -35,6 +45,11 @@ msgstr "%(value)s für %(quantity)s %(unit)s aus %(production)s"
 #: code:addons/mrp_account/models/mrp_production.py:0
 msgid "%s - Labour"
 msgstr "%s - Arbeit"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "2023-08-15"
+msgstr "15-08-2023"
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_move_form_inherit_mrp_account
@@ -97,11 +112,6 @@ msgid "Account Move Line"
 msgstr "Kontobuchungszeile"
 
 #. module: mrp_account
-#: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting_line
-msgid "Account move line to be created when posting WIP account move"
-msgstr "Zu erstellende Buchungszeile beim Buchen einer WIP-Kontobewegung"
-
-#. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
 msgid "Acme Corp."
 msgstr "Acme Corp."
@@ -152,11 +162,6 @@ msgstr "Stückliste"
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_line__category
 msgid "Category"
 msgstr "Kategorie"
-
-#. module: mrp_account
-#: model:ir.model,name:mrp_account.model_res_company
-msgid "Companies"
-msgstr "Unternehmen"
 
 #. module: mrp_account
 #: model:ir.actions.server,name:mrp_account.action_compute_price_bom_product
@@ -225,11 +230,6 @@ msgid "Debit"
 msgstr "Soll"
 
 #. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
-msgid "Discard"
-msgstr "Verwerfen"
-
-#. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_applicability__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_line__display_name
@@ -245,7 +245,6 @@ msgstr "Verwerfen"
 #: model:ir.model.fields,field_description:mrp_account.field_product_product__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_product_template__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_report_mrp_report_mo_overview__display_name
-#: model:ir.model.fields,field_description:mrp_account.field_res_company__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_stock_account_stock_valuation_report__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_stock_move__display_name
 msgid "Display Name"
@@ -287,7 +286,6 @@ msgstr "Zusätzliche Einzelkosten"
 #: model:ir.model.fields,field_description:mrp_account.field_product_product__id
 #: model:ir.model.fields,field_description:mrp_account.field_product_template__id
 #: model:ir.model.fields,field_description:mrp_account.field_report_mrp_report_mo_overview__id
-#: model:ir.model.fields,field_description:mrp_account.field_res_company__id
 #: model:ir.model.fields,field_description:mrp_account.field_stock_account_stock_valuation_report__id
 #: model:ir.model.fields,field_description:mrp_account.field_stock_move__id
 msgid "ID"
@@ -307,6 +305,11 @@ msgstr "Journalbuchung"
 #: model:ir.model,name:mrp_account.model_account_move_line
 msgid "Journal Item"
 msgstr "Buchungszeile"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting_line
+msgid "Journal item to be created when posting WIP journal entry"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__label
@@ -584,8 +587,8 @@ msgstr "WIP-Buchung"
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting
-msgid "Wizard to post Manufacturing WIP account move"
-msgstr "Assistent zum Buchen von WIP-Kontobewegungen in der Fertigung"
+msgid "Wizard to post Manufacturing WIP journal entry"
+msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_workcenter
@@ -624,54 +627,3 @@ msgstr "Produktivitätsprotokoll des Arbeitsplatzes"
 #: code:addons/mrp_account/models/mrp_workorder.py:0
 msgid "[WC] %s"
 msgstr "[WC] %s"
-
-#~ msgid "$1000"
-#~ msgstr "1000 €"
-
-#~ msgid "$5000"
-#~ msgstr "5000 €"
-
-#~ msgid "2023-08-15"
-#~ msgstr "15-08-2023"
-
-#~ msgid "From Production Order %(reference)s"
-#~ msgstr "Aus Produktionsauftrag %(reference)s"
-
-#~ msgid ""
-#~ "Analytic account in which cost and revenue entries will take        place "
-#~ "for financial management of the manufacturing order."
-#~ msgstr ""
-#~ "Analytisches Konto, auf dem die Kosten- und Erlösbuchungen für das "
-#~ "Finanzmanagement des Produktionsauftrags erfolgen."
-
-#~ msgid ""
-#~ "Analytic account in which cost and revenue entries will take place for "
-#~ "financial management of the manufacturing order."
-#~ msgstr ""
-#~ "Analytisches Konto, auf dem die Kosten- und Erlösbuchungen für das "
-#~ "Finanzmanagement des Produktionsauftrags erfolgen."
-
-#~ msgid "Bill of Material"
-#~ msgstr "Stückliste"
-
-#~ msgid ""
-#~ "Posts analytical accounting entries in real time for both component and "
-#~ "operational costs."
-#~ msgstr ""
-#~ "Tätigt Buchungen in Analysekonten in Echtzeit für Komponenten und "
-#~ "Arbeitskosten,"
-
-#~ msgid "Production Order"
-#~ msgstr "Fertigungsauftrag"
-
-#~ msgid "Stock Rule"
-#~ msgstr "Lagerregel"
-
-#~ msgid "Work Center Usage"
-#~ msgstr "Work-Center Auslastung"
-
-#~ msgid "Workcenters"
-#~ msgstr "Work-Center"
-
-#~ msgid "[Raw] %s"
-#~ msgstr "[Raw] %s"
