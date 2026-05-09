@@ -1,27 +1,18 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * account_tax_python
 #
-# Translators:
-# Martin Trigaux, 2018
-# Boško Stojaković <bluesoft83@gmail.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~11.5\n"
+"Project-Id-Version: Odoo Server master (account_tax_python)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-12 18:35+0000\n"
-"PO-Revision-Date: 2018-09-18 09:49+0000\n"
-"Last-Translator: Boško Stojaković <bluesoft83@gmail.com>, 2018\n"
-"Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
+"Language-Team: Bosnian\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. module: account_tax_python
-#: model:ir.model.fields,help:account_tax_python.field_account_tax__amount_type
+# model:
+# model:ir.model.fields,help:account_tax_python.field_account_tax__amount_type
+#, []
 msgid ""
 "\n"
 "    - Group of Taxes: The tax is a set of sub taxes.\n"
@@ -34,9 +25,20 @@ msgid ""
 "        e.g 200 * (1 - 10%) = 180 (price included)\n"
 "        "
 msgstr ""
+"\n"
+"    - Grupa poreza: Porez je skup pod-poreza.\n"
+"    - Fiksni: Iznos poreza ostaje isti bez obzira na cijenu.\n"
+"    - Postotak: Iznos poreza je % cijene:\n"
+"        npr. 100 * (1 + 10%) = 110 (cijena bez poreza)\n"
+"        npr. 110 / (1 + 10%) = 100 (cijena s porezom)\n"
+"    - Postotak porez uključen: Iznos poreza je dio cijene:\n"
+"        npr. 180 / (1 - 10%) = 200 (cijena bez poreza)\n"
+"        npr. 200 * (1 - 10%) = 180 (cijena s porezom)\n"
+"        "
 
-#. module: account_tax_python
-#: model:ir.model.fields,help:account_tax_python.field_account_tax__formula
+# model:
+# model:ir.model.fields,help:account_tax_python.field_account_tax__formula
+#, []
 msgid ""
 "Compute the amount of the tax.\n"
 "\n"
@@ -45,98 +47,101 @@ msgid ""
 ":param quantity: float\n"
 ":param product: A object representing the product\n"
 msgstr ""
+"Izračunaj iznos poreza.\n"
+"\n"
+":param base: float, stvarni iznos na koji se primjenjuje porez\n"
+":param price_unit: float\n"
+":param quantity: float\n"
+":param product: Objekt koji predstavlja proizvod\n"
 
-#. module: account_tax_python
-#: model:ir.model.fields.selection,name:account_tax_python.selection__account_tax__amount_type__code
+# model:
+# model:ir.model.fields.selection,name:account_tax_python.selection__account_tax__amount_type__code
+#, []
 msgid "Custom Formula"
-msgstr ""
+msgstr "Prilagođena formula"
 
-#. module: account_tax_python
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__display_name
+# model:
+# model:ir.model.fields,field_description:account_tax_python.field_account_tax__display_name
+#, []
 msgid "Display Name"
-msgstr ""
+msgstr "Naziv za prikaz"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Field '%s' is not accessible"
-msgstr ""
+msgstr "Polje '%s' nije dostupno"
 
-#. module: account_tax_python
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__formula
+# model:
+# model:ir.model.fields,field_description:account_tax_python.field_account_tax__formula
+#, []
 msgid "Formula"
-msgstr ""
+msgstr "Formula"
 
-#. module: account_tax_python
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__formula_decoded_info
+# model:
+# model:ir.model.fields,field_description:account_tax_python.field_account_tax__formula_decoded_info
+#, []
 msgid "Formula Decoded Info"
-msgstr ""
+msgstr "Dekodirane informacije formule"
 
-#. module: account_tax_python
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__id
+# model:
+# model:ir.model.fields,field_description:account_tax_python.field_account_tax__id
+#, []
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Invalid AST node: %s"
-msgstr ""
+msgstr "Nevažeći AST čvor: %s"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Invalid formula"
-msgstr ""
+msgstr "Nevažeća formula"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Kwargs are not allowed"
-msgstr ""
+msgstr "Kwargs nisu dozvoljeni"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Only int, float or None are allowed as constant values"
-msgstr ""
+msgstr "Samo int, float ili None su dozvoljeni kao konstantne vrijednosti"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/models/account_tax.py:0
+# model: code:addons/account_tax_python/models/account_tax.py
+#, []
 msgid "Only primitive types are allowed in python tax formula context."
 msgstr ""
+"Samo primitivni tipovi su dozvoljeni u kontekstu python porezne formule."
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Only product['string'] or uom['string'] read-access is allowed"
-msgstr ""
+msgstr "Dozvoljen je samo pristup čitanju product['string'] ili uom['string']"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Only read access to identifiers is allowed"
-msgstr ""
+msgstr "Dozvoljen je samo pristup čitanju identifikatora"
 
-#. module: account_tax_python
-#: model:ir.model,name:account_tax_python.model_account_tax
+# model: model:ir.model,name:account_tax_python.model_account_tax
+#, []
 msgid "Tax"
 msgstr "Porez"
 
-#. module: account_tax_python
-#: model:ir.model.fields,field_description:account_tax_python.field_account_tax__amount_type
+# model:
+# model:ir.model.fields,field_description:account_tax_python.field_account_tax__amount_type
+#, []
 msgid "Tax Computation"
 msgstr "Izračunavanje poreza"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Unknown function call"
-msgstr ""
+msgstr "Nepoznat poziv funkcije"
 
-#. module: account_tax_python
-#. odoo-python
-#: code:addons/account_tax_python/tools/formula_utils.py:0
+# model: code:addons/account_tax_python/tools/formula_utils.py
+#, []
 msgid "Unknown identifier: %s"
-msgstr ""
+msgstr "Nepoznat identifikator: %s"

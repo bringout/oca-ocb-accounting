@@ -1,1160 +1,1154 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * stock_account
 #
-# Translators:
-# Martin Trigaux, 2018
-# Boško Stojaković <bluesoft83@gmail.com>, 2018
-# Bole <bole@dajmi5.com>, 2018
-# Malik K, 2018
-# Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~11.5\n"
+"Project-Id-Version: Odoo Server master (stock_account)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-27 18:36+0000\n"
-"PO-Revision-Date: 2026-01-16 05:53+0000\n"
-"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
-"Language-Team: Bosnian <https://translate.odoo.com/projects/odoo-s19-1/"
-"stock_account/bs/>\n"
+"Language-Team: Bosnian\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.14.3\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_quant.py:0
+# model: code:addons/stock_account/models/stock_quant.py
+#, []
 msgid " [Accounted on %s]"
-msgstr ""
+msgstr " [Obračunato na %s]"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_lot.py:0
+# model: code:addons/stock_account/models/stock_lot.py
+#, []
 msgid "%(lot)s price update from %(old_price)s to %(new_price)s by %(user)s"
 msgstr ""
+"%(lot)s ažuriranje cijene sa %(old_price)s na %(new_price)s od strane "
+"%(user)s"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
+# model: code:addons/stock_account/models/stock_move.py
+#, []
 msgid "%(quantity)s %(uom)s at product's cost"
-msgstr ""
+msgstr "%(quantity)s %(uom)s po nabavnoj cijeni proizvoda"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
-msgid "6.00"
-msgstr ""
-
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+#, []
 msgid "<span>Product</span>"
-msgstr ""
+msgstr "<span>Proizvod</span>"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+#, []
 msgid "<span>Quantity</span>"
-msgstr ""
+msgstr "<span>Količina</span>"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+#, []
 msgid "<span>SN/LN</span>"
-msgstr ""
+msgstr "<span>SB/LB</span>"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__avco_value
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_avco_report__avco_value
+#, []
 msgid "AVCO Value"
-msgstr ""
+msgstr "AVCO vrijednost"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_account_account
+# model: model:ir.model,name:stock_account.model_account_account
+#, []
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_account_chart_template
+# model: model:ir.model,name:stock_account.model_account_chart_template
+#, []
 msgid "Account Chart Template"
-msgstr ""
+msgstr "Predložak kontnog plana"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_inventory_adjustment_name__accounting_date
-#: model:ir.model.fields,field_description:stock_account.field_stock_quant__accounting_date
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_inventory_adjustment_name__accounting_date
+#, []
 msgid "Accounting Date"
 msgstr "Datum knjiženja"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.view_location_form_inherit
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.view_location_form_inherit
+#, []
 msgid "Accounting Information"
 msgstr "Računovodstvene informacije"
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.js:0
-#: code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.xml:0
+# model:
+# code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.js
+#, []
 msgid "Accrual"
-msgstr ""
+msgstr "Obračun"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.res_config_settings_view_form
+#, []
 msgid ""
 "Add additional cost (transport, customs, ...) in the value of the product."
-msgstr ""
+msgstr "Dodaj zavisni trošak (transport, carina...) u vrijednost proizvoda."
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__quantity
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_avco_report__quantity
+#, []
 msgid "Added Quantity"
-msgstr ""
+msgstr "Dodana količina"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__added_value
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_avco_report__added_value
+#, []
 msgid "Added Value"
-msgstr ""
+msgstr "Dodana vrijednost"
 
-#. module: stock_account
-#: model:ir.actions.act_window,name:stock_account.product_value_action
-#: model:ir.actions.server,name:stock_account.stock_move_action_adjust_valuation
-#: model_terms:ir.ui.view,arch_db:stock_account.product_value_form_view
+# model: model:ir.actions.act_window,name:stock_account.product_value_action
+#, []
 msgid "Adjust Valuation"
-msgstr ""
+msgstr "Prilagodi valorizaciju"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
+# model: code:addons/stock_account/models/stock_move.py
+#, []
 msgid "Adjust Valuation: %(product)s"
-msgstr ""
+msgstr "Prilagodi valorizaciju: %(product)s"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
+# model: code:addons/stock_account/models/stock_move.py
+#, []
 msgid "Adjusted on %(date)s by %(user)s"
-msgstr ""
+msgstr "Prilagođeno %(date)s od strane %(user)s"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_res_config_settings__module_stock_landed_costs
-#: model_terms:ir.ui.view,arch_db:stock_account.res_config_settings_view_form
+# model:
+# model:ir.model.fields,help:stock_account.field_res_config_settings__module_stock_landed_costs
+#, []
 msgid ""
-"Affect landed costs on reception operations and split them among products to "
-"update their cost price."
+"Affect landed costs on reception operations and split them among products to"
+" update their cost price."
 msgstr ""
+"Uticaj landed costs na operacije prijema i podijeli ih među proizvodima da "
+"ažurira njihovu cijenu koštanja."
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/filters/filter_warehouses.xml:0
+# model:
+# code:addons/stock_account/static/src/stock_valuation/filters/filter_warehouses.xml
+#, []
 msgid "All Warehouses"
-msgstr ""
+msgstr "Sva skladišta"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_account_analytic_account
+# model: model:ir.model,name:stock_account.model_account_analytic_account
+#, []
 msgid "Analytic Account"
-msgstr ""
+msgstr "Analitički konto"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__analytic_account_line_ids
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__analytic_account_line_ids
+#, []
 msgid "Analytic Account Line"
-msgstr ""
+msgstr "Stavka analitičkog računa"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_account_analytic_plan
+# model: model:ir.model,name:stock_account.model_account_analytic_plan
+#, []
 msgid "Analytic Plan"
 msgstr ""
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/filters/filter_date.xml:0
+# model:
+# code:addons/stock_account/static/src/stock_valuation/filters/filter_date.xml
+#, []
 msgid "As of"
-msgstr ""
+msgstr "Stanje na"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_account_account__account_stock_variation_id
-#: model:ir.model.fields,help:stock_account.field_product_category__account_stock_variation_id
+# model:
+# model:ir.model.fields,help:stock_account.field_account_account__account_stock_variation_id
+#, []
 msgid ""
 "At closing, register the inventory variation of the period into a specific "
 "account"
 msgstr ""
+"Prilikom zatvaranja, registrujte varijaciju zaliha u periodu na određeni "
+"konto"
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/filters/filter_date.xml:0
+# model:
+# code:addons/stock_account/static/src/stock_valuation/filters/filter_date.xml
+#, []
 msgid "At the date of"
-msgstr ""
+msgstr "Na datum"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_product__avg_cost
-#: model:ir.model.fields,field_description:stock_account.field_stock_lot__avg_cost
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_product__avg_cost
+#, []
 msgid "Average Cost"
-msgstr ""
+msgstr "Prosječni trošak"
 
-#. module: stock_account
-#: model:ir.model.fields.selection,name:stock_account.selection__product_category__property_cost_method__average
-#: model:ir.model.fields.selection,name:stock_account.selection__product_template__cost_method__average
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__cost_method__average
-#: model:ir.model.fields.selection,name:stock_account.selection__stock_quant__cost_method__average
+# model:
+# model:ir.model.fields.selection,name:stock_account.selection__product_category__property_cost_method__average
+#, []
 msgid "Average Cost (AVCO)"
-msgstr ""
+msgstr "Prosječna cijena (AVCO)"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+#, []
 msgid "BC46282798"
-msgstr ""
+msgstr "BC46282798"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+#, []
 msgid "Bacon"
-msgstr ""
+msgstr "Bacon"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__closing_datetime
-#: model:ir.model.fields,field_description:stock_account.field_account_move__closing_datetime
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__closing_datetime
+#, []
 msgid "Closing Date"
 msgstr ""
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid "Closing: Location Reclassification - [%(account)s]"
-msgstr ""
+msgstr "Zatvaranje: Reklasifikacija lokacije - [%(account)s]"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid "Closing: Stock Variation Global for company [%(company)s]"
-msgstr ""
+msgstr "Zatvaranje: Globalna varijacija zaliha za firmu [%(company)s]"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid "Closing: Stock Variation Over Period"
-msgstr ""
+msgstr "Zatvaranje: Varijacija zaliha u periodu"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_account_move_line__cogs_origin_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_move_line__cogs_origin_id
+#, []
 msgid "Cogs Origin"
-msgstr ""
+msgstr "Porijeklo COGS-a"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_res_company
-#: model:ir.model.fields,field_description:stock_account.field_product_value__company_id
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__company_id
+# model: model:ir.model,name:stock_account.model_res_company
+#, []
 msgid "Company"
-msgstr ""
+msgstr "Kompanija"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__company_currency_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__company_currency_id
+#, []
 msgid "Company Currency"
-msgstr ""
+msgstr "Valuta kompanije"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__computed_value_description
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__value_computed_justification
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__computed_value_description
+#, []
 msgid "Computed Value Description"
-msgstr ""
+msgstr "Opis izračunate vrijednosti"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
+# model: code:addons/stock_account/models/stock_move.py
+#, []
 msgid ""
 "Computed value: %(value)s\n"
 "%(description)s"
 msgstr ""
+"Izračunata vrijednost: %(value)s\n"
+"%(description)s"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_res_config_settings
+# model: model:ir.model,name:stock_account.model_res_config_settings
+#, []
 msgid "Config Settings"
-msgstr ""
+msgstr "Postavke konfiguracije"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_lot__standard_price
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_lot__standard_price
+#, []
 msgid "Cost"
-msgstr ""
+msgstr "Trošak"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_product__cost_method
-#: model:ir.model.fields,field_description:stock_account.field_product_template__cost_method
-#: model:ir.model.fields,field_description:stock_account.field_res_company__cost_method
-#: model:ir.model.fields,field_description:stock_account.field_stock_quant__cost_method
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_product__cost_method
+#, []
 msgid "Cost Method"
-msgstr ""
+msgstr "Metoda troška"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.view_location_form_inherit
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.view_location_form_inherit
+#, []
 msgid "Cost of Production"
-msgstr ""
+msgstr "Trošak proizvodnje"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_category__property_cost_method
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__property_cost_method
+#, []
 msgid "Costing Method"
 msgstr "Metoda koštanja"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_account_account__account_stock_expense_id
+# model:
+# model:ir.model.fields,help:stock_account.field_account_account__account_stock_expense_id
+#, []
 msgid ""
 "Counterpart used at closing for accounting adjustments to inventory "
 "valuation."
 msgstr ""
+"Protustavka koja se koristi pri zatvaranju za računovodstvene prilagodbe "
+"valorizacije zaliha."
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_picking__country_code
-#: model:ir.model.fields,field_description:stock_account.field_stock_picking_type__country_code
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_picking__country_code
+#, []
 msgid "Country Code"
-msgstr ""
+msgstr "Šifra države"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__create_uid
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__create_uid
+#, []
 msgid "Created by"
 msgstr "Kreirao"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__create_date
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__create_date
+#, []
 msgid "Created on"
 msgstr "Kreirano"
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/line/line.xml:0
+# model: code:addons/stock_account/static/src/stock_valuation/line/line.xml
+#, []
 msgid "Credit"
-msgstr ""
+msgstr "Potražuje"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__currency_id
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__currency_id
-#: model:ir.model.fields,field_description:stock_account.field_stock_quant__currency_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__currency_id
+#, []
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__current_value
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__current_value
+#, []
 msgid "Current Value"
-msgstr ""
+msgstr "Trenutna vrijednost"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__current_value_description
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__current_value_description
+#, []
 msgid "Current Value Description"
-msgstr ""
+msgstr "Opis trenutne vrijednosti"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__current_value_details
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__current_value_details
+#, []
 msgid "Current Value Details"
-msgstr ""
+msgstr "Detalji trenutne vrijednosti"
 
-#. module: stock_account
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_period__daily
+# model:
+# model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_period__daily
+#, []
 msgid "Daily"
-msgstr ""
+msgstr "Dnevno"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__date
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__date
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__date
+#, []
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_stock_inventory_adjustment_name__accounting_date
-#: model:ir.model.fields,help:stock_account.field_stock_quant__accounting_date
+# model:
+# model:ir.model.fields,help:stock_account.field_stock_inventory_adjustment_name__accounting_date
+#, []
 msgid ""
 "Date at which the accounting entries will be created in case of automated "
 "inventory valuation. If empty, the inventory date will be used."
 msgstr ""
+"Datum na koji će se kreirati računovodstvene stavke u slučaju automatskog "
+"vrednovanja inventara. Ako je prazan, koristit će se datum inventara."
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/line/line.xml:0
+# model: code:addons/stock_account/static/src/stock_valuation/line/line.xml
+#, []
 msgid "Debit"
-msgstr ""
+msgstr "Duguje"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__description
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__description
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__description
+#, []
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_res_config_settings__group_lot_on_invoice
+# model:
+# model:ir.model.fields,field_description:stock_account.field_res_config_settings__group_lot_on_invoice
+#, []
 msgid "Display Lots & Serial Numbers on Invoices"
-msgstr ""
+msgstr "Metoda troška"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_account_account__display_name
-#: model:ir.model.fields,field_description:stock_account.field_account_analytic_account__display_name
-#: model:ir.model.fields,field_description:stock_account.field_account_analytic_plan__display_name
-#: model:ir.model.fields,field_description:stock_account.field_account_chart_template__display_name
-#: model:ir.model.fields,field_description:stock_account.field_account_move__display_name
-#: model:ir.model.fields,field_description:stock_account.field_account_move_line__display_name
-#: model:ir.model.fields,field_description:stock_account.field_product_category__display_name
-#: model:ir.model.fields,field_description:stock_account.field_product_product__display_name
-#: model:ir.model.fields,field_description:stock_account.field_product_template__display_name
-#: model:ir.model.fields,field_description:stock_account.field_product_value__display_name
-#: model:ir.model.fields,field_description:stock_account.field_res_company__display_name
-#: model:ir.model.fields,field_description:stock_account.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_account_stock_valuation_report__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_forecasted_product_product__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_inventory_adjustment_name__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_location__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_lot__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_picking_type__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_quant__display_name
-#: model:ir.model.fields,field_description:stock_account.field_stock_return_picking_line__display_name
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_account__display_name
+#, []
 msgid "Display Name"
-msgstr "Prikazani naziv"
+msgstr "Naziv za prikaz"
 
-#. module: stock_account
-#: model:res.groups,name:stock_account.group_lot_on_invoice
+# model: model:res.groups,name:stock_account.group_lot_on_invoice
+#, []
 msgid "Display Serial & Lot Number on Invoices"
-msgstr ""
+msgstr "Prikaži lot & serijski broj na računima"
 
-#. module: stock_account
-#. odoo-javascript
-#. odoo-python
-#: code:addons/stock_account/report/stock_valuation_report.py:0
-#: code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.xml:0
+# model: code:addons/stock_account/report/stock_valuation_report.py
+#, []
 msgid "Ending Stock"
-msgstr ""
+msgstr "Završno stanje zaliha"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid "Everything is correctly closed"
-msgstr ""
+msgstr "Sve je ispravno zatvoreno"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_expense_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_expense_id
+#, []
 msgid "Expense Account"
-msgstr ""
+msgstr "Konto troška"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_stock_location__valuation_account_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_expense_active
+#, []
+msgid "Expense Account Active"
+msgstr "Konto troška aktivan"
+
+# model:
+# model:ir.model.fields,help:stock_account.field_stock_location__valuation_account_id
+#, []
 msgid ""
 "Expense account used to re-qualify products removed from stock and sent to "
 "this location"
 msgstr ""
+"Konto rashoda koji se koristi za rekvalifikaciju proizvoda uklonjenih iz "
+"zaliha i poslanih na ovu lokaciju"
 
-#. module: stock_account
-#: model:ir.model.fields.selection,name:stock_account.selection__product_category__property_cost_method__fifo
-#: model:ir.model.fields.selection,name:stock_account.selection__product_template__cost_method__fifo
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__cost_method__fifo
-#: model:ir.model.fields.selection,name:stock_account.selection__stock_quant__cost_method__fifo
+# model:
+# model:ir.model.fields.selection,name:stock_account.selection__product_category__property_cost_method__fifo
+#, []
 msgid "First In First Out (FIFO)"
-msgstr ""
+msgstr "Prvi unutra Prvi van (FIFO)"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/product_value.py:0
+# model: code:addons/stock_account/models/product_value.py
+#, []
 msgid "For %(quantity)s %(uom)s (%(price_unit)s per %(uom)s)"
-msgstr ""
+msgstr "Za %(quantity)s %(uom)s (%(price_unit)s po %(uom)s)"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.view_account_form
+# model: model_terms:ir.ui.view,arch_db:stock_account.view_account_form
+#, []
 msgid "For Perpetual Continental Only"
-msgstr ""
+msgstr "Samo za perpetualnu kontinentalnu metodu"
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/buttons_bar/buttons_bar.xml:0
+# model:
+# code:addons/stock_account/static/src/stock_valuation/buttons_bar/buttons_bar.xml
+#, []
 msgid "Generate Entry"
-msgstr ""
+msgstr "Generiši unos"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_account_account__id
-#: model:ir.model.fields,field_description:stock_account.field_account_analytic_account__id
-#: model:ir.model.fields,field_description:stock_account.field_account_analytic_plan__id
-#: model:ir.model.fields,field_description:stock_account.field_account_chart_template__id
-#: model:ir.model.fields,field_description:stock_account.field_account_move__id
-#: model:ir.model.fields,field_description:stock_account.field_account_move_line__id
-#: model:ir.model.fields,field_description:stock_account.field_product_category__id
-#: model:ir.model.fields,field_description:stock_account.field_product_product__id
-#: model:ir.model.fields,field_description:stock_account.field_product_template__id
-#: model:ir.model.fields,field_description:stock_account.field_product_value__id
-#: model:ir.model.fields,field_description:stock_account.field_res_company__id
-#: model:ir.model.fields,field_description:stock_account.field_res_config_settings__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_account_stock_valuation_report__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_forecasted_product_product__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_inventory_adjustment_name__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_location__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_lot__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_move_line__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_picking__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_picking_type__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_quant__id
-#: model:ir.model.fields,field_description:stock_account.field_stock_return_picking_line__id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_account__id
+#, []
 msgid "ID"
 msgstr "ID"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_category__anglo_saxon_accounting
+# model:
+# model:ir.model.fields,help:stock_account.field_product_category__anglo_saxon_accounting
+#, []
 msgid ""
 "If checked, the product will be valued using the Anglo-Saxon accounting "
 "method."
 msgstr ""
+"Ako je označeno, proizvod će biti vrednovan korištenjem anglosaksonske "
+"računovodstvene metode."
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_product__lot_valuated
-#: model:ir.model.fields,help:stock_account.field_product_template__lot_valuated
-#: model:ir.model.fields,help:stock_account.field_stock_lot__lot_valuated
+# model:
+# model:ir.model.fields,help:stock_account.field_product_product__lot_valuated
+#, []
 msgid "If checked, the valuation will be specific by Lot/Serial number."
 msgstr ""
+"Ako je označeno, valorizacija će biti specifična po Lotu/Serijskom broju."
 
-#. module: stock_account
-#. odoo-javascript
-#. odoo-python
-#: code:addons/stock_account/report/stock_valuation_report.py:0
-#: code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.xml:0
+# model: code:addons/stock_account/report/stock_valuation_report.py
+#, []
 msgid "Initial Balance"
-msgstr ""
+msgstr "Početno stanje"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_location.py:0
+# model: code:addons/stock_account/models/stock_location.py
+#, []
 msgid "Invalid search operator or value"
-msgstr ""
+msgstr "Neispravan operator pretrage ili vrijednost"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_inventory_adjustment_name
+# model:
+# model:ir.model,name:stock_account.model_stock_inventory_adjustment_name
+#, []
 msgid "Inventory Adjustment Reference / Reason"
-msgstr ""
+msgstr "Referenca / razlog korekcije inventure"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__inventory_closing
-#: model:ir.model.fields,field_description:stock_account.field_account_move__inventory_closing
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__inventory_closing
+#, []
 msgid "Inventory Closing"
 msgstr ""
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_location
+# model: model:ir.model,name:stock_account.model_stock_location
+#, []
 msgid "Inventory Location"
 msgstr ""
 
-#. module: stock_account
-#. odoo-javascript
-#. odoo-python
-#: code:addons/stock_account/report/stock_valuation_report.py:0
-#: code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.js:0
-#: code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.xml:0
+# model: code:addons/stock_account/report/stock_valuation_report.py
+#, []
 msgid "Inventory Loss"
-msgstr ""
+msgstr "Gubitak zaliha"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_res_company__inventory_period
+# model:
+# model:ir.model.fields,field_description:stock_account.field_res_company__inventory_period
+#, []
 msgid "Inventory Period"
-msgstr ""
+msgstr "Period inventure"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/account_chart_template.py:0
-#: model:ir.actions.client,name:stock_account.action_report_stock_valuation
-#: model:ir.model.fields,field_description:stock_account.field_product_category__property_valuation
-#: model_terms:ir.ui.view,arch_db:stock_account.view_category_property_form_stock
+# model: code:addons/stock_account/models/account_chart_template.py
+#, []
 msgid "Inventory Valuation"
 msgstr "Vrednovanje inventure"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__is_dropship
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__is_dropship
+#, []
 msgid "Is Dropship"
-msgstr ""
+msgstr "Je dropship"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__is_in
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__is_in
+#, []
 msgid "Is Incoming (valued)"
-msgstr ""
+msgstr "Je ulazni (vrednovan)"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__is_out
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__is_out
+#, []
 msgid "Is Outgoing (valued)"
-msgstr ""
+msgstr "Je izlazni (vrednovan)"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__is_valued
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__is_valued
+#, []
 msgid "Is Valued"
-msgstr ""
+msgstr "Je vrednovan"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_location__is_valued_internal
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_location__is_valued_internal
+#, []
 msgid "Is valued inside the company"
-msgstr ""
+msgstr "Vrednuje se unutar firme"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_location__is_valued_external
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_location__is_valued_external
+#, []
 msgid "Is valued outside the company"
-msgstr ""
+msgstr "Vrednuje se izvan firme"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid ""
 "It exists closing entries after the selected date. Cancel them before "
 "generate an entry prior to them"
 msgstr ""
+"Postoje knjiženja zatvaranja nakon izabranog datuma. Otkažite ih prije "
+"generisanja knjiženja prije njih"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_account_move
+# model: model:ir.model,name:stock_account.model_account_move
+#, []
 msgid "Journal Entry"
-msgstr ""
+msgstr "Stavka dnevnika"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_account_move_line
+# model: model:ir.model,name:stock_account.model_account_move_line
+#, []
 msgid "Journal Item"
-msgstr ""
+msgstr "Stavka žurnala"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid "Journal Items"
-msgstr ""
+msgstr "Stavke dnevnika"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__justification
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_avco_report__justification
+#, []
 msgid "Justification"
-msgstr ""
+msgstr "Obrazloženje"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_res_config_settings__module_stock_landed_costs
+# model:
+# model:ir.model.fields,field_description:stock_account.field_res_config_settings__module_stock_landed_costs
+#, []
 msgid "Landed Costs"
 msgstr "Troškovi nabavke"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__write_uid
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__write_uid
+#, []
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Posljednji put ažurirao"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__write_date
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__write_date
+#, []
 msgid "Last Updated on"
-msgstr "Zadnje ažurirano"
+msgstr "Posljednji put ažurirano"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.view_location_form_inherit
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.view_location_form_inherit
+#, []
 msgid "Loss Account"
-msgstr ""
+msgstr "Konto gubitka"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__lot_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__lot_id
+#, []
 msgid "Lot"
-msgstr ""
+msgstr "Lot"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_lot
+# model: model:ir.model,name:stock_account.model_stock_lot
+#, []
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/Serijski"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.res_config_settings_view_form
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.res_config_settings_view_form
+#, []
 msgid "Lots & Serial numbers will appear on the invoice"
-msgstr ""
+msgstr "Lotovi i serijski brojevi će se pojaviti na fakturi"
 
-#. module: stock_account
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_period__manual
+# model:
+# model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_period__manual
+#, []
 msgid "Manual"
 msgstr "Ručno"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__value_manual
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__value_manual
+#, []
 msgid "Manual Value"
-msgstr ""
+msgstr "Ručna vrijednost"
 
-#. module: stock_account
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_period__monthly
+# model:
+# model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_period__monthly
+#, []
 msgid "Monthly"
-msgstr ""
+msgstr "Mjesečno"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__move_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__move_id
+#, []
 msgid "Move"
-msgstr ""
+msgstr "Kretanje"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.product_value_form_view
+# model: model_terms:ir.ui.view,arch_db:stock_account.product_value_form_view
+#, []
 msgid "New Value"
-msgstr ""
+msgstr "Nova vrijednost"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
+# model: code:addons/stock_account/models/stock_move.py
+#, []
 msgid "Only is set (= True) is supported in search for remaining_qty."
-msgstr ""
+msgstr "Samo is set (= True) je podržano u pretrazi za remaining_qty."
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/product.py:0
+# model: code:addons/stock_account/models/product.py
+#, []
 msgid ""
 "Only the value 'periodic' and 'real_time' are accepted to search on "
 "valuation field."
 msgstr ""
+"Samo vrijednosti 'periodic' i 'real_time' su prihvaćene za pretragu polja "
+"valuation."
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_valuation/filters/filter_options.xml:0
+# model:
+# code:addons/stock_account/static/src/stock_valuation/filters/filter_options.xml
+#, []
 msgid "Options"
-msgstr ""
+msgstr "Opcije"
 
-#. module: stock_account
-#: model:ir.model.fields.selection,name:stock_account.selection__product_category__property_valuation__periodic
-#: model:ir.model.fields.selection,name:stock_account.selection__product_template__valuation__periodic
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_valuation__periodic
+# model:
+# model:ir.model.fields.selection,name:stock_account.selection__product_category__property_valuation__periodic
+#, []
 msgid "Periodic (at closing)"
-msgstr ""
+msgstr "Periodično (pri zatvaranju)"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_category__property_valuation
+# model:
+# model:ir.model.fields,help:stock_account.field_product_category__property_valuation
+#, []
 msgid ""
-"Periodic: The accounting entries are suggested manually in the inventory "
-"valuation report.\n"
-"        Perpetual: An accounting entry is automatically created to value the "
-"inventory when a product is billed or invoiced.\n"
+"Periodic: The accounting entries are suggested manually in the inventory valuation report.\n"
+"        Perpetual: An accounting entry is automatically created to value the inventory when a product is billed or invoiced.\n"
 "        "
 msgstr ""
+"Periodično: Računovodstvene stavke se ručno predlažu u izvještaju o valorizaciji zaliha.\n"
+"        Perpetualno: Računovodstvena stavka se automatski kreira radi vrednovanja zaliha kada se proizvod fakturiše ili obračunava.\n"
+"        "
 
-#. module: stock_account
-#: model:ir.model.fields.selection,name:stock_account.selection__product_category__property_valuation__real_time
-#: model:ir.model.fields.selection,name:stock_account.selection__product_template__valuation__real_time
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__inventory_valuation__real_time
+# model:
+# model:ir.model.fields.selection,name:stock_account.selection__product_category__property_valuation__real_time
+#, []
 msgid "Perpetual (at invoicing)"
-msgstr ""
+msgstr "Perpetualno (pri fakturisanju)"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_picking_type
+# model: model:ir.model,name:stock_account.model_stock_picking_type
+#, []
 msgid "Picking Type"
-msgstr ""
+msgstr "Tip prijema/izdavanja"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid "Please set the Journal for Inventory Valuation in the settings."
-msgstr ""
+msgstr "Molimo postavite dnevnik za valorizaciju zaliha u postavkama."
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid ""
 "Please set the Valuation Account for Inventory Valuation in the settings."
 msgstr ""
+"Molimo postavite konto valorizacije za valorizaciju zaliha u postavkama."
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_category__property_price_difference_account_id
-#: model:ir.model.fields,field_description:stock_account.field_product_product__property_price_difference_account_id
-#: model:ir.model.fields,field_description:stock_account.field_product_template__property_price_difference_account_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__property_price_difference_account_id
+#, []
 msgid "Price Difference Account"
+msgstr "Konto razlike u cijeni"
+
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__property_price_difference_account_active
+#, []
+msgid "Price Difference Account Active"
 msgstr ""
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__price_unit
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__price_unit
+#, []
 msgid "Price Unit"
-msgstr ""
+msgstr "Jedinična cijena"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/product.py:0
+# model: code:addons/stock_account/models/product.py
+#, []
 msgid "Price update from %(old_price)s to %(new_price)s by %(user)s"
 msgstr ""
+"Ažuriranje cijene sa %(old_price)s na %(new_price)s od strane %(user)s"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_product_template
-#: model:ir.model.fields,field_description:stock_account.field_product_value__product_id
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__product_id
+# model: model:ir.model,name:stock_account.model_product_template
+#, []
 msgid "Product"
 msgstr "Proizvod"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_product_category
+# model: model:ir.model,name:stock_account.model_product_category
+#, []
 msgid "Product Category"
 msgstr "Kategorija proizvoda"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_move_line
+# model: model:ir.model,name:stock_account.model_stock_move_line
+#, []
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Kretanja artikala (stavka kretanja zalihe)"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_quant.py:0
+# model: code:addons/stock_account/models/stock_quant.py
+#, []
 msgid "Product Quantity Confirmed"
-msgstr ""
+msgstr "Količina proizvoda potvrđena"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_quant.py:0
+# model: code:addons/stock_account/models/stock_quant.py
+#, []
 msgid "Product Quantity Updated"
-msgstr ""
+msgstr "Količina proizvoda ažurirana"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_product_value
-#: model:ir.model.fields.selection,name:stock_account.selection__stock_avco_report__res_model_name__product_value
+# model: model:ir.model,name:stock_account.model_product_value
+#, []
 msgid "Product Value"
-msgstr ""
+msgstr "Vrijednost proizvoda"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_product_product
+# model: model:ir.model,name:stock_account.model_product_product
+#, []
 msgid "Product Variant"
-msgstr ""
+msgstr "Varijante proizvoda"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_res_company__account_production_wip_account_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_res_company__account_production_wip_account_id
+#, []
 msgid "Production WIP Account"
-msgstr ""
+msgstr "Konto WIP proizvodnje"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_res_company__account_production_wip_overhead_account_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_res_company__account_production_wip_overhead_account_id
+#, []
 msgid "Production WIP Overhead Account"
-msgstr ""
+msgstr "Konto režijskih troškova WIP proizvodnje"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_quant
+# model: model:ir.model,name:stock_account.model_stock_quant
+#, []
 msgid "Quant"
 msgstr ""
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__reference
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_avco_report__reference
+#, []
 msgid "Reference"
-msgstr "Referenca"
+msgstr "Vezna oznaka"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.view_move_search
+# model: model_terms:ir.ui.view,arch_db:stock_account.view_move_search
+#, []
 msgid "Remaining"
-msgstr ""
+msgstr "Preostalo"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__remaining_qty
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__remaining_qty
+#, []
 msgid "Remaining Quantity"
-msgstr ""
+msgstr "Preostala količina"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__remaining_value
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__remaining_value
+#, []
 msgid "Remaining Value"
-msgstr ""
+msgstr "Preostala vrijednost"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__res_model_name
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_avco_report__res_model_name
+#, []
 msgid "Resource Model Name"
-msgstr ""
+msgstr "Naziv modela resursa"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_return_picking_line
-msgid "Return Picking Line"
-msgstr ""
-
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_inventory_adjustment_name__should_show_accounting_date
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_inventory_adjustment_name__should_show_accounting_date
+#, []
 msgid "Should Show Accounting Date"
-msgstr ""
+msgstr "Treba prikazati računovodstveni datum"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__standard_price
-#: model:ir.model.fields.selection,name:stock_account.selection__product_category__property_cost_method__standard
-#: model:ir.model.fields.selection,name:stock_account.selection__product_template__cost_method__standard
-#: model:ir.model.fields.selection,name:stock_account.selection__res_company__cost_method__standard
-#: model:ir.model.fields.selection,name:stock_account.selection__stock_quant__cost_method__standard
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__standard_price
+#, []
 msgid "Standard Price"
 msgstr "Standardna cijena"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_category__property_cost_method
+# model:
+# model:ir.model.fields,help:stock_account.field_product_category__property_cost_method
+#, []
 msgid ""
-"Standard Price: The products are valued at their standard cost defined on "
-"the product.\n"
-"        Average Cost (AVCO): The products are valued at weighted average "
-"cost.\n"
-"        First In First Out (FIFO): The products are valued supposing those "
-"that enter the company first will also leave it first.\n"
+"Standard Price: The products are valued at their standard cost defined on the product.\n"
+"        Average Cost (AVCO): The products are valued at weighted average cost.\n"
+"        First In First Out (FIFO): The products are valued supposing those that enter the company first will also leave it first.\n"
 "        "
 msgstr ""
+"Standardna cijena: Proizvodi se vrednuju po njihovoj standardnoj cijeni definisanoj na proizvodu.\n"
+"        Prosječna cijena (AVCO): Proizvodi se vrednuju po ponderisanoj prosječnoj cijeni.\n"
+"        Prvi ušao prvi izašao (FIFO): Proizvodi se vrednuju pretpostavljajući da oni koji prvi uđu u kompaniju će je i prvi napustiti.\n"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_avco_report
+# model: model:ir.model,name:stock_account.model_stock_avco_report
+#, []
 msgid "Stock AVCO Justifier"
-msgstr ""
+msgstr "AVCO obrazloženje zaliha"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.view_category_property_form
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.view_category_property_form
+#, []
 msgid "Stock Account"
-msgstr ""
+msgstr "Konto zaliha"
 
-#. module: stock_account
-#: model:ir.actions.server,name:stock_account.ir_cron_post_stock_valuation_ir_actions_server
+# model:
+# model:ir.actions.server,name:stock_account.ir_cron_post_stock_valuation_ir_actions_server
+#, []
 msgid "Stock Account: Inventory Valuation Closing"
-msgstr ""
+msgstr "Konto zaliha: Zatvaranje valorizacije zaliha"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/res_company.py:0
+# model: code:addons/stock_account/models/res_company.py
+#, []
 msgid "Stock Closing"
-msgstr ""
+msgstr "Zatvaranje zaliha"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_category__property_stock_journal
-#: model:ir.model.fields,field_description:stock_account.field_res_company__account_stock_journal_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__property_stock_journal
+#, []
 msgid "Stock Journal"
 msgstr "Dnevnik zaliha"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_move
-#: model:ir.model.fields,field_description:stock_account.field_account_bank_statement_line__stock_move_ids
-#: model:ir.model.fields,field_description:stock_account.field_account_move__stock_move_ids
-#: model:ir.model.fields.selection,name:stock_account.selection__stock_avco_report__res_model_name__stock_move
+# model: model:ir.model,name:stock_account.model_stock_move
+#, []
 msgid "Stock Move"
 msgstr "Kretanje zalihe"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_forecasted_product_product
+# model:
+# model:ir.model,name:stock_account.model_stock_forecasted_product_product
+#, []
 msgid "Stock Replenishment Report"
-msgstr ""
+msgstr "Izvještaj o nadopuni skladišta"
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_account_forecasted/forecasted_header.js:0
-#: model:ir.model,name:stock_account.model_stock_account_stock_valuation_report
+# model:
+# code:addons/stock_account/static/src/stock_account_forecasted/forecasted_header.js
+#, []
 msgid "Stock Valuation"
-msgstr ""
+msgstr "Obračun vrijednosti zaliha"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_category__property_stock_valuation_account_id
-#: model:ir.model.fields,field_description:stock_account.field_res_company__account_stock_valuation_id
-#: model:ir.model.fields,field_description:stock_account.field_stock_location__valuation_account_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__property_stock_valuation_account_id
+#, []
 msgid "Stock Valuation Account"
 msgstr "Konto vrednovanja zaliha"
 
-#. module: stock_account
-#. odoo-javascript
-#. odoo-python
-#: code:addons/stock_account/report/stock_valuation_report.py:0
-#: code:addons/stock_account/static/src/stock_valuation/stock_valuation_report.xml:0
-#: model_terms:ir.ui.view,arch_db:stock_account.view_category_property_form
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__property_stock_valuation_account_active
+#, []
+msgid "Stock Valuation Account Active"
+msgstr ""
+
+# model: code:addons/stock_account/report/stock_valuation_report.py
+#, []
 msgid "Stock Variation"
-msgstr ""
+msgstr "Varijacija zaliha"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_category__account_stock_variation_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__account_stock_variation_id
+#, []
 msgid "Stock Variation Account"
+msgstr "Konto varijacije zaliha"
+
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__account_stock_variation_active
+#, []
+msgid "Stock Variation Account Active"
 msgstr ""
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_product__company_currency_id
+# model:
+# model:ir.model.fields,help:stock_account.field_product_product__company_currency_id
+#, []
 msgid ""
 "Technical field to correctly show the currently selected company's currency "
 "that corresponds to the totaled value of the product's valuation layers"
 msgstr ""
+"Tehničko polje za ispravno prikazivanje trenutno odabrane valute kompanije "
+"koja odgovara ukupnoj vrijednosti slojeva vrednovanja proizvoda"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_stock_picking__country_code
-#: model:ir.model.fields,help:stock_account.field_stock_picking_type__country_code
+# model:
+# model:ir.model.fields,help:stock_account.field_stock_picking__country_code
+#, []
 msgid ""
 "The ISO country code in two chars. \n"
 "You can use this field for quick search."
 msgstr ""
+"ISO oznaka zemlje u dva znaka. \n"
+"Ovo polje možete koristiti za brzu pretragu."
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_value__current_value
-#: model:ir.model.fields,help:stock_account.field_stock_move__value
+# model:
+# model:ir.model.fields,help:stock_account.field_product_value__current_value
+#, []
 msgid "The current value of the move. It's zero if the move is not valued."
 msgstr ""
+"Trenutna vrijednost kretanja. Iznosi nula ako kretanje nije vrednovano."
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/fields/boolean_confirm.js:0
+# model: code:addons/stock_account/static/src/fields/boolean_confirm.js
+#, []
 msgid ""
-"This operation might lead in a loss of data. Valuation will be identical for "
-"all lots/SN. Do you want to proceed ? "
+"This operation might lead in a loss of data. Valuation will be identical for"
+" all lots/SN. Do you want to proceed ? "
 msgstr ""
+"Ova operacija može dovesti do gubitka podataka. Valorizacija će biti "
+"identična za sve lotove/SN. Želite li nastaviti? "
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__total_quantity
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_avco_report__total_quantity
+#, []
 msgid "Total Quantity"
-msgstr ""
+msgstr "Ukupna količina"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_move_view_list_valuation
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_move_view_list_valuation
+#, []
 msgid "Total Remaining Qty"
-msgstr ""
+msgstr "Ukupno preostala količina"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_move_view_list_valuation
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_move_view_list_valuation
+#, []
 msgid "Total Remaining Value"
-msgstr ""
+msgstr "Ukupna preostala vrijednost"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_product__total_value
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__total_value
-#: model:ir.model.fields,field_description:stock_account.field_stock_lot__total_value
-#: model_terms:ir.ui.view,arch_db:stock_account.product_product_stock_tree_inherit_stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.product_product_view_list_at_date
-#: model_terms:ir.ui.view,arch_db:stock_account.view_stock_quant_tree_editable_inherit
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_product__total_value
+#, []
 msgid "Total Value"
-msgstr ""
+msgstr "Vrijednost"
 
-#. module: stock_account
-#: model:ir.model,name:stock_account.model_stock_picking
+# model: model:ir.model,name:stock_account.model_stock_picking
+#, []
 msgid "Transfer"
-msgstr ""
+msgstr "Prenos"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_stock_move__to_refund
-#: model:ir.model.fields,help:stock_account.field_stock_return_picking_line__to_refund
+# model: model:ir.model.fields,help:stock_account.field_stock_move__to_refund
+#, []
 msgid ""
-"Trigger a decrease of the delivered/received quantity in the associated Sale "
-"Order/Purchase Order"
+"Trigger a decrease of the delivered/received quantity in the associated Sale"
+" Order/Purchase Order"
 msgstr ""
+"Pokreni smanjenje dostavljene/primljene količine u povezanoj prodajnoj "
+"narudžbi/nabavnoj narudžbi"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.product_product_stock_tree_inherit_stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.product_product_view_list_at_date
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_avco_report_view_list
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_move_view_list_valuation
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.product_product_stock_tree_inherit_stock_account
+#, []
 msgid "Unit Cost"
-msgstr ""
+msgstr "Cijena"
 
-#. module: stock_account
-#: model:ir.actions.act_window,name:stock_account.stock_avco_report_action
+# model:
+# model:ir.actions.act_window,name:stock_account.stock_avco_report_action
+#, []
 msgid "Unit Cost History"
-msgstr ""
+msgstr "Historija jediničnih troškova"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__to_refund
-#: model:ir.model.fields,field_description:stock_account.field_stock_return_picking_line__to_refund
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__to_refund
+#, []
 msgid "Update quantities on SO/PO"
-msgstr ""
+msgstr "Ažuriraj količine na narudžbenicama (nabavka/prodaja)"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_category__anglo_saxon_accounting
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_category__anglo_saxon_accounting
+#, []
 msgid "Use Anglo-Saxon Accounting"
-msgstr ""
+msgstr "Koristi anglosaksonsko računovodstvo"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__user_id
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__user_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__user_id
+#, []
 msgid "User"
-msgstr ""
+msgstr "Korisnik"
 
-#. module: stock_account
-#: model:ir.actions.act_window,name:stock_account.stock_move_valuation_action
-#: model:ir.model.fields,field_description:stock_account.field_product_product__valuation
-#: model:ir.model.fields,field_description:stock_account.field_product_template__valuation
-#: model:ir.model.fields,field_description:stock_account.field_res_company__inventory_valuation
-#: model_terms:ir.ui.view,arch_db:stock_account.res_config_settings_view_form
+# model:
+# model:ir.actions.act_window,name:stock_account.stock_move_valuation_action
+#, []
 msgid "Valuation"
 msgstr "Procijena vrijednosti"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_product__company_currency_id
-#: model:ir.model.fields,field_description:stock_account.field_stock_lot__company_currency_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_product__company_currency_id
+#, []
 msgid "Valuation Currency"
-msgstr ""
+msgstr "Valuta vrednovanja"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_product__lot_valuated
-#: model:ir.model.fields,field_description:stock_account.field_product_template__lot_valuated
-#: model:ir.model.fields,field_description:stock_account.field_stock_lot__lot_valuated
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_product__lot_valuated
+#, []
 msgid "Valuation by Lot/Serial"
-msgstr ""
+msgstr "Valorizacija po Lotu/Serijskom broju"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_value__value
-#: model:ir.model.fields,field_description:stock_account.field_stock_avco_report__value
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__value
-#: model:ir.model.fields,field_description:stock_account.field_stock_quant__value
+# model:
+# model:ir.model.fields,field_description:stock_account.field_product_value__value
+#, []
 msgid "Value"
 msgstr "Vrijednost"
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__value_justification
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__value_justification
+#, []
 msgid "Value Description"
-msgstr ""
+msgstr "Opis vrijednosti"
 
-#. module: stock_account
-#. odoo-javascript
-#: code:addons/stock_account/static/src/stock_account_forecasted/forecasted_header.xml:0
+# model:
+# code:addons/stock_account/static/src/stock_account_forecasted/forecasted_header.xml
+#, []
 msgid "Value On Hand:"
-msgstr ""
+msgstr "Vrijednost na stanju:"
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
+# model: code:addons/stock_account/models/stock_move.py
+#, []
 msgid "Value based on original move %(reference)s"
-msgstr ""
+msgstr "Vrijednost zasnovana na originalnom kretanju %(reference)s"
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_stock_lot__standard_price
+# model:
+# model:ir.model.fields,help:stock_account.field_stock_lot__standard_price
+#, []
 msgid ""
 "Value of the lot (automatically computed in AVCO).\n"
-"        Used to value the product when the purchase cost is not known (e.g. "
-"inventory adjustment).\n"
+"        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n"
 "        Used to compute margins on sale orders."
 msgstr ""
+"Vrijednost lota (automatski izračunata u AVCO).\n"
+"        Koristi se za vrednovanje proizvoda kada nabavni trošak nije poznat (npr. korekcija inventure).\n"
+"        Koristi se za izračun marže na prodajnim narudžbama."
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_stock_move__standard_price
+# model:
+# model:ir.model.fields,help:stock_account.field_stock_move__standard_price
+#, []
 msgid ""
 "Value of the product (automatically computed in AVCO).\n"
-"        Used to value the product when the purchase cost is not known (e.g. "
-"inventory adjustment).\n"
+"        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n"
 "        Used to compute margins on sale orders."
 msgstr ""
+"Vrijednost proizvoda (automatski izračunata u AVCO).\n"
+"        Koristi se za vrednovanje proizvoda kada nabavni trošak nije poznat (npr. korekcija inventure).\n"
+"        Koristi se za izračun marže na prodajnim narudžbama."
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_variation_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_variation_id
+#, []
 msgid "Variation Account"
+msgstr "Konto varijacije"
+
+# model:
+# model:ir.model.fields,field_description:stock_account.field_account_account__account_stock_variation_active
+#, []
+msgid "Variation Account Active"
 msgstr ""
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_category__property_stock_valuation_account_id
+# model:
+# model:ir.model.fields,help:stock_account.field_product_category__property_stock_valuation_account_id
+#, []
 msgid ""
 "When automated inventory valuation is enabled on a product, this account "
 "will hold the current value of the products."
 msgstr ""
+"Kad je omogućeno automatsko vrednovanje inventara na proizvodu, ovaj račun "
+"će držati trenutnu vrijednost proizvoda."
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_category__property_stock_journal
+# model:
+# model:ir.model.fields,help:stock_account.field_product_category__property_stock_journal
+#, []
 msgid ""
 "When doing automated inventory valuation, this is the Accounting Journal in "
 "which entries will be automatically posted when stock moves are processed."
 msgstr ""
+"Pri automatskom vrednovanju inventara, ovo je računovodstveni dnevnik u "
+"kojem će stavke biti automatski proknjižene kad se kretanja zaliha obrađuju."
 
-#. module: stock_account
-#: model:ir.model.fields,help:stock_account.field_product_category__property_price_difference_account_id
-#: model:ir.model.fields,help:stock_account.field_product_product__property_price_difference_account_id
-#: model:ir.model.fields,help:stock_account.field_product_template__property_price_difference_account_id
+# model:
+# model:ir.model.fields,help:stock_account.field_product_category__property_price_difference_account_id
+#, []
 msgid ""
 "With perpetual valuation, this account will hold the price difference "
 "between the standard price and the bill price."
 msgstr ""
+"Kod perpetualne valorizacije, ovaj konto će sadržavati razliku u cijeni "
+"između standardne cijene i cijene s računa."
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_move.py:0
+# model: code:addons/stock_account/models/stock_move.py
+#, []
 msgid "You can only adjust valuation for one move at a time."
 msgstr ""
+"Možete prilagoditi valorizaciju samo za jedno kretanje u isto vrijeme."
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/product.py:0
+# model: code:addons/stock_account/models/product.py
+#, []
 msgid ""
 "You can only get the standard price at a given date for products with "
 "'Standard Price' as cost method."
 msgstr ""
+"Standardnu cijenu na određeni datum možete dobiti samo za proizvode sa "
+"'Standardnom cijenom' kao metodom troška."
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/product.py:0
+# model: code:addons/stock_account/models/product.py
+#, []
 msgid "You can only use the '=' operator to search on valuation field."
-msgstr ""
+msgstr "Možete koristiti samo operator '=' za pretragu polja valuation."
 
-#. module: stock_account
-#. odoo-python
-#: code:addons/stock_account/models/stock_picking.py:0
+# model: code:addons/stock_account/models/stock_picking.py
+#, []
 msgid ""
-"You cannot modify the scheduled date of operation %s because it falls within "
-"a locked fiscal period."
+"You cannot modify the scheduled date of operation %s because it falls within"
+" a locked fiscal period."
 msgstr ""
+"Ne možete izmijeniti planirani datum operacije %s jer pripada zaključanom "
+"fiskalnom periodu."
 
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_move__account_move_id
+# model:
+# model:ir.model.fields,field_description:stock_account.field_stock_move__account_move_id
+#, []
 msgid "stock_move_id"
-msgstr ""
+msgstr "stock_move_id"
 
-#. module: stock_account
-#: model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+# model:
+# model_terms:ir.ui.view,arch_db:stock_account.stock_account_report_invoice_document
+#, []
 msgid "units"
-msgstr ""
+msgstr "jedinica"

@@ -1,306 +1,293 @@
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * spreadsheet_dashboard_stock_account
 #
-# Odoo Translation Bot <c3p@odoo.com>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: Odoo Server master (spreadsheet_dashboard_stock_account)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-08 18:39+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"Language-Team: Bosnian\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "3D printing pen"
-msgstr ""
+msgstr "3D olovka za štampu"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "447 out of 1,856"
-msgstr ""
+msgstr "447 od 1.856"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "76,437 out of 188,071"
-msgstr ""
+msgstr "76.437 od 188.071"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Ageing stock qty by category and creation date"
-msgstr ""
+msgstr "Starost količine zaliha po kategoriji i datumu kreiranja"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Ageing stock qty by product and creation date"
-msgstr ""
+msgstr "Starost količine zaliha po proizvodu i datumu kreiranja"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Ageing stock value by product and creation date"
-msgstr ""
+msgstr "Starost vrijednosti zaliha po proizvodu i datumu kreiranja"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Available Quantity"
-msgstr ""
+msgstr "Dostupna količina"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Available Value"
-msgstr ""
+msgstr "Dostupna vrijednost"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Available and reserved stock qty (top locations)"
-msgstr ""
+msgstr "Dostupna i rezervisana količina zaliha (top lokacije)"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Available and reserved stock qty (top propducts)"
-msgstr ""
+msgstr "Dostupna i rezervisana količina zaliha (top proizvodi)"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Available and reserved stock value (top locations)"
-msgstr ""
+msgstr "Dostupna i rezervisana vrijednost zaliha (top lokacije)"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Available and reserved stock value (top propducts)"
-msgstr ""
+msgstr "Dostupna i rezervisana vrijednost zaliha (top proizvodi)"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Bluetooth-enabled LED light strip"
-msgstr ""
+msgstr "LED svjetlosna traka s Bluetooth-om"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Compact espresso machine"
-msgstr ""
+msgstr "Kompaktni espresso aparat"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Count of products with negative stock"
-msgstr ""
+msgstr "Broj proizvoda s negativnim zalihama"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Creation Date"
-msgstr ""
+msgstr "Datum kreiranja"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Electric standing desk"
-msgstr ""
+msgstr "Električni stojeći sto"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Ergonomic office chair"
-msgstr ""
+msgstr "Ergonomska kancelarijska stolica"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "KPI"
-msgstr ""
+msgstr "KPI"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Lines with negative stock"
-msgstr ""
+msgstr "Stavke s negativnim zalihama"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/Serija"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Post-production"
-msgstr ""
+msgstr "Poslije proizvodnje"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Pre-production"
-msgstr ""
+msgstr "Prije proizvodnje"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Product"
-msgstr ""
+msgstr "Proizvod"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Product Category"
-msgstr ""
+msgstr "Kategorija proizvoda"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Products"
-msgstr ""
+msgstr "Proizvodi"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Reserved"
-msgstr ""
+msgstr "Rezervisano"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Reserved Quantity"
-msgstr ""
+msgstr "Rezervisana količina"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Reserved Value"
-msgstr ""
+msgstr "Rezervisana vrijednost"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Share of reserved stock Value"
-msgstr ""
+msgstr "Udio vrijednosti rezervisanih zaliha"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Share of reserved stock qty"
-msgstr ""
+msgstr "Udio količine rezervisanih zaliha"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Share reserved stock Qty"
-msgstr ""
+msgstr "Udio količine rezervisanih zaliha"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Share reserved stock Value"
-msgstr ""
+msgstr "Udio vrijednosti rezervisanih zaliha"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Smart air purifier"
-msgstr ""
+msgstr "Pametni prečišćivač zraka"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Solar-powered phone charger"
-msgstr ""
+msgstr "Punjač telefona na solarnu energiju"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Stock Quantity"
-msgstr ""
+msgstr "Količina zaliha"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Stock Value"
-msgstr ""
+msgstr "Vrijednost zaliha"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Top 10 products with negative stock"
-msgstr ""
+msgstr "Top 10 proizvoda s negativnim zalihama"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Total"
-msgstr ""
+msgstr "Ukupno"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Total inventory value"
-msgstr ""
+msgstr "Ukupna vrijednost inventara"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "WH/Output"
-msgstr ""
+msgstr "WH/Output"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "WH/Stock"
-msgstr ""
+msgstr "WH/Stock"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "WH/Stock/Shelf 10"
-msgstr ""
+msgstr "WH/Stock/Shelf 10"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_dashboard.json
+#, []
 msgid "Warehouse"
-msgstr ""
+msgstr "Skladište"
 
-#. module: spreadsheet_dashboard_stock_account
-#: model:spreadsheet.dashboard,name:spreadsheet_dashboard_stock_account.spreadsheet_dashboard_warehouse_metrics
+# model:
+# model:spreadsheet.dashboard,name:spreadsheet_dashboard_stock_account.spreadsheet_dashboard_warehouse_metrics
+#, []
 msgid "Warehouse Metrics"
-msgstr ""
+msgstr "Metrike skladišta"
 
-#. module: spreadsheet_dashboard_stock_account
-#. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json:0
+# model:
+# code:addons/spreadsheet_dashboard_stock_account/data/files/warehouse_metrics_sample_dashboard.json
+#, []
 msgid "Waterproof hiking backpack"
-msgstr ""
+msgstr "Vodootporni planinarski ranac"
