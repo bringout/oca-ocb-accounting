@@ -198,7 +198,7 @@ msgstr "Uhvati transakciju"
 # model_terms:ir.ui.view,arch_db:account_payment.payment_refund_wizard_view_form
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model: model:ir.model,name:account_payment.model_res_config_settings
 #, []

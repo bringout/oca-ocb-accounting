@@ -5358,7 +5358,7 @@ msgstr "Kliknite ili pritisnite enter za dodavanje opisa"
 # model_terms:ir.ui.view,arch_db:account.account_terms_conditions_setting_banner
 #, []
 msgid "Close"
-msgstr "Amortizovano"
+msgstr "Zatvori"
 
 # model: model:ir.ui.menu,name:account.account_closing_menu
 #, []
