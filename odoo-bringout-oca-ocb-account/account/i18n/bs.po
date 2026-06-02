@@ -1608,7 +1608,7 @@ msgstr "Sukladno svakom tipu konta"
 #: code:addons/account/models/account_tax.py:0
 #, python-format
 msgid "Account"
-msgstr "Naziv konta"
+msgstr "Konto"
 
 # taken from hr.po
 #. module: account
@@ -2891,7 +2891,7 @@ msgstr "Analitički plan"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_move_line__analytic_precision
 msgid "Analytic Precision"
-msgstr "Preciznost analitike"
+msgstr "Analitička preciznost"
 
 # taken from hr.po
 #. module: account
@@ -3319,13 +3319,13 @@ msgstr "Prijedlozi zatvaranja izvoda iz banke"
 #. module: account
 #: model:ir.model,name:account.model_account_bank_statement
 msgid "Bank Statement"
-msgstr "Izvod banke"
+msgstr "Bankovni izvod"
 
 # taken from hr.po
 #. module: account
 #: model:ir.model,name:account.model_account_bank_statement_line
 msgid "Bank Statement Line"
-msgstr "Stavka izvoda banke"
+msgstr "Stavka bankovnog izvoda"
 
 # taken from hr.po
 #. module: account
@@ -3715,7 +3715,7 @@ msgstr "Može biti vidljivo?"
 #. module: account
 #: code:addons/account/static/src/components/currency_form/form_controller.js:0
 msgid "Cancel"
-msgstr "Otkaži"
+msgstr "Odustani"
 
 # taken from hr.po
 #. module: account
@@ -4335,7 +4335,7 @@ msgstr "Država preduzeća"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__company_currency_id
 msgid "Company Currency"
-msgstr "Valuta preduzeća"
+msgstr "Valuta kompanije"
 
 # taken from hr.po
 #. module: account
@@ -4359,7 +4359,7 @@ msgstr "Preduzeće ima kontni plan"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement__company_id
 msgid "Company related to this journal"
-msgstr "Preduzeće na koje se odnose finansijski nalozi"
+msgstr "Kompanija vezana za ovaj dnevnik"
 
 # taken from hr.po
 #. module: account
@@ -4415,7 +4415,7 @@ msgstr ""
 #. module: account
 #: model:ir.model,name:account.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke"
+msgstr "Postavke konfiguracije"
 
 # taken from hr.po
 #. module: account
@@ -5766,7 +5766,7 @@ msgstr "Prikaži upozorenje za neaktivne valute"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__display_name
 msgid "Display Name"
-msgstr "Naziv za prikaz"
+msgstr "Naziv prikaza"
 
 # taken from hr.po
 #. module: account
@@ -6871,12 +6871,12 @@ msgstr "Sa P&L računa"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_move_line_filter
 msgid "From Trade Payable accounts"
-msgstr "Sa računa poslovnih obaveza"
+msgstr "Sa konta obveza prema dobavljačima"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_move_line_filter
 msgid "From Trade Receivable accounts"
-msgstr "Sa računa poslovnih potraživanja"
+msgstr "Sa konta potraživanja od kupaca"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_reconcile_model_line__amount_type__regex
@@ -8122,7 +8122,7 @@ msgstr "Da li je CoA instaliran"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement__is_complete
 msgid "Is Complete"
-msgstr "Završeno"
+msgstr "Kompletno"
 
 # taken from hr.po
 #. module: account
@@ -8181,7 +8181,7 @@ msgstr "Odštampan"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__is_reconciled
 msgid "Is Reconciled"
-msgstr "Poravnat"
+msgstr "Usklađeno"
 
 # taken from hr.po
 #. module: account
@@ -8205,7 +8205,7 @@ msgstr "Storno"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement__is_valid
 msgid "Is Valid"
-msgstr "Ispravan"
+msgstr "Važeće"
 
 # taken from hr.po
 #. module: account
@@ -8248,7 +8248,7 @@ msgstr "Dnevnik"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__currency_id
 msgid "Journal Currency"
-msgstr "Dnevnik valute"
+msgstr "Valuta dnevnika"
 
 # taken from hr.po
 #. module: account
@@ -8272,7 +8272,7 @@ msgstr "Stavke žurnala (po datumu)"
 #: code:addons/account/models/account_move.py:0
 #, python-format
 msgid "Journal Entry"
-msgstr "Stavka dnevnika"
+msgstr "Knjiženje"
 
 #. module: account
 #. odoo-python
@@ -8350,7 +8350,7 @@ msgstr "Grupe žurnala"
 #. module: account
 #: model:ir.model,name:account.model_account_move_line
 msgid "Journal Item"
-msgstr "Stavka žurnala"
+msgstr "Stavka dnevnika"
 
 # taken from hr.po
 #. module: account
@@ -8370,7 +8370,7 @@ msgstr "Naslov stavke naloga"
 #. module: account
 #: code:addons/account/models/account_lock_exception.py:0
 msgid "Journal Items"
-msgstr "Žurnal (stavke)"
+msgstr "Stavke dnevnika"
 
 # taken from hr.po
 #. module: account
@@ -8589,7 +8589,7 @@ msgstr "Zadnji Hash"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena"
+msgstr "Zadnji put izmijenjeno"
 
 # taken from hr.po
 #. module: account
@@ -8607,13 +8607,13 @@ msgstr "Zadnji kvartal"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__write_uid
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Zadnji put ažurirao"
 
 # taken from hr.po
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažurirano"
+msgstr "Zadnji put ažurirano"
 
 # taken from hr.po
 #. module: account
@@ -9609,7 +9609,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_fiscal_position__note
 msgid "Notes"
-msgstr "Zabilješke"
+msgstr "Napomene"
 
 # taken from hr.po
 #. module: account
@@ -10428,7 +10428,7 @@ msgstr "Platite svoje račune jednim klikom koristeći Euro SEPA uslugu"
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_account__account_type__liability_payable
 msgid "Payable"
-msgstr "Za naplatu"
+msgstr "Obveze"
 
 # taken from hr.po
 #. module: account
@@ -11263,7 +11263,7 @@ msgstr "Potvrde"
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_account__account_type__asset_receivable
 msgid "Receivable"
-msgstr "Kupci"
+msgstr "Potraživanja"
 
 # taken from hr.po
 #. module: account
@@ -11334,7 +11334,7 @@ msgstr "Šablon modela sravnjenja"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_move_line__reconciled
 msgid "Reconciled"
-msgstr "Sravnjeno"
+msgstr "Usklađeno"
 
 # taken from hr.po
 #. module: account
@@ -11756,7 +11756,7 @@ msgstr "Storno: %(move_name)s, %(reason)s"
 #: code:addons/account/models/account_partial_reconcile.py:0
 #, python-format
 msgid "Reversal of: %s"
-msgstr "Storniranje od: %s"
+msgstr "Storno: %s"
 
 # taken from hr.po
 #. module: account
@@ -11975,7 +11975,7 @@ msgstr "Maskirani broj računa"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
 msgid "Save"
-msgstr "Spremi"
+msgstr "Snimi"
 
 # taken from hr.po
 #. module: account
@@ -14144,7 +14144,7 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_bank_statement_line__foreign_currency_id
 msgid "The optional other currency if it is a multi-currency entry."
-msgstr "Opcionalna druga valuta ako je u pitanju viševalutni unos."
+msgstr "Opcionalna druga valuta ako je to viševalutna stavka."
 
 # taken from hr.po
 #. module: account
@@ -15228,7 +15228,7 @@ msgstr "Evidentiraj troškove i prihode po projektima, odjeljenjima itd"
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_line__transaction_type
 msgid "Transaction Type"
-msgstr "Tip transakcije"
+msgstr "Vrsta transakcije"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_reconcile_model__match_transaction_type_param
@@ -15434,7 +15434,7 @@ msgstr "Neproknjižene stavke dnevnika"
 #: code:addons/account/static/src/components/account_payment_field/account_payment.xml:0
 #, python-format
 msgid "Unreconcile"
-msgstr "Otkaži zatvaranje"
+msgstr "Poništi uskladu"
 
 # taken from hr.po
 #. module: account
@@ -15870,7 +15870,7 @@ msgstr ""
 #: code:addons/account/static/src/components/account_payment_field/account_payment.xml:0
 #, python-format
 msgid "View"
-msgstr "Pregled"
+msgstr "Prikaz"
 
 # taken from hr.po
 #. module: account
@@ -26524,3 +26524,1976 @@ msgid ""
 "'n/a' }})"
 msgstr ""
 "{{ object.company_id.name }} Samofaktura (Ref {{ object.name or 'n/a' }})"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid ""
+"\n"
+"Example: %(example)s"
+msgstr ""
+"\n"
+"Primjer: %(example)s"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid ""
+"%(failed_count)s out of %(total_count)s entries could not be reset to draft."
+msgstr ""
+"%(failed_count)s od %(total_count)s zapisa nije moglo biti vraćeno na skicu."
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
+msgid ""
+"- A rounding per tax is advised if your prices are tax-excluded. This "
+"minimizes cumulative rounding errors because it totals all unrounded tax "
+"amounts first and only rounds the final tax total once.\\n"
+"                                                                                                                                                                                "
+"- A rounding per line is advised if your prices are tax-included. That way, "
+"the sum of line subtotal equals the total with taxes."
+msgstr ""
+"- Zaokruživanje po porezu se preporučuje ako su vaše cijene bez uračunatog "
+"poreza. Ovo minimizira kumulativne greške zaokruživanja jer prvo sabira sve "
+"nezaokružene iznose poreza i samo finalni ukupni porez zaokružuje jednom.\\n"
+"                                                                                                                                                                                "
+"- Zaokruživanje po stavki se preporučuje ako su vaše cijene sa uračunatim "
+"porezom. Na taj način, zbir podsuma stavki je jednak ukupnom iznosu sa "
+"porezima."
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_bank_statement_kanban
+msgid "- Ending"
+msgstr "- Završetak"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "1-01-85004-3 or 101850043"
+msgstr "1-01-85004-3 ili 101850043"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid ""
+"10XXXXXXXXY or 20XXXXXXXXY or 15XXXXXXXXY or 16XXXXXXXXY or 17XXXXXXXXY"
+msgstr ""
+"10XXXXXXXXY ili 20XXXXXXXXY ili 15XXXXXXXXY ili 16XXXXXXXXY ili 17XXXXXXXXY"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "11111111111 (NIN) or 2222222222 (VKN)"
+msgstr "11111111111 (NIN) ili 2222222222 (VKN)"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "123-45-67890 or 1234567890"
+msgstr "123-45-67890 ili 1234567890"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid ""
+"12345678 or UA12345678 (EDRPOU), 1234567890 (RNOPP) or 123456789012 (IPN)"
+msgstr ""
+"12345678 ili UA12345678 (EDRPOU), 1234567890 (RNOPP) ili 123456789012 (IPN)"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "12345678-1-11 or 8071592153"
+msgstr "12345678-1-11 ili 8071592153"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "1792060346001 or 1792060346"
+msgstr "1792060346001 ili 1792060346"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "310175397400003 [Fifteen digits, first and last digits should be \"3\"]"
+msgstr "310175397400003 [petnaest znamenaka, prva i zadnja moraju biti \"3\"]"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "49-098-576 or 49098576"
+msgstr "49-098-576 ili 49098576"
+
+#. module: account
+#: model:mail.template,body_html:account.email_template_edi_self_billing_credit_note
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"            <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                Dear\n"
+"                <t t-if=\"object.partner_id.parent_id\">\n"
+"                    <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"                </t>\n"
+"                <t t-else=\"\">\n"
+"                    <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"                </t>\n"
+"                <br/><br/>\n"
+"                Here is your\n"
+"                <t t-if=\"object.name\">\n"
+"                    self-billing credit note <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">RINV/2021/05/0001</span>\n"
+"                </t>\n"
+"                <t t-else=\"\">\n"
+"                    self-billing credit note\n"
+"                </t>\n"
+"                <t t-if=\"object.invoice_origin\">\n"
+"                    (with reference: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"                </t>\n"
+"                amounting in <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"                from <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"                <br/><br/>\n"
+"                Do not hesitate to contact us if you have any questions.\n"
+"                <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"                    <br/><br/>\n"
+"                    <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"                </t>\n"
+"            </p>\n"
+"        </div>\n"
+"                    "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"            <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                Poštovani\n"
+"                <t t-if=\"object.partner_id.parent_id\">\n"
+"                    <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"                </t>\n"
+"                <t t-else=\"\">\n"
+"                    <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"                </t>\n"
+"                <br/><br/>\n"
+"                Šaljemo vam vašu\n"
+"                <t t-if=\"object.name\">\n"
+"                    samoizdatu knjižnu obavijest <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">RINV/2021/05/0001</span>\n"
+"                </t>\n"
+"                <t t-else=\"\">\n"
+"                    samoizdatu knjižnu obavijest\n"
+"                </t>\n"
+"                <t t-if=\"object.invoice_origin\">\n"
+"                    (sa referencom: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"                </t>\n"
+"                u iznosu od <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"                od <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"                <br/><br/>\n"
+"                Slobodno nas kontaktirajte ako imate bilo kakvih pitanja.\n"
+"                <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"                    <br/><br/>\n"
+"                    <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"                </t>\n"
+"            </p>\n"
+"        </div>\n"
+"                    "
+
+#. module: account
+#: model:mail.template,body_html:account.email_template_edi_invoice
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Dear\n"
+"        <t t-if=\"object.partner_id.parent_id\">\n"
+"            <t t-if=\"object.partner_id.name\">\n"
+"                <t t-out=\"object.partner_id.name\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"            </t>\n"
+"            <t t-else=\"\">\n"
+"                <t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>,\n"
+"            </t>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Here is your\n"
+"        <t t-if=\"object.name\">\n"
+"            invoice <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">INV/2021/05/0005</span>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            invoice\n"
+"        </t>\n"
+"        <t t-if=\"object.invoice_origin\">\n"
+"            (with reference: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"        </t>\n"
+"        amounting in <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"        from <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <t t-if=\"object.payment_state in ('paid', 'in_payment')\">\n"
+"            This invoice is already paid.\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            Please remit payment at your earliest convenience.\n"
+"            <t t-if=\"object.payment_reference\">\n"
+"                <br/><br/>\n"
+"                Please use the following communication for your payment: <strong t-out=\"object.payment_reference or ''\">INV/2021/05/0005</strong>\n"
+"                <t t-if=\"object.partner_bank_id\">\n"
+"                    on the account <strong t-out=\"object.partner_bank_id.account_number\"/>\n"
+"                </t>\n"
+"                .\n"
+"            </t>\n"
+"        </t>\n"
+"        <t t-if=\"hasattr(object, 'timesheet_count') and object.timesheet_count\">\n"
+"            <br/><br/>\n"
+"            PS: you can review your timesheets <a t-att-href=\"'/my/timesheets?search_in=invoice&amp;search=%s' % object.name\">from the portal.</a>\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Do not hesitate to contact us if you have any questions.\n"
+"        <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Poštovani\n"
+"        <t t-if=\"object.partner_id.parent_id\">\n"
+"            <t t-if=\"object.partner_id.name\">\n"
+"                <t t-out=\"object.partner_id.name\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"            </t>\n"
+"            <t t-else=\"\">\n"
+"                <t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>,\n"
+"            </t>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Šaljemo vam vašu\n"
+"        <t t-if=\"object.name\">\n"
+"            fakturu <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">INV/2021/05/0005</span>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            fakturu\n"
+"        </t>\n"
+"        <t t-if=\"object.invoice_origin\">\n"
+"            (sa referencom: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"        </t>\n"
+"        u iznosu od <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"        od <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <t t-if=\"object.payment_state in ('paid', 'in_payment')\">\n"
+"            Ova faktura je već plaćena.\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            Molimo izvršite plaćanje u najkraćem mogućem roku.\n"
+"            <t t-if=\"object.payment_reference\">\n"
+"                <br/><br/>\n"
+"                Molimo koristite sljedeću komunikaciju za vaše plaćanje: <strong t-out=\"object.payment_reference or ''\">INV/2021/05/0005</strong>\n"
+"                <t t-if=\"object.partner_bank_id\">\n"
+"                    na račun <strong t-out=\"object.partner_bank_id.account_number\"/>\n"
+"                </t>\n"
+"                .\n"
+"            </t>\n"
+"        </t>\n"
+"        <t t-if=\"hasattr(object, 'timesheet_count') and object.timesheet_count\">\n"
+"            <br/><br/>\n"
+"            P.S.: vaše evidencije rada možete pregledati <a t-att-href=\"'/my/timesheets?search_in=invoice&amp;search=%s' % object.name\">sa portala.</a>\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Slobodno nas kontaktirajte ako imate bilo kakvih pitanja.\n"
+"        <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+
+#. module: account
+#: model:mail.template,body_html:account.email_template_edi_self_billing_invoice
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Dear\n"
+"        <t t-if=\"object.partner_id.parent_id\">\n"
+"            <t t-if=\"object.partner_id.name\">\n"
+"                <t t-out=\"object.partner_id.name\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"            </t>\n"
+"            <t t-else=\"\">\n"
+"                <t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>,\n"
+"            </t>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Here is your\n"
+"        <t t-if=\"object.name\">\n"
+"            self-billing invoice <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">INV/2021/05/0005</span>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            self-billing invoice\n"
+"        </t>\n"
+"        <t t-if=\"object.invoice_origin\">\n"
+"            (with reference: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"        </t>\n"
+"        amounting in <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"        from <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <t t-if=\"object.payment_state in ('paid', 'in_payment')\">\n"
+"            This self-billing invoice has already been paid.\n"
+"        </t>\n"
+"        <t t-if=\"hasattr(object, 'timesheet_count') and object.timesheet_count\">\n"
+"            <br/><br/>\n"
+"            PS: you can review your timesheets <a t-att-href=\"'/my/timesheets?search_in=invoice&amp;search=%s' % object.name\">from the portal.</a>\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Do not hesitate to contact us if you have any questions.\n"
+"        <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Poštovani\n"
+"        <t t-if=\"object.partner_id.parent_id\">\n"
+"            <t t-if=\"object.partner_id.name\">\n"
+"                <t t-out=\"object.partner_id.name\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"            </t>\n"
+"            <t t-else=\"\">\n"
+"                <t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>,\n"
+"            </t>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Šaljemo vam vašu\n"
+"        <t t-if=\"object.name\">\n"
+"            samoizdatu fakturu <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">INV/2021/05/0005</span>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            samoizdatu fakturu\n"
+"        </t>\n"
+"        <t t-if=\"object.invoice_origin\">\n"
+"            (sa referencom: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"        </t>\n"
+"        u iznosu od <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"        od <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <t t-if=\"object.payment_state in ('paid', 'in_payment')\">\n"
+"            Ova samoizdata faktura je već plaćena.\n"
+"        </t>\n"
+"        <t t-if=\"hasattr(object, 'timesheet_count') and object.timesheet_count\">\n"
+"            <br/><br/>\n"
+"            P.S.: vaše evidencije rada možete pregledati <a t-att-href=\"'/my/timesheets?search_in=invoice&amp;search=%s' % object.name\">sa portala.</a>\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Slobodno nas kontaktirajte ako imate bilo kakvih pitanja.\n"
+"        <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+
+#. module: account
+#: model:mail.template,body_html:account.email_template_edi_credit_note
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Dear\n"
+"        <t t-if=\"object.partner_id.parent_id\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Here is your\n"
+"        <t t-if=\"object.name\">\n"
+"            credit note <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">RINV/2021/05/0001</span>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            credit note\n"
+"        </t>\n"
+"        <t t-if=\"object.invoice_origin\">\n"
+"            (with reference: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"        </t>\n"
+"        amounting in <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"        from <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <br/><br/>\n"
+"        Do not hesitate to contact us if you have any questions.\n"
+"        <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Poštovani\n"
+"        <t t-if=\"object.partner_id.parent_id\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t> (<t t-out=\"object.partner_id.parent_id.name or ''\">Azure Interior</t>),\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            <t t-out=\"object.partner_id.name or ''\">Brandon Freeman</t>,\n"
+"        </t>\n"
+"        <br/><br/>\n"
+"        Šaljemo vam vašu\n"
+"        <t t-if=\"object.name\">\n"
+"            knjižnu obavijest <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">RINV/2021/05/0001</span>\n"
+"        </t>\n"
+"        <t t-else=\"\">\n"
+"            knjižnu obavijest\n"
+"        </t>\n"
+"        <t t-if=\"object.invoice_origin\">\n"
+"            (sa referencom: <t t-out=\"object.invoice_origin or ''\">SUB003</t>)\n"
+"        </t>\n"
+"        u iznosu od <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"        od <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <br/><br/>\n"
+"        Slobodno nas kontaktirajte ako imate bilo kakvih pitanja.\n"
+"        <t t-if=\"not is_html_empty(object.invoice_user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"object.invoice_user_id.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+
+#. module: account
+#: model:mail.template,body_html:account.mail_template_data_payment_receipt
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Dear <t t-out=\"object.partner_id.name or ''\">Azure Interior</t><br/><br/>\n"
+"        Thank you for your payment.\n"
+"        Here is your payment receipt <span style=\"font-weight:bold;\" t-out=\"(object.name or '').replace('/','-') or ''\">BNK1-2021-05-0002</span> amounting\n"
+"        to <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount, object.currency_id) or ''\">$ 10.00</span> from <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <br/><br/>\n"
+"        Do not hesitate to contact us if you have any questions.\n"
+"        <br/><br/>\n"
+"        Best regards,\n"
+"        <t t-if=\"not is_html_empty(user.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"        Poštovani <t t-out=\"object.partner_id.name or ''\">Azure Interior</t><br/><br/>\n"
+"        Hvala vam na uplati.\n"
+"        Šaljemo vam potvrdu o uplati <span style=\"font-weight:bold;\" t-out=\"(object.name or '').replace('/','-') or ''\">BNK1-2021-05-0002</span> u iznosu\n"
+"        od <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount, object.currency_id) or ''\">$ 10.00</span> od <t t-out=\"object.company_id.name or ''\">YourCompany</t>.\n"
+"        <br/><br/>\n"
+"        Slobodno nas kontaktirajte ako imate bilo kakvih pitanja.\n"
+"        <br/><br/>\n"
+"        Srdačan pozdrav,\n"
+"        <t t-if=\"not is_html_empty(user.signature)\">\n"
+"            <br/><br/>\n"
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-out=\"user.signature or ''\">Mitchell Admin</t></div>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>\n"
+"\n"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_move_kanban
+msgid ""
+"<span class=\"badge rounded-pill text-bg-info\">\n"
+"                                        To Review\n"
+"                                    </span>"
+msgstr ""
+"<span class=\"badge rounded-pill text-bg-info\">\n"
+"                                        Za pregled\n"
+"                                    </span>"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_partner_property_form
+msgid ""
+"<span class=\"me-1\">One or more Bank Accounts set on this partner are also "
+"used by others:</span>"
+msgstr ""
+"<span class=\"me-1\">Jedan ili više bankovnih računa postavljenih za ovog "
+"partnera koriste i drugi:</span>"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_partner_bank_form_inherit_account
+msgid "<span class=\"me-1\">The Bank Account could be a duplicate of</span>"
+msgstr "<span class=\"me-1\">Bankovni račun bi mogao biti duplikat od</span>"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_move_form
+msgid ""
+"<span invisible=\"name or name_placeholder or "
+"document_sequence_editable\">Draft</span>"
+msgstr ""
+"<span invisible=\"name or name_placeholder or "
+"document_sequence_editable\">Skica</span>"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.tax_repartition_line_kanban
+msgid "<span invisible=\"not account_id\">on</span>"
+msgstr "<span invisible=\"not account_id\">na</span>"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.tax_repartition_line_kanban
+msgid "<span invisible=\"repartition_type == 'base'\">%</span>"
+msgstr "<span invisible=\"repartition_type == 'base'\">%</span>"
+
+#. module: account
+#: model:ir.model.constraint,message:account.constraint_account_journal_group_uniq_name
+msgid "A Ledger group name must be unique."
+msgstr "Naziv grupe knjige mora biti jedinstven."
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_setup_bank_manual_config__clearing_number
+msgid ""
+"A clearing number (or routing number) refers to a bank, branch, or location "
+"and is used by domestic money transfer protocols (from/to bank accounts in "
+"the same country)."
+msgstr ""
+"Klirinški broj (ili broj usmjeravanja) odnosi se na banku, filijalu ili "
+"lokaciju i koristi se u domaćim protokolima novčanih transfera (između "
+"bankovnih računa u istoj državi)."
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
+msgid ""
+"A new field 'Total (tax inc.)' to speed up and control the encoding by "
+"automating line creation with the right account and tax."
+msgstr ""
+"Novo polje 'Ukupno (sa por.)' za ubrzanje i kontrolu unosa automatizovanjem "
+"kreiranja stavke sa odgovarajućim kontom i porezom."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "ACN"
+msgstr "ACN"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_move_line_filter
+msgid "Account (with children)"
+msgstr "Konto (sa podređenima)"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_tax_repartition_line__account_active
+msgid "Account Active"
+msgstr "Konto aktivan"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_report__filter_hierarchy
+msgid "Account Parents"
+msgstr "Nadređeni konti"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_partner__property_account_payable_active
+msgid "Account Payable Active"
+msgstr "Konto obaveza aktivan"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_partner__property_account_receivable_active
+msgid "Account Receivable Active"
+msgstr "Konto potraživanja aktivan"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.tax_repartition_line_form
+msgid "Account Tax Repartition Line"
+msgstr "Stavka raspodjele poreznog konta"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_setup_bank_manual_config__holder_name
+msgid ""
+"Account holder name in case it is different than the name of the partner."
+msgstr "Ime vlasnika računa u slučaju da se razlikuje od imena partnera."
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_depreciation_buildings
+msgid "Accumulated Amortization - Buildings"
+msgstr "Akumulirana amortizacija - Zgrade"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_depreciation_furniture
+msgid "Accumulated Amortization - Furniture & Fixtures"
+msgstr "Akumulirana amortizacija - Namještaj i oprema"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_depreciation_improvements
+msgid "Accumulated Amortization - Improvements"
+msgstr "Akumulirana amortizacija - Poboljšanja"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_depreciation_machines
+msgid "Accumulated Amortization - Machines & Tools"
+msgstr "Akumulirana amortizacija - Mašine i alati"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_depreciation_other_property
+msgid "Accumulated Amortization - Other Property"
+msgstr "Akumulirana amortizacija - Ostala imovina"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_depreciation_technology
+msgid "Accumulated Amortization - Technology"
+msgstr "Akumulirana amortizacija - Tehnologija"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_depreciation_vehicles
+msgid "Accumulated Amortization - Vehicles"
+msgstr "Akumulirana amortizacija - Vozila"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_account__activity_plans_ids
+msgid "Activity Plans"
+msgstr "Planovi aktivnosti"
+
+#. module: account
+#: code:addons/account/static/src/components/mail_attachments/account_move_send_attachments_selector.xml:0
+msgid "Add Attachment"
+msgstr "Dodaj prilog"
+
+#. module: account
+#: code:addons/account/static/src/components/mail_attachments/account_move_send_attachments_selector.xml:0
+msgid "Add..."
+msgstr "Dodaj..."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_partner__additional_identifiers
+msgid "Additional Identifiers"
+msgstr "Dodatni identifikatori"
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_report_line__foldability__always_unfolded
+msgid "Always Unfolded"
+msgstr "Uvijek razmotano"
+
+#. module: account
+#: code:addons/account/wizard/account_payment_register.py:0
+msgid ""
+"Amount of %(amount).2f %(currency)s is already paid. Make sure you don't pay"
+" twice."
+msgstr ""
+"Iznos od %(amount).2f %(currency)s je već plaćen. Pazite da ne platite "
+"dvaput."
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_move__review_state__anomaly
+msgid "Anomaly"
+msgstr "Anomalija"
+
+#. module: account
+#: code:addons/account/static/src/components/many2many_tags_banks/many2many_tags_banks.js:0
+msgid "Archive"
+msgstr "Arhiviraj"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Australian Company Number."
+msgstr "Australski broj kompanije."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Austrian company registry number (UID)."
+msgstr "Austrijski broj registra kompanije (UID)."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_partner__available_additional_identifiers_metadata
+msgid "Available Additional Identifiers Metadata"
+msgstr "Metapodaci dostupnih dodatnih identifikatora"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "BCE/KBO"
+msgstr "BCE/KBO"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__bank_bic
+msgid "BIC/SWIFT"
+msgstr "BIC/SWIFT"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_journal__bank_bic
+msgid ""
+"Bank Identifier Code for international wires in the format Bank Code (4 "
+"letters) + Country Code (2 letters) + Location Code (2 letters/numbers) + "
+"Optional Branch Code (3 letters/numbers)."
+msgstr ""
+"Bankovni identifikacioni kod za međunarodne uplate u formatu Šifra banke (4 "
+"slova) + Šifra države (2 slova) + Šifra lokacije (2 slova/broja) + Opcijska "
+"šifra filijale (3 slova/broja)."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__bank_name
+msgid "Bank Name"
+msgstr "Naziv banke"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__account_journal_suspense_account_active
+msgid "Bank Suspense Account Active"
+msgstr "Konto bankovnog suspenza aktivan"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_setup_bank_manual_config__account_type
+msgid ""
+"Bank account type: Normal, IBAN, CLABE, or other from localization. Inferred"
+" from the bank account number."
+msgstr ""
+"Tip bankovnog računa: Normalni, IBAN, CLABE ili drugi iz lokalizacije. "
+"Izvodi se iz broja bankovnog računa."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__account_cash_basis_base_account_active
+msgid "Base Tax Received Account Active"
+msgstr "Konto primljenog osnovnog poreza aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Belgian Crossroads Bank for Enterprises number."
+msgstr "Belgijski broj iz Crossroads Bank for Enterprises."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Belgian national identification number."
+msgstr "Belgijski nacionalni identifikacijski broj."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Brazilian company identification number. 14 digits."
+msgstr "Brazilski identifikacioni broj kompanije. 14 cifara."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Brazilian individual identification number."
+msgstr "Brazilski identifikacioni broj fizičkog lica."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Brønnøysund nr"
+msgstr "Brønnøysund br"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Business ID"
+msgstr "Poslovni ID"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Business ID (Y-tunnus)."
+msgstr "Poslovni ID (Y-tunnus)."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "CHE-123.456.788 TVA or CHE-123.456.788 MWST or CHE-123.456.788 IVA"
+msgstr "CHE-123.456.788 TVA ili CHE-123.456.788 MWST ili CHE-123.456.788 IVA"
+
+#. module: account
+#: code:addons/account/models/res_partner_bank.py:0
+msgid "CLABE"
+msgstr "CLABE"
+
+#. module: account
+#: code:addons/account/tools/bank_account_number.py:0
+msgid "CLABE should be a string of 18 digits."
+msgstr "CLABE mora biti niz od 18 cifara."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "CPF"
+msgstr "CPF"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "CVR"
+msgstr "CVR"
+
+#. module: account
+#: code:addons/account/wizard/account_payment_register.py:0
+msgid "Check payments"
+msgstr "Plaćanja čekom"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Citizen Identification"
+msgstr "Identifikacija građanina"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__clearing_label_id
+msgid "Clearing Label"
+msgstr "Oznaka kliringa"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_account__code_path
+msgid "Code Path"
+msgstr "Putanja šifre"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_report__user_groupby
+msgid ""
+"Comma-separated list of fields from account.move.line (Journal Item)."
+"             When set, the report lines will generate sublines grouped by "
+"those keys except when specified on the report line."
+msgstr ""
+"Lista polja iz account.move.line (Stavka dnevnika) razdvojena zarezima."
+"             Kada je postavljena, izvještajne stavke će generisati podstavke"
+" grupisane po tim ključevima osim kad je drugačije navedeno na izvještajnoj "
+"stavci."
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_report__groupby
+msgid ""
+"Comma-separated list of fields from account.move.line (Journal Item)."
+"             When set, this report will have report lines generating "
+"sublines grouped by those keys except when specified on the report line."
+msgstr ""
+"Lista polja iz account.move.line (Stavka dnevnika) razdvojena zarezima."
+"             Kada je postavljena, ovaj izvještaj će imati izvještajne stavke"
+" koje generišu podstavke grupisane po tim ključevima osim kad je drugačije "
+"navedeno na izvještajnoj stavci."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Company Registry"
+msgstr "Registar kompanije"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_bank_statement_line__journal_company_id
+msgid "Company of the Journal"
+msgstr "Kompanija dnevnika"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Company registry"
+msgstr "Registar kompanije"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_form
+msgid "Consolidation"
+msgstr "Konsolidacija"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_search
+msgid "Cost of revenue"
+msgstr "Trošak prihoda"
+
+#. module: account
+#: code:addons/account/static/src/components/many2x_tax_tags/tax_tag_popover.xml:0
+msgid "Credit Note :"
+msgstr "Knjižna obavijest :"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Croatian company registry number."
+msgstr "Hrvatski broj registra kompanije."
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_move_line__cumulated_balance
+msgid "Cumulated balance for the account."
+msgstr "Kumulativni saldo konta."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_depreciation_buildings
+msgid "Cumulative amortization recorded for building assets."
+msgstr "Kumulativna amortizacija evidentirana za imovinu zgrada."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_depreciation_technology
+msgid "Cumulative amortization recorded for capitalized technology assets."
+msgstr ""
+"Kumulativna amortizacija evidentirana za kapitalizovanu tehnološku imovinu."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_depreciation_furniture
+msgid "Cumulative amortization recorded for furniture and fixture assets."
+msgstr "Kumulativna amortizacija evidentirana za imovinu namještaja i opreme."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_depreciation_improvements
+msgid ""
+"Cumulative amortization recorded for leasehold or property improvements."
+msgstr ""
+"Kumulativna amortizacija evidentirana za poboljšanja zakupljene ili vlastite"
+" imovine."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_depreciation_machines
+msgid "Cumulative amortization recorded for machinery and tool assets."
+msgstr "Kumulativna amortizacija evidentirana za imovinu mašina i alata."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_depreciation_other_property
+msgid ""
+"Cumulative amortization recorded for other depreciable property assets."
+msgstr "Kumulativna amortizacija evidentirana za ostalu amortizujuću imovinu."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_depreciation_vehicles
+msgid "Cumulative amortization recorded for vehicle assets."
+msgstr "Kumulativna amortizacija evidentirana za imovinu vozila."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__account_discount_expense_allocation_active
+msgid "Customer Invoices Discounts Account Active"
+msgstr "Konto popusta na kupčeve fakture aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "DE123456788 or 12/345/67890"
+msgstr "DE123456788 ili 12/345/67890"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "DUNS"
+msgstr "DUNS"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Danish Central Business Register number."
+msgstr "Danski broj iz Centralnog poslovnog registra."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Danish tax entity number (SE-nummer)."
+msgstr "Danski broj poreznog subjekta (SE-nummer)."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_move_line__deductible_percentage
+msgid "Deductibility Percentage"
+msgstr "Procenat odbitnosti"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__default_account_active
+msgid "Default Account Active"
+msgstr "Standardni konto aktivan"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_expense_buildings
+msgid "Depreciation Expense - Buildings"
+msgstr "Trošak amortizacije - Zgrade"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_expense_furniture
+msgid "Depreciation Expense - Furniture & Fixtures"
+msgstr "Trošak amortizacije - Namještaj i oprema"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_expense_improvements
+msgid "Depreciation Expense - Improvements"
+msgstr "Trošak amortizacije - Poboljšanja"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_expense_machines
+msgid "Depreciation Expense - Machines & Tools"
+msgstr "Trošak amortizacije - Mašine i alati"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_expense_other_property
+msgid "Depreciation Expense - Other Property"
+msgstr "Trošak amortizacije - Ostala imovina"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_expense_technology
+msgid "Depreciation Expense - Technology"
+msgstr "Trošak amortizacije - Tehnologija"
+
+#. module: account
+#: model:account.account,name:account.22_account_account_us_expense_vehicles
+msgid "Depreciation Expense - Vehicles"
+msgstr "Trošak amortizacije - Vozila"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_bank_statement_line__document_sequence_editable
+msgid "Document's sequence editable"
+msgstr "Sekvenca dokumenta uredljiva"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Dun & Bradstreet unique 9-digit business identifier."
+msgstr "Dun & Bradstreet jedinstveni 9-cifreni poslovni identifikator."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Dutch Chamber of Commerce registration number."
+msgstr "Holandski registracijski broj iz Privredne komore."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Dutch government Organisation Identification Number."
+msgstr "Identifikacijski broj holandske vladine organizacije."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "EAN/GLN"
+msgstr "EAN/GLN"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__account_journal_early_pay_discount_gain_account_active
+msgid "Early Discount Gain Account Active"
+msgstr "Konto dobitka od ranog popusta aktivan"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__account_journal_early_pay_discount_loss_account_active
+msgid "Early Discount Loss Account Active"
+msgstr "Konto gubitka od ranog popusta aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Electronic address for French e-invoicing platforms (PDP/PPF)."
+msgstr ""
+"Elektronska adresa za francuske platforme za e-fakturisanje (PDP/PPF)."
+
+#. module: account
+#: model:ir.model,name:account.model_mail_template
+msgid "Email Template"
+msgstr "Predložak email-a"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_report__enable_snapshots
+msgid "Enable Snapshots"
+msgstr "Omogući snimke"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_form
+msgid "Enter description here..."
+msgstr "Unesite opis ovdje..."
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Entries in error"
+msgstr "Stavke u grešci"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Estonian business registry code."
+msgstr "Estonska šifra poslovnog registra."
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Exchange Loss"
+msgstr "Gubitak od kursnih razlika"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Exchange Profit"
+msgstr "Dobitak od kursnih razlika"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_payment_register__exchange_rate
+msgid "Exchange Rate"
+msgstr "Tečaj"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_payment_register__exchange_rate_currency_code
+msgid "Exchange Rate Currency Code"
+msgstr "Šifra valute za tečaj"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_product_product__property_account_expense_active
+msgid "Expense Account Active"
+msgstr "Konto troška aktivan"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_tax_repartition_line__factor
+msgid ""
+"Factor to apply on the journal items generated from this distribution line"
+msgstr ""
+"Faktor koji se primjenjuje na stavke dnevnika generisane iz ove linije "
+"raspodjele"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_tax_repartition_line__factor_percent
+msgid ""
+"Factor to apply on the journal items generated from this distribution line, "
+"in percents"
+msgstr ""
+"Faktor koji se primjenjuje na stavke dnevnika generisane iz ove linije "
+"raspodjele, u procentima"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__state_id
+msgid "Fed. State"
+msgstr "Federacija"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_report_line__foldability
+msgid "Foldability"
+msgstr "Mogućnost preklapanja"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_analytic_line_filter_inherit_account
+msgid "For the Last 365 Days"
+msgstr "Za posljednjih 365 dana"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "France FRCTC Electronic Address"
+msgstr "Francuska FRCTC elektronska adresa"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "France Register of legal persons"
+msgstr "Francuska registar pravnih lica"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "French 14-digit establishment identification number (SIREN + NIC)."
+msgstr ""
+"Francuski 14-cifreni identifikacijski broj poslovne jedinice (SIREN + NIC)."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "French 9-digit business identification number."
+msgstr "Francuski 9-cifreni poslovni identifikacijski broj."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "French national identification number (NIR)."
+msgstr "Francuski nacionalni identifikacijski broj (NIR)."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "GB123456782 or XI123456782"
+msgstr "GB123456782 ili XI123456782"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "GEBA"
+msgstr "GEBA"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_partner__global_location_number
+msgid "GLN"
+msgstr "GLN"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "GS1 identification keys"
+msgstr "GS1 identifikacioni ključevi"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "GS1 identification keys for supply chain management."
+msgstr "GS1 identifikacijski ključevi za upravljanje lancem snabdijevanja."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__income_currency_exchange_account_active
+msgid "Gain Exchange Rate Account Active"
+msgstr "Konto dobitka od kursnih razlika aktivan"
+
+#. module: account
+#: code:addons/account/models/template_generic_coa.py:0
+msgid "Generic (Minimal) Chart of Accounts"
+msgstr "Generički (Minimalni) Kontni plan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "German Electronic Business Address."
+msgstr "Njemačka elektronska poslovna adresa."
+
+#. module: account
+#: model:ir.model.fields,help:account.field_res_partner__global_location_number
+msgid "Global Location Number"
+msgstr "Globalni broj lokacije"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Global Location Number, used to identify parties and locations."
+msgstr ""
+"Globalni broj lokacije, koristi se za identifikaciju strana i lokacija."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_bank_statement_line__has_draft_move_duplicate
+msgid "Has Draft Move Duplicate"
+msgstr "Ima duplikat skice"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__has_ledger
+msgid "Has Ledger"
+msgstr "Ima knjigu"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__has_phishing_warnings
+msgid "Has Phishing Warnings"
+msgstr "Ima upozorenja o phishingu"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__holder_name
+msgid "Holder Name"
+msgstr "Ime vlasnika"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Hungarian company registry number."
+msgstr "Mađarski broj registra kompanije."
+
+#. module: account
+#: code:addons/account/models/res_partner_bank.py:0
+msgid "IBAN"
+msgstr "IBAN"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "ICE"
+msgstr "ICE"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "IIN"
+msgstr "IIN"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "IVA"
+msgstr "IVA"
+
+#. module: account
+#: code:addons/account/static/src/webclient/share_target/account_share_target_item.xml:0
+msgid "In Journal"
+msgstr "U dnevniku"
+
+#. module: account
+#: code:addons/account/models/account_report.py:0
+msgid ""
+"In report '%(report_name)s', on line '%(line_name)s', with label '%(label)s',\n"
+"The format of the cross report expression is invalid. \n"
+"Expected: cross_report(<report_id>|<xml_id>[,force_date_sope])Example:  cross_report(my_module.my_report) or cross_report(123)"
+msgstr ""
+"U izvještaju '%(report_name)s', na stavci '%(line_name)s', sa oznakom '%(label)s',\n"
+"Format izraza unakrsnog izvještaja je nevažeći. \n"
+"Očekivano: cross_report(<report_id>|<xml_id>[,force_date_sope])Primjer:  cross_report(my_module.my_report) ili cross_report(123)"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal_group__included_journal_ids
+msgid "Included Journals"
+msgstr "Uključeni dnevnici"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_product_product__property_account_income_active
+msgid "Income Account Active"
+msgstr "Konto prihoda aktivan"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__transfer_account_active
+msgid "Internal Transfer Account Active"
+msgstr "Konto internog prenosa aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "International Bank Account Number, used as an EDI identifier."
+msgstr "Međunarodni broj bankovnog računa, koristi se kao EDI identifikator."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Invalid identifier: %(identifier)s.%(example)s"
+msgstr "Nevažeći identifikator: %(identifier)s.%(example)s"
+
+#. module: account
+#: code:addons/account/static/src/components/many2x_tax_tags/tax_tag_popover.xml:0
+msgid "Invoice :"
+msgstr "Faktura :"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_bank_statement_line__invoice_vendor_bill_id
+msgid "Invoice Vendor Bill"
+msgstr "Faktura dobavljača"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Japanese corporate number (Specified Subject to Tax)."
+msgstr "Japanski korporativni broj (specifičan subjekt poreza)."
+
+#. module: account
+#: model:ir.model,name:account.model_account_move_reversal
+msgid "Journal Entry Reversal"
+msgstr "Storno stavke dnevnika"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "KVK"
+msgstr "KVK"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "LEI"
+msgstr "LEI"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Latvian unified registration number."
+msgstr "Latvijski jedinstveni registracijski broj."
+
+#. module: account
+#: code:addons/account/models/res_partner_bank.py:0
+msgid "Learn more"
+msgstr "Saznajte više"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Legal Entity Identifier"
+msgstr "Identifikator pravnog subjekta"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Leitweg-ID"
+msgstr "Leitweg-ID"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_move_line__open_on
+msgid "Limit the date for the Residual (at date) fields."
+msgstr "Ograniči datum za polja Preostalo (na datum)."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Lithuanian legal entity code (JAK)."
+msgstr "Litvanska šifra pravnog subjekta (JAK)."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__module_account_loan_extract
+msgid "Loans Digitization"
+msgstr "Digitalizacija kredita"
+
+#. module: account
+#: code:addons/account/models/account_move_line.py:0
+msgid "Local Gaap"
+msgstr "Lokalni Gaap"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__loss_account_active
+msgid "Loss Account Active"
+msgstr "Konto gubitka aktivan"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__expense_currency_exchange_account_active
+msgid "Loss Exchange Rate Account Active"
+msgstr "Konto gubitka od kursnih razlika aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Luxembourg business registry number."
+msgstr "Luksemburški broj poslovnog registra."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Malaysian company registration number."
+msgstr "Malezijski registracijski broj kompanije."
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_report_column__figure_type__many2one
+msgid "Many2One"
+msgstr "Many2One"
+
+#. module: account
+#: model:ir.actions.server,name:account.action_mark_payment_as_reconciled
+msgid "Mark as Reconciled"
+msgstr "Označi kao usaglašeno"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid ""
+"Moroccan joint business identifier (Identifiant Commun de l'Entreprise)."
+msgstr ""
+"Marokanski zajednički poslovni identifikator (Identifiant Commun de "
+"l'Entreprise)."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "NZBN"
+msgstr "NZBN"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_account__name_path
+msgid "Name Path"
+msgstr "Putanja imena"
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_report_line__foldability__never_unfolded
+msgid "Never Unfolded"
+msgstr "Nikad razmotano"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "New Zealand Business Number."
+msgstr "Poslovni broj Novog Zelanda."
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_move__review_state__no_review
+msgid "No Review"
+msgstr "Bez pregleda"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_tax__non_deductible_amount
+msgid "Non Deductible Amount"
+msgstr "Iznos koji se ne odbija"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Norwegian Register of Legal Entities (Brønnøysund Register Center)"
+msgstr "Norveški registar pravnih subjekata (Brønnøysund Register Center)"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_position_form
+msgid "Note to add on invoices using this Fiscal Position."
+msgstr "Napomena za fakture koje koriste ovu poreznu poziciju."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "OIN"
+msgstr "OIN"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_move_line__open_on
+msgid "Open On"
+msgstr "Otvori na"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.account_journal_dashboard_kanban_view
+msgid "Outstanding payments"
+msgstr "Neizmirena plaćanja"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_account__parent_id
+msgid "Parent Account"
+msgstr "Nadređeni konto"
+
+#. module: account
+#: code:addons/account/models/res_partner_bank.py:0
+msgid "Partner set to %s"
+msgstr "Partner postavljen na %s"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_account__reconcile
+msgid "Payment Reconciliation"
+msgstr "Usaglašavanje plaćanja"
+
+#. module: account
+#: code:addons/account/models/account_payment.py:0
+msgid "Payment must be in paid state to be reconciled."
+msgstr "Plaćanje mora biti u stanju plaćeno da bi bilo usaglašeno."
+
+#. module: account
+#: code:addons/account/models/account_payment.py:0
+msgid "Payments linked to an Asset Cash account cannot be reconciled."
+msgstr ""
+"Plaćanja povezana sa kontom Gotovine osnovnog sredstva ne mogu biti "
+"usaglašena."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_expense_buildings
+msgid "Periodic depreciation expense for building assets."
+msgstr "Periodični trošak amortizacije za imovinu zgrada."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_expense_technology
+msgid "Periodic depreciation expense for capitalized technology assets."
+msgstr "Periodični trošak amortizacije za kapitalizovanu tehnološku imovinu."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_expense_furniture
+msgid "Periodic depreciation expense for furniture and fixture assets."
+msgstr "Periodični trošak amortizacije za imovinu namještaja i opreme."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_expense_improvements
+msgid "Periodic depreciation expense for leasehold or property improvements."
+msgstr ""
+"Periodični trošak amortizacije za poboljšanja zakupljene ili vlastite "
+"imovine."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_expense_machines
+msgid "Periodic depreciation expense for machinery and tool assets."
+msgstr "Periodični trošak amortizacije za imovinu mašina i alata."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_expense_other_property
+msgid "Periodic depreciation expense for other depreciable property assets."
+msgstr "Periodični trošak amortizacije za ostalu amortizujuću imovinu."
+
+#. module: account
+#: model:account.account,description:account.22_account_account_us_expense_vehicles
+msgid "Periodic depreciation expense for vehicle assets."
+msgstr "Periodični trošak amortizacije za imovinu vozila."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Peruvian unique taxpayer registry number (RUC)."
+msgstr "Peruanski jedinstveni registracijski broj poreznog obveznika (RUC)."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__phishing_warnings
+msgid "Phishing Warnings"
+msgstr "Upozorenja o phishingu"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_partner_bank_search_inherit
+msgid "Phishing risk"
+msgstr "Phishing rizik"
+
+#. module: account
+#: code:addons/account/models/res_partner_bank.py:0
+msgid ""
+"Phishing risk: %(label1)s is in %(country1)s but %(label2)s is in "
+"%(country2)s"
+msgstr ""
+"Phishing rizik: %(label1)s je u %(country1)s ali %(label2)s je u "
+"%(country2)s"
+
+#. module: account
+#: code:addons/account/models/res_partner_bank.py:0
+msgid ""
+"Phishing risk: %(money_transfer_service)s is a money transfer service and "
+"not a bank. Double check if the account can be trusted by calling the "
+"vendor."
+msgstr ""
+"Phishing rizik: %(money_transfer_service)s je servis za novčane transfere a "
+"ne banka. Dvostruko provjerite da li se računu može vjerovati pozivanjem "
+"dobavljača."
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__text
+msgid "Plain Text"
+msgstr "Običan tekst"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.init_accounts_tree
+msgid "Post Entry?"
+msgstr "Knjižiti stavku?"
+
+#. module: account
+#: model:ir.actions.server,name:account.action_server_payment_receipt
+msgid "Print Payment Receipt"
+msgstr "Štampaj potvrdu o uplati"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__non_deductible_account_active
+msgid "Private Share Account Active"
+msgstr "Konto privatnog dijela aktivan"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_move_form
+msgid "Professional"
+msgstr "Profesionalna"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__profit_account_active
+msgid "Profit Account Active"
+msgstr "Konto dobiti aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "RO1234567897 or 8001011234567 or 9000123456789"
+msgstr "RO1234567897 ili 8001011234567 ili 9000123456789"
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__reference
+msgid "Record Reference"
+msgstr "Referenca zapisa"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Registrikood"
+msgstr "Registrikood"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_move_line__residual_at_date
+msgid "Residual (at date)"
+msgstr "Preostalo (na datum)"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_move_line__residual_currency_at_date
+msgid "Residual in currency (at date)"
+msgstr "Preostalo u valuti (na datum)"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
+msgid ""
+"Review all the modification done by the user with right under bookkeeper."
+msgstr ""
+"Pregledaj sve izmjene koje je korisnik uradio sa pravom ispod knjigovođe."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_bank_statement_line__set_to_review_documents
+msgid "Review data"
+msgstr "Pregledaj podatke"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_account_form
+msgid "Root account"
+msgstr "Korijenski konto"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Routing ID for invoicing German public authorities."
+msgstr "ID za usmjeravanje za fakturisanje njemačkim javnim organima."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "SE"
+msgstr "SE"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "SIREN"
+msgstr "SIREN"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "SIRET"
+msgstr "SIRET"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "SST"
+msgstr "SST"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "See exchange information"
+msgstr "Pogledaj informacije o kursnim razlikama"
+
+#. module: account
+#: model:ir.model,name:account.model_account_move_send_batch_wizard
+msgid "Send Invoice Batch Wizard"
+msgstr "Čarobnjak za grupno slanje faktura"
+
+#. module: account
+#: model:ir.model,name:account.model_account_move_send_wizard
+msgid "Send Invoice Wizard"
+msgstr "Čarobnjak za slanje fakture"
+
+#. module: account
+#: model:ir.model,name:account.model_account_move_send
+msgid "Shared Send Invoice Wizard Functions"
+msgstr "Zajedničke funkcije čarobnjaka za slanje faktura"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__show_clearing_number
+msgid "Show Clearing Number"
+msgstr "Prikaži broj kliringa"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_bank_statement_line__show_invoice_vendor_bill
+msgid "Show Invoice Vendor Bill"
+msgstr "Prikaži fakturu dobavljača"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Singapore Unique Entity Number."
+msgstr "Singapurski jedinstveni broj subjekta."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Slovak company identification number (IČO)."
+msgstr "Slovački identifikacijski broj kompanije (IČO)."
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Some entries could not be reset to draft"
+msgstr "Neke stavke nije moguće vratiti na skicu"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_bank_statement_kanban
+msgid "Starting"
+msgstr "Početak"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__street
+msgid "Street"
+msgstr "Ulica"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__street2
+msgid "Street2"
+msgstr "Ulica2"
+
+#. module: account
+#: model:ir.model.fields.selection,name:account.selection__account_move__review_state__supervised
+msgid "Supervised"
+msgstr "Pod nadzorom"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_journal__suspense_account_active
+msgid "Suspense Account Active"
+msgstr "Konto suspenza aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Swedish organization number (Organisationsnummer)."
+msgstr "Švedski organizacijski broj (Organisationsnummer)."
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "Swiss company identification number (UIDB)."
+msgstr "Švicarski identifikacijski broj kompanije (UIDB)."
+
+#. module: account
+#: code:addons/account/static/src/components/many2x_tax_tags/tax_tag_popover.xml:0
+msgid "Tax Distribution"
+msgstr "Raspodjela poreza"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_setup_bank_manual_config__phishing_warnings
+msgid ""
+"Technical field used to display warnings if there's a potential phishing "
+"risk"
+msgstr ""
+"Tehničko polje koje se koristi za prikaz upozorenja ako postoji potencijalni"
+" phishing rizik"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Template for Bills"
+msgstr "Šablon za fakture dobavljača"
+
+#. module: account
+#: code:addons/account/models/account_account.py:0
+msgid "Template for Chart of Accounts"
+msgstr "Šablon za kontni plan"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Template for Credit Notes"
+msgstr "Šablon za knjižne obavijesti"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Template for Invoices"
+msgstr "Šablon za fakture"
+
+#. module: account
+#: code:addons/account/models/account_move_line.py:0
+msgid "Template for Journal Items"
+msgstr "Šablon za stavke dnevnika"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Template for Misc. Operations"
+msgstr "Šablon za razne operacije"
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid "Template for Refunds"
+msgstr "Šablon za povraćaje"
+
+#. module: account
+#: model:ir.model.constraint,message:account.constraint_account_report_column_expression_label_uniq
+msgid "The Expression label must be unique per account report."
+msgstr "Oznaka izraza mora biti jedinstvena po izvještaju konta."
+
+#. module: account
+#: code:addons/account/tools/bank_account_number.py:0
+msgid ""
+"The IBAN does not seem to be correct. You should have entered something like this %s\n"
+"Where B = National bank code, S = Branch code, C = Account No, k = Check digit"
+msgstr ""
+"Čini se da IBAN nije ispravan. Trebali bi upisati nešto poput %s\n"
+"Gdje je B= Nacionalni kod banke, S=VBDI Banke, C= broj računa, k=kontrolni broj"
+
+#. module: account
+#: code:addons/account/tools/bank_account_number.py:0
+msgid "The IBAN is invalid, it should begin with the country code"
+msgstr "IBAN nije valida, trebao bi da počinje sa šifrom države"
+
+#. module: account
+#: code:addons/account/models/account_account.py:0
+msgid ""
+"The account code can only contain alphanumeric characters, dots, and dashes."
+msgstr ""
+"Šifra konta može sadržavati samo alfanumeričke znakove, tačke i crtice."
+
+#. module: account
+#: code:addons/account/models/account_move_line.py:0
+msgid "The deductibility percentage must be between 0% and 100%"
+msgstr "Procenat odbitnosti mora biti između 0% i 100%"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.res_config_settings_view_form
+msgid "The document's sequence becomes editable on all documents."
+msgstr "Sekvenca dokumenta postaje uredljiva na svim dokumentima."
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_move_line__residual_currency_at_date
+msgid ""
+"The residual amount (at date) on a journal item expressed in its currency."
+msgstr ""
+"Preostali iznos (na datum) na stavki dnevnika izražen u njegovoj valuti."
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_move_line__residual_at_date
+msgid ""
+"The residual amount (at date) on a journal item expressed in the company "
+"currency."
+msgstr ""
+"Preostali iznos (na datum) na stavki dnevnika izražen u valuti kompanije."
+
+#. module: account
+#: code:addons/account/tools/bank_account_number.py:0
+msgid "There is no IBAN code."
+msgstr "Nema IBAN šifre."
+
+#. module: account
+#: code:addons/account/tools/bank_account_number.py:0
+msgid "This CLABE does not pass the checksum check, please verify it."
+msgstr ""
+"Ovaj CLABE ne prolazi provjeru kontrolnog zbira, molimo provjerite ga."
+
+#. module: account
+#: code:addons/account/tools/bank_account_number.py:0
+msgid "This IBAN does not pass the validation check, please verify it."
+msgstr "Ovaj IBAN ne prolazi validaciju, molim provjerite!"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_account__reconcile
+msgid ""
+"This account is used in bank reconciliation. Currency rate difference "
+"entries will be automatically created if needed."
+msgstr ""
+"Ovaj konto se koristi u usaglašavanju banke. Stavke kursnih razlika će biti "
+"automatski kreirane ako bude potrebno."
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.init_accounts_tree
+msgid ""
+"This action is irreversible: the credit/debit cannot be modified again from "
+"this screen."
+msgstr ""
+"Ova radnja je nepovratna: zaduženje/potraživanje se više ne može mijenjati "
+"sa ovog ekrana."
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid ""
+"This entry has already been reviewed. You need the bookkeeper role to change"
+" it."
+msgstr ""
+"Ova stavka je već pregledana. Potrebna vam je uloga knjigovođe da je "
+"promijenite."
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_tax_form
+msgid "This note will be mentioned on invoices using this tax."
+msgstr "Ova napomena će biti spomenuta na fakturama koje koriste ovaj porez."
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.view_move_line_payment_tree
+msgid "Total Residual at date"
+msgstr "Ukupno preostalo na datum"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_payment__transaction_uuid
+msgid "Transaction ID"
+msgstr "ID transakcije"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "UEN"
+msgstr "UEN"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "UIDB"
+msgstr "UIDB"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_payment__transaction_uuid
+msgid "Unique transaction identifier assigned by the initiating party"
+msgstr ""
+"Jedinstveni identifikator transakcije dodijeljen od strane inicijatora"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_payment_register__unreconciled_paid_amount
+msgid "Unreconciled Paid Amount"
+msgstr "Neusaglašen plaćeni iznos"
+
+#. module: account
+#: model:ir.model,name:account.model_validate_account_move
+msgid "Validate Journal Entry"
+msgstr "Potvrdi stavku dnevnika"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.init_accounts_tree
+msgid "Validate and Post"
+msgstr "Potvrdi i knjiži"
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_res_config_settings__account_discount_income_allocation_active
+msgid "Vendor Bills Discounts Account Active"
+msgstr "Konto popusta na fakturama dobavljača aktivan"
+
+#. module: account
+#: code:addons/account/tools/partner_identifiers.py:0
+msgid "XXXXXXXXX [9 digits] and it should respect the Luhn algorithm checksum"
+msgstr "XXXXXXXXX [9 brojeva] trebalo bi poštivati Luhn algoritam za provjeru"
+
+#. module: account
+#: code:addons/account/models/account_account.py:0
+msgid ""
+"You are attempting to validate opening entries belonging to another company."
+" Please switch to the correct company."
+msgstr ""
+"Pokušavate potvrditi početne stavke koje pripadaju drugoj kompaniji. Molimo "
+"prebacite se na ispravnu kompaniju."
+
+#. module: account
+#: code:addons/account/models/account_move_send.py:0
+msgid ""
+"You can only generate sales documents or purchase documents for self-"
+"billing."
+msgstr ""
+"Možete generirati samo prodajne dokumente ili dokumente nabavke za "
+"samoizdavanje."
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid ""
+"You cannot edit the journal of a journal entry if it has been posted once, "
+"unless the name is removed or set to \"/\". This might create a gap in the "
+"sequence."
+msgstr ""
+"Ne možete uređivati dnevnik stavke dnevnika ako je jednom proknjižena, osim "
+"ako se ime ukloni ili postavi na \"/\". Ovo može stvoriti prazninu u "
+"sekvenci."
+
+#. module: account
+#: code:addons/account/models/account_move.py:0
+msgid ""
+"You cannot edit the journal of a journal entry with a sequence number "
+"assigned, unless the name is removed or set to \"/\". This might create a "
+"gap in the sequence."
+msgstr ""
+"Ne možete uređivati dnevnik stavke dnevnika sa dodijeljenim sekvencijskim "
+"brojem, osim ako se ime ukloni ili postavi na \"/\". Ovo može stvoriti "
+"prazninu u sekvenci."
+
+#. module: account
+#: code:addons/account/models/account_tax.py:0
+msgid "You must select a payable account for 'Tax Payable Account'."
+msgstr "Morate odabrati konto obaveza za 'Konto obaveza poreza'."
+
+#. module: account
+#: code:addons/account/models/account_tax.py:0
+msgid "You must select a receivable account for 'Tax Receivable Account'."
+msgstr "Morate odabrati konto potraživanja za 'Konto potraživanja poreza'."
+
+#. module: account
+#: code:addons/account/models/account_tax.py:0
+msgid "You must use non-trade accounts for tax groups."
+msgstr "Za grupe poreza morate koristiti netrgovačke konte."
+
+#. module: account
+#: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__zip
+msgid "Zip"
+msgstr "Broj pošte"
+
+#. module: account
+#: model_terms:ir.ui.view,arch_db:account.validate_account_move_view
+msgid "fall outside the typical range.<br/>"
+msgstr "izlaze iz uobičajenog opsega.<br/>"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_account__code_path
+msgid ""
+"similar to parent path but with codes instead of ids, used to order accounts"
+msgstr ""
+"slično putanji nadređenog ali sa šiframa umjesto id-ova, koristi se za "
+"sortiranje konta"
+
+#. module: account
+#: model:ir.model.fields,help:account.field_account_account__name_path
+msgid ""
+"similar to parent path but with names instead of ids, used to order and "
+"search accounts"
+msgstr ""
+"slično putanji nadređenog ali sa imenima umjesto id-ova, koristi se za "
+"sortiranje i pretragu konta"

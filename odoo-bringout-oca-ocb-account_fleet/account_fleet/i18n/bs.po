@@ -49,13 +49,13 @@ msgstr "Datum kreiranja"
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_account_move
 msgid "Journal Entry"
-msgstr "Stavka dnevnika"
+msgstr "Knjiženje"
 
 # taken from hr.po
 #. module: account_fleet
 #: model:ir.model,name:account_fleet.model_account_move_line
 msgid "Journal Item"
-msgstr "Stavka žurnala"
+msgstr "Stavka dnevnika"
 
 # taken from hr.po
 #. module: account_fleet
@@ -150,3 +150,54 @@ msgid ""
 msgstr ""
 "Ne možete mijenjati iznos usluga povezanih sa stavkom knjiženja. Učinite to "
 "na povezanoj računovodstvenoj stavci."
+
+#. module: account_fleet
+#: model_terms:ir.ui.view,arch_db:account_fleet.report_invoice_document
+msgid "1-ABC-123"
+msgstr ""
+
+#. module: account_fleet
+#: model_terms:ir.ui.view,arch_db:account_fleet.fleet_vehicle_log_services_view_form
+msgid ""
+"<span class=\"o_stat_value\">New</span>\n"
+"                                <span class=\"o_stat_text\">Service's Bill</span>"
+msgstr ""
+
+#. module: account_fleet
+#: model:ir.model,name:account_fleet.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: account_fleet
+#: model:ir.model.fields,help:account_fleet.field_account_account__is_vehicle_account
+msgid ""
+"Check this box if a vehicle has to be linked to the account, when creating a"
+" bill for an expense or when creating an asset."
+msgstr ""
+
+#. module: account_fleet
+#: model:ir.model.fields,field_description:account_fleet.field_account_account__is_vehicle_account
+msgid "Requires vehicle"
+msgstr ""
+
+#. module: account_fleet
+#: code:addons/account_fleet/models/account_move.py:0
+msgid "Services"
+msgstr "Usluge"
+
+#. module: account_fleet
+#: model:ir.model,name:account_fleet.model_account_tax
+msgid "Tax"
+msgstr ""
+
+#. module: account_fleet
+#: code:addons/account_fleet/models/fleet_vehicle_log_services.py:0
+msgid ""
+"You cannot modify the amount of services linked to a journal item. Do it on "
+"the related accounting entry instead."
+msgstr ""
+
+#. module: account_fleet
+#: code:addons/account_fleet/models/account_move.py:0
+msgid "account_move_line_id"
+msgstr ""

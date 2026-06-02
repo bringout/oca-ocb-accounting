@@ -77,7 +77,7 @@ msgstr "Kompanije"
 #. module: snailmail_account
 #: model:ir.model,name:snailmail_account.model_res_config_settings
 msgid "Config Settings"
-msgstr "Postavke"
+msgstr "Postavke konfiguracije"
 
 # taken from hr.po
 #. module: snailmail_account
@@ -101,7 +101,7 @@ msgstr "Kreirano"
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_account_move__display_name
 msgid "Display Name"
-msgstr "Naziv za prikaz"
+msgstr "Naziv prikaza"
 
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_account_move__id
@@ -142,19 +142,19 @@ msgstr "Pošalji pismom po defaultu"
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice____last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena"
+msgstr "Zadnji put izmijenjeno"
 
 # taken from hr.po
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice__write_uid
 msgid "Last Updated by"
-msgstr "Zadnji ažurirao"
+msgstr "Zadnji put ažurirao"
 
 # taken from hr.po
 #. module: snailmail_account
 #: model:ir.model.fields,field_description:snailmail_account.field_snailmail_confirm_invoice__write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažurirano"
+msgstr "Zadnji put ažurirano"
 
 # taken from hr.po
 #. module: snailmail_account
@@ -258,3 +258,13 @@ msgstr "Pregledaj fakture"
 #: code:addons/snailmail_account/controllers/portal.py:0
 msgid "by Post"
 msgstr "poštom"
+
+#. module: snailmail_account
+#: model:ir.model,name:snailmail_account.model_account_move_send_batch_wizard
+msgid "Send Invoice Batch Wizard"
+msgstr "Čarobnjak za grupno slanje faktura"
+
+#. module: snailmail_account
+#: model:ir.model,name:snailmail_account.model_account_move_send
+msgid "Shared Send Invoice Wizard Functions"
+msgstr "Zajedničke funkcije čarobnjaka za slanje faktura"

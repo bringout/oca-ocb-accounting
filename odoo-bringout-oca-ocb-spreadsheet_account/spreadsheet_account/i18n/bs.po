@@ -37,13 +37,13 @@ msgstr ""
 #. module: spreadsheet_account
 #: model:ir.model,name:spreadsheet_account.model_account_account
 msgid "Account"
-msgstr "Naziv konta"
+msgstr "Konto"
 
 # taken from hr.po
 #. module: spreadsheet_account
 #: model:ir.model,name:spreadsheet_account.model_res_company
 msgid "Companies"
-msgstr "Tvrtke"
+msgstr "Kompanije"
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -316,3 +316,18 @@ msgstr "ID-jevi oznaka (odvojeni zarezom)."
 #: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 msgid "The technical account type (possible values are: %s)."
 msgstr "Tehnički tip konta (moguće vrijednosti su: %s)."
+
+#. module: spreadsheet_account
+#: model:ir.model,name:spreadsheet_account.model_res_company
+msgid "Company"
+msgstr ""
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/fiscal_year_global_filter.js:0
+msgid "Current Fiscal Year"
+msgstr ""
+
+#. module: spreadsheet_account
+#: code:addons/spreadsheet_account/static/src/fiscal_year_global_filter.js:0
+msgid "Fiscal Year"
+msgstr ""

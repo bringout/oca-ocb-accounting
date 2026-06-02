@@ -200,7 +200,7 @@ msgstr "Omjer"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Receivable"
-msgstr "Kupci"
+msgstr "Potraživanja"
 
 # taken from hr.po
 #. module: spreadsheet_dashboard_account
