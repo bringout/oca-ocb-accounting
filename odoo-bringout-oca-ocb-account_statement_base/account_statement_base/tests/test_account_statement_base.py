@@ -1,21 +1,22 @@
 from odoo import Command
 from odoo.tests import tagged
 
-from odoo.addons.account.tests.common import TestAccountReconciliationCommon
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
 @tagged("post_install", "-at_install")
-class TestReconciliationWidget(TestAccountReconciliationCommon):
+class TestOpenEntries(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.company = cls.company_data["company"]
         cls.acc_bank_stmt_model = cls.env["account.bank.statement"]
         cls.account_move_model = cls.env["account.move"]
         cls.account_move_line_model = cls.env["account.move.line"]
         cls.current_assets_account = cls.env["account.account"].search(
             [
                 ("account_type", "=", "asset_current"),
-                ("company_id", "=", cls.company.id),
+                ("company_ids", "in", cls.company.ids),
             ],
             limit=1,
         )
@@ -23,7 +24,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         cls.non_current_assets_account = cls.env["account.account"].search(
             [
                 ("account_type", "=", "asset_non_current"),
-                ("company_id", "=", cls.company.id),
+                ("company_ids", "in", cls.company.ids),
             ],
             limit=1,
         )

@@ -2,11 +2,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.tools.sql import pg_varchar
 
 
 class CharId(fields.Id):
     type = "string"
-    column_type = ("varchar", fields.pg_varchar())
+    column_type = ("varchar", pg_varchar())
 
 
 class AccountAccountReconcile(models.Model):
@@ -15,7 +16,7 @@ class AccountAccountReconcile(models.Model):
     _inherit = "account.reconcile.abstract"
     _auto = False
 
-    reconcile_data_info = fields.Serialized(inverse="_inverse_reconcile_data_info")
+    reconcile_data_info = fields.Json(inverse="_inverse_reconcile_data_info")
 
     partner_id = fields.Many2one("res.partner", readonly=True)
     account_id = fields.Many2one("account.account", readonly=True)
@@ -25,13 +26,11 @@ class AccountAccountReconcile(models.Model):
 
     @property
     def _table_query(self):
-        return "%s %s %s %s %s" % (
-            self._select(),
-            self._from(),
-            self._where(),
-            self._groupby(),
-            self._having(),
+        query = (
+            f"{self._select()} {self._from()} {self._where()} "
+            f"{self._groupby()} {self._having()}"
         )
+        return query
 
     def _select(self):
         account_account_name_field = (
@@ -56,8 +55,8 @@ class AccountAccountReconcile(models.Model):
                 a.id as account_id,
                 FALSE as is_reconciled,
                 aml.currency_id as currency_id,
-                a.company_id,
-                false as foreign_currency_id,
+                am.company_id,
+                null as foreign_currency_id,
                 (
                     SUM(
                         CASE WHEN aml.amount_residual > 0
@@ -96,7 +95,7 @@ class AccountAccountReconcile(models.Model):
                     ELSE NULL
                 END,
                 aml.currency_id,
-                a.company_id
+                am.company_id
         """
 
     def _having(self):
@@ -204,12 +203,3 @@ class AccountAccountReconcile(models.Model):
         for line in lines:
             self._add_account_move_line(line, keep_current=True)
         return res
-
-
-class AccountAccountReconcileData(models.TransientModel):
-    _name = "account.account.reconcile.data"
-    _description = "Reconcile data model to store user info"
-
-    user_id = fields.Many2one("res.users", required=True)
-    reconcile_id = fields.Integer(required=True)
-    data = fields.Serialized()

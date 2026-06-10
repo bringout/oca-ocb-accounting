@@ -1,4 +1,4 @@
-from odoo import _, models
+from odoo import models
 
 
 class AccountBankStatement(models.Model):
@@ -6,8 +6,7 @@ class AccountBankStatement(models.Model):
 
     def action_open_statement_lines(self):
         self.ensure_one()
-        if not self:
-            return {}
+
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "account_statement_base.account_bank_statement_line_action"
         )
@@ -16,8 +15,8 @@ class AccountBankStatement(models.Model):
                 "domain": [("statement_id", "=", self.id)],
                 "context": {
                     "default_statement_id": self.id,
-                    "default_journal_id": self._context.get("active_id")
-                    if self._context.get("active_model") == "account.journal"
+                    "default_journal_id": self.env.context.get("active_id")
+                    if self.env.context.get("active_model") == "account.journal"
                     else None,
                     "account_bank_statement_line_main_view": True,
                 },
@@ -29,8 +28,8 @@ class AccountBankStatement(models.Model):
     def open_entries(self):
         self.ensure_one()
         return {
-            "name": _("Journal Items"),
-            "view_mode": "tree,form",
+            "name": self.env._("Journal Items"),
+            "view_mode": "list,form",
             "res_model": "account.move.line",
             "view_id": False,
             "type": "ir.actions.act_window",
@@ -42,12 +41,3 @@ class AccountBankStatement(models.Model):
                 ("statement_id", "=", self.id),
             ],
         }
-
-    def _compute_balance_end(self):
-        # Consider new lines amount in the balance
-        # Remove if merged: https://github.com/odoo/odoo/pull/188675
-        res = super()._compute_balance_end()
-        for stmt in self:
-            lines = stmt.line_ids.filtered(lambda x: not x._origin)
-            stmt.balance_end += sum(lines.mapped("amount"))
-        return res
