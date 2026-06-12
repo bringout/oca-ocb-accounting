@@ -591,10 +591,14 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
 
     def _line_nodes_filter_base_lines(self, vals, filter_function=None):
         # EXTENDS account.edi.xml.ubl
-        # Early payment discount lines should not appear as lines but as allowances/charges.
+        # Early payment discount lines AND global discount lines should not appear as lines but as allowances/charges.
         # Cash rounding lines should not appear as lines but in PayableRoundingAmount.
         def new_filter_function(base_line):
-            if self._ubl_is_early_payment_base_line(base_line) or self._ubl_is_cash_rounding_base_line(base_line):
+            if any([
+                self._ubl_is_early_payment_base_line(base_line),
+                self._ubl_is_global_discount_base_line(base_line),
+                self._ubl_is_cash_rounding_base_line(base_line),
+            ]):
                 return False
             return not filter_function or filter_function(base_line)
 
@@ -669,6 +673,17 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
     def _ubl_add_party_tax_scheme_nodes(self, vals):
         # EXTENDS account.edi.ubl
         super()._ubl_add_party_tax_scheme_nodes(vals)
+        # [BR-O-03]/[BR-O-04]/[BR-O-05] no party tax scheme with "Not subject to VAT" VAT Category Code
+        base_lines = vals['base_lines']
+        if (
+            'ubl_cii_tax_category_code' in self.env['account.tax']._fields
+            and any(
+                tax_data['tax'].ubl_cii_tax_category_code == 'O'
+                for base_line in base_lines
+                for tax_data in base_line['tax_details']['taxes_data']
+            )
+        ):
+            return
         nodes = vals['party_node']['cac:PartyTaxScheme']
         partner = vals['party_vals']['partner']
         commercial_partner = partner.commercial_partner_id
@@ -683,6 +698,9 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
 
             if country_code == 'HU' and not vat.upper().startswith('HU'):
                 vat = 'HU' + vat[:8]
+
+            if country_code == 'DK' and not vat.upper().startswith('DK'):
+                vat = 'DK' + vat
 
             nodes.append({
                 'cbc:CompanyID': {'_text': vat},
@@ -898,6 +916,13 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
         if document_node['cac:Delivery']:
             document_node['cac:Delivery'] = document_node['cac:Delivery'][0]
 
+    def _is_document_allowance_charge(self, base_line):
+        # EXTENDS 'account_edi_xml_ubl_20'
+        return (
+            super()._is_document_allowance_charge(base_line)
+            or base_line['special_type'] == 'global_discount'
+        )
+
     def _add_invoice_allowance_charge_nodes(self, document_node, vals):
         # OVERRIDE
         sub_vals = {
@@ -911,8 +936,9 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
         if not invoice:
             return
 
-        # Early payment discount lines are treated as allowances/charges.
+        # Early payment discount lines AND Global discount lines are treated as allowances/charges.
         self._ubl_add_allowance_charge_nodes_early_payment_discount(sub_vals)
+        self._ubl_add_allowance_charge_nodes_global_discount(sub_vals)
 
     def _ubl_get_tax_subtotal_node(self, vals, tax_subtotal):
         # EXTENDS account.edi.xml.ubl
@@ -1077,10 +1103,33 @@ class AccountEdiXmlUbl_Bis3(models.AbstractModel):
                 constraints.update({'cen_en16931_item_name': _("Each invoice line should have a product or a label.")})
                 break
 
-            if len(line_node['cac:Item']['cac:ClassifiedTaxCategory']) != 1:
+        tax_category_ids_per_line_node = [
+            (
+                line_node,
+                [
+                    tax_category_node.get('cbc:ID', {}).get('_text')
+                    for tax_category_node in line_node.get('cac:Item', {}).get('cac:ClassifiedTaxCategory', [])
+                ]
+            )
+            for line_node in line_nodes
+        ]
+
+        for line_node, tax_categories in tax_category_ids_per_line_node:
+            if len(tax_categories) != 1 or None in tax_categories:
                 # [UBL-SR-48]-Invoice lines shall have one and only one classified tax category.
                 # /!\ exception: possible to have any number of ecotaxes (fixed tax) with a regular percentage tax
                 constraints['cen_en16931_tax_line'] = _("Each invoice line shall have one and only one tax.")
+
+        has_service_outside_scope_of_tax = False
+        has_only_service_outside_scope_of_tax = True
+        for line_node, tax_categories in tax_category_ids_per_line_node:
+            if 'O' in tax_categories:
+                has_service_outside_scope_of_tax = True
+            has_only_service_outside_scope_of_tax = set(tax_categories) == {'O'}
+        if has_service_outside_scope_of_tax and not has_only_service_outside_scope_of_tax:
+            # [BR-O-02] and other [BR-XX-02] contradict each other.
+            # taxes of category 'O' should not be mixed with other.
+            constraints['cen_en1691_tax_category_o'] = _("Taxes of category 'Service outside scope of tax' shall not be mixed with tax from other categories. You should split your invoice in two")
 
         for role in ('supplier', 'customer'):
             party_node = vals['document_node']['cac:AccountingCustomerParty'] if role == 'customer' else vals['document_node']['cac:AccountingSupplierParty']
