@@ -12,7 +12,7 @@ class TestBomPriceCommon(common.TransactionCase):
     def _create_product(cls, name, price):
         return cls.Product.create({
             'name': name,
-            'type': 'product',
+            'is_storable': True,
             'standard_price': price,
         })
 
@@ -126,8 +126,8 @@ class TestBomPrice(TestBomPriceCommon):
         self.env['mrp.workcenter.capacity'].create({
             'product_id': self.dining_table.id,
             'workcenter_id': workcenter_1.id,
-            'time_start': 2,
-            'time_stop': 1,
+            'time_start': 17,
+            'time_stop': 16,
         })
 
         self.bom_1.write({
@@ -253,4 +253,4 @@ class TestBomPrice(TestBomPriceCommon):
         self.dining_table.button_bom_cost()
         self.assertEqual(self.dining_table.standard_price, 137.5, "After computing price from BoM price should be 137.5")
         scrap_wood.button_bom_cost()
-        self.assertEqual(scrap_wood.standard_price, 20.63, "After computing price from BoM price should be 20.63")
+        self.assertAlmostEqual(scrap_wood.standard_price, 20.625, msg="After computing price from BoM price should be 20.63")

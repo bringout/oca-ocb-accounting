@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
-from odoo.tests import tagged, new_test_user
-from odoo.tests.common import Form
+from odoo.tests import Form, tagged, new_test_user
 from odoo import Command, fields
 from odoo.exceptions import UserError, RedirectWarning
 
@@ -13,8 +12,11 @@ from collections import defaultdict
 class TestAccountMove(AccountTestInvoicingCommon):
 
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
+
+        cls.company_data_2 = cls.setup_other_company()
+        cls.other_currency = cls.setup_other_currency('HRK')
 
         tax_repartition_line = cls.company_data['default_tax_sale'].refund_repartition_line_ids\
             .filtered(lambda line: line.repartition_type == 'tax')
@@ -62,6 +64,11 @@ class TestAccountMove(AccountTestInvoicingCommon):
             'debit': 0.0,
             'credit': 500.0,
         }
+
+    @classmethod
+    def default_env_context(cls):
+        # OVERRIDE
+        return {}
 
     def test_out_invoice_auto_post_at_date(self):
         # Create auto-posted (but not recurring) entry
@@ -123,7 +130,7 @@ class TestAccountMove(AccountTestInvoicingCommon):
 
         # The currency set on the account is not the same as the one set on the company.
         # It should raise an error.
-        custom_account.currency_id = self.currency_data['currency']
+        custom_account.currency_id = self.other_currency
 
         with self.assertRaises(UserError), self.cr.savepoint():
             self.test_move.line_ids[0].account_id = custom_account
@@ -137,7 +144,7 @@ class TestAccountMove(AccountTestInvoicingCommon):
     def test_fiscal_position_multicompany(self):
         """A move is assigned a fiscal position that matches its own company."""
         company1 = self.company_data["company"]
-        company2 = self.company_data_2["company"]
+        company2 = self._create_company(name='company2')
         partner = self.env['res.partner'].create({'name': 'Belouga'})
         fpos1 = self.env["account.fiscal.position"].create(
             {
@@ -171,49 +178,9 @@ class TestAccountMove(AccountTestInvoicingCommon):
         # Editing the reference should be allowed.
         self.test_move.ref = 'whatever'
 
-        # Try to edit a line into a locked fiscal year.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                    (1, lines[2].id, {'debit': lines[2].debit + 100.0}),
-                ],
-            })
-
         # Try to edit the account of a line.
         with self.assertRaises(UserError), self.cr.savepoint():
             self.test_move.line_ids[0].write({'account_id': self.test_move.line_ids[0].account_id.copy().id})
-
-        # Try to edit a line.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                    (1, lines[3].id, {'debit': lines[3].debit + 100.0}),
-                ],
-            })
-
-        # Try to add a new tax on a line.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[2].id, {'tax_ids': [(6, 0, self.company_data['default_tax_purchase'].ids)]}),
-                ],
-            })
-
-        # Try to create a new line.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                    (0, None, {
-                        'name': 'revenue line 1',
-                        'account_id': self.company_data['default_account_revenue'].id,
-                        'debit': 100.0,
-                        'credit': 0.0,
-                    }),
-                ],
-            })
 
         # You can't remove the journal entry from a locked period.
         with self.assertRaises(UserError), self.cr.savepoint():
@@ -260,70 +227,8 @@ class TestAccountMove(AccountTestInvoicingCommon):
         # lines[3] = 'revenue line 2'
         lines = self.test_move.line_ids.sorted('debit')
 
-        # Try to edit a line not affecting the taxes.
-        self.test_move.write({
-            'line_ids': [
-                (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                (1, lines[2].id, {'debit': lines[2].debit + 100.0}),
-            ],
-        })
-
         # Try to edit the account of a line.
         self.test_move.line_ids[0].write({'account_id': self.test_move.line_ids[0].account_id.copy().id})
-
-        # Try to edit a line having some taxes.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                    (1, lines[3].id, {'debit': lines[3].debit + 100.0}),
-                ],
-            })
-
-        # Try to add a new tax on a line.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[2].id, {'tax_ids': [(6, 0, self.company_data['default_tax_purchase'].ids)]}),
-                ],
-            })
-
-        # Try to edit a tax line.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                    (1, lines[1].id, {'debit': lines[1].debit + 100.0}),
-                ],
-            })
-
-        # Try to create a line not affecting the taxes.
-        self.test_move.write({
-            'line_ids': [
-                (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                (0, None, {
-                    'name': 'revenue line 1',
-                    'account_id': self.company_data['default_account_revenue'].id,
-                    'debit': 100.0,
-                    'credit': 0.0,
-                }),
-            ],
-        })
-
-        # Try to create a line affecting the taxes.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            self.test_move.write({
-                'line_ids': [
-                    (1, lines[0].id, {'credit': lines[0].credit + 100.0}),
-                    (0, None, {
-                        'name': 'revenue line 2',
-                        'account_id': self.company_data['default_account_revenue'].id,
-                        'debit': 100.0,
-                        'credit': 0.0,
-                        'tax_ids': [(6, 0, self.company_data['default_tax_sale'].ids)],
-                    }),
-                ],
-            })
 
         # You can't remove the journal entry from a locked period.
         with self.assertRaises(UserError), self.cr.savepoint():
@@ -394,26 +299,19 @@ class TestAccountMove(AccountTestInvoicingCommon):
 
         (lines[0] + lines[2]).reconcile()
 
-        # You can't write something impacting the reconciliation on an already reconciled line.
-        with self.assertRaises(UserError), self.cr.savepoint():
-            draft_moves[0].write({
-                'line_ids': [
-                    (1, lines[1].id, {'credit': lines[1].credit + 100.0}),
-                    (1, lines[2].id, {'debit': lines[2].debit + 100.0}),
-                ]
-            })
-
-        # The write must not raise anything because the rounding of the monetary field should ignore such tiny amount.
-        draft_moves[0].write({
-            'line_ids': [
-                (1, lines[1].id, {'credit': lines[1].credit + 0.0000001}),
-                (1, lines[2].id, {'debit': lines[2].debit + 0.0000001}),
-            ]
-        })
-
         # You can't unlink an already reconciled line.
         with self.assertRaises(UserError), self.cr.savepoint():
             draft_moves.unlink()
+
+    def test_modify_posted_move_readonly_fields(self):
+        self.test_move.action_post()
+
+        readonly_fields = ('invoice_line_ids', 'line_ids', 'invoice_date', 'date', 'partner_id',
+                           'invoice_payment_term_id', 'currency_id', 'fiscal_position_id', 'invoice_cash_rounding_id')
+        for field in readonly_fields:
+            with self.assertRaisesRegex(UserError, "You cannot modify the following readonly fields on a posted move"), \
+                    self.cr.savepoint():
+                self.test_move.write({field: False})
 
     def test_add_followers_on_post(self):
         # Add some existing partners, some from another company
@@ -447,14 +345,14 @@ class TestAccountMove(AccountTestInvoicingCommon):
         with move_form.line_ids.new() as line_form:
             line_form.name = 'debit_line'
             line_form.account_id = self.company_data['default_account_revenue']
-            line_form.currency_id = self.currency_data['currency']
+            line_form.currency_id = self.other_currency
             line_form.amount_currency = 1200.0
 
         # New line that should get 400.0 as credit.
         with move_form.line_ids.new() as line_form:
             line_form.name = 'credit_line'
             line_form.account_id = self.company_data['default_account_revenue']
-            line_form.currency_id = self.currency_data['currency']
+            line_form.currency_id = self.other_currency
             line_form.amount_currency = -1200.0
         move = move_form.save()
 
@@ -462,13 +360,13 @@ class TestAccountMove(AccountTestInvoicingCommon):
             move.line_ids.sorted('debit'),
             [
                 {
-                    'currency_id': self.currency_data['currency'].id,
+                    'currency_id': self.other_currency.id,
                     'amount_currency': -1200.0,
                     'debit': 0.0,
                     'credit': 400.0,
                 },
                 {
-                    'currency_id': self.currency_data['currency'].id,
+                    'currency_id': self.other_currency.id,
                     'amount_currency': 1200.0,
                     'debit': 400.0,
                     'credit': 0.0,
@@ -484,13 +382,13 @@ class TestAccountMove(AccountTestInvoicingCommon):
             move.line_ids.sorted('debit'),
             [
                 {
-                    'currency_id': self.currency_data['currency'].id,
+                    'currency_id': self.other_currency.id,
                     'amount_currency': -1200.0,
                     'debit': 0.0,
                     'credit': 600.0,
                 },
                 {
-                    'currency_id': self.currency_data['currency'].id,
+                    'currency_id': self.other_currency.id,
                     'amount_currency': 1200.0,
                     'debit': 600.0,
                     'credit': 0.0,
@@ -508,13 +406,13 @@ class TestAccountMove(AccountTestInvoicingCommon):
             move.line_ids.sorted('debit'),
             [
                 {
-                    'currency_id': self.currency_data['currency'].id,
+                    'currency_id': self.other_currency.id,
                     'amount_currency': -1200.0,
                     'debit': 0.0,
                     'credit': 200.0,
                 },
                 {
-                    'currency_id': self.currency_data['currency'].id,
+                    'currency_id': self.other_currency.id,
                     'amount_currency': 1200.0,
                     'debit': 200.0,
                     'credit': 0.0,
@@ -544,7 +442,7 @@ class TestAccountMove(AccountTestInvoicingCommon):
             'name': 'included_tax_line',
             'amount_type': 'percent',
             'amount': 20,
-            'price_include': True,
+            'price_include_override': 'tax_included',
             'include_base_amount': False,
         })
         self.account = self.company_data['default_account_revenue']
@@ -593,7 +491,7 @@ class TestAccountMove(AccountTestInvoicingCommon):
             'move_type': 'entry',
             'partner_id': self.partner_a.id,
             'date': fields.Date.from_string('2019-01-01'),
-            'currency_id': self.currency_data['currency'].id,
+            'currency_id': self.other_currency.id,
             'line_ids': [
                 (0, None, self.entry_line_vals_1),
                 (0, None, self.entry_line_vals_2),
@@ -628,10 +526,9 @@ class TestAccountMove(AccountTestInvoicingCommon):
 
         move_reversal = self.env['account.move.reversal'].with_context(active_model="account.move", active_ids=move.ids).create({
             'date': fields.Date.from_string('2021-02-01'),
-            'refund_method': 'refund',
             'journal_id': move.journal_id.id,
         })
-        reversal = move_reversal.reverse_moves()
+        reversal = move_reversal.refund_moves()
         reversed_move = self.env['account.move'].browse(reversal['res_id'])
         self.assertRecordValues(reversed_move.line_ids, [
             {
@@ -665,19 +562,16 @@ class TestAccountMove(AccountTestInvoicingCommon):
             'code': 'TWAIT',
             'account_type': 'liability_current',
             'reconcile': True,
-            'company_id': self.company_data['company'].id,
         })
         tax_final_account = self.env['account.account'].create({
             'name': 'TAX_TO_DEDUCT',
             'code': 'TDEDUCT',
             'account_type': 'asset_current',
-            'company_id': self.company_data['company'].id,
         })
         tax_base_amount_account = self.env['account.account'].create({
             'name': 'TAX_BASE',
             'code': 'TBASE',
             'account_type': 'asset_current',
-            'company_id': self.company_data['company'].id,
         })
         self.env.company.account_cash_basis_base_account_id = tax_base_amount_account
         self.env.company.tax_exigibility = True
@@ -868,7 +762,7 @@ class TestAccountMove(AccountTestInvoicingCommon):
         tax_line.unlink()
 
         # But creating unbalanced misc entry shouldn't be allowed otherwise
-        with self.assertRaisesRegex(UserError, r"The move \(.*\) is not balanced\."):
+        with self.assertRaisesRegex(UserError, r"The entry is not balanced."):
             self.env["account.move"].create({
                 "move_type": "entry",
                 "line_ids": [
@@ -889,7 +783,7 @@ class TestAccountMove(AccountTestInvoicingCommon):
                     Command.create({
                         'name': "line1",
                         'account_id': self.company_data['default_account_receivable'].id,
-                        'currency_id': self.currency_data['currency'].id,
+                        'currency_id': self.other_currency.id,
                         'balance': 400.0,
                         'amount_currency': 1200.0,
                     }),
@@ -906,7 +800,7 @@ class TestAccountMove(AccountTestInvoicingCommon):
                     Command.create({
                         'name': "line1",
                         'account_id': self.company_data['default_account_receivable'].id,
-                        'currency_id': self.currency_data['currency'].id,
+                        'currency_id': self.other_currency.id,
                         'balance': -600.0,
                         'amount_currency': -1200.0,
                     }),
@@ -920,12 +814,11 @@ class TestAccountMove(AccountTestInvoicingCommon):
         ])
         moves.action_post()
 
-        res = moves.line_ids\
+        moves.line_ids\
             .filtered(lambda x: x.account_id == self.company_data['default_account_receivable'])\
             .reconcile()
 
-        self.assertTrue(res.get('partials'))
-        exchange_diff = res['partials'].exchange_move_id
+        exchange_diff = moves.line_ids.matched_debit_ids.exchange_move_id
         self.assertTrue(exchange_diff)
         with self.assertRaises(UserError), self.cr.savepoint():
             exchange_diff.button_draft()
@@ -1015,9 +908,9 @@ class TestAccountMove(AccountTestInvoicingCommon):
 
         self.assertRecordValues(sale_move.line_ids.sorted(lambda x: -x.balance), [
             # pylint: disable=C0326
-            {'name': 'debit',   'debit': 115.0, 'credit':   0.0, 'account_id': test_account.id,                                  'tax_ids': [],           'tax_base_amount': 0,   'tax_tag_invert': False, 'tax_repartition_line_id': False},
-            {'name': 'Tax 15%', 'debit':   0.0, 'credit':  15.0, 'account_id': self.company_data['default_account_tax_sale'].id, 'tax_ids': [],           'tax_base_amount': 100, 'tax_tag_invert': True,  'tax_repartition_line_id': sale_invoice_rep_line.id},
-            {'name': 'credit',  'debit':   0.0, 'credit': 100.0, 'account_id': test_account.id,                                  'tax_ids': sale_tax.ids, 'tax_base_amount': 0,   'tax_tag_invert': True,  'tax_repartition_line_id': False},
+            {'name': 'debit',  'debit': 115.0, 'credit':   0.0, 'account_id': test_account.id,                                  'tax_ids': [],           'tax_base_amount': 0,   'tax_tag_invert': False, 'tax_repartition_line_id': False},
+            {'name': '15%',    'debit':   0.0, 'credit':  15.0, 'account_id': self.company_data['default_account_tax_sale'].id, 'tax_ids': [],           'tax_base_amount': 100, 'tax_tag_invert': True,  'tax_repartition_line_id': sale_invoice_rep_line.id},
+            {'name': 'credit', 'debit':   0.0, 'credit': 100.0, 'account_id': test_account.id,                                  'tax_ids': sale_tax.ids, 'tax_base_amount': 0,   'tax_tag_invert': True,  'tax_repartition_line_id': False},
         ])
 
         # Same with a purchase tax
@@ -1042,9 +935,9 @@ class TestAccountMove(AccountTestInvoicingCommon):
         purchase_invoice_rep_line = purchase_tax.invoice_repartition_line_ids.filtered(lambda x: x.repartition_type == 'tax')
         self.assertRecordValues(purchase_move.line_ids.sorted(lambda x: x.balance), [
             # pylint: disable=C0326
-            {'name': 'credit',           'credit': 115.0, 'debit':   0.0, 'account_id': test_account.id,                                      'tax_ids': [],               'tax_base_amount': 0,   'tax_tag_invert': False, 'tax_repartition_line_id': False},
-            {'name': 'Purchase Tax 15%', 'credit':   0.0, 'debit':  15.0, 'account_id': self.company_data['default_account_tax_purchase'].id, 'tax_ids': [],               'tax_base_amount': 100, 'tax_tag_invert': False,  'tax_repartition_line_id': purchase_invoice_rep_line.id},
-            {'name': 'debit',            'credit':   0.0, 'debit': 100.0, 'account_id': test_account.id,                                      'tax_ids': purchase_tax.ids, 'tax_base_amount': 0,   'tax_tag_invert': False,  'tax_repartition_line_id': False},
+            {'name': 'credit', 'credit': 115.0, 'debit':   0.0, 'account_id': test_account.id,                                      'tax_ids': [],               'tax_base_amount': 0,   'tax_tag_invert': False, 'tax_repartition_line_id': False},
+            {'name': '15%',    'credit':   0.0, 'debit':  15.0, 'account_id': self.company_data['default_account_tax_purchase'].id, 'tax_ids': [],               'tax_base_amount': 100, 'tax_tag_invert': False,  'tax_repartition_line_id': purchase_invoice_rep_line.id},
+            {'name': 'debit',  'credit':   0.0, 'debit': 100.0, 'account_id': test_account.id,                                      'tax_ids': purchase_tax.ids, 'tax_base_amount': 0,   'tax_tag_invert': False,  'tax_repartition_line_id': False},
         ])
 
     @freeze_time('2021-10-01 00:00:00')
@@ -1057,14 +950,57 @@ class TestAccountMove(AccountTestInvoicingCommon):
         })
         move = self.env['account.move'].with_context(default_move_type='entry')
         with Form(move) as move_form:
-            self.assertEqual(move_form.name, 'MISC/2021/10/0001')
+            self.assertEqual(move_form.name_placeholder, 'MISC/2021/10/0001')
             move_form.journal_id, journal = journal, move_form.journal_id
-            self.assertEqual(move_form.name, 'AJ/2021/10/0001')
+            self.assertEqual(move_form.name_placeholder, 'AJ/2021/10/0001')
             # ensure we aren't burning any sequence by switching journal
             move_form.journal_id, journal = journal, move_form.journal_id
-            self.assertEqual(move_form.name, 'MISC/2021/10/0001')
+            self.assertEqual(move_form.name_placeholder, 'MISC/2021/10/0001')
             move_form.journal_id, journal = journal, move_form.journal_id
-            self.assertEqual(move_form.name, 'AJ/2021/10/0001')
+            self.assertEqual(move_form.name_placeholder, 'AJ/2021/10/0001')
+
+    def test_change_journal_posted_before(self):
+        """ Changes to a move posted before can only de done if move name is '/' or empty (False) """
+        journal = self.env['account.journal'].create({
+            'name': 'awesome journal',
+            'type': 'general',
+            'code': 'AJ',
+        })
+        self.test_move.action_post()
+        self.test_move.button_draft()  # move has posted_before == True
+        self.assertEqual(self.test_move.journal_id, self.company_data['default_journal_misc'])
+        self.assertEqual(self.test_move.name, 'MISC/2016/01/0001')
+        with self.assertRaisesRegex(UserError, 'You cannot edit the journal of an account move if it has been posted once, unless the name is removed or set to "/". This might create a gap in the sequence.'):
+            self.test_move.write({'journal_id': False})
+        # Once move name in draft is changed to '/', changing the journal is allowed
+        self.test_move.name = '/'
+        self.test_move.journal_id = journal
+        self.test_move.action_post()
+        self.assertEqual(self.test_move.name, 'AJ/2016/01/0001')
+        self.assertEqual(self.test_move.journal_id, journal)
+
+    def test_change_journal_sequence_number(self):
+        """ Changes to an account move with a sequence number assigned can only de done
+        if the move name is '/' or empty (False)
+        """
+        journal = self.env['account.journal'].create({
+            'name': 'awesome journal',
+            'type': 'general',
+            'code': 'AJ',
+        })
+        # Post move with sequence number 1 and create new move with sequence number 2
+        self.test_move.action_post()
+        test_move_2 = self.test_move.copy({'name': 'TEST/2016/01/0002', 'date': '2016-01-01'})
+        self.assertEqual(test_move_2.sequence_number, 2)
+        self.assertEqual(test_move_2.journal_id, self.company_data['default_journal_misc'])
+        with self.assertRaisesRegex(UserError, 'You cannot edit the journal of an account move with a sequence number assigned, unless the name is removed or set to "/". This might create a gap in the sequence.'):
+            test_move_2.write({'journal_id': False})
+        # Once move name in draft is changed to '/', changing the journal is allowed
+        test_move_2.write({'name': False, 'journal_id': journal.id})
+        test_move_2.action_post()
+        # Sequence number is updated for the new journal
+        self.assertEqual(test_move_2.sequence_number, 1)
+        self.assertEqual(test_move_2.journal_id, journal)
 
     def test_manually_modifying_taxes(self):
         """Manually modifying taxes on a move should not automatically recompute them"""
@@ -1095,43 +1031,6 @@ class TestAccountMove(AccountTestInvoicingCommon):
         move = move_form.save()
         tax_line = move.line_ids.filtered('tax_repartition_line_id')
         self.assertEqual(tax_line.debit, 721.43)
-
-    def test_account_root_multiple_companies(self):
-        account = self.env['account.account'].create({
-            'name': 'account',
-            'code': 'ZZ',
-            'account_type': 'asset_current',
-            'company_id': self.env.company.id,
-        })
-        other_company = self.env['res.company'].create({'name': 'other company'})
-        self.env['account.account'].create({
-            'name': 'other account',
-            'code': 'ZZ',
-            'account_type': 'asset_current',
-            'company_id': other_company.id,
-        })
-        self.env['account.move'].create({
-            'move_type': 'entry',
-            'date': fields.Date.from_string('2016-01-01'),
-            'line_ids': [
-                (0, None, {
-                    'name': 'revenue line 1',
-                    'account_id': account.id,
-                    'debit': 500.0,
-                    'credit': 0.0,
-                }),
-                (0, None, {
-                    'name': 'revenue line 1',
-                    'account_id': self.company_data['default_account_tax_sale'].id,
-                    'debit': 0.0,
-                    'credit': 500.0,
-                }),
-            ]
-        })
-        balance = self.env["account.move.line"].read_group(
-            [("account_id", "=", account.id)], ["balance:sum"], ["account_root_id"]
-        )[0]["balance"]
-        self.assertEqual(balance, 500)
 
     def test_line_steal(self):
         honest_move = self.env['account.move'].create({
@@ -1172,6 +1071,131 @@ class TestAccountMove(AccountTestInvoicingCommon):
         wizard.validate_move()
         self.assertTrue(self.test_move.state == 'posted')
 
+    def test_cumulated_balance(self):
+        move = self.env['account.move'].create({
+            'line_ids': [Command.create({
+                'balance': 100,
+                'account_id': self.company_data['default_account_receivable'].id,
+            }), Command.create({
+                'balance': 100,
+                'account_id': self.company_data['default_account_tax_sale'].id,
+            }), Command.create({
+                'balance': -200,
+                'account_id': self.company_data['default_account_revenue'].id,
+            })]
+        })
+
+        for order, expected in [
+            ('balance DESC', [
+                (100, 0),
+                (100, -100),
+                (-200, -200),
+            ]),
+            ('balance ASC', [
+                (-200, 0),
+                (100, 200),
+                (100, 100),
+            ]),
+        ]:
+            read_results = self.env['account.move.line'].search_read(
+                domain=[('move_id', '=', move.id)],
+                fields=['balance', 'cumulated_balance'],
+                order=order,
+            )
+            for (balance, cumulated_balance), read_result in zip(expected, read_results):
+                self.assertAlmostEqual(balance, read_result['balance'])
+                self.assertAlmostEqual(cumulated_balance, read_result['cumulated_balance'])
+
+    def test_move_line_rounding(self):
+        """Whatever arguments we give to the creation of an account move,
+        in every case the amounts should be properly rounded to the currency's precision.
+        In other words, we don't fall victim of the limitation introduced by 9d87d15db6dd40
+
+        Here the rounding should be done according to company_currency_id, which is a related
+        on move_id.company_id.currency_id.
+        In principle, it should not be necessary to add it to the create values,
+        since it is supposed to be computed by the ORM...
+        """
+        move = self.env['account.move'].create({
+            'line_ids': [
+                (0, 0, {'debit': 100.0 / 3, 'account_id': self.company_data['default_account_revenue'].id}),
+                (0, 0, {'credit': 100.0 / 3, 'account_id': self.company_data['default_account_revenue'].id}),
+            ],
+        })
+
+        self.assertEqual(
+            [(33.33, 0.0), (0.0, 33.33)],
+            move.line_ids.mapped(lambda x: (x.debit, x.credit)),
+            "Quantities should have been rounded according to the currency."
+        )
+
+    def test_journal_entry_clear_taxes(self):
+        """
+        This test checks that tax tags on journal entries lines are updated according to the taxes on each line
+        In other words, removing a tax from a line should remove its tags from that line
+        """
+        def _create_tax_tag(tag_name):
+            return self.env['account.account.tag'].create({
+                'name': tag_name,
+                'applicability': 'taxes',
+                'country_id': self.env.company.country_id.id,
+            })
+
+        def _create_tax(tax_percent):
+            return self.env['account.tax'].create({
+                'name': f'VAT {tax_percent}%',
+                'type_tax_use': 'sale',
+                'amount': tax_percent,
+                'invoice_repartition_line_ids': [
+                    Command.create({
+                        'repartition_type': 'base',
+                        'tag_ids': _create_tax_tag(f'invoice_base_{tax_percent}').ids,
+                    }),
+                    Command.create({
+                        'repartition_type': 'tax',
+                        'tag_ids': _create_tax_tag(f'invoice_tax_{tax_percent}').ids,
+                    }),
+                ],
+                'refund_repartition_line_ids': [
+                    Command.create({
+                        'repartition_type': 'base',
+                        'tag_ids': _create_tax_tag(f'refund_base_{tax_percent}').ids,
+                    }),
+                    Command.create({
+                        'repartition_type': 'tax',
+                        'tag_ids': _create_tax_tag(f'refund_tax_{tax_percent}').ids,
+                    }),
+                ],
+            })
+
+        tax_1 = _create_tax(10)
+        tax_2 = _create_tax(15)
+
+        move = self.env['account.move'].create({
+            'move_type': 'entry',
+            'date': '2019-01-01',
+            'journal_id': self.company_data['default_journal_sale'].id,
+            'line_ids': [
+                Command.create({
+                    'debit': 0.0,
+                    'credit': 0.0,
+                    'account_id': self.company_data['default_account_payable'].id,
+                    'tax_ids': [Command.set([tax_1.id, tax_2.id])],
+                })
+            ],
+        })
+        line = move.line_ids[0]
+        self.assertEqual(len(line.tax_ids), 2)
+        self.assertEqual(len(line.tax_tag_ids), 2)
+
+        line.tax_ids = [Command.set(tax_1.ids)]
+        self.assertEqual(len(line.tax_ids), 1)
+        self.assertEqual(len(line.tax_tag_ids), 1)
+
+        line.tax_ids = [Command.clear()]
+        self.assertEqual(len(line.tax_ids), 0)
+        self.assertEqual(len(line.tax_tag_ids), 0)
+
     def test_balance_modification_auto_balancing(self):
         """ Test that amount currency is correctly recomputed when, without multicurrency enabled,
         the balance is changed """
@@ -1203,3 +1227,180 @@ class TestAccountMove(AccountTestInvoicingCommon):
         self.assertRecordValues(line, [
             {'amount_currency': 10.00, 'balance': 10.00},
         ])
+
+    def test_no_partner_id_on_duplication(self):
+        """ Test that when a account_move is duplicated the partner_id is not included in the duplicated_move """
+        move = self.env['account.move'].create({
+            'move_type': 'entry',
+            'partner_id': self.partner_a.id,
+            'date': fields.Date.from_string('2019-01-01'),
+            'currency_id': self.other_currency.id,
+            'line_ids': [
+                Command.create(self.entry_line_vals_1),
+                Command.create(self.entry_line_vals_2),
+            ],
+        })
+        move_duplicate = move.copy()
+        self.assertTrue(move_duplicate)
+        self.assertFalse(move_duplicate.partner_id)
+
+    def test_no_recompute_when_company_address_changes(self):
+        """
+        Ensure that changing the company partner address does NOT trigger
+        any recomputation on account.move or account.move.line fields
+        """
+        # Prepare patching
+        protected_models = ['account.move', 'account.move.line']
+        original_recompute = {model: self.env[model]._recompute_field for model in protected_models}
+        fields_recomputed = []
+
+        def mock_recompute(self, field, ids=None):
+            ids_to_compute = self.env.transaction.tocompute.get(field, ())
+            ids = ids_to_compute if ids is None else [id_ for id_ in ids if id_ in ids_to_compute]
+            if field.store and (
+                (self._name == 'account.move' and invoice.id in ids)
+                or (self._name == 'account.move.line' and set(invoice.line_ids.ids) & set(ids))
+            ):
+                fields_recomputed.append(str(field))
+            original_recompute[self._name](field, ids)
+
+        # Setup data
+        invoice = self.env['account.move'].create({
+            'move_type': 'entry',
+            'partner_id': self.partner_a.id,
+            'date': fields.Date.from_string('2019-01-01'),
+            'currency_id': self.other_currency.id,
+            'line_ids': [
+                Command.create(self.entry_line_vals_1),
+                Command.create(self.entry_line_vals_2),
+            ],
+        })
+        self.env.flush_all()
+
+        # Check
+        for model in protected_models:
+            self.patch(self.env.registry[model], '_recompute_field', mock_recompute)
+
+        invoice.company_id.partner_id.write({
+            'street': 'New Street',
+            'zip': '12345',
+            'country_id': invoice.company_id.partner_id.country_id.id,
+            'vat': '12345678',
+        })
+        self.env.flush_all()
+        self.assertEqual(fields_recomputed, [])
+
+    def test_post_invoice_fails_with_account_and_journal_company_inconsistency(self):
+        """
+        Ensure that an invoice cannot be posted when at least one line account
+        belongs to a different company than the journal.
+
+        The test verifies that:
+        - Using a journal from a branch company (child of the account's company) is allowed
+        - Using a journal from an unrelated company correctly raises a UserError
+        - Using a shared account between two companies works as expected
+        """
+        account = self.company_data['default_account_revenue']
+        move = self.env['account.move'].create({
+            'line_ids': [
+                Command.create({'name': 'debit_line', 'debit': 100.0, 'account_id': account.id}),
+                Command.create({'name': 'credit_line', 'credit': 100.0, 'account_id': account.id}),
+            ]
+        })
+
+        # Ensure branch company aren't considered as inconsistency
+        company_branch = self.env['res.company'].create({
+            'name': 'Company Branch',
+            'parent_id': self.env.company.id,
+        })
+        journal_branch = self.env['account.journal'].create({
+            'name': 'Company Branch Journal',
+            'type': 'general',
+            'code': 'CBrJ',
+            'company_id': company_branch.id,
+        })
+        move.write({'company_id': company_branch.id, 'journal_id': journal_branch.id})
+        move.action_post()
+        move.button_draft()
+
+        # Ensure posting fails when the account's company is different than the journal's company
+        company_b = self.env['res.company'].create({'name': 'Company B'})
+        journal_b = self.env['account.journal'].create({
+            'name': 'Company B Journal',
+            'type': 'general',
+            'code': 'CBJ',
+            'company_id': company_b.id,
+        })
+        move.write({'name': '/', 'company_id': company_b.id, 'journal_id': journal_b.id})
+        with self.assertRaisesRegex(UserError, rf"The entry is using accounts \({account.display_name}\) from a different company\."):
+            move.action_post()
+
+        # Ensure posting works for accounts shared between the two companies
+        shared_account = self.env['account.account'].create([{
+            'name': 'Shared Account',
+            'company_ids': [Command.set((self.env.company | company_b).ids)],
+            'code_mapping_ids': [
+                Command.create({'company_id': self.env.company.id, 'code': '180001'}),
+                Command.create({'company_id': company_b.id, 'code': '180001'}),
+            ],
+        }])
+        move.line_ids.account_id = shared_account
+        move.action_post()
+
+    def test_modify_zero_line_in_locked_period(self):
+        """
+        Ensure that zero-amount lines in a locked period cannot be modified or reset to draft, but can be safely unlinked.
+        """
+        posted_move = self.env['account.move'].create({
+            'move_type': 'entry',
+            'date': '2024-01-01',
+            'line_ids': [
+                Command.create({
+                    'name': 'zero line 1',
+                    'account_id': self.company_data['default_account_revenue'].id,
+                }),
+                Command.create({
+                    'name': 'zero line 2',
+                    'account_id': self.company_data['default_account_expense'].id,
+                }),
+            ]
+        })
+        posted_move.action_post()
+
+        posted_move.company_id.sudo().write({
+            'fiscalyear_lock_date': '2025-01-01',
+        })
+
+        with self.assertRaisesRegex(UserError, "You cannot add/modify entries prior to and inclusive of"), self.cr.savepoint():
+            posted_move.line_ids[0].write({'account_id': self.company_data['default_account_expense'].id})
+
+        posted_move.line_ids.unlink()
+
+        self.assertFalse(posted_move.line_ids, "The zero-amount lines should have been successfully deleted.")
+
+    def test_invoice_line_name_uses_invoice_partner_language(self):
+        """Test that when an invoice is created for an invoice contact (that has a different language with
+        respect to its parent contact) also the name of the product in the invoice is in the correct language."""
+        self.env['res.lang']._activate_lang('fr_FR')
+        self.partner_a.lang = 'en_US'
+
+        invoice_contact = self.env['res.partner'].create({
+            'name': 'Invoice Contact',
+            'type': 'invoice',
+            'parent_id': self.partner_a.id,
+            'lang': 'fr_FR',
+        })
+
+        self.product_a.update_field_translations('description_sale', {
+            'en_US': 'Water Bottle',
+            'fr_FR': 'Bouteille d\'eau',
+        })
+
+        invoice = self.env['account.move'].create({
+            'move_type': 'out_invoice',
+            'partner_id': invoice_contact.id,
+            'invoice_line_ids': [Command.create({'product_id': self.product_a.id})],
+        })
+
+        line = invoice.invoice_line_ids.filtered(lambda l: l.product_id == self.product_a)[:1]
+        self.assertEqual(line.name, "product_a\nBouteille d'eau")

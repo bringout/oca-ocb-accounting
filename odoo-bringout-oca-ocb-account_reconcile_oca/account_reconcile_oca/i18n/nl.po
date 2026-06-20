@@ -32,7 +32,6 @@ msgstr ""
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__account_id
 #: model_terms:ir.ui.view,arch_db:account_reconcile_oca.bank_statement_line_form_reconcile_view
-#, python-format
 msgid "Account"
 msgstr "Rekening"
 
@@ -66,7 +65,6 @@ msgstr "Toevoegen Bankafschriftregel"
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Add all"
 msgstr ""
 
@@ -98,7 +96,6 @@ msgstr ""
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Amount in currency"
 msgstr "Valutabedrag"
 
@@ -184,11 +181,6 @@ msgid "Company Currency"
 msgstr ""
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,help:account_reconcile_oca.field_account_bank_statement_line__company_id
-msgid "Company related to this journal"
-msgstr "Bedrijf gerelateerd aan dit dagboek"
-
-#. module: account_reconcile_oca
 #: model:ir.model,name:account_reconcile_oca.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
@@ -196,7 +188,6 @@ msgstr ""
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Create"
 msgstr "Aanmaken"
 
@@ -213,7 +204,6 @@ msgstr "Aangemaakt op"
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Credit"
 msgstr "Credit"
 
@@ -231,7 +221,6 @@ msgstr "Data"
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Date"
 msgstr "Datum"
 
@@ -243,7 +232,6 @@ msgstr ""
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Debit"
 msgstr "Debet"
 
@@ -262,11 +250,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:account_reconcile_oca.selection__account_journal__reconcile_mode__edit
 msgid "Edit Move"
 msgstr "Bewerk Boeking"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_balance_end_real
-msgid "Ending Balance"
-msgstr ""
 
 #. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__foreign_currency_id
@@ -288,7 +271,6 @@ msgstr "Van debiteurenrekeningen"
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Global Balance"
 msgstr ""
 
@@ -304,24 +286,9 @@ msgid "Invoice"
 msgstr "Factuur"
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_complete
-msgid "Is Complete"
-msgstr ""
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency
-msgid "Is Manual in Currency?"
-msgstr ""
-
-#. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__is_reconciled
 msgid "Is Reconciled"
 msgstr "Is Afgeletterd"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_valid
-msgid "Is Valid"
-msgstr ""
 
 #. module: account_reconcile_oca
 #: model_terms:ir.ui.view,arch_db:account_reconcile_oca.account_journal_dashboard_kanban_view
@@ -357,15 +324,8 @@ msgstr "Tussenrekeningen aanhouden"
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Label"
 msgstr "Label"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile____last_update
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile_data____last_update
-msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
 
 #. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile_data__write_uid
@@ -412,6 +372,11 @@ msgstr ""
 #. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency_id
 msgid "Manual In Currency"
+msgstr ""
+
+#. module: account_reconcile_oca
+#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency
+msgid "Manual In Currency?"
 msgstr ""
 
 #. module: account_reconcile_oca
@@ -483,14 +448,8 @@ msgid "Name"
 msgstr "Naam"
 
 #. module: account_reconcile_oca
-#: model_terms:ir.ui.view,arch_db:account_reconcile_oca.bank_statement_line_form_reconcile_view
-msgid "Narration"
-msgstr "Notitie"
-
-#. module: account_reconcile_oca
 #. odoo-python
 #: code:addons/account_reconcile_oca/models/account_bank_statement_line.py:0
-#, python-format
 msgid "No supense lines are allowed when reconciling"
 msgstr "Bij aflettering zijn tussenrekening regels niet toegestaan"
 
@@ -509,8 +468,12 @@ msgstr "Niet af te letteren"
 #. module: account_reconcile_oca
 #. odoo-javascript
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
-#, python-format
 msgid "Open Balance"
+msgstr ""
+
+#. module: account_reconcile_oca
+#: model_terms:ir.ui.view,arch_db:account_reconcile_oca.bank_statement_line_form_reconcile_view
+msgid "Other Info"
 msgstr ""
 
 #. module: account_reconcile_oca
@@ -518,7 +481,6 @@ msgstr ""
 #: code:addons/account_reconcile_oca/static/src/xml/reconcile.xml:0
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__partner_id
 #: model_terms:ir.ui.view,arch_db:account_reconcile_oca.bank_statement_line_form_reconcile_view
-#, python-format
 msgid "Partner"
 msgstr "Partner"
 
@@ -612,7 +574,6 @@ msgstr "Herstel aflettering"
 #. module: account_reconcile_oca
 #. odoo-python
 #: code:addons/account_reconcile_oca/models/account_bank_statement_line.py:0
-#, python-format
 msgid "Reversal of: %s"
 msgstr ""
 
@@ -648,11 +609,6 @@ msgid "Statement"
 msgstr ""
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_name
-msgid "Statement Name"
-msgstr ""
-
-#. module: account_reconcile_oca
 #: model:ir.actions.act_window,name:account_reconcile_oca.action_bank_statement_line_reconcile
 msgid "Statement lines"
 msgstr ""
@@ -680,7 +636,6 @@ msgstr "Transacties"
 #. module: account_reconcile_oca
 #. odoo-python
 #: code:addons/account_reconcile_oca/models/account_bank_statement_line.py:0
-#, python-format
 msgid "Undefined"
 msgstr "Ongedefinieerd"
 
@@ -717,14 +672,12 @@ msgstr ""
 #. module: account_reconcile_oca
 #. odoo-python
 #: code:addons/account_reconcile_oca/models/account_journal.py:0
-#, python-format
 msgid "Well done! Everything has been reconciled"
 msgstr "Goed gedaan! Alles is afgeletterd"
 
 #. module: account_reconcile_oca
 #. odoo-python
 #: code:addons/account_reconcile_oca/models/account_move_line.py:0
-#, python-format
 msgid "You can only reconcile journal items belonging to the same account."
 msgstr ""
 
@@ -748,8 +701,17 @@ msgstr "wordt verminderd met"
 msgid "with an open amount"
 msgstr "met een open bedrag"
 
+#~ msgid "Company related to this journal"
+#~ msgstr "Bedrijf gerelateerd aan dit dagboek"
+
+#~ msgid "Narration"
+#~ msgstr "Notitie"
+
 #, python-format
 #~ msgid "Keep suspense move lines mode cannot be unreconciled"
 #~ msgstr ""
 #~ "De modes, houd tussenrekening boekingsregels, kan niet ongedaan worden "
 #~ "gemaakt"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst gewijzigd op"

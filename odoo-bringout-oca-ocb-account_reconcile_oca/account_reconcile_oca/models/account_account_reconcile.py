@@ -25,13 +25,11 @@ class AccountAccountReconcile(models.Model):
 
     @property
     def _table_query(self):
-        return "%s %s %s %s %s" % (
-            self._select(),
-            self._from(),
-            self._where(),
-            self._groupby(),
-            self._having(),
+        query = (
+            f"{self._select()} {self._from()} {self._where()} "
+            f"{self._groupby()} {self._having()}"
         )
+        return query
 
     def _select(self):
         account_account_name_field = (
@@ -56,8 +54,8 @@ class AccountAccountReconcile(models.Model):
                 a.id as account_id,
                 FALSE as is_reconciled,
                 aml.currency_id as currency_id,
-                a.company_id,
-                false as foreign_currency_id,
+                am.company_id,
+                null as foreign_currency_id,
                 (
                     SUM(
                         CASE WHEN aml.amount_residual > 0
@@ -96,7 +94,7 @@ class AccountAccountReconcile(models.Model):
                     ELSE NULL
                 END,
                 aml.currency_id,
-                a.company_id
+                am.company_id
         """
 
     def _having(self):
