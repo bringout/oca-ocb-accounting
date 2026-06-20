@@ -1,26 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* spreadsheet_dashboard_account
-# 
+#
 # Translators:
-# kittipot anuwet <pipemsn1@gmail.com>, 2022
-# Wichanon Jamwutthipreecha, 2022
-# Khwunchai Jaengsawang <khwunchai.j@ku.th>, 2022
-# Martin Trigaux, 2022
+# Wil Odoo, 2023
 # Rasareeyar Lappiam, 2023
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-29 09:44+0000\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Rasareeyar Lappiam, 2023\n"
 "Language-Team: Thai (https://app.transifex.com/odoo/teams/41243/th/)\n"
+"Language: th\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: spreadsheet_dashboard_account
@@ -39,10 +36,6 @@ msgstr "# วัน"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Amount"
@@ -64,7 +57,6 @@ msgstr "ต้นทุนขาย"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Country"
@@ -134,8 +126,12 @@ msgid "Invoices by Total Signed"
 msgstr "ใบแจ้งหนี้ตามการลงนามโดยรวม"
 
 #. module: spreadsheet_dashboard_account
+#: model:spreadsheet.dashboard,name:spreadsheet_dashboard_account.dashboard_invoicing
+msgid "Invoicing"
+msgstr "ออกใบแจ้งหนี้"
+
+#. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Average Invoice"
@@ -151,7 +147,6 @@ msgstr "KPI - DSO"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Income"
 msgstr "KPI - รายได้"
@@ -165,7 +160,6 @@ msgstr "KPI - จำนวนใบแจ้งหนี้"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Unpaid Invoices"
@@ -181,7 +175,6 @@ msgstr "ช่วงเวลา"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Product"
 msgstr "สินค้า"
@@ -195,9 +188,6 @@ msgstr "หมวดหมู่สินค้า"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Ratio"
@@ -227,8 +217,6 @@ msgstr "รายได้"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Salesperson"
 msgstr "พนักงานขาย"
@@ -243,15 +231,12 @@ msgstr "สถานะ"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Categories"
 msgstr "หมวดหมู่ยอดนิยม"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Countries"
@@ -267,14 +252,12 @@ msgstr "ใบแจ้งหนี้ยอดนิยม"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Products"
 msgstr "สินค้ายอดนิยม"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Salespeople"

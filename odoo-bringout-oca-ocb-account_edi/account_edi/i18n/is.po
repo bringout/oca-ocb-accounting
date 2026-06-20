@@ -3,17 +3,16 @@
 # 	* account_edi
 # 
 # Translators:
-# Martin Trigaux, 2022
-# Heiðar Sigurðsson, 2022
+# Heiðar Sigurðsson, 2024
 # jonasyngvi, 2024
 # Kristófer Arnþórsson, 2024
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 08:26+0000\n"
-"PO-Revision-Date: 2022-09-22 05:44+0000\n"
+"POT-Creation-Date: 2024-08-13 10:27+0000\n"
+"PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Kristófer Arnþórsson, 2024\n"
 "Language-Team: Icelandic (https://app.transifex.com/odoo/teams/41243/is/)\n"
 "MIME-Version: 1.0\n"
@@ -58,6 +57,18 @@ msgid "A request for cancellation of the EDI has been called off."
 msgstr "Beiðni um niðurfellingu á EDI hefur verið hætt."
 
 #. module: account_edi
+#: model:ir.model,name:account_edi.model_account_move_send
+msgid "Account Move Send"
+msgstr "Reikningur Færa Senda"
+
+#. module: account_edi
+#: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
+msgid ""
+"Are you sure you want to cancel this invoice without waiting for the EDI "
+"document to be canceled?"
+msgstr ""
+
+#. module: account_edi
 #: model:ir.model,name:account_edi.model_ir_attachment
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__attachment_id
 msgid "Attachment"
@@ -90,7 +101,7 @@ msgstr "Aflýsa EDI afpöntun"
 #: model:ir.model.fields.selection,name:account_edi.selection__account_edi_document__state__cancelled
 #: model:ir.model.fields.selection,name:account_edi.selection__account_move__edi_state__cancelled
 msgid "Cancelled"
-msgstr "Eytt"
+msgstr "Hætt við"
 
 #. module: account_edi
 #. odoo-python
@@ -129,30 +140,15 @@ msgstr "Búið til þann"
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__display_name
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_format__display_name
 msgid "Display Name"
-msgstr "Birtingarnafn"
-
-#. module: account_edi
-#. odoo-python
-#: code:addons/account_edi/models/account_edi_format.py:0
-#, python-format
-msgid "Display the currency"
-msgstr ""
+msgstr "Birta nafn"
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
-#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "Download"
 msgstr "Sækja"
 
 #. module: account_edi
-#: model:ir.actions.server,name:account_edi.ir_cron_edi_network_ir_actions_server
-#: model:ir.cron,cron_name:account_edi.ir_cron_edi_network
-msgid "EDI : Perform web services operations"
-msgstr ""
-
-#. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
-#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "EDI Documents"
 msgstr "EDI skjöl"
 
@@ -165,6 +161,11 @@ msgstr "EDI snið"
 #: model:ir.model.fields,help:account_edi.field_account_journal__compatible_edi_ids
 msgid "EDI format that support moves in this journal"
 msgstr "EDI snið sem styður hreyfingar í þessari dagbók"
+
+#. module: account_edi
+#: model:ir.actions.server,name:account_edi.ir_cron_edi_network_ir_actions_server
+msgid "EDI: Perform web services operations"
+msgstr "EDI: Framkvæma vefþjónustuaðgerðir"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_bank_statement_line__edi_blocking_level
@@ -219,16 +220,18 @@ msgid "Edi Show Cancel Button"
 msgstr "Edi Show Cancel Button"
 
 #. module: account_edi
+#: model:ir.model.fields,field_description:account_edi.field_account_bank_statement_line__edi_show_force_cancel_button
+#: model:ir.model.fields,field_description:account_edi.field_account_move__edi_show_force_cancel_button
+#: model:ir.model.fields,field_description:account_edi.field_account_payment__edi_show_force_cancel_button
+msgid "Edi Show Force Cancel Button"
+msgstr ""
+
+#. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_bank_statement_line__edi_web_services_to_process
 #: model:ir.model.fields,field_description:account_edi.field_account_move__edi_web_services_to_process
 #: model:ir.model.fields,field_description:account_edi.field_account_payment__edi_web_services_to_process
 msgid "Edi Web Services To Process"
 msgstr "Edi vefþjónusta til vinnslu"
-
-#. module: account_edi
-#: model_terms:ir.ui.view,arch_db:account_edi.view_account_journal_form_inherited
-msgid "Electronic Data Interchange"
-msgstr ""
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_edi_document
@@ -237,7 +240,6 @@ msgstr "Rafræn skjal fyrir account.move"
 
 #. module: account_edi
 #: model:ir.actions.act_window,name:account_edi.action_open_edi_documents
-#: model:ir.actions.act_window,name:account_edi.action_open_payment_edi_documents
 #: model:ir.model.fields,field_description:account_edi.field_account_bank_statement_line__edi_state
 #: model:ir.model.fields,field_description:account_edi.field_account_journal__edi_format_ids
 #: model:ir.model.fields,field_description:account_edi.field_account_move__edi_state
@@ -256,16 +258,16 @@ msgid "Electronic invoicing state"
 msgstr "Staða rafrænna reikninga"
 
 #. module: account_edi
-#: model:ir.model,name:account_edi.model_mail_template
-msgid "Email Templates"
-msgstr ""
-
-#. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__error
 #: model:ir.model.fields.selection,name:account_edi.selection__account_edi_document__blocking_level__error
 #: model:ir.model.fields.selection,name:account_edi.selection__account_move__edi_blocking_level__error
 msgid "Error"
 msgstr "Villa"
+
+#. module: account_edi
+#: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
+msgid "Force Cancel"
+msgstr ""
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__edi_format_name
@@ -276,8 +278,8 @@ msgstr "Snið nafn"
 #: model:ir.model.fields,help:account_edi.field_account_bank_statement_line__edi_error_count
 #: model:ir.model.fields,help:account_edi.field_account_move__edi_error_count
 #: model:ir.model.fields,help:account_edi.field_account_payment__edi_error_count
-msgid "How many EDIs are in error for this move ?"
-msgstr ""
+msgid "How many EDIs are in error for this move?"
+msgstr "Hversu mörg EDI eru í villu fyrir þessa hreyfingu?"
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__id
@@ -307,23 +309,12 @@ msgstr ""
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_journal
 msgid "Journal"
-msgstr "Færslubók"
+msgstr "Dagbók"
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_move
 msgid "Journal Entry"
 msgstr "Dagbókarfærsla"
-
-#. module: account_edi
-#: model:ir.model,name:account_edi.model_account_move_line
-msgid "Journal Item"
-msgstr ""
-
-#. module: account_edi
-#: model:ir.model.fields,field_description:account_edi.field_account_edi_document____last_update
-#: model:ir.model.fields,field_description:account_edi.field_account_edi_format____last_update
-msgid "Last Modified on"
-msgstr ""
 
 #. module: account_edi
 #: model:ir.model.fields,field_description:account_edi.field_account_edi_document__write_uid
@@ -354,20 +345,9 @@ msgid "Only one edi document by move by format"
 msgstr "Aðeins eitt edi skjal með því að færa eftir sniði"
 
 #. module: account_edi
-#: model:ir.model,name:account_edi.model_account_payment
-msgid "Payments"
-msgstr "Greiðslur"
-
-#. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
-#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "Process now"
 msgstr "Ferlið núna"
-
-#. module: account_edi
-#: model:ir.model,name:account_edi.model_uom_uom
-msgid "Product Unit of Measure"
-msgstr ""
 
 #. module: account_edi
 #: model:ir.model,name:account_edi.model_account_resequence_wizard
@@ -386,7 +366,6 @@ msgstr "Biðja um EDI niðurfellingu"
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
-#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "Retry"
 msgstr "Reyna"
 
@@ -414,15 +393,6 @@ msgid "The aggregated state of all the EDIs with web-service of this move"
 msgstr "Samanlagt ástand allra EDI með vefþjónustu þessa flutnings"
 
 #. module: account_edi
-#. odoo-python
-#: code:addons/account_edi/models/account_edi_format.py:0
-#, python-format
-msgid ""
-"The currency (%s) of the document you are uploading is not active in this database.\n"
-"Please activate it and update the currency rate if needed before trying again to import."
-msgstr ""
-
-#. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_edi_document__attachment_id
 msgid ""
 "The file generated by edi_format_id when the invoice is posted (and this "
@@ -441,17 +411,8 @@ msgstr ""
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
-msgid ""
-"The invoice will be processed asynchronously by the following E-invoicing "
-"service :"
-msgstr ""
-
-#. module: account_edi
-#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
-msgid ""
-"The payment will be processed asynchronously by the following E-invoicing "
-"service :"
-msgstr ""
+msgid "The invoice will soon be sent to"
+msgstr "Reikningurinn verður fljótlega sendur til"
 
 #. module: account_edi
 #: model:ir.model.fields,help:account_edi.field_account_edi_document__error
@@ -471,6 +432,15 @@ msgstr "Þessi kóði er þegar til"
 #, python-format
 msgid "This document is being sent by another process already. "
 msgstr "Nú þegar er verið að senda þetta skjal með öðru ferli. "
+
+#. module: account_edi
+#. odoo-python
+#: code:addons/account_edi/models/account_move.py:0
+#, python-format
+msgid ""
+"This invoice was canceled while the EDIs %s still had a pending cancellation"
+" request."
+msgstr ""
 
 #. module: account_edi
 #: model:ir.model.fields.selection,name:account_edi.selection__account_edi_document__state__to_cancel
@@ -514,6 +484,5 @@ msgstr ""
 
 #. module: account_edi
 #: model_terms:ir.ui.view,arch_db:account_edi.view_move_form_inherit
-#: model_terms:ir.ui.view,arch_db:account_edi.view_payment_form_inherit
 msgid "⇒ See errors"
 msgstr "⇒ Sjá villur"

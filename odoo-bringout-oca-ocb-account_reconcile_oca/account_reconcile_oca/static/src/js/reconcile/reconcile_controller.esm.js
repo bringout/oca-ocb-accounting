@@ -1,9 +1,9 @@
 /** @odoo-module */
 const {onMounted, onWillStart, useState, useSubEnv} = owl;
+import {useBus, useService} from "@web/core/utils/hooks";
 import {KanbanController} from "@web/views/kanban/kanban_controller";
 import {View} from "@web/views/view";
 import {formatMonetary} from "@web/views/fields/formatters";
-import {useService} from "@web/core/utils/hooks";
 
 export class ReconcileController extends KanbanController {
     async setup() {
@@ -22,7 +22,9 @@ export class ReconcileController extends KanbanController {
         this.action = useService("action");
         this.router = useService("router");
         this.activeActions = this.props.archInfo.activeActions;
-        this.model.addEventListener("update", () => this.selectRecord(), {once: true});
+        useBus(this.model.bus, "update", () => {
+            this.selectRecord();
+        });
         onWillStart(() => {
             this.updateJournalInfo();
         });
@@ -93,7 +95,7 @@ export class ReconcileController extends KanbanController {
         };
     }
     async selectRecord(record) {
-        var resId = undefined;
+        var resId = false;
         if (record === undefined && this.props.resId) {
             resId = this.props.resId;
         } else if (record === undefined) {
@@ -135,6 +137,7 @@ export class ReconcileController extends KanbanController {
         this.router.pushState({id: resId});
     }
 }
+
 ReconcileController.components = {
     ...ReconcileController.components,
     View,

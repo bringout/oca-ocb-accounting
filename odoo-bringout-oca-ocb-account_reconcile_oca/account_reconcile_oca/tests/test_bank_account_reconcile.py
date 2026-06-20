@@ -2,14 +2,21 @@ import time
 
 from odoo.tests import Form, tagged
 
-from odoo.addons.account.tests.common import TestAccountReconciliationCommon
+from odoo.addons.account_reconcile_model_oca.tests.common import (
+    TestAccountReconciliationCommon,
+)
 
 
 @tagged("post_install", "-at_install")
 class TestReconciliationWidget(TestAccountReconciliationCommon):
     @classmethod
+    def _setup_context(cls):
+        return {**cls.env.context, "_test_account_reconcile_oca": True}
+
+    @classmethod
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
+        cls.env = cls.env(context=cls._setup_context())
         # Auto-disable reconciliation model created automatically with
         # generate_account_reconcile_model() to avoid side effects in tests
         cls.invoice_matching_models = cls.env["account.reconcile.model"].search(
@@ -24,15 +31,15 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         cls.acc_bank_stmt_model = cls.env["account.bank.statement"]
         cls.acc_bank_stmt_line_model = cls.env["account.bank.statement.line"]
         cls.bank_journal_usd.suspense_account_id = (
-            cls.company.account_journal_suspense_account_id
+            cls.env.company.account_journal_suspense_account_id
         )
         cls.bank_journal_euro.suspense_account_id = (
-            cls.company.account_journal_suspense_account_id
+            cls.env.company.account_journal_suspense_account_id
         )
         cls.current_assets_account = cls.env["account.account"].search(
             [
                 ("account_type", "=", "asset_current"),
-                ("company_id", "=", cls.company.id),
+                ("company_id", "=", cls.env.company.id),
             ],
             limit=1,
         )
@@ -106,7 +113,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         ) as f:
             self.assertFalse(f.can_reconcile)
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertFalse(f.add_account_move_line_id)
             self.assertTrue(f.can_reconcile)
@@ -233,7 +240,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             }
         )
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         with Form(
             bank_stmt_line,
@@ -286,7 +293,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         ) as f:
             self.assertFalse(f.can_reconcile)
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertFalse(f.add_account_move_line_id)
             self.assertTrue(f.can_reconcile)
@@ -343,10 +350,10 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             }
         )
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         receivable2 = inv2.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         with Form(
             bank_stmt_line,
@@ -406,10 +413,10 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             }
         )
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "liability_payable"
+            lambda line: line.account_id.account_type == "liability_payable"
         )
         receivable2 = inv2.line_ids.filtered(
-            lambda l: l.account_id.account_type == "liability_payable"
+            lambda line: line.account_id.account_type == "liability_payable"
         )
         with Form(
             bank_stmt_line,
@@ -537,7 +544,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         inv1 = self.create_invoice(currency_id=self.currency_euro_id)
 
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         bank_stmt = self.acc_bank_stmt_model.create(
             {
@@ -644,7 +651,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             }
         )
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         with Form(
             bank_stmt_line,
@@ -705,7 +712,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         self.env.user.groups_id -= self.env.ref("account.group_account_manager")
         self.bank_journal_euro.company_id.period_lock_date = time.strftime("%Y-07-16")
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         with Form(
             bank_stmt_line,
@@ -817,7 +824,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             }
         )
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         with Form(
             bank_stmt_line,
@@ -892,7 +899,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             }
         )
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         with Form(
             bank_stmt_line,
@@ -929,7 +936,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             }
         )
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         with Form(
             bank_stmt_line,
@@ -946,8 +953,8 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
 
     def test_widget_invoice_unselect(self):
         """
-        We want to test how selection and unselection of an account move lines is managed
-        by the system.
+        We want to test how selection and unselection of an account move lines is
+        managed by the system.
         """
         inv1 = self.create_invoice(
             currency_id=self.currency_euro_id, invoice_amount=100
@@ -974,12 +981,12 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         ) as f:
             self.assertFalse(f.can_reconcile)
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertFalse(f.add_account_move_line_id)
             self.assertTrue(f.can_reconcile)
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertFalse(f.add_account_move_line_id)
             self.assertFalse(f.can_reconcile)
@@ -1020,7 +1027,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             f.save()
             self.assertEqual(f.partner_id, inv1.partner_id)
         bank_stmt_line.clean_reconcile()
-        # As we have a set a partner, the cleaning should assign the invoice automatically
+        # As we have set a partner, the cleaning should assign the invoice automatically
         self.assertTrue(bank_stmt_line.can_reconcile)
 
     def test_widget_model_clean(self):
@@ -1112,11 +1119,11 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         partner = inv1.partner_id
 
         receivable1 = inv1.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         self.assertTrue(receivable1)
         receivable2 = inv2.line_ids.filtered(
-            lambda l: l.account_id.account_type == "asset_receivable"
+            lambda line: line.account_id.account_type == "asset_receivable"
         )
         self.assertTrue(receivable2)
 
@@ -1169,12 +1176,12 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
     def test_partner_name_with_parent(self):
         parent_partner = self.env["res.partner"].create(
             {
-                "name": "test",
+                "name": "test-account_reconcile_oca",
             }
         )
         child_partner = self.env["res.partner"].create(
             {
-                "name": "test",
+                "name": "test-account_reconcile_oca",
                 "parent_id": parent_partner.id,
                 "type": "delivery",
             }
@@ -1201,7 +1208,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
                 "amount": 100,
                 "date": time.strftime("%Y-07-15"),
                 "payment_ref": "test",
-                "partner_name": "test",
+                "partner_name": "test-account_reconcile_oca",
             }
         )
 
@@ -1238,7 +1245,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         ) as f:
             self.assertFalse(f.can_reconcile)
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertFalse(f.add_account_move_line_id)
             self.assertTrue(f.can_reconcile)
@@ -1311,7 +1318,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
                 259200,
             )
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertTrue(f.can_reconcile)
         self.assertEqual(len(bank_stmt_line.reconcile_data_info["data"]), 3)
@@ -1371,11 +1378,59 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
                 100,
             )
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertFalse(f.add_account_move_line_id)
             self.assertTrue(f.can_reconcile)
             self.assertEqual(3, len(f.reconcile_data_info["data"]))
+
+    def test_receivable_line(self):
+        bank_stmt_line = self.acc_bank_stmt_line_model.create(
+            {
+                "name": "testLine",
+                "journal_id": self.bank_journal_euro.id,
+                "partner_id": self.partner_agrolait_id,
+                "amount": 100,
+                "date": time.strftime("%Y-07-15"),
+            }
+        )
+        self.assertTrue(bank_stmt_line.can_reconcile)
+        suspense_line = False
+        for line in bank_stmt_line.reconcile_data_info["data"]:
+            if line["kind"] == "suspense":
+                suspense_line = line
+                break
+        self.assertTrue(suspense_line)
+        self.assertEqual(
+            self.env["account.account"]
+            .browse(suspense_line["account_id"][0])
+            .account_type,
+            "asset_receivable",
+        )
+
+    def test_payable_line(self):
+        bank_stmt_line = self.acc_bank_stmt_line_model.create(
+            {
+                "name": "testLine",
+                "journal_id": self.bank_journal_euro.id,
+                "partner_id": self.partner_agrolait_id,
+                "amount": -100,
+                "date": time.strftime("%Y-07-15"),
+            }
+        )
+        self.assertTrue(bank_stmt_line.can_reconcile)
+        suspense_line = False
+        for line in bank_stmt_line.reconcile_data_info["data"]:
+            if line["kind"] == "suspense":
+                suspense_line = line
+                break
+        self.assertTrue(suspense_line)
+        self.assertEqual(
+            self.env["account.account"]
+            .browse(suspense_line["account_id"][0])
+            .account_type,
+            "liability_payable",
+        )
 
     def test_invoice_foreign_currency_late_change_of_rate(self):
         # Test we can reconcile lines in foreign currency even if the rate was updated
@@ -1458,7 +1513,7 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
             # check currency amount is still fine
             self.assertEqual(f.reconcile_data_info["data"][0]["currency_amount"], 100)
             f.add_account_move_line_id = inv1.line_ids.filtered(
-                lambda l: l.account_id.account_type == "asset_receivable"
+                lambda line: line.account_id.account_type == "asset_receivable"
             )
             self.assertEqual(3, len(f.reconcile_data_info["data"]))
             self.assertTrue(f.can_reconcile)

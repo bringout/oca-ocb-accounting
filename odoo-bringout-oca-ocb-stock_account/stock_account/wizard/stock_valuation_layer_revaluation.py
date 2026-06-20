@@ -94,12 +94,13 @@ class StockValuationLayerRevaluation(models.TransientModel):
 
         remaining_qty = sum(remaining_svls.mapped('remaining_qty'))
         remaining_value = self.added_value
-        remaining_value_unit_cost = self.currency_id.round(remaining_value / remaining_qty)
+        remaining_value_unit_cost = remaining_value / remaining_qty
         for svl in remaining_svls:
             if float_is_zero(svl.remaining_qty - remaining_qty, precision_rounding=self.product_id.uom_id.rounding):
                 taken_remaining_value = remaining_value
             else:
                 taken_remaining_value = remaining_value_unit_cost * svl.remaining_qty
+            taken_remaining_value = self.currency_id.round(taken_remaining_value)
             if float_compare(svl.remaining_value + taken_remaining_value, 0, precision_rounding=self.product_id.uom_id.rounding) < 0:
                 raise UserError(_('The value of a stock valuation layer cannot be negative. Landed cost could be use to correct a specific transfer.'))
 
@@ -110,8 +111,8 @@ class StockValuationLayerRevaluation(models.TransientModel):
         previous_value_svl = self.current_value_svl
         revaluation_svl = self.env['stock.valuation.layer'].create(revaluation_svl_vals)
 
-        # Update the stardard price in case of AVCO
-        if product_id.categ_id.property_cost_method in ('average', 'fifo'):
+        # Update the stardard price in case of AVCO/FIFO
+        if product_id.categ_id.property_cost_method in ['average', 'fifo']:
             product_id.with_context(disable_auto_svl=True).standard_price += self.added_value / self.current_quantity_svl
 
         # If the Inventory Valuation of the product category is automated, create related account move.

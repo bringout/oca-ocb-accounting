@@ -7,29 +7,15 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="account.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[@id='bank_cash']" position="inside">
-                <div
-                    class="col-12 col-lg-6 o_setting_box"
+            <block id="bank_cash" position="inside">
+                <setting
                     id="reconcile_aggregate"
                     title="Standard aggregation to use on bank reconciliation"
+                    string="Reconcile aggregation"
                 >
-                    <div class="o_setting_left_pane">
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <label
-                            for="reconcile_aggregate"
-                            string="Reconcile aggregation"
-                        />
-                        <div class="o_setting_container">
-                            <field name="reconcile_aggregate" />
-                        </div>
-
-                        <div class="text-muted">
-                            Standard aggregation to use on bank reconciliation
-                        </div>
-                    </div>
-                </div>
-            </xpath>
+                    <field name="reconcile_aggregate" />
+                </setting>
+            </block>
         </field>
     </record>
 

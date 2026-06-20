@@ -3,7 +3,7 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
-from odoo.tools import clean_context, float_is_zero, float_repr, float_round, float_compare
+from odoo.tools import float_is_zero, float_repr, float_round, float_compare
 from odoo.exceptions import ValidationError
 from collections import defaultdict
 from datetime import datetime
@@ -38,15 +38,18 @@ class ProductTemplate(models.Model):
                     continue
 
                 # Empty out the stock with the current cost method.
-                description = _("Due to a change of product category (from %s to %s), the costing method\
-                                has changed for product template %s: from %s to %s.") %\
-                    (product_template.categ_id.display_name, new_product_category.display_name,
-                     product_template.display_name, product_template.cost_method, new_product_category.property_cost_method)
+                description = _(
+                    "Due to a change of product category (from %s to %s), the costing method has changed for product template %s: from %s to %s.",
+                    product_template.categ_id.display_name,
+                    new_product_category.display_name,
+                    product_template.display_name,
+                    product_template.cost_method,
+                    new_product_category.property_cost_method)
                 out_svl_vals_list, products_orig_quantity_svl, products = Product\
                     ._svl_empty_stock(description, product_template=product_template)
                 out_stock_valuation_layers = SVL.create(out_svl_vals_list)
                 if product_template.valuation == 'real_time':
-                    move_vals_list += Product._svl_empty_stock_am(out_stock_valuation_layers)
+                    move_vals_list += Product.with_context(products_orig_quantity_svl=products_orig_quantity_svl)._svl_empty_stock_am(out_stock_valuation_layers)
                 impacted_templates[product_template] = (products, description, products_orig_quantity_svl)
 
         res = super(ProductTemplate, self).write(vals)
@@ -63,7 +66,7 @@ class ProductTemplate(models.Model):
             raise UserError(_("The action leads to the creation of a journal entry, for which you don't have the access rights."))
         # Create the account moves.
         if move_vals_list:
-            account_moves = self.env['account.move'].sudo().with_context(clean_context(self._context)).create(move_vals_list)
+            account_moves = self.env['account.move'].sudo().create(move_vals_list)
             account_moves._post()
         return res
 
@@ -115,31 +118,36 @@ class ProductProduct(models.Model):
     def _get_valuation_layer_group_domain(self):
         company_id = self.env.company.id
         domain = [
+            *self.env['stock.valuation.layer']._check_company_domain(company_id),
             ('product_id', 'in', self.ids),
-            ('company_id', '=', company_id),
         ]
         if self.env.context.get('to_date'):
             to_date = fields.Datetime.to_datetime(self.env.context['to_date'])
             domain.append(('create_date', '<=', to_date))
         return domain
 
-    def _get_valuation_layer_group_fields(self):
+    def _get_valuation_layer_group_fields_aggregate(self):
         return ['value:sum', 'quantity:sum']
 
     def _get_valuation_layer_groups(self):
         domain = self._get_valuation_layer_group_domain()
-        group_fields = self._get_valuation_layer_group_fields()
-        return self.env['stock.valuation.layer']._read_group(domain, group_fields, ['product_id'])
+        group_fields_aggregate = self._get_valuation_layer_group_fields_aggregate()
+        return self.env['stock.valuation.layer']._read_group(
+            domain,
+            groupby=['product_id'],
+            aggregates=group_fields_aggregate,
+        )
 
-    def _prepare_valuation_layer_field_values(self, valuation_layer_group):
+    def _prepare_valuation_layer_field_values(self, aggregates):
         self.ensure_one()
-        value_svl = self.env.company.currency_id.round(valuation_layer_group['value'])
+        value_sum, quantity_sum = aggregates
+        value_svl = self.env.company.currency_id.round(value_sum)
         avg_cost = 0
-        if not float_is_zero(valuation_layer_group['quantity'], precision_rounding=self.uom_id.rounding):
-            avg_cost = value_svl / valuation_layer_group['quantity']
+        if not float_is_zero(quantity_sum, precision_rounding=self.uom_id.rounding):
+            avg_cost = value_svl / quantity_sum
         return {
             "value_svl": value_svl,
-            "quantity_svl": valuation_layer_group['quantity'],
+            "quantity_svl": quantity_sum,
             "avg_cost": avg_cost,
             "total_value": avg_cost * self.sudo(False).qty_available
         }
@@ -150,18 +158,12 @@ class ProductProduct(models.Model):
         """Compute totals of multiple svl related values"""
         self.company_currency_id = self.env.company.currency_id
         valuation_layer_groups = self._get_valuation_layer_groups()
-        products = self.browse()
         # Browse all products and compute products' quantities_dict in batch.
-        self.env['product.product'].browse([group['product_id'][0] for group in valuation_layer_groups]).sudo(False).mapped('qty_available')
-        for valuation_layer_group in valuation_layer_groups:
-            product = self.browse(valuation_layer_group['product_id'][0])
-            product.update(product._prepare_valuation_layer_field_values(valuation_layer_group))
-            products |= product
-        remaining = (self - products)
-        remaining.value_svl = 0
-        remaining.quantity_svl = 0
-        remaining.avg_cost = 0
-        remaining.total_value = 0
+        group_mapping = {product: aggregates for product, *aggregates in valuation_layer_groups}
+        for product in self:
+            aggregates = group_mapping.get(product._origin, (0, 0))
+            vals = product._prepare_valuation_layer_field_values(aggregates)
+            product.update(vals)
 
     # -------------------------------------------------------------------------
     # Actions
@@ -229,16 +231,17 @@ class ProductProduct(models.Model):
             rounding_error = currency.round(
                 (self.standard_price * self.quantity_svl - self.value_svl) * abs(quantity / self.quantity_svl)
             )
-            if rounding_error:
-                # If it is bigger than the (smallest number of the currency * quantity) / 2,
-                # then it isn't a rounding error but a stock valuation error, we shouldn't fix it under the hood ...
-                if abs(rounding_error) <= max((abs(quantity) * currency.rounding) / 2, currency.rounding):
-                    vals['value'] += rounding_error
-                    vals['rounding_adjustment'] = '\nRounding Adjustment: %s%s %s' % (
-                        '+' if rounding_error > 0 else '',
-                        float_repr(rounding_error, precision_digits=currency.decimal_places),
-                        currency.symbol
-                    )
+
+            # If it is bigger than the (smallest number of the currency * quantity) / 2,
+            # then it isn't a rounding error but a stock valuation error, we shouldn't fix it under the hood ...
+            threshold = currency.round(max((abs(quantity) * currency.rounding) / 2, currency.rounding))
+            if rounding_error and abs(rounding_error) <= threshold:
+                vals['value'] += rounding_error
+                vals['rounding_adjustment'] = '\nRounding Adjustment: %s%s %s' % (
+                    '+' if rounding_error > 0 else '',
+                    float_repr(rounding_error, precision_digits=currency.decimal_places),
+                    currency.symbol
+                )
         if self.product_tmpl_id.cost_method == 'fifo':
             vals.update(fifo_vals)
         return vals
@@ -272,7 +275,7 @@ class ProductProduct(models.Model):
             svl_vals = {
                 'company_id': company_id.id,
                 'product_id': product.id,
-                'description': _('Product value manually modified (from %s to %s)') % (product.standard_price, rounded_new_price),
+                'description': _('Product value manually modified (from %s to %s)', product.standard_price, rounded_new_price),
                 'value': value,
                 'quantity': 0,
             }
@@ -338,7 +341,7 @@ class ProductProduct(models.Model):
             }
             am_vals_list.append(move_vals)
 
-        account_moves = self.env['account.move'].sudo().with_context(clean_context(self._context)).create(am_vals_list)
+        account_moves = self.env['account.move'].sudo().create(am_vals_list)
         if account_moves:
             account_moves._post()
 
@@ -389,9 +392,16 @@ class ProductProduct(models.Model):
                     new_standard_price = next_candidates and next_candidates[0].unit_cost or new_standard_price
                 break
 
-        # Update the standard price with the price of the last used candidate, if any.
-        if new_standard_price and self.cost_method == 'fifo':
-            self.sudo().with_company(company.id).with_context(disable_auto_svl=True).standard_price = new_standard_price
+        # Fifo out will change the AVCO value of the product. So in case of out,
+        # we recompute it base on the remaining value and quantities.
+        if self.cost_method == 'fifo':
+            quantity_svl = sum(candidates.mapped('remaining_qty'))
+            value_svl = sum(candidates.mapped('remaining_value'))
+            product = self.sudo().with_company(company.id).with_context(disable_auto_svl=True)
+            if float_compare(quantity_svl, 0.0, precision_rounding=self.uom_id.rounding) > 0:
+                product.standard_price = value_svl / quantity_svl
+            elif candidates and not float_is_zero(qty_to_take_on_candidates, precision_rounding=self.uom_id.rounding):
+                product.standard_price = new_standard_price
 
         # If there's still quantity to value but we're out of candidates, we fall in the
         # negative stock use case. We chose to value the out move at the price of the
@@ -414,6 +424,21 @@ class ProductProduct(models.Model):
             }
         return vals
 
+    def _prepare_fifo_vacuum_valuation_layer_values(self, svl_to_vacuum, corrected_value):
+        self.ensure_one()
+        move = svl_to_vacuum.stock_move_id
+        return {
+            'product_id': self.id,
+            'value': corrected_value,
+            'unit_cost': 0,
+            'quantity': 0,
+            'remaining_qty': 0,
+            'stock_move_id': move.id,
+            'company_id': move.company_id.id,
+            'description': 'Revaluation of %s (negative inventory)' % (move.picking_id.name or move.name),
+            'stock_valuation_layer_id': svl_to_vacuum.id,
+        }
+
     def _run_fifo_vacuum(self, company=None):
         """Compensate layer valued at an estimated price with the price of future receipts
         if any. If the estimated price is equals to the real price, no layer is created but
@@ -425,31 +450,33 @@ class ProductProduct(models.Model):
             company = self.env.company
         ValuationLayer = self.env['stock.valuation.layer'].sudo()
         svls_to_vacuum_by_product = defaultdict(lambda: ValuationLayer)
-        res = ValuationLayer.read_group([
+        res = ValuationLayer._read_group([
             ('product_id', 'in', self.ids),
             ('remaining_qty', '<', 0),
             ('stock_move_id', '!=', False),
             ('company_id', '=', company.id),
-        ], ['ids:array_agg(id)', 'create_date:min'], ['product_id'], orderby='create_date, id')
+        ], ['product_id'], ['id:recordset', 'create_date:min'], order='create_date:min')
         min_create_date = datetime.max
+        if not res:
+            return
         for group in res:
-            svls_to_vacuum_by_product[group['product_id'][0]] = ValuationLayer.browse(group['ids'])
-            min_create_date = min(min_create_date, group['create_date'])
+            svls_to_vacuum_by_product[group[0].id] = group[1].sorted(key=lambda r: (r.create_date, r.id))
+            min_create_date = min(min_create_date, group[2])
         all_candidates_by_product = defaultdict(lambda: ValuationLayer)
-        res = ValuationLayer.read_group([
+        res = ValuationLayer._read_group([
             ('product_id', 'in', self.ids),
             ('remaining_qty', '>', 0),
             ('company_id', '=', company.id),
             ('create_date', '>=', min_create_date),
-        ], ['ids:array_agg(id)'], ['product_id'], orderby='id')
+        ], ['product_id'], ['id:recordset'])
         for group in res:
-            all_candidates_by_product[group['product_id'][0]] = ValuationLayer.browse(group['ids'])
+            all_candidates_by_product[group[0].id] = group[1]
 
         new_svl_vals_real_time = []
         new_svl_vals_manual = []
         real_time_svls_to_vacuum = ValuationLayer
 
-        for product in self:
+        for product in self.with_company(company.id):
             all_candidates = all_candidates_by_product[product.id]
             current_real_time_svls = ValuationLayer
             for svl_to_vacuum in svls_to_vacuum_by_product[product.id]:
@@ -500,19 +527,8 @@ class ProductProduct(models.Model):
 
                 corrected_value = svl_to_vacuum.currency_id.round(corrected_value)
 
-                move = svl_to_vacuum.stock_move_id
                 new_svl_vals = new_svl_vals_real_time if product.valuation == 'real_time' else new_svl_vals_manual
-                new_svl_vals.append({
-                    'product_id': product.id,
-                    'value': corrected_value,
-                    'unit_cost': 0,
-                    'quantity': 0,
-                    'remaining_qty': 0,
-                    'stock_move_id': move.id,
-                    'company_id': move.company_id.id,
-                    'description': 'Revaluation of %s (negative inventory)' % (move.picking_id.name or move.name),
-                    'stock_valuation_layer_id': svl_to_vacuum.id,
-                })
+                new_svl_vals.append(product._prepare_fifo_vacuum_valuation_layer_values(svl_to_vacuum, corrected_value))
                 if product.valuation == 'real_time':
                     current_real_time_svls |= svl_to_vacuum
             real_time_svls_to_vacuum |= current_real_time_svls
@@ -522,10 +538,9 @@ class ProductProduct(models.Model):
         # If some negative stock were fixed, we need to recompute the standard price.
         for product in self:
             product = product.with_company(company.id)
-            # Only recompute if we fixed some negative stock
             if not svls_to_vacuum_by_product[product.id]:
                 continue
-            if product.cost_method == 'average' and not float_is_zero(product.quantity_svl,
+            if product.cost_method in ['average', 'fifo'] and not float_is_zero(product.quantity_svl,
                                                                       precision_rounding=product.uom_id.rounding):
                 product.sudo().with_context(disable_auto_svl=True).write({'standard_price': product.value_svl / product.quantity_svl})
 
@@ -568,7 +583,7 @@ class ProductProduct(models.Model):
                 'move_type': 'entry',
             })
             vacuum_pairs_to_reconcile.append((vacuum_svl, svl_to_vacuum))
-        new_account_moves = AccountMove.with_context(clean_context(self._context)).create(account_move_vals)
+        new_account_moves = AccountMove.create(account_move_vals)
         new_account_moves._post()
         for new_account_move, (vacuum_svl, svl_to_vacuum) in zip(new_account_moves, vacuum_pairs_to_reconcile):
             account = svls_accounts[svl_to_vacuum.id]['stock_output']
@@ -692,9 +707,20 @@ class ProductProduct(models.Model):
                 raise UserError(_('You don\'t have any stock input account defined on your product category. You must define one before processing this operation.'))
             if not product_accounts[product.id].get('stock_valuation'):
                 raise UserError(_('You don\'t have any stock valuation account defined on your product category. You must define one before processing this operation.'))
+            if not product_accounts[product.id].get('stock_output'):
+                raise UserError(
+                    _('You don\'t have any output valuation account defined on your product '
+                      'category. You must define one before processing this operation.')
+                )
 
-            debit_account_id = stock_input_account.id
-            credit_account_id = product_accounts[product.id]['stock_valuation'].id
+            precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+            orig_qtys = self.env.context.get('products_orig_quantity_svl')
+            if orig_qtys and float_compare(orig_qtys[product.id], 0, precision_digits=precision) < 1:
+                debit_account_id = product_accounts[product.id]['stock_valuation'].id
+                credit_account_id = product_accounts[product.id]['stock_output'].id
+            else:
+                debit_account_id = stock_input_account.id
+                credit_account_id = product_accounts[product.id]['stock_valuation'].id
             value = out_stock_valuation_layer.value
             move_vals = {
                 'journal_id': product_accounts[product.id]['stock_journal'].id,
@@ -791,16 +817,19 @@ class ProductProduct(models.Model):
         if not qty_to_invoice:
             return 0
 
-        candidates = stock_moves\
-            .sudo()\
-            .filtered(lambda m: is_returned == bool(m.origin_returned_move_id and sum(m.stock_valuation_layer_ids.mapped('quantity')) >= 0))\
-            .mapped('stock_valuation_layer_ids')
+        candidates = self.env['stock.valuation.layer'].sudo()
+        for move in stock_moves.sudo():
+            move_candidates = move._get_layer_candidates()
+            if is_returned != bool(move.origin_returned_move_id and sum(move_candidates.mapped('quantity')) >= 0):
+                continue
+            candidates |= move_candidates
 
         if self.env.context.get('candidates_prefetch_ids'):
             candidates = candidates.with_prefetch(self.env.context.get('candidates_prefetch_ids'))
 
         if len(candidates) > 1:
-            candidates = candidates.sorted(lambda svl: (svl.create_date, svl.id))
+            # sort candidates by create_date > existing records by id > new records without origin
+            candidates = candidates.sorted(lambda svl: (svl.create_date, not bool(svl.ids), svl.ids[0] if svl.ids else 0))
 
         value_invoiced = self.env.context.get('value_invoiced', 0)
         if 'value_invoiced' in self.env.context:
@@ -814,7 +843,7 @@ class ProductProduct(models.Model):
         for sml in stock_moves.move_line_ids:
             if not sml._should_exclude_for_valuation():
                 continue
-            missing -= sml.product_uom_id._compute_quantity(sml.qty_done, self.uom_id, rounding_method='HALF-UP')
+            missing -= sml.product_uom_id._compute_quantity(sml.quantity, self.uom_id, rounding_method='HALF-UP')
         if float_compare(missing, 0, precision_rounding=self.uom_id.rounding) > 0:
             valuation += self.standard_price * missing
 
@@ -842,32 +871,93 @@ class ProductCategory(models.Model):
         """)
     property_stock_journal = fields.Many2one(
         'account.journal', 'Stock Journal', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0])]", check_company=True,
         help="When doing automated inventory valuation, this is the Accounting Journal in which entries will be automatically posted when stock moves are processed.")
     property_stock_account_input_categ_id = fields.Many2one(
         'account.account', 'Stock Input Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True,
+        domain="[('deprecated', '=', False)]", check_company=True,
         help="""Counterpart journal items for all incoming stock moves will be posted in this account, unless there is a specific valuation account
                 set on the source location. This is the default value for all products in this category. It can also directly be set on each product.""")
     property_stock_account_output_categ_id = fields.Many2one(
         'account.account', 'Stock Output Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True,
+        domain="[('deprecated', '=', False)]", check_company=True,
         help="""When doing automated inventory valuation, counterpart journal items for all outgoing stock moves will be posted in this account,
                 unless there is a specific valuation account set on the destination location. This is the default value for all products in this category.
                 It can also directly be set on each product.""")
     property_stock_valuation_account_id = fields.Many2one(
         'account.account', 'Stock Valuation Account', company_dependent=True,
-        domain="[('company_id', '=', allowed_company_ids[0]), ('deprecated', '=', False)]", check_company=True,
+        domain="[('deprecated', '=', False)]", check_company=True,
         help="""When automated inventory valuation is enabled on a product, this account will hold the current value of the products.""",)
 
-    @api.constrains('property_stock_valuation_account_id', 'property_stock_account_output_categ_id', 'property_stock_account_input_categ_id')
-    def _check_valuation_accouts(self):
-        # Prevent to set the valuation account as the input or output account.
+    @api.model
+    def _get_stock_account_property_field_names(self):
+        return [
+            'property_stock_account_input_categ_id',
+            'property_stock_account_output_categ_id',
+            'property_stock_valuation_account_id',
+        ]
+
+    @api.constrains(lambda self: tuple(self._get_stock_account_property_field_names() + ['property_valuation']))
+    def _check_valuation_accounts(self):
+        fnames = self._get_stock_account_property_field_names()
         for category in self:
+            # "compute" properties in constraint because ORM doesn't support computed properties
+            for property_field in fnames:
+                category[property_field] = category.property_valuation == 'real_time' and (
+                    category[property_field]
+                    or self.env['ir.property']._get(property_field, 'product.category')
+                )
+
+            # Prevent to set the valuation account as the input or output account.
             valuation_account = category.property_stock_valuation_account_id
             input_and_output_accounts = category.property_stock_account_input_categ_id | category.property_stock_account_output_categ_id
             if valuation_account and valuation_account in input_and_output_accounts:
                 raise ValidationError(_('The Stock Input and/or Output accounts cannot be the same as the Stock Valuation account.'))
+
+    @api.model
+    def _create_default_stock_accounts_properties(self):
+        IrProperty = self.env['ir.property']
+        company = self.env.ref('base.main_company')
+        output_field = self.env['ir.model.fields'].search([
+            ('model', '=', 'product.category'),
+            ('name', '=', 'property_stock_account_output_categ_id'),
+        ])
+        output_property = IrProperty.search([
+            ('fields_id', '=', output_field.id),
+            ('res_id', '=', False),
+            ('company_id', '=', company.id),
+        ])
+        if not output_property:
+            IrProperty._load_records([{
+                'xml_id': 'stock_account.property_stock_account_output_categ_id',
+                'noupdate': True,
+                'values': {
+                    'name': 'property_stock_account_output_categ_id',
+                    'fields_id': output_field.id,
+                    'value': False,
+                    'company_id': company.id,
+                },
+            }])
+
+        input_field = self.env['ir.model.fields'].search([
+            ('model', '=', 'product.category'),
+            ('name', '=', 'property_stock_account_input_categ_id'),
+        ])
+        input_property = IrProperty.search([
+            ('fields_id', '=', input_field.id),
+            ('res_id', '=', False),
+            ('company_id', '=', company.id),
+        ])
+        if not input_property:
+            IrProperty._load_records([{
+                'xml_id': 'stock_account.property_stock_account_input_categ_id',
+                'noupdate': True,
+                'values': {
+                    'name': 'property_stock_account_input_categ_id',
+                    'fields_id': input_field.id,
+                    'value': False,
+                    'company_id': company.id,
+                },
+            }])
 
     @api.onchange('property_cost_method')
     def onchange_property_cost(self):
@@ -894,22 +984,6 @@ class ProductCategory(models.Model):
             new_valuation = vals.get('property_valuation')
 
             for product_category in self:
-                property_stock_fields = ['property_stock_account_input_categ_id', 'property_stock_account_output_categ_id', 'property_stock_valuation_account_id']
-                if 'property_valuation' in vals and vals['property_valuation'] == 'manual_periodic' and product_category.property_valuation != 'manual_periodic':
-                    for stock_property in property_stock_fields:
-                        vals[stock_property] = False
-                elif 'property_valuation' in vals and vals['property_valuation'] == 'real_time' and product_category.property_valuation != 'real_time':
-                    company_id = self.env.company
-                    for stock_property in property_stock_fields:
-                        vals[stock_property] = vals.get(stock_property, False) or company_id[stock_property]
-                elif product_category.property_valuation == 'manual_periodic':
-                    for stock_property in property_stock_fields:
-                        if stock_property in vals:
-                            vals.pop(stock_property)
-                else:
-                    for stock_property in property_stock_fields:
-                        if stock_property in vals and vals[stock_property] is False:
-                            vals.pop(stock_property)
                 valuation_impacted = False
                 if new_cost_method and new_cost_method != product_category.property_cost_method:
                     valuation_impacted = True
@@ -920,18 +994,19 @@ class ProductCategory(models.Model):
 
                 # Empty out the stock with the current cost method.
                 if new_cost_method:
-                    description = _("Costing method change for product category %s: from %s to %s.") \
-                        % (product_category.display_name, product_category.property_cost_method, new_cost_method)
+                    description = _(
+                        "Costing method change for product category %s: from %s to %s.",
+                        product_category.display_name, product_category.property_cost_method, new_cost_method)
                 else:
-                    description = _("Valuation method change for product category %s: from %s to %s.") \
-                        % (product_category.display_name, product_category.property_valuation, new_valuation)
+                    description = _(
+                        "Valuation method change for product category %s: from %s to %s.",
+                        product_category.display_name, product_category.property_valuation, new_valuation)
                 out_svl_vals_list, products_orig_quantity_svl, products = Product\
                     ._svl_empty_stock(description, product_category=product_category)
                 out_stock_valuation_layers = SVL.sudo().create(out_svl_vals_list)
                 if product_category.property_valuation == 'real_time':
-                    move_vals_list += Product._svl_empty_stock_am(out_stock_valuation_layers)
-                for svl in out_stock_valuation_layers:
-                    svl.product_id.with_context(disable_auto_svl=True).standard_price = svl.unit_cost
+
+                    move_vals_list += Product.with_context(products_orig_quantity_svl=products_orig_quantity_svl)._svl_empty_stock_am(out_stock_valuation_layers)
                 impacted_categories[product_category] = (products, description, products_orig_quantity_svl)
 
         res = super(ProductCategory, self).write(vals)
@@ -948,35 +1023,11 @@ class ProductCategory(models.Model):
             raise UserError(_("The action leads to the creation of a journal entry, for which you don't have the access rights."))
         # Create the account moves.
         if move_vals_list:
-            account_moves = self.env['account.move'].sudo().with_context(clean_context(self._context)).create(move_vals_list)
+            account_moves = self.env['account.move'].sudo().create(move_vals_list)
             account_moves._post()
         return res
 
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        for vals in vals_list:
-            if 'property_valuation' not in vals or vals['property_valuation'] == 'manual_periodic':
-                vals['property_stock_account_input_categ_id'] = False
-                vals['property_stock_account_output_categ_id'] = False
-                vals['property_stock_valuation_account_id'] = False
-            if 'property_valuation' in vals and vals['property_valuation'] == 'real_time':
-                company_id = self.env.company
-                vals['property_stock_account_input_categ_id'] = vals.get('property_stock_account_input_categ_id', False) or company_id.property_stock_account_input_categ_id
-                vals['property_stock_account_output_categ_id'] = vals.get('property_stock_account_output_categ_id', False) or company_id.property_stock_account_output_categ_id
-                vals['property_stock_valuation_account_id'] = vals.get('property_stock_valuation_account_id', False) or company_id.property_stock_valuation_account_id
-
-        return super().create(vals_list)
-
+    # delete in master
     @api.onchange('property_valuation')
     def onchange_property_valuation(self):
-        # Remove or set the account stock properties if necessary
-        if self.property_valuation == 'manual_periodic':
-            self.property_stock_account_input_categ_id = False
-            self.property_stock_account_output_categ_id = False
-            self.property_stock_valuation_account_id = False
-        if self.property_valuation == 'real_time':
-            company_id = self.env.company
-            self.property_stock_account_input_categ_id = company_id.property_stock_account_input_categ_id
-            self.property_stock_account_output_categ_id = company_id.property_stock_account_output_categ_id
-            self.property_stock_valuation_account_id = company_id.property_stock_valuation_account_id
+        pass

@@ -1,35 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_debit_note
-# 
-# Translators:
-# Батболд <batbold.ts@gmail.com>, 2022
-# Batmunkh Ganbat <batmunkh2522@gmail.com>, 2022
-# Martin Trigaux, 2022
-# Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2022
-# 
+# * account_debit_note
+#
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 08:26+0000\n"
-"PO-Revision-Date: 2022-09-22 05:44+0000\n"
-"Last-Translator: Baskhuu Lodoikhuu <baskhuujacara@gmail.com>, 2022\n"
-"Language-Team: Mongolian (https://app.transifex.com/odoo/teams/41243/mn/)\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
+"PO-Revision-Date: 2025-11-10 12:12+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"Language-Team: Mongolian <https://translate.odoo.com/projects/odoo-17/"
+"account_debit_note/mn/>\n"
+"Language: mn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: mn\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. module: account_debit_note
 #: model_terms:ir.ui.view,arch_db:account_debit_note.view_move_form_debit
 msgid "<span class=\"o_stat_text\">Debit Notes</span>"
-msgstr ""
-
-#. module: account_debit_note
-#: model_terms:ir.ui.view,arch_db:account_debit_note.view_move_form_debit
-msgid "Add Debit Note"
 msgstr ""
 
 #. module: account_debit_note
@@ -67,6 +59,14 @@ msgstr "Үүсгэсэн этгээд"
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__create_date
 msgid "Created on"
 msgstr "Үүсгэсэн огноо"
+
+#. module: account_debit_note
+#: model:ir.actions.server,name:account_debit_note.action_move_debit_note
+#: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_invoice_filter_debit
+#: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_move_filter_debit
+#: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_move_line_filter_debit
+msgid "Debit Note"
+msgstr ""
 
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__date
@@ -116,11 +116,6 @@ msgstr "Ажил гүйлгээ"
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__journal_type
 msgid "Journal Type"
 msgstr ""
-
-#. module: account_debit_note
-#: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note____last_update
-msgid "Last Modified on"
-msgstr "Сүүлд зассан огноо"
 
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__write_uid
@@ -193,5 +188,23 @@ msgstr "Тусгай журнал хэрэглэх"
 #. odoo-python
 #: code:addons/account_debit_note/wizard/account_debit_note.py:0
 #, python-format
+msgid ""
+"You can make a debit note only for a Customer Invoice, a Customer Credit "
+"Note, a Vendor Bill or a Vendor Credit Note."
+msgstr ""
+
+#. module: account_debit_note
+#. odoo-python
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
+#, python-format
 msgid "You can only debit posted moves."
+msgstr ""
+
+#. module: account_debit_note
+#. odoo-python
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
+#, python-format
+msgid ""
+"You can't make a debit note for an invoice that is already linked to a debit "
+"note."
 msgstr ""

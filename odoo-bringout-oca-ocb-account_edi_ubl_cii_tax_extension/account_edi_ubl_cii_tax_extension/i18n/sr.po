@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-16 07:48+0000\n"
-"PO-Revision-Date: 2024-09-21 23:00+0000\n"
+"PO-Revision-Date: 2024-09-21 22:00+0000\n"
 "Last-Translator: Geoinfo d.o.o. <geoinfobih@gmail.com>, 2024\n"
 "Language-Team: Serbian (https://app.transifex.com/odoo/teams/41243/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -111,7 +111,7 @@ msgid ""
 "VATEX-EU-132 - Exempt based on article 132 of Council Directive 2006/112/EC"
 msgstr ""
 "VATEX-EU-132 - Oslobađanje na osnovu člana 132 Direktive Saveta EU "
-"2006/112/EC."
+"2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
 #: model:ir.model.fields.selection,name:account_edi_ubl_cii_tax_extension.selection__account_tax__ubl_cii_tax_exemption_reason_code__vatex-eu-132-1a
@@ -128,7 +128,7 @@ msgid ""
 "VATEX-EU-132-1B - Exempt based on article 132, section 1 (b) of Council "
 "Directive 2006/112/EC"
 msgstr ""
-"VATEX-EU-132-1A - Oslobađanje na osnovu člana 132, stava 1(b) Direktive "
+"VATEX-EU-132-1B - Oslobađanje na osnovu člana 132, stava 1(b) Direktive "
 "Saveta EU 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
@@ -155,7 +155,7 @@ msgid ""
 "VATEX-EU-132-1E - Exempt based on article 132, section 1 (e) of Council "
 "Directive 2006/112/EC"
 msgstr ""
-"VATEX-EU-132-1A - Oslobađanje na osnovu člana 132, stava 1(e) Direktive "
+"VATEX-EU-132-1E - Oslobađanje na osnovu člana 132, stava 1(e) Direktive "
 "Saveta EU 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension
@@ -218,7 +218,7 @@ msgid ""
 "VATEX-EU-132-1L - Exempt based on article 132, section 1 (l) of Council "
 "Directive 2006/112/EC"
 msgstr ""
-"VATEX-EU-132-1L - Oslobađanje na osnovu člana 132, stava 1(k) Direktive "
+"VATEX-EU-132-1L - Oslobađanje na osnovu člana 132, stava 1(l) Direktive "
 "Saveta EU 2006/112/EC"
 
 #. module: account_edi_ubl_cii_tax_extension

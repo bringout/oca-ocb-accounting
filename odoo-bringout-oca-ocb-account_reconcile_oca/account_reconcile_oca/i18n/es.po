@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-04-16 19:11+0000\n"
+"PO-Revision-Date: 2025-04-16 19:14+0000\n"
 "Last-Translator: \"Pedro M. Baeza\" <pedro.baeza@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -264,11 +264,6 @@ msgid "Edit Move"
 msgstr "Editar movimiento"
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_balance_end_real
-msgid "Ending Balance"
-msgstr "Balance final"
-
-#. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__foreign_currency_id
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__foreign_currency_id
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_reconcile_abstract__foreign_currency_id
@@ -304,24 +299,9 @@ msgid "Invoice"
 msgstr "Factura"
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_complete
-msgid "Is Complete"
-msgstr "Está completo"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency
-msgid "Is Manual in Currency?"
-msgstr "¿Es manual en la moneda?"
-
-#. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__is_reconciled
 msgid "Is Reconciled"
 msgstr "Conciliado"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_valid
-msgid "Is Valid"
-msgstr "Es válido"
 
 #. module: account_reconcile_oca
 #: model_terms:ir.ui.view,arch_db:account_reconcile_oca.account_journal_dashboard_kanban_view
@@ -360,12 +340,6 @@ msgstr "Mantener cuentas transitorias"
 #, python-format
 msgid "Label"
 msgstr "Etiqueta"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile____last_update
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile_data____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
 
 #. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile_data__write_uid
@@ -413,6 +387,11 @@ msgstr "Contrapartida de cambio manual"
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency_id
 msgid "Manual In Currency"
 msgstr "En moneda manual"
+
+#. module: account_reconcile_oca
+#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency
+msgid "Manual In Currency?"
+msgstr "¿Manual en moneda?"
 
 #. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_kind
@@ -648,11 +627,6 @@ msgid "Statement"
 msgstr "Extracto"
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_name
-msgid "Statement Name"
-msgstr "Nombre del extracto"
-
-#. module: account_reconcile_oca
 #: model:ir.actions.act_window,name:account_reconcile_oca.action_bank_statement_line_reconcile
 msgid "Statement lines"
 msgstr "Líneas de extracto bancario"
@@ -754,7 +728,10 @@ msgstr "con un importe pendiente de"
 #~ "Mantener en modo suspenso las líneas que no pueden ser desconciliadas"
 
 #~ msgid "Due Date"
-#~ msgstr "Fecha de Vencimiento"
+#~ msgstr "Fecha de vencimiento"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modficación en"
 
 #, python-format
 #~ msgid "You must reconcile information on the same partner"

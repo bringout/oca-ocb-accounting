@@ -1,61 +1,131 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* mrp_account
-# 
+#
 # Translators:
-# F Hariri <fhari1234@gmail.com>, 2023
+# Mohammad Tahmasebi <hit.tah75@gmail.com>, 2023
+# Hamid Reza Kaveh <hamidrkp@riseup.net>, 2023
+# Hamid Ahmadimoghaddam, 2023
+# Yousef Shadmanesh <y.shadmanesh@gmail.com>, 2023
 # Martin Trigaux, 2023
-# Hanna Kheradroosta, 2023
 # Hamed Mohammadi <hamed@dehongi.com>, 2023
-# Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024
-# 
+# rahim agh <rahim.aghareb@gmail.com>, 2023
+# pfp pfp <pfpour@yahoo.com>, 2024
+# Hanna Kheradroosta, 2024
+# Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2025
+# Naser mars, 2025
+# Tiffany Chang, 2025
+# Mohammadamir Heshmatkhah <maheshmatkhah.soft@gmail.com>, 2025
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 12:51+0000\n"
-"PO-Revision-Date: 2022-09-22 05:53+0000\n"
-"Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024\n"
+"POT-Creation-Date: 2026-05-29 17:38+0000\n"
+"PO-Revision-Date: 2023-10-26 23:09+0000\n"
+"Last-Translator: Mohammadamir Heshmatkhah <maheshmatkhah.soft@gmail.com>, "
+"2025\n"
 "Language-Team: Persian (https://app.transifex.com/odoo/teams/41243/fa/)\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fa\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mrp_account
-#: code:addons/mrp_account/models/mrp_production.py:0
-#: model:ir.model,name:mrp_account.model_account_analytic_account
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_bom__analytic_account_id
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__analytic_account_id
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__costs_hour_account_id
 #: model_terms:ir.ui.view,arch_db:mrp_account.mrp_production_form_view_inherited
-#, python-format
+msgid "<span class=\"o_stat_text\">Analytic Account</span>"
+msgstr "<span class=\"o_stat_text\">حساب تحلیلی</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.mrp_production_form_view_inherited
+msgid "<span class=\"o_stat_text\">Valuation</span>"
+msgstr "<span class=\"o_stat_text\">ارزیابی</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span style=\"margin-right: 15px;\">Total</span>"
+msgstr "<span style=\"margin-right: 15px;\">جمع کل</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Amount</span>"
+msgstr "<span>مبلغ</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Date</span>"
+msgstr "<span>تاریخ</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Product</span>"
+msgstr "<span>محصول</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Quantity</span>"
+msgstr "<span>تعداد</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Ref.</span>"
+msgstr "<span>مرجع.</span>"
+
+#. module: mrp_account
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "<span>Unit of Measure</span>"
+msgstr "<span>واحد اندازه‌گیری</span>"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_account_analytic_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_bom__analytic_account_ids
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__analytic_account_ids
 msgid "Analytic Account"
 msgstr "حساب تحلیلی"
 
 #. module: mrp_account
+#. odoo-python
+#: code:addons/mrp_account/models/mrp_production.py:0
+#, python-format
+msgid "Analytic Accounts"
+msgstr "حساب های تحلیلی"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_bom__analytic_distribution
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__analytic_distribution
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__analytic_distribution
+msgid "Analytic Distribution"
+msgstr "توزیع تحلیلی"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_bom__analytic_distribution_search
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__analytic_distribution_search
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr "جستجوی توزیع تحلیلی"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_bom__analytic_distribution_text
+msgid "Analytic Distribution Text"
+msgstr "متن توزیع تحلیلی"
+
+#. module: mrp_account
 #: model:ir.model,name:mrp_account.model_account_analytic_line
 msgid "Analytic Line"
-msgstr "سطرتحلیلی"
+msgstr "سطر تحلیلی"
 
 #. module: mrp_account
-#: model:ir.model.fields,help:mrp_account.field_mrp_production__analytic_account_id
-msgid ""
-"Analytic account in which cost and revenue entries will take        place "
-"for financial management of the manufacturing order."
-msgstr ""
-"حساب تحلیلی که در آن ورودی هزینه و درآمد برای مدیریت مالی سفارش ساخت انجام "
-"می شود."
+#: model:ir.model,name:mrp_account.model_account_analytic_applicability
+msgid "Analytic Plan's Applicabilities"
+msgstr "کاربردهای طرح تحلیلی"
 
 #. module: mrp_account
-#: model:ir.model.fields,help:mrp_account.field_mrp_bom__analytic_account_id
-msgid ""
-"Analytic account in which cost and revenue entries will take place for "
-"financial management of the manufacturing order."
-msgstr ""
-"حساب تحلیلی که در آن ورودی هزینه و درآمد برای مدیریت مالی سفارش ساخت انجام "
-"می شود."
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_bom__analytic_precision
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__analytic_precision
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__analytic_precision
+msgid "Analytic Precision"
+msgstr "دقت تحلیلی"
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_bom
@@ -63,8 +133,8 @@ msgid "Bill of Material"
 msgstr "صورت مواد اولیه"
 
 #. module: mrp_account
+#. odoo-python
 #: code:addons/mrp_account/models/analytic_account.py:0
-#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__bom_ids
 #: model_terms:ir.ui.view,arch_db:mrp_account.account_analytic_account_view_form_mrp
 #, python-format
 msgid "Bills of Materials"
@@ -74,6 +144,11 @@ msgstr "صورت های مواد اولیه"
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__bom_count
 msgid "BoM Count"
 msgstr "تعاد صورت مواد اولیه"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__bom_ids
+msgid "Bom"
+msgstr "بوام"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_line__category
@@ -101,9 +176,21 @@ msgstr ""
 "برای محصولات تولیدی محاسبه کنید."
 
 #. module: mrp_account
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter_productivity__cost_already_recorded
-msgid "Cost Recorded"
-msgstr "هزینه ثبت شده"
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__costs_hour_account_ids
+msgid "Costs Hour Account"
+msgstr "حساب هزینه‌ ساعت"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_bom__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_production__distribution_analytic_account_ids
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__distribution_analytic_account_ids
+msgid "Distribution Analytic Account"
+msgstr "حساب تحلیلی توزیعی"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_applicability__business_domain
+msgid "Domain"
+msgstr "دامنه"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_production__extra_cost
@@ -113,16 +200,22 @@ msgstr "هزینه اضافی واحد"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_account_move_line
 msgid "Journal Item"
-msgstr "آیتم روزنامه"
+msgstr "آیتم دفترروزنامه"
 
 #. module: mrp_account
+#: model:ir.model,name:mrp_account.model_report_mrp_report_mo_overview
+msgid "MO Overview Report"
+msgstr "گزارش کلی تولید"
+
+#. module: mrp_account
+#: model:ir.model.fields.selection,name:mrp_account.selection__account_analytic_applicability__business_domain__manufacturing_order
 #: model:ir.model.fields.selection,name:mrp_account.selection__account_analytic_line__category__manufacturing_order
 msgid "Manufacturing Order"
 msgstr "سفارش تولید"
 
 #. module: mrp_account
+#. odoo-python
 #: code:addons/mrp_account/models/analytic_account.py:0
-#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__production_ids
 #: model_terms:ir.ui.view,arch_db:mrp_account.account_analytic_account_view_form_mrp
 #, python-format
 msgid "Manufacturing Orders"
@@ -134,16 +227,9 @@ msgid "Manufacturing Orders Count"
 msgstr "تعداد سفارشات تولید"
 
 #. module: mrp_account
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__mo_analytic_account_line_id
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__mo_analytic_account_line_ids
 msgid "Mo Analytic Account Line"
 msgstr "مو خط حساب تحلیلی"
-
-#. module: mrp_account
-#: model:ir.model.fields,help:mrp_account.field_mrp_workcenter__costs_hour_account_id
-msgid ""
-"Posts analytical accounting entries in real time for both component and "
-"operational costs."
-msgstr ""
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_product_template
@@ -151,9 +237,24 @@ msgid "Product"
 msgstr "محصول"
 
 #. module: mrp_account
+#: model:ir.model,name:mrp_account.model_product_category
+msgid "Product Category"
+msgstr "دسته بندی محصول"
+
+#. module: mrp_account
 #: model:ir.model,name:mrp_account.model_product_product
 msgid "Product Variant"
 msgstr "گونه محصول"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__production_ids
+msgid "Production"
+msgstr "تولید"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_product_category__property_stock_account_production_cost_id
+msgid "Production Account"
+msgstr "حساب تولید"
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_production
@@ -176,12 +277,30 @@ msgid "Stock Rule"
 msgstr "قانون موجودی انبار"
 
 #. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.mrp_production_form_view_inherited
-msgid "Valuation"
-msgstr "ارزش گذاری"
+#: model:ir.model.fields,help:mrp_account.field_product_category__property_stock_account_production_cost_id
+msgid ""
+"This account will be used as a valuation counterpart for both components and "
+"final products for manufacturing orders.\n"
+"                If there are any workcenter/employee costs, this value will "
+"remain on the account once the production is completed."
+msgstr ""
+"این حساب به عنوان یک حساب مقابل برای ارزیابی اجزاء و محصولات نهایی برای "
+"سفارشات تولیدی استفاده خواهد شد.\n"
+"                اگر هزینه‌های کارگاه/کارمند وجود داشته باشد، این ارزش پس از "
+"تکمیل تولید در حساب باقی خواهد ماند."
 
 #. module: mrp_account
-#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__wc_analytic_account_line_id
+#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
+msgid "WIP Report for"
+msgstr "گزارش کار در جریان (WIP) برای"
+
+#. module: mrp_account
+#: model:ir.actions.report,name:mrp_account.wip_report
+msgid "WIP report"
+msgstr "گزارش در جریان ساخت"
+
+#. module: mrp_account
+#: model:ir.model.fields,field_description:mrp_account.field_mrp_workorder__wc_analytic_account_line_ids
 msgid "Wc Analytic Account Line"
 msgstr "خط حساب تحلیلی Wc"
 
@@ -206,27 +325,16 @@ msgid "Work Order Count"
 msgstr "تعداد سفارش کار"
 
 #. module: mrp_account
+#. odoo-python
 #: code:addons/mrp_account/models/analytic_account.py:0
 #, python-format
 msgid "Work Orders"
 msgstr "سفارشات کار"
 
 #. module: mrp_account
-#: model:ir.model,name:mrp_account.model_mrp_workcenter_productivity
-msgid "Workcenter Productivity Log"
-msgstr "ثبت رویداد تولیدات مرکز کار"
-
-#. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__workcenter_ids
-msgid "Workcenters"
-msgstr "مراکز کار"
-
-#. module: mrp_account
-#. odoo-python
-#: code:addons/mrp_account/models/stock_move.py:0
-#, python-format
-msgid "[Raw] %s"
-msgstr ""
+msgid "Workcenter"
+msgstr "مرکز کار"
 
 #. module: mrp_account
 #. odoo-python
@@ -234,4 +342,28 @@ msgstr ""
 #: code:addons/mrp_account/models/mrp_workorder.py:0
 #, python-format
 msgid "[WC] %s"
-msgstr "[WC] ٪s"
+msgstr "[WC] %s"
+
+#~ msgid "Acme Corp."
+#~ msgstr "شرکت آکمه."
+
+#~ msgid "Laptop"
+#~ msgstr "لپ‌تاپ"
+
+#~ msgid "REF123"
+#~ msgstr "رف123"
+
+#~ msgid "Units"
+#~ msgstr "عدد"
+
+#~ msgid "$1000"
+#~ msgstr "۱۰۰۰ دلار"
+
+#~ msgid "$5000"
+#~ msgstr "$۵۰۰۰"
+
+#~ msgid "2023-08-15"
+#~ msgstr "2023-08-15"
+
+#~ msgid "Stock Valuation Layer"
+#~ msgstr "لایه ارزش گذاری موجودی"

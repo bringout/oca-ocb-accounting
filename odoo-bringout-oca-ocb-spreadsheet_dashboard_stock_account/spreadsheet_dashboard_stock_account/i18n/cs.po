@@ -1,28 +1,28 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* spreadsheet_dashboard_stock_account
-# 
+#
 # Translators:
-# Martin Trigaux, 2022
-# Michal Veselý <michal@veselyberanek.net>, 2022
-# Pauline Thiry <pth@odoo.com>, 2022
-# Jiří Podhorecký <jirka.p@volny.cz>, 2022
 # SlavekB <slavek.banko@axis.cz>, 2023
+# Jiří Podhorecký <jirka.p@volny.cz>, 2023
+# Jakub Smolka, 2023
+# Wil Odoo, 2023
 # Aleš Fiala <f.ales1@seznam.cz>, 2024
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-29 09:44+0000\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Aleš Fiala <f.ales1@seznam.cz>, 2024\n"
 "Language-Team: Czech (https://app.transifex.com/odoo/teams/41243/cs/)\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: cs\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n "
+"<= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 #. module: spreadsheet_dashboard_stock_account
 #. odoo-javascript
@@ -30,6 +30,11 @@ msgstr ""
 #, python-format
 msgid "Current"
 msgstr "Aktuální"
+
+#. module: spreadsheet_dashboard_stock_account
+#: model:spreadsheet.dashboard,name:spreadsheet_dashboard_stock_account.spreadsheet_dashboard_inventory_on_hand
+msgid "Inventory On Hand"
+msgstr "Inventář po ruce"
 
 #. module: spreadsheet_dashboard_stock_account
 #. odoo-javascript
@@ -69,7 +74,6 @@ msgstr "KPI"
 #. module: spreadsheet_dashboard_stock_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
 #, python-format
 msgid "Location"
 msgstr "Místo"
@@ -79,12 +83,10 @@ msgstr "Místo"
 #: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
 #, python-format
 msgid "Lot/Serial"
-msgstr "Šarže / seriové číslo"
+msgstr "Šarže/sériové číslo"
 
 #. module: spreadsheet_dashboard_stock_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
 #, python-format
 msgid "On Hand"
@@ -93,15 +95,12 @@ msgstr "Po ruce"
 #. module: spreadsheet_dashboard_stock_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
 #, python-format
 msgid "Product"
 msgstr "Produkt"
 
 #. module: spreadsheet_dashboard_stock_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_stock_account/data/files/inventory_on_hand_dashboard.json:0
 #, python-format
 msgid "Reserved"

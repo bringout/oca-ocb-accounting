@@ -1,30 +1,31 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* account_debit_note
-# 
+#
 # Translators:
-# matjaz k <matjaz@mentis.si>, 2022
-# Martin Trigaux, 2022
-# Vida Potočnik <vida.potocnik@mentis.si>, 2022
-# laznikd <laznik@mentis.si>, 2022
-# Matjaz Mozetic <m.mozetic@matmoz.si>, 2022
 # Tomaž Jug <tomaz@editor.si>, 2023
+# Vida Potočnik <vida.potocnik@mentis.si>, 2023
+# matjaz k <matjaz@mentis.si>, 2023
+# Matjaz Mozetic <m.mozetic@matmoz.si>, 2023
+# laznikd <laznik@mentis.si>, 2023
+# Martin Trigaux, 2023
 # Katja Deržič, 2024
 # Aleš Pipan, 2025
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-04 01:32+0000\n"
-"PO-Revision-Date: 2022-09-22 05:44+0000\n"
+"POT-Creation-Date: 2025-12-29 18:37+0000\n"
+"PO-Revision-Date: 2023-10-26 23:09+0000\n"
 "Last-Translator: Aleš Pipan, 2025\n"
 "Language-Team: Slovenian (https://app.transifex.com/odoo/teams/41243/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3);\n"
 
 #. module: account_debit_note
 #: model_terms:ir.ui.view,arch_db:account_debit_note.view_move_form_debit
@@ -32,11 +33,6 @@ msgid "<span class=\"o_stat_text\">Debit Notes</span>"
 msgstr ""
 "<span class=\"o_stat_text\">Debetne opombe\n"
 "</span>"
-
-#. module: account_debit_note
-#: model_terms:ir.ui.view,arch_db:account_debit_note.view_move_form_debit
-msgid "Add Debit Note"
-msgstr ""
 
 #. module: account_debit_note
 #: model:ir.model,name:account_debit_note.model_account_debit_note
@@ -73,6 +69,14 @@ msgstr "Ustvaril"
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
+
+#. module: account_debit_note
+#: model:ir.actions.server,name:account_debit_note.action_move_debit_note
+#: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_invoice_filter_debit
+#: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_move_filter_debit
+#: model_terms:ir.ui.view,arch_db:account_debit_note.view_account_move_line_filter_debit
+msgid "Debit Note"
+msgstr "Debetni zapis"
 
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__date
@@ -125,11 +129,6 @@ msgstr "Temeljnica"
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__journal_type
 msgid "Journal Type"
 msgstr "Vrsta dnevnika"
-
-#. module: account_debit_note
-#: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note____last_update
-msgid "Last Modified on"
-msgstr "Zadnjič spremenjeno"
 
 #. module: account_debit_note
 #: model:ir.model.fields,field_description:account_debit_note.field_account_debit_note__write_uid
@@ -188,7 +187,7 @@ msgstr "Za ta račun so bile ustvarjene bremepisne opombe"
 
 #. module: account_debit_note
 #. odoo-python
-#: code:addons/account_debit_note/models/account_move.py:0
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
 #, python-format
 msgid "This debit note was created from: %s"
 msgstr "Ta bremenitvena opomba je bila ustvarjena iz: %s"
@@ -202,5 +201,26 @@ msgstr "Uporabi določen dnevnik"
 #. odoo-python
 #: code:addons/account_debit_note/wizard/account_debit_note.py:0
 #, python-format
+msgid ""
+"You can make a debit note only for a Customer Invoice, a Customer Credit "
+"Note, a Vendor Bill or a Vendor Credit Note."
+msgstr ""
+"Debetni zapis lahko izstavite samo za račun stranke, dobropis stranke, račun "
+"dobavitelja ali dobropis dobavitelja."
+
+#. module: account_debit_note
+#. odoo-python
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
+#, python-format
 msgid "You can only debit posted moves."
 msgstr "Zabremeniti lahko samo knjižene premike."
+
+#. module: account_debit_note
+#. odoo-python
+#: code:addons/account_debit_note/wizard/account_debit_note.py:0
+#, python-format
+msgid ""
+"You can't make a debit note for an invoice that is already linked to a debit "
+"note."
+msgstr ""
+"Za račun, ki je že povezan z bremepisom, ni mogoče ustvariti bremepisa."

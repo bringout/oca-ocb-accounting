@@ -21,7 +21,7 @@ class StockMoveLine(models.Model):
             if move_line.state != 'done':
                 continue
             product_uom = move_line.product_id.uom_id
-            diff = move_line.product_uom_id._compute_quantity(move_line.qty_done, product_uom)
+            diff = move_line.product_uom_id._compute_quantity(move_line.quantity, product_uom)
             if float_is_zero(diff, precision_rounding=product_uom.rounding):
                 continue
             self._create_correction_svl(move, diff)
@@ -32,22 +32,28 @@ class StockMoveLine(models.Model):
 
     def write(self, vals):
         analytic_move_to_recompute = set()
-        if 'qty_done' in vals or 'move_id' in vals:
+        if 'quantity' in vals or 'move_id' in vals:
             for move_line in self:
-                move_id = vals.get('move_id') if vals.get('move_id') else move_line.move_id.id
+                move_id = vals.get('move_id', move_line.move_id.id)
                 analytic_move_to_recompute.add(move_id)
-        if 'qty_done' in vals:
+        if 'quantity' in vals:
             for move_line in self:
                 if move_line.state != 'done':
                     continue
                 product_uom = move_line.product_id.uom_id
-                diff = move_line.product_uom_id._compute_quantity(vals['qty_done'] - move_line.qty_done, product_uom, rounding_method='HALF-UP')
+                diff = move_line.product_uom_id._compute_quantity(vals['quantity'] - move_line.quantity, product_uom, rounding_method='HALF-UP')
                 if float_is_zero(diff, precision_rounding=product_uom.rounding):
                     continue
                 self._create_correction_svl(move_line.move_id, diff)
         res = super(StockMoveLine, self).write(vals)
         if analytic_move_to_recompute:
             self.env['stock.move'].browse(analytic_move_to_recompute)._account_analytic_entry_move()
+        return res
+
+    def unlink(self):
+        analytic_move_to_recompute = self.move_id
+        res = super().unlink()
+        analytic_move_to_recompute._account_analytic_entry_move()
         return res
 
     # -------------------------------------------------------------------------

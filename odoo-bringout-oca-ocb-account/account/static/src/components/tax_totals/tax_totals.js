@@ -1,13 +1,21 @@
 /** @odoo-module **/
 
-import { formatFloat, formatMonetary } from "@web/views/fields/formatters";
+import { formatMonetary } from "@web/views/fields/formatters";
+import { formatFloat } from "@web/core/utils/numbers";
 import { parseFloat } from "@web/views/fields/parsers";
 import { standardFieldProps } from "@web/views/fields/standard_field_props";
 import { registry } from "@web/core/registry";
-import { session } from "@web/session";
+import { getCurrency } from "@web/core/currency";
+import {
+    Component,
+    onPatched,
+    onWillUpdateProps,
+    onWillRender,
+    toRaw,
+    useRef,
+    useState,
+} from "@odoo/owl";
 import { useNumpadDecimal } from "@web/views/fields/numpad_decimal_hook";
-
-const { Component, onPatched, onWillUpdateProps, useRef, useState } = owl;
 
 /**
  A line of some TaxTotalsComponent, giving the values of a tax group.
@@ -70,7 +78,7 @@ class TaxGroupComponent extends Component {
         let newValue;
         try {
             newValue = parseFloat(this.inputTax.el.value); // Get the new value
-        } catch (_err) {
+        } catch {
             this.inputTax.el.value = oldValue;
             this.setState("edit");
             return;
@@ -110,9 +118,7 @@ export class TaxTotalsComponent extends Component {
     setup() {
         this.totals = {};
         this.formatData(this.props);
-        onWillUpdateProps((nextProps) => {
-            this.formatData(nextProps);
-        });
+        onWillRender(() => this.formatData(this.props));
     }
 
     get readonly() {
@@ -125,7 +131,7 @@ export class TaxTotalsComponent extends Component {
     }
 
     get currency() {
-        return session.currencies[this.currencyId];
+        return getCurrency(this.currencyId);
     }
 
     invalidate() {
@@ -140,12 +146,15 @@ export class TaxTotalsComponent extends Component {
      */
     _onChangeTaxValueByTaxGroup({ oldValue, newValue }) {
         if (oldValue === newValue) return;
-        this.props.update(this.totals);
+        this.props.record.update({ [this.props.name]: this.totals });
         this.totals.display_rounding = false;
     }
 
     formatData(props) {
-        let totals = JSON.parse(JSON.stringify(props.value));
+        let totals = JSON.parse(JSON.stringify(toRaw(props.record.data[this.props.name])));
+        if (!totals) {
+            return;
+        }
         const currencyFmtOpts = { currencyId: props.record.data.currency_id && props.record.data.currency_id[0] };
 
         let amount_untaxed = totals.amount_untaxed;
@@ -184,4 +193,8 @@ TaxTotalsComponent.props = {
     ...standardFieldProps,
 };
 
-registry.category("fields").add("account-tax-totals-field", TaxTotalsComponent);
+export const taxTotalsComponent = {
+    component: TaxTotalsComponent,
+};
+
+registry.category("fields").add("account-tax-totals-field", taxTotalsComponent);

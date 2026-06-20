@@ -20,7 +20,7 @@
                                 class="btn-primary"
                                 data-hotkey="q"
                                 context="{'validate_analytic': True}"/>
-                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
                     </footer>
                 </form>
             </field>
@@ -28,7 +28,6 @@
 
         <record id="action_validate_account_move" model="ir.actions.act_window">
             <field name="name">Post entries</field>
-            <field name="type">ir.actions.act_window</field>
             <field name="res_model">validate.account.move</field>
             <field name="view_mode">form</field>
             <field name="view_id" ref="validate_account_move_view"/>

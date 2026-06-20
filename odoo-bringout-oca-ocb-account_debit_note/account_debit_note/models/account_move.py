@@ -14,8 +14,8 @@ class AccountMove(models.Model):
     @api.depends('debit_note_ids')
     def _compute_debit_count(self):
         debit_data = self.env['account.move']._read_group([('debit_origin_id', 'in', self.ids)],
-                                                        ['debit_origin_id'], ['debit_origin_id'])
-        data_map = {datum['debit_origin_id'][0]: datum['debit_origin_id_count'] for datum in debit_data}
+                                                        ['debit_origin_id'], ['__count'])
+        data_map = {debit_origin.id: count for debit_origin, count in debit_data}
         for inv in self:
             inv.debit_note_count = data_map.get(inv.id, 0.0)
 
@@ -29,8 +29,11 @@ class AccountMove(models.Model):
             'domain': [('debit_origin_id', '=', self.id)],
         }
 
-    def _get_copy_message_content(self, default):
-        """Override to handle debit note specific messages."""
-        if default and default.get('debit_origin_id'):
-            return _('This debit note was created from: %s', self._get_html_link())
-        return super()._get_copy_message_content(default)
+    def action_debit_note(self):
+        action = self.env.ref('account_debit_note.action_view_account_move_debit')._get_action_dict()
+        return action
+
+    def _get_debit_note_origin(self):
+        # OVERRIDE
+        self.ensure_one()
+        return self.debit_origin_id

@@ -1,25 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* spreadsheet_dashboard_account
-# 
+#
 # Translators:
-# Martin Trigaux, 2022
-# Cécile Collart <cco@odoo.com>, 2022
-# Jolien De Paepe, 2023
-# 
+# Wil Odoo, 2023
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 13:32+0000\n"
-"PO-Revision-Date: 2022-09-29 09:44+0000\n"
-"Last-Translator: Jolien De Paepe, 2023\n"
+"POT-Creation-Date: 2025-12-29 18:38+0000\n"
+"PO-Revision-Date: 2023-10-26 23:09+0000\n"
+"Last-Translator: Wil Odoo, 2023\n"
 "Language-Team: French (https://app.transifex.com/odoo/teams/41243/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -37,10 +36,6 @@ msgstr "# jours"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Amount"
@@ -62,7 +57,6 @@ msgstr "Coût des marchandises vendues"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Country"
@@ -101,7 +95,7 @@ msgstr "Date"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Income"
-msgstr "Revenus"
+msgstr "Produits"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -122,7 +116,7 @@ msgstr "Facturé par mois"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Invoices"
-msgstr "Factures"
+msgstr "Factures clients"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -132,8 +126,12 @@ msgid "Invoices by Total Signed"
 msgstr "Factures par total signé"
 
 #. module: spreadsheet_dashboard_account
+#: model:spreadsheet.dashboard,name:spreadsheet_dashboard_account.dashboard_invoicing
+msgid "Invoicing"
+msgstr "Facturation"
+
+#. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Average Invoice"
@@ -149,7 +147,6 @@ msgstr "KPI - DMP"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Income"
 msgstr "KPI - Revenus"
@@ -163,7 +160,6 @@ msgstr "KPI - Nombre de factures"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Unpaid Invoices"
@@ -179,7 +175,6 @@ msgstr "Période"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Product"
 msgstr "Produit"
@@ -189,24 +184,21 @@ msgstr "Produit"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Product Category"
-msgstr "Catégorie de produit"
+msgstr "Catégorie de produits"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Ratio"
-msgstr "Ratio"
+msgstr "Facteur"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Receivable"
-msgstr "Créance"
+msgstr "Client"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -220,12 +212,10 @@ msgstr "Référence"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Revenue"
-msgstr "Revenus"
+msgstr "Revenu"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Salesperson"
@@ -241,15 +231,12 @@ msgstr "Statut"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Categories"
 msgstr "Meilleures catégories"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Countries"
@@ -265,14 +252,12 @@ msgstr "Meilleures factures"
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Products"
 msgstr "Meilleurs produits"
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
-#: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Salespeople"

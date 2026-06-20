@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, models, api
-from odoo.tools import float_compare, float_is_zero
+from odoo.tools import float_is_zero
 
 
 class AccountMove(models.Model):
@@ -59,7 +59,8 @@ class AccountMove(models.Model):
         res = super(AccountMove, self).button_draft()
 
         # Unlink the COGS lines generated during the 'post' method.
-        self.mapped('line_ids').filtered(lambda line: line.display_type == 'cogs').unlink()
+        with self.env.protecting(self.env['account.move']._get_protected_vals({}, self)):
+            self.mapped('line_ids').filtered(lambda line: line.display_type == 'cogs').unlink()
         return res
 
     def button_cancel(self):
@@ -138,7 +139,7 @@ class AccountMove(models.Model):
 
                 # Add interim account line.
                 lines_vals_list.append({
-                    'name': line.name[:64],
+                    'name': line.name[:64] if line.name else '',
                     'move_id': move.id,
                     'partner_id': move.commercial_partner_id.id,
                     'product_id': line.product_id.id,
@@ -149,11 +150,12 @@ class AccountMove(models.Model):
                     'account_id': debit_interim_account.id,
                     'display_type': 'cogs',
                     'tax_ids': [],
+                    'cogs_origin_id': line.id,
                 })
 
                 # Add expense account line.
                 lines_vals_list.append({
-                    'name': line.name[:64],
+                    'name': line.name[:64] if line.name else '',
                     'move_id': move.id,
                     'partner_id': move.commercial_partner_id.id,
                     'product_id': line.product_id.id,
@@ -165,6 +167,7 @@ class AccountMove(models.Model):
                     'analytic_distribution': line.analytic_distribution,
                     'display_type': 'cogs',
                     'tax_ids': [],
+                    'cogs_origin_id': line.id,
                 })
         return lines_vals_list
 
@@ -184,6 +187,8 @@ class AccountMove(models.Model):
         """ Reconciles the entries made in the interim accounts in anglosaxon accounting,
         reconciling stock valuation move lines with the invoice's.
         """
+        reconcile_plan = []
+        no_exchange_reconcile_plan = []
         for move in self:
             if not move.is_invoice():
                 continue
@@ -225,18 +230,24 @@ class AccountMove(models.Model):
                     )
                     invoice_aml = product_account_moves.filtered(lambda aml: aml not in correction_amls and aml.move_id == move)
                     stock_aml = product_account_moves - correction_amls - invoice_aml
+
                     # Reconcile:
                     # In case there is a move with correcting lines that has not been posted
                     # (e.g., it's dated for some time in the future) we should defer any
                     # reconciliation with exchange difference.
                     if correction_amls or 'draft' in move.line_ids.sudo().stock_valuation_layer_ids.account_move_id.mapped('state'):
-                        if sum(correction_amls.mapped('balance')) > 0:
-                            product_account_moves.with_context(no_exchange_difference=True).reconcile()
+                        if sum(correction_amls.mapped('balance')) > 0 or all(aml.is_same_currency for aml in correction_amls):
+                            no_exchange_reconcile_plan += [product_account_moves]
                         else:
-                            (invoice_aml | correction_amls).with_context(no_exchange_difference=True).reconcile()
-                            (invoice_aml.filtered(lambda aml: not aml.reconciled) | stock_aml).with_context(no_exchange_difference=True).reconcile()
+                            no_exchange_reconcile_plan += [invoice_aml | correction_amls]
+                            moves_to_reconcile = (invoice_aml.filtered(lambda aml: not aml.reconciled) | stock_aml)
+                            if moves_to_reconcile:
+                                no_exchange_reconcile_plan += [moves_to_reconcile]
                     else:
-                        product_account_moves.reconcile()
+                        reconcile_plan += [product_account_moves]
+        self.env['account.move.line']._reconcile_plan(reconcile_plan)
+        no_exchange_reconcile_plan = [amls.filtered(lambda aml: not aml.reconciled) for amls in no_exchange_reconcile_plan]
+        self.env['account.move.line'].with_context(no_exchange_difference=True)._reconcile_plan(no_exchange_reconcile_plan)
 
     def _get_invoiced_lot_values(self):
         return []
@@ -246,6 +257,11 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     stock_valuation_layer_ids = fields.One2many('stock.valuation.layer', 'account_move_line_id', string='Stock Valuation Layer')
+    cogs_origin_id = fields.Many2one(  # technical field used to keep track in the originating line of the anglo-saxon lines
+        comodel_name="account.move.line",
+        copy=False,
+        index="btree_not_null",
+    )
 
     def _compute_account_id(self):
         super()._compute_account_id()
@@ -255,9 +271,8 @@ class AccountMoveLine(models.Model):
             and line.move_id.is_purchase_document()
         ))
         for line in input_lines:
-            line = line.with_company(line.move_id.journal_id.company_id)
             fiscal_position = line.move_id.fiscal_position_id
-            accounts = line.product_id.product_tmpl_id.get_product_accounts(fiscal_pos=fiscal_position)
+            accounts = line.with_company(line.company_id).product_id.product_tmpl_id.get_product_accounts(fiscal_pos=fiscal_position)
             if accounts['stock_input']:
                 line.account_id = accounts['stock_input']
 
@@ -269,7 +284,14 @@ class AccountMoveLine(models.Model):
         if float_is_zero(self.quantity, precision_rounding=self.product_uom_id.rounding):
             return self.price_unit
 
-        price_unit = self.price_subtotal / self.quantity
+        if self.discount != 100:
+            if not any(t.price_include for t in self.tax_ids) and self.discount:
+                price_unit = self.price_unit * (1 - self.discount / 100)
+            else:
+                price_unit = self.price_subtotal / self.quantity
+        else:
+            price_unit = 0
+
         return -price_unit if self.move_id.move_type == 'in_refund' else price_unit
 
     def _get_stock_valuation_layers(self, move):
@@ -301,53 +323,20 @@ class AccountMoveLine(models.Model):
     def _inverse_product_id(self):
         super(AccountMoveLine, self.filtered(lambda l: l.display_type != 'cogs'))._inverse_product_id()
 
-    def _deduce_anglo_saxon_unit_price(self, account_moves, stock_moves):
-        self.ensure_one()
+    def _get_exchange_journal(self, company):
+        if (
+            self and self.move_id.sudo().stock_valuation_layer_ids and
+            self.product_id.categ_id.property_cost_method != 'standard' and
+            self.product_id.categ_id.property_valuation == 'real_time'
+        ):
+            return self.product_id.categ_id.property_stock_journal
+        return super()._get_exchange_journal(company)
 
-        move_is_downpayment = self.env.context.get("move_is_downpayment")
-        if move_is_downpayment is None:
-            move_is_downpayment = self.move_id.invoice_line_ids.filtered(
-                lambda line: any(line.sale_line_ids.mapped("is_downpayment"))
-            )
-
-        is_line_reversing = False
-        if self.move_id.move_type == 'out_refund' and not move_is_downpayment:
-            is_line_reversing = True
-        qty_to_invoice = self.product_uom_id._compute_quantity(self.quantity, self.product_id.uom_id)
-        if self.move_id.move_type == 'out_refund' and move_is_downpayment:
-            qty_to_invoice = -qty_to_invoice
-        account_moves = account_moves.filtered(lambda m: m.state == 'posted' and bool(m.reversed_entry_id) == is_line_reversing)
-
-        posted_cogs = self.env['account.move.line'].search([
-            ('move_id', 'in', account_moves.ids),
-            ('display_type', '=', 'cogs'),
-            ('product_id', '=', self.product_id.id),
-            ('balance', '>', 0),
-        ])
-        qty_invoiced = 0
-        product_uom = self.product_id.uom_id
-        for line in posted_cogs:
-            if float_compare(line.quantity, 0, precision_rounding=product_uom.rounding) and line.move_id.move_type == 'out_refund' and any(line.move_id.invoice_line_ids.sale_line_ids.mapped('is_downpayment')):
-                qty_invoiced += line.product_uom_id._compute_quantity(abs(line.quantity), line.product_id.uom_id)
-            else:
-                qty_invoiced += line.product_uom_id._compute_quantity(line.quantity, line.product_id.uom_id)
-        value_invoiced = sum(posted_cogs.mapped('balance'))
-        reversal_moves = self.env['account.move']._search([('reversed_entry_id', 'in', posted_cogs.move_id.ids)])
-        reversal_cogs = self.env['account.move.line'].search([
-            ('move_id', 'in', reversal_moves),
-            ('display_type', '=', 'cogs'),
-            ('product_id', '=', self.product_id.id),
-            ('balance', '>', 0)
-        ])
-        for line in reversal_cogs:
-            if float_compare(line.quantity, 0, precision_rounding=product_uom.rounding) and line.move_id.move_type == 'out_refund' and any(line.move_id.invoice_line_ids.sale_line_ids.mapped('is_downpayment')):
-                qty_invoiced -= line.product_uom_id._compute_quantity(abs(line.quantity), line.product_id.uom_id)
-            else:
-                qty_invoiced -= line.product_uom_id._compute_quantity(line.quantity, line.product_id.uom_id)
-        value_invoiced -= sum(reversal_cogs.mapped('balance'))
-
-        product = self.product_id.with_company(self.company_id).with_context(value_invoiced=value_invoiced)
-        average_price_unit = product._compute_average_price(qty_invoiced, qty_to_invoice, stock_moves, is_returned=is_line_reversing)
-        price_unit = self.product_id.uom_id.with_company(self.company_id)._compute_price(average_price_unit, self.product_uom_id)
-
-        return price_unit
+    def _get_exchange_account(self, company, amount):
+        if (
+            self and self.move_id.sudo().stock_valuation_layer_ids and
+            self.product_id.categ_id.property_cost_method != 'standard' and
+            self.product_id.categ_id.property_valuation == 'real_time'
+        ):
+            return self.product_id.categ_id.property_stock_valuation_account_id
+        return super()._get_exchange_account(company, amount)

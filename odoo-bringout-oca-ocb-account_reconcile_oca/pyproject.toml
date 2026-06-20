@@ -1,14 +1,16 @@
 [project]
 name = "odoo-bringout-oca-ocb-account_reconcile_oca"
 version = "16.0.0"
-description = "Account Reconcile OCA - 
-        Reconcile addons for Odoo CE accounting"
+description = "Account Reconcile Oca - 
+        
+        Reconcile addons for Odoo CE accounting
+        "
 authors = [
     { name = "Ernad Husremovic", email = "hernad@bring.out.ba" }
 ]
 dependencies = [
-    "odoo-bringout-oca-ocb-account_statement_base>=16.0.0",
-    "odoo-bringout-oca-ocb-base_sparse_field>=16.0.0",
+    "odoo-bringout-oca-ocb-account_statement_base>=17.0.0",
+    "odoo-bringout-oca-ocb-base_sparse_field>=17.0.0",
     "requests>=2.25.1"
 ]
 readme = "README.md"
@@ -24,8 +26,8 @@ classifiers = [
 ]
 
 [project.urls]
-homepage = "https://github.com/bringout/0"
-repository = "https://github.com/bringout/0"
+homepage = "https://git.hodi.ba/bringout/project-0"
+repository = "https://git.hodi.ba/bringout/project-0"
 
 [build-system]
 requires = ["hatchling"]

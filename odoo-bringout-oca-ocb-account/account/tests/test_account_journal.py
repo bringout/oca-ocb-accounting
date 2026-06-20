@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+
+from ast import literal_eval
 from unittest.mock import patch
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 from odoo.addons.account.models.account_payment_method import AccountPaymentMethod
-from odoo.tests import tagged
+from odoo.addons.mail.tests.common import MailCommon
+from odoo.addons.test_mail.data.test_mail_data import MAIL_EML_ATTACHMENT
+from odoo.tests import Form, tagged, new_test_user
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -24,16 +28,17 @@ class TestAccountJournal(AccountTestInvoicingCommon):
     def test_changing_journal_company(self):
         ''' Ensure you can't change the company of an account.journal if there are some journal entries '''
 
+        self.company_data['default_journal_sale'].code = "DIFFERENT"
         self.env['account.move'].create({
             'move_type': 'entry',
             'date': '2019-01-01',
             'journal_id': self.company_data['default_journal_sale'].id,
         })
 
-        with self.assertRaises(UserError), self.cr.savepoint():
+        with self.assertRaisesRegex(UserError, "entries linked to it"), self.cr.savepoint():
             self.company_data['default_journal_sale'].company_id = self.company_data_2['company']
 
-    def test_account_control_create_journal_entry(self):
+    def test_account_control_post_journal_entry(self):
         move_vals = {
             'line_ids': [
                 (0, 0, {
@@ -54,11 +59,11 @@ class TestAccountJournal(AccountTestInvoicingCommon):
         # Should fail because 'default_account_expense' is not allowed.
         self.company_data['default_journal_misc'].account_control_ids |= self.company_data['default_account_revenue']
         with self.assertRaises(UserError), self.cr.savepoint():
-            self.env['account.move'].create(move_vals)
+            self.env['account.move'].create(move_vals).action_post()
 
         # Should be allowed because both accounts are accepted.
         self.company_data['default_journal_misc'].account_control_ids |= self.company_data['default_account_expense']
-        self.env['account.move'].create(move_vals)
+        self.env['account.move'].create(move_vals).action_post()
 
     def test_account_control_existing_journal_entry(self):
         self.env['account.move'].create({
@@ -136,28 +141,6 @@ class TestAccountJournal(AccountTestInvoicingCommon):
 
         self.assertFalse(second_method.exists())
 
-    def test_account_journal_alias_name(self):
-        journal = self.company_data['default_journal_purchase']
-        self.assertEqual(journal.alias_name, 'vendor-bills-company_1_data')
-        journal.name = 'ぁ'
-        journal.alias_name = False
-        self.assertEqual(journal.alias_name, 'bill-company_1_data')
-        journal.code = 'ぁ'
-        journal.alias_name = False
-        self.assertEqual(journal.alias_name, 'purchase-company_1_data')
-
-        company_2_id = str(self.company_data_2['company'].id)
-        journal_2 = self.company_data_2['default_journal_sale']
-        self.company_data_2['company'].name = 'ぁ'
-        journal_2.alias_name = False
-        self.assertEqual(journal_2.alias_name, 'customer-invoices-' + company_2_id)
-        journal_2.name = 'ぁ'
-        journal_2.alias_name = False
-        self.assertEqual(journal_2.alias_name, 'inv-' + company_2_id)
-        journal_2.code = 'ぁ'
-        journal_2.alias_name = False
-        self.assertEqual(journal_2.alias_name, 'sale-' + company_2_id)
-
     def test_account_journal_duplicates(self):
         new_journals = self.env["account.journal"].with_context(import_file=True).create([
             {"name": "OD_BLABLA"},
@@ -205,3 +188,216 @@ class TestAccountJournal(AccountTestInvoicingCommon):
         journals.action_unarchive()
         self.assertTrue(journals[0].active)
         self.assertTrue(journals[1].active)
+
+
+@tagged('post_install', '-at_install', 'mail_alias')
+class TestAccountJournalAlias(AccountTestInvoicingCommon, MailCommon):
+
+    def test_alias_name_creation(self):
+        """ Test alias creation, notably avoid raising constraints due to ascii
+        characters removal. See odoo/odoo@339cdffb68f91eb1455d447d1bdd7133c68723bd """
+        # check base test data
+        journal1 = self.company_data['default_journal_purchase']
+        company1 = journal1.company_id
+        journal2 = self.company_data_2['default_journal_sale']
+        company2 = journal2.company_id
+        # have a non ascii company name
+        company2.name = 'ぁ'
+
+        for (aname, jname, jcode, jtype, jcompany), expected_alias_name in zip(
+            [
+                ('youpie', 'Journal Name', 'NEW1', 'purchase', company1),
+                (False, 'Journal Other Name', 'NEW2', 'purchase', company1),
+                (False, 'ぁ', 'NEW3', 'purchase', company1),
+                (False, 'ぁ', 'ぁ', 'purchase', company1),
+                ('youpie', 'Journal Name', 'NEW1', 'purchase', company2),
+                (False, 'Journal Other Name', 'NEW2', 'purchase', company2),
+                (False, 'ぁ', 'NEW3', 'purchase', company2),
+                (False, 'ぁ', 'ぁ', 'purchase', company2),
+            ],
+            [
+                f'youpie-{company1.name}',
+                f'journal-other-name-{company1.name}',
+                f'new3-{company1.name}',
+                f'purchase-{company1.name}',
+                f'youpie-{company2.id}',
+                f'journal-other-name-{company2.id}',
+                f'new3-{company2.id}',
+                f'purchase-{company2.id}',
+            ]
+        ):
+            with self.subTest(aname=aname, jname=jname, jcode=jcode, jtype=jtype, jcompany=jcompany):
+                new_journal = self.env['account.journal'].create({
+                    'code': jcode,
+                    'company_id': jcompany.id,
+                    'name': jname,
+                    'type': jtype,
+                    # force alias_name only if given, to check default value otherwise
+                    **({'alias_name': aname} if aname else {}),
+                })
+                self.assertEqual(new_journal.alias_name, expected_alias_name)
+
+        # other types: no mail support by default
+        journals = self.env['account.journal'].create([{
+            'code': f'NEW{jtype}',
+            'name': f'Type {jtype}',
+            'type': jtype}
+            for jtype in ('general', 'cash', 'bank')
+        ])
+        self.assertFalse(journals.alias_id, 'Do not create useless aliases')
+        self.assertFalse(list(filter(None, journals.mapped('alias_name'))))
+
+    def test_alias_name_form(self):
+        """ Test alias name update using Form tool (onchange) """
+        journal = Form(self.env['account.journal'])
+        journal.name = 'Test With Form'
+        self.assertFalse(journal.alias_name)
+        journal.type = 'sale'
+        self.assertEqual(journal.alias_name, f'test-with-form-{self.env.company.name}')
+        journal.type = 'cash'
+        self.assertFalse(journal.alias_name)
+
+    def test_alias_from_type(self):
+        """ Test alias behavior on journal, especially alias_name management as
+        well as defaults update, see odoo/odoo@400b6860271a11b9914166ff7e42939c4c6192dc """
+        journal = self.company_data['default_journal_purchase']
+
+        # assert base test data
+        company_name = 'company_1_data'
+        journal_code = 'BILL'
+        journal_name = 'Vendor Bills'
+        journal_alias = journal.alias_id
+        self.assertEqual(journal.code, journal_code)
+        self.assertEqual(journal.company_id.name, company_name)
+        self.assertEqual(journal.name, journal_name)
+        self.assertEqual(journal.type, 'purchase')
+
+        # assert default creation data
+        self.assertEqual(journal_alias.alias_contact, 'everyone')
+        self.assertDictEqual(
+            dict(literal_eval(journal_alias.alias_defaults)),
+            {
+                'move_type': 'in_invoice',
+                'company_id': journal.company_id.id,
+                'journal_id': journal.id,
+            }
+        )
+        self.assertFalse(journal_alias.alias_force_thread_id, 'Journal alias should create new moves')
+        self.assertEqual(journal_alias.alias_model_id, self.env['ir.model']._get('account.move'),
+                         'Journal alias targets moves')
+        self.assertEqual(journal_alias.alias_name, f'vendor-bills-{company_name}')
+        self.assertEqual(journal_alias.alias_parent_model_id, self.env['ir.model']._get('account.journal'),
+                         'Journal alias owned by journal itself')
+        self.assertEqual(journal_alias.alias_parent_thread_id, journal.id,
+                         'Journal alias owned by journal itself')
+
+        # update alias_name, ensure a fallback on a real name when not explicit reset
+        for alias_name, expected in [
+            (False, False),
+            ('', False),
+            (' ', f'vendor-bills-{company_name}'),  # error recuperation
+            ('.', f'vendor-bills-{company_name}'),  # error recuperation
+            ('😊', f'vendor-bills-{company_name}'),  # resets, unicode not supported
+            ('ぁ', f'vendor-bills-{company_name}'),  # resets, non ascii not supported
+            ('Youpie Boum', 'youpie-boum'),
+        ]:
+            with self.subTest(alias_name=alias_name):
+                journal.write({'alias_name': alias_name})
+                self.assertEqual(journal.alias_name, expected)
+                self.assertEqual(journal_alias.alias_name, expected)
+
+        # changing type should void if not purchase or sale
+        for jtype in ('general', 'cash', 'bank'):
+            journal.write({'type': jtype})
+            self.assertEqual(journal.alias_id, journal_alias,
+                             'Dà not unlink aliases, just reset their value')
+            self.assertFalse(journal.alias_name)
+            self.assertFalse(journal_alias.alias_name)
+
+        # changing type should reset if sale or purchase
+        journal.company_id.write({'name': 'New Company Name'})
+        journal.write({'name': 'Reset Journal', 'type': 'sale'})
+        journal_alias_2 = journal.alias_id
+        self.assertEqual(journal_alias_2.alias_contact, 'everyone')
+        self.assertDictEqual(
+            dict(literal_eval(journal_alias_2.alias_defaults)),
+            {
+                'move_type': 'out_invoice',
+                'company_id': journal.company_id.id,
+                'journal_id': journal.id,
+            }
+        )
+        self.assertFalse(journal_alias_2.alias_force_thread_id, 'Journal alias should create new moves')
+        self.assertEqual(journal_alias_2.alias_model_id, self.env['ir.model']._get('account.move'),
+                         'Journal alias targets moves')
+        self.assertEqual(journal_alias_2.alias_name, 'reset-journal-new-company-name')
+        self.assertEqual(journal_alias_2.alias_parent_model_id, self.env['ir.model']._get('account.journal'),
+                         'Journal alias owned by journal itself')
+        self.assertEqual(journal_alias_2.alias_parent_thread_id, journal.id,
+                         'Journal alias owned by journal itself')
+
+    def test_alias_create_unique(self):
+        """ Make auto-generated alias_name unique when needed """
+        company_name = self.company_data['company'].name
+        journal = self.env['account.journal'].create({
+            'name': 'Test Journal',
+            'type': 'sale',
+            'code': 'A',
+        })
+        journal2 = self.env['account.journal'].create({
+            'name': 'Test Journal',
+            'type': 'sale',
+            'code': 'B',
+        })
+        self.assertEqual(journal.alias_name, f'test-journal-{company_name}')
+        self.assertEqual(journal2.alias_name, f'test-journal-{company_name}-b')
+
+    def test_send_email_to_alias_from_other_company(self):
+        user_company_2 = new_test_user(
+            self.env,
+            name='company 2 user',
+            login='company_2_user',
+            password='company_2_user',
+            email='company_2_user@test.com',
+            company_id=self.company_data_2['company'].id
+        )
+        self.format_and_process(
+            MAIL_EML_ATTACHMENT,
+            user_company_2.email,
+            self.company_data['default_journal_purchase'].alias_email,
+            subject='purchase test mail',
+            target_model='account.move',
+            msg_id='<test-account-move-alias-id>',
+        )
+        self.assertTrue(self.env['account.move'].search([('invoice_source_email', '=', 'company_2_user@test.com')]))
+
+    def test_alias_uniqueness_without_domain(self):
+        """Ensure alias_name is unique even if alias_domain is not defined."""
+        default_account = self.env['account.account'].search(
+            domain=[('deprecated', '=', False), ('account_type', 'in', ('income', 'income_other'))],
+            limit=1,
+        )
+        with Form(self.env['account.journal']) as journal_form:
+            journal_form.type = 'sale'
+            journal_form.code = 'A'
+            journal_form.name = 'Test Journal 1'
+            journal_form.default_account_id = default_account
+            journal_1 = journal_form.save()
+        with Form(self.env['account.journal']) as journal_form:
+            journal_form.type = 'sale'
+            journal_form.code = 'B'
+            journal_form.name = 'Test Journal 2'
+            journal_form.default_account_id = default_account
+            journal_2 = journal_form.save()
+        self.assertNotEqual(journal_1.alias_id.alias_name, journal_2.alias_id.alias_name)
+
+    def test_new_purchase_journal_gets_default_account(self):
+        journal = self.env['account.journal'].create({
+            'name': 'Test Purchase',
+            'type': 'purchase',
+            'code': 'TPUR',
+        })
+        self.assertEqual(
+            journal.default_account_id,
+            self.env['ir.property'].with_company(journal.company_id)._get('property_account_expense_categ_id', 'product.category'),
+        )

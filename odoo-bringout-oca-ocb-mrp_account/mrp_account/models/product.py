@@ -1,13 +1,21 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models
+from odoo import fields, models
+from odoo.osv import expression
 from odoo.tools import float_round, groupby
 
 
 class ProductTemplate(models.Model):
     _name = 'product.template'
     _inherit = 'product.template'
+
+    def _get_product_accounts(self):
+        accounts = super()._get_product_accounts()
+        accounts.update({
+            'production': self.categ_id.property_stock_account_production_cost_id,
+        })
+        return accounts
 
     def action_bom_cost(self):
         templates = self.filtered(lambda t: t.product_variant_count == 1 and t.bom_count > 0)
@@ -67,7 +75,7 @@ class ProductProduct(models.Model):
             line_qty = bom_line.product_uom_id._compute_quantity(bom_lines[bom_line]['qty'], bom_line.product_id.uom_id)
             moves = self.env['stock.move'].concat(*moves_list)
             value += line_qty * bom_line.product_id._compute_average_price(qty_invoiced * line_qty, qty_to_invoice * line_qty, moves, is_returned=is_returned)
-        return value
+        return bom.product_uom_id._compute_price(value / bom.product_qty, self.uom_id)
 
     def _compute_bom_price(self, bom, boms_to_recompute=False, byproduct_bom=False):
         self.ensure_one()
@@ -108,3 +116,20 @@ class ProductProduct(models.Model):
             if byproduct_cost_share:
                 total *= float_round(1 - byproduct_cost_share / 100, precision_rounding=0.0001)
             return bom.product_uom_id._compute_price(total / bom.product_qty, self.uom_id)
+
+
+class ProductCategory(models.Model):
+    _inherit = 'product.category'
+
+    property_stock_account_production_cost_id = fields.Many2one(
+        'account.account', 'Production Account', company_dependent=True,
+        domain="[('deprecated', '=', False)]", check_company=True,
+        help="""This account will be used as a valuation counterpart for both components and final products for manufacturing orders.
+                If there are any workcenter/employee costs, this value will remain on the account once the production is completed.""")
+
+    def write(self, vals):
+        return super(ProductCategory, self.with_context(product_category_mrp_account_write=True)).write(vals)
+
+    def _get_stock_account_property_field_names(self):
+        mrp_value = ['property_stock_account_production_cost_id'] if self.property_stock_account_production_cost_id or not self.env.context.get('product_category_mrp_account_write') else []
+        return super()._get_stock_account_property_field_names() + mrp_value

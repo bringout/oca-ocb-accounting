@@ -265,11 +265,6 @@ msgid "Edit Move"
 msgstr "Uredi temeljnicu"
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_balance_end_real
-msgid "Ending Balance"
-msgstr ""
-
-#. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__foreign_currency_id
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__foreign_currency_id
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_reconcile_abstract__foreign_currency_id
@@ -305,24 +300,9 @@ msgid "Invoice"
 msgstr "Račun"
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_complete
-msgid "Is Complete"
-msgstr ""
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency
-msgid "Is Manual in Currency?"
-msgstr ""
-
-#. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile__is_reconciled
 msgid "Is Reconciled"
 msgstr "Je zatvoren"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_valid
-msgid "Is Valid"
-msgstr ""
 
 #. module: account_reconcile_oca
 #: model_terms:ir.ui.view,arch_db:account_reconcile_oca.account_journal_dashboard_kanban_view
@@ -361,12 +341,6 @@ msgstr ""
 #, python-format
 msgid "Label"
 msgstr "Natpis"
-
-#. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile____last_update
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile_data____last_update
-msgid "Last Modified on"
-msgstr "Zadnje modificirano"
 
 #. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_account_reconcile_data__write_uid
@@ -413,6 +387,11 @@ msgstr ""
 #. module: account_reconcile_oca
 #: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency_id
 msgid "Manual In Currency"
+msgstr ""
+
+#. module: account_reconcile_oca
+#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__manual_in_currency
+msgid "Manual In Currency?"
 msgstr ""
 
 #. module: account_reconcile_oca
@@ -649,11 +628,6 @@ msgid "Statement"
 msgstr ""
 
 #. module: account_reconcile_oca
-#: model:ir.model.fields,field_description:account_reconcile_oca.field_account_bank_statement_line__statement_name
-msgid "Statement Name"
-msgstr ""
-
-#. module: account_reconcile_oca
 #: model:ir.actions.act_window,name:account_reconcile_oca.action_bank_statement_line_reconcile
 msgid "Statement lines"
 msgstr ""
@@ -748,3 +722,6 @@ msgstr "će biti umanjeno za"
 #: model_terms:ir.ui.view,arch_db:account_reconcile_oca.bank_statement_line_form_reconcile_view
 msgid "with an open amount"
 msgstr "pa početnim iznosom"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnje modificirano"

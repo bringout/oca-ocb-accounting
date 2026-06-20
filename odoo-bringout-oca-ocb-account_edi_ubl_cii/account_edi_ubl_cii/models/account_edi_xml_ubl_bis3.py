@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, _
-from odoo.addons.account_edi_ubl_cii.models.account_edi_common import COUNTRY_EAS
+from odoo.addons.account_edi_ubl_cii.models.account_edi_xml_ubl_20 import UBL_NAMESPACES
 
 from stdnum.no import mva
 
@@ -50,21 +50,15 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
         # EXTENDS account.edi.xml.ubl_21
         vals_list = super()._get_partner_party_tax_scheme_vals_list(partner, role)
 
-        if not partner.vat:
-            return []
+        if not partner.vat or partner.vat == '/':
+            return [{
+                'company_id': partner.peppol_endpoint,
+                'tax_scheme_vals': {'id': partner.peppol_eas},
+            }]
 
         for vals in vals_list:
             vals.pop('registration_name', None)
             vals.pop('registration_address_vals', None)
-
-            # Some extra european countries use Bis 3 but do not prepend their VAT with the country code (i.e.
-            # Australia). Allow them to use Bis 3 without raising BR-CO-09.
-            if (
-                partner.country_id
-                and partner.country_id not in self.env.ref('base.europe').country_ids
-                and not partner.vat[:2].isalpha()
-            ):
-                vals['company_id'] = partner.country_id.code + partner.vat
 
         # sources:
         #  https://anskaffelser.dev/postaward/g3/spec/current/billing-3.0/norway/#_applying_foretaksregisteret
@@ -72,7 +66,16 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
         if partner.country_id.code == "NO" and role == 'supplier':
             vals_list.append({
                 'company_id': "Foretaksregisteret",
-                'tax_scheme_id': "TAX",
+                'tax_scheme_vals': {'id': 'TAX'},
+            })
+
+        # source:
+        # https://docs.peppol.eu/poacc/billing/3.0/2025-Q4/rules/ubl-peppol/SE-R-005/
+        # https://docs.peppol.eu/poacc/billing/3.0/bis/#national_rules (SE-R-005 (fatal))
+        if partner.country_id.code == "SE" and role == 'supplier':
+            vals_list.append({
+                'company_id': "GODKÄND FÖR F-SKATT",
+                'tax_scheme_vals': {'id': 'TAX'},
             })
 
         return vals_list
@@ -83,12 +86,14 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
 
         for vals in vals_list:
             vals.pop('registration_address_vals', None)
-            if partner.country_code == 'NL' and 'l10n_nl_oin' in partner._fields:
-                endpoint = partner.l10n_nl_oin or partner.l10n_nl_kvk
-                scheme = '0190' if partner.l10n_nl_oin else '0106'
+            if partner.country_code == 'NL':
+                # For NL, VAT can be used as a Peppol endpoint, but KVK/OIN has to be used as PartyLegalEntity/CompanyID
+                # To implement a workaround on stable, company_registry field is used without recording whether
+                # the number is a KVK or OIN, and the length of the number (8 = KVK, 9 = OIN) is used to determine the type
+                nl_id = partner.company_registry if partner.peppol_eas not in ('0106', '0190') else partner.peppol_endpoint
                 vals.update({
-                    'company_id': endpoint,
-                    'company_id_attrs': {'schemeID': scheme},
+                    'company_id': nl_id,
+                    'company_id_attrs': {'schemeID': '0190' if nl_id and len(nl_id) == 20 else '0106'},
                 })
             if partner.country_id.code == "LU":
                 if 'l10n_lu_peppol_identifier' in partner._fields and partner.l10n_lu_peppol_identifier:
@@ -99,6 +104,10 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                 # DK-R-014: For Danish Suppliers it is mandatory to specify schemeID as "0184" (DK CVR-number) when
                 # PartyLegalEntity/CompanyID is used for AccountingSupplierParty
                 vals['company_id_attrs'] = {'schemeID': '0184'}
+            if partner.country_code == 'SE' and partner.company_registry:
+                vals['company_id'] = ''.join(char for char in partner.company_registry if char.isdigit())
+            if not vals['company_id']:
+                vals['company_id'] = partner.peppol_endpoint
 
         return vals_list
 
@@ -115,42 +124,10 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
         vals = super()._get_partner_party_vals(partner, role)
 
         partner = partner.commercial_partner_id
-        vals['endpoint_id'] = partner.vat
-        vals['endpoint_id_attrs'] = {'schemeID': COUNTRY_EAS.get(partner.country_id.code)}
-
-        if partner.country_code == 'NO':
-            if 'l10n_no_bronnoysund_number' in partner._fields:
-                vals['endpoint_id'] = partner.l10n_no_bronnoysund_number
-            elif partner.vat:
-                vals['endpoint_id'] = partner.vat.replace("NO", "").replace("MVA", "")
-        # [BR-NL-1] Dutch supplier registration number ( AccountingSupplierParty/Party/PartyLegalEntity/CompanyID );
-        # With a Dutch supplier (NL), SchemeID may only contain 106 (Chamber of Commerce number) or 190 (OIN number).
-        # [BR-NL-10] At a Dutch supplier, for a Dutch customer ( AccountingCustomerParty ) the customer registration
-        # number must be filled with Chamber of Commerce or OIN. SchemeID may only contain 106 (Chamber of
-        # Commerce number) or 190 (OIN number).
-        if partner.country_code == 'NL' and 'l10n_nl_oin' in partner._fields:
-            if partner.l10n_nl_oin:
-                vals.update({
-                    'endpoint_id': partner.l10n_nl_oin,
-                    'endpoint_id_attrs': {'schemeID': '0190'},
-                })
-            elif partner.l10n_nl_kvk:
-                vals.update({
-                    'endpoint_id': partner.l10n_nl_kvk,
-                    'endpoint_id_attrs': {'schemeID': '0106'},
-                })
-        if partner.country_id.code == 'SG' and 'l10n_sg_unique_entity_number' in partner._fields:
-            vals.update({
-                'endpoint_id': partner.l10n_sg_unique_entity_number,
-                'endpoint_id_attrs': {'schemeID': '0195'},
-            })
-        if partner.country_id.code == "LU" and 'l10n_lu_peppol_identifier' in partner._fields and partner.l10n_lu_peppol_identifier:
-            vals['endpoint_id'] = partner.l10n_lu_peppol_identifier
-        if partner.country_id.code == "SE" and partner.vat:
-            vals['endpoint_id'] = partner.vat.replace("SE", "")[:-2]
-        if partner.country_id.code == 'AU' and partner.vat:
-            # PEPPOL-COMMON-R050: Australian Business Number (ABN) should not have country code
-            vals['endpoint_id'] = partner.vat.replace('AU', '').strip()
+        vals.update({
+            'endpoint_id': partner.peppol_endpoint,
+            'endpoint_id_attrs': {'schemeID': partner.peppol_eas},
+        })
 
         return vals
 
@@ -158,10 +135,9 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
         # EXTENDS account.edi.xml.ubl_21
         vals = super()._get_partner_party_identification_vals_list(partner)
 
-        if partner.country_code == 'NL' and 'l10n_nl_oin' in partner._fields:
-            endpoint = partner.l10n_nl_oin or partner.l10n_nl_kvk
+        if partner.country_code == 'NL':
             vals.append({
-                'id': endpoint,
+                'id': partner.peppol_endpoint,
             })
         return vals
 
@@ -175,9 +151,6 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                              and supplier.country_id.code in economic_area
                              and supplier.country_id != customer.country_id)
 
-        if not intracom_delivery:
-            return []
-
         # [BR-IC-12]-In an Invoice with a VAT breakdown (BG-23) where the VAT category code (BT-118) is
         # "Intra-community supply" the Deliver to country code (BT-80) shall not be blank.
 
@@ -185,17 +158,17 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
         # "Intra-community supply" the Actual delivery date (BT-72) or the Invoicing period (BG-14)
         # shall not be blank.
 
-        if 'partner_shipping_id' in invoice._fields:
-            partner_shipping = invoice.partner_shipping_id
-        else:
-            partner_shipping = customer
+        if intracom_delivery:
+            partner_shipping = invoice.company_id.partner_id if invoice.is_purchase_document() else (invoice.partner_shipping_id or customer)
 
-        return [{
-            'actual_delivery_date': invoice.invoice_date,
-            'delivery_location_vals': {
-                'delivery_address_vals': self._get_partner_address_vals(partner_shipping),
-            },
-        }]
+            return [{
+                'actual_delivery_date': invoice.invoice_date,
+                'delivery_location_vals': {
+                    'delivery_address_vals': self._get_partner_address_vals(partner_shipping),
+                },
+            }]
+
+        return super()._get_delivery_vals_list(invoice)
 
     def _get_partner_address_vals(self, partner):
         # EXTENDS account.edi.xml.ubl_21
@@ -246,6 +219,13 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                 subtotal_vals.pop('percent', None)
                 subtotal_vals['currency_dp'] = 2
 
+        if invoice.currency_id != invoice.company_id.currency_id:
+            vals_list.append({
+                'currency': invoice.company_id.currency_id,
+                'currency_dp': self._get_currency_decimal_places(invoice.company_id.currency_id),
+                'tax_amount': taxes_vals['tax_amount'],
+            })
+
         return vals_list
 
     def _get_invoice_line_item_vals(self, line, taxes_vals):
@@ -270,9 +250,9 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
 
         return vals_list
 
-    def _get_invoice_line_vals(self, line, taxes_vals):
+    def _get_invoice_line_vals(self, line, line_id, taxes_vals):
         # EXTENDS account.edi.xml.ubl_21
-        vals = super()._get_invoice_line_vals(line, taxes_vals)
+        vals = super()._get_invoice_line_vals(line, line_id, taxes_vals)
 
         vals.pop('tax_total_vals', None)
 
@@ -283,7 +263,7 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
             # We can't have negative unit prices, so we invert the signs of
             # the unit price and quantity, resulting in the same amount in the end
             vals['price_vals']['price_amount'] *= -1
-            vals['invoiced_quantity'] *= -1
+            vals['line_quantity'] *= -1
 
         return vals
 
@@ -292,12 +272,13 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
         vals = super()._export_invoice_vals(invoice)
 
         vals['vals'].update({
-            'customization_id': 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0',
+            'customization_id': self._get_customization_ids()['ubl_bis3'],
             'profile_id': 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0',
+            'tax_currency_code': None if invoice.currency_id == invoice.company_id.currency_id else invoice.company_id.currency_id.name,
             'currency_dp': 2,
             'ubl_version_id': None,
         })
-        vals['vals']['legal_monetary_total_vals']['currency_dp'] = 2
+        vals['vals']['monetary_total_vals']['currency_dp'] = 2
 
         # [NL-R-001] For suppliers in the Netherlands, if the document is a creditnote, the document MUST
         # contain an invoice reference (cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID)
@@ -309,11 +290,18 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                 }
             })
 
+        # For B2G transactions in Germany: set the buyer_reference to the Leitweg-ID (code 0204)
+        if invoice.commercial_partner_id.peppol_eas == '0204':
+            vals['vals'].update({
+                'buyer_reference': invoice.commercial_partner_id.peppol_endpoint,
+            })
+
         return vals
 
     def _export_invoice_constraints(self, invoice, vals):
         # EXTENDS account.edi.xml.ubl_21
         constraints = super()._export_invoice_constraints(invoice, vals)
+
         constraints.update(
             self._invoice_constraints_peppol_en16931_ubl(invoice, vals)
         )
@@ -335,15 +323,6 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                              and vals['customer'].country_id != vals['supplier'].country_id)
 
         constraints = {
-            # [BR-S-02]-An Invoice that contains an Invoice line (BG-25) where the Invoiced item VAT category code
-            # (BT-151) is "Standard rated" shall contain the Seller VAT Identifier (BT-31), the Seller tax registration
-            # identifier (BT-32) and/or the Seller tax representative VAT identifier (BT-63).
-            # ---
-            # [BR-CO-26]-In order for the buyer to automatically identify a supplier, the Seller identifier (BT-29),
-            # the Seller legal registration identifier (BT-30) and/or the Seller VAT identifier (BT-31) shall be present.
-            'cen_en16931_seller_vat_identifier': self._check_required_fields(
-                vals['supplier'], 'vat'  # this check is larger than the rules above
-            ),
             # [BR-61]-If the Payment means type code (BT-81) means SEPA credit transfer, Local credit transfer or
             # Non-SEPA international credit transfer, the Payment account identifier (BT-84) shall be present.
             # note: Payment account identifier is <cac:PayeeFinancialAccount>
@@ -351,18 +330,6 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
             'cen_en16931_payment_account_identifier': self._check_required_fields(
                 invoice, 'partner_bank_id'
             ) if vals['vals']['payment_means_vals_list'][0]['payment_means_code'] in (30, 58) else None,
-            # [BR-62]-The Seller electronic address (BT-34) shall have a Scheme identifier.
-            # if this fails, it might just be a missing country when mapping the country to the EAS code
-            'cen_en16931_seller_EAS': self._check_required_fields(
-                vals['vals']['accounting_supplier_party_vals']['party_vals']['endpoint_id_attrs'], 'schemeID',
-                _("No Electronic Address Scheme (EAS) could be found for %s.", vals['customer'].name)
-            ),
-            # [BR-63]-The Buyer electronic address (BT-49) shall have a Scheme identifier.
-            # if this fails, it might just be a missing country when mapping the country to the EAS code
-            'cen_en16931_buyer_EAS': self._check_required_fields(
-                vals['vals']['accounting_customer_party_vals']['party_vals']['endpoint_id_attrs'], 'schemeID',
-                _("No Electronic Address Scheme (EAS) could be found for %s.", vals['customer'].name)
-            ),
             # [BR-IC-12]-In an Invoice with a VAT breakdown (BG-23) where the VAT category code (BT-118) is
             # "Intra-community supply" the Deliver to country code (BT-80) shall not be blank.
             'cen_en16931_delivery_country_code': self._check_required_fields(
@@ -382,14 +349,14 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
             ) if intracom_delivery else None,
         }
 
-        for line_vals in vals['vals']['invoice_line_vals']:
+        for line_vals in vals['vals']['line_vals']:
             if not line_vals['item_vals'].get('name'):
                 # [BR-25]-Each Invoice line (BG-25) shall contain the Item name (BT-153).
                 constraints.update({'cen_en16931_item_name': _("Each invoice line should have a product or a label.")})
                 break
 
         for line in invoice.invoice_line_ids.filtered(lambda x: x.display_type not in ('line_note', 'line_section')):
-            if len(line.tax_ids.flatten_taxes_hierarchy().filtered(lambda t: t.amount_type != 'fixed')) != 1:
+            if len(line.tax_ids.flatten_taxes_hierarchy().filtered(lambda t: t.amount_type not in ('fixed', 'code'))) != 1:
                 # [UBL-SR-48]-Invoice lines shall have one and only one classified tax category.
                 # /!\ exception: possible to have any number of ecotaxes (fixed tax) with a regular percentage tax
                 constraints.update({'cen_en16931_tax_line': _("Each invoice line shall have one and only one tax.")})
@@ -403,7 +370,7 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
             scheme_vals = vals['vals'][f'accounting_{role}_party_vals']['party_vals']['party_tax_scheme_vals'][-1:]
             if (
                 not (scheme_vals and scheme_vals[0]['company_id'] and scheme_vals[0]['company_id'][:2].isalpha())
-                and (scheme_vals and scheme_vals[0]['tax_scheme_id'] == 'VAT')
+                and (scheme_vals and scheme_vals[0]['tax_scheme_vals'].get('id') == 'VAT')
                 and self._name in ('account.edi.xml.ubl_bis3', 'account.edi.xml.ubl_nl', 'account.edi.xml.ubl_de')
             ):
                 # [BR-CO-09]-The Seller VAT identifier (BT-31), the Seller tax representative VAT identifier (BT-63)
@@ -427,14 +394,6 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
         They always refer to the supplier's country.
         """
         constraints = {
-            # PEPPOL-EN16931-R020: Seller electronic address MUST be provided
-            'peppol_en16931_ubl_seller_endpoint': self._check_required_fields(
-                vals['supplier'], 'vat'
-            ),
-            # PEPPOL-EN16931-R010: Buyer electronic address MUST be provided
-            'peppol_en16931_ubl_buyer_endpoint': self._check_required_fields(
-                vals['customer'], 'vat'
-            ),
             # PEPPOL-EN16931-R003: A buyer reference or purchase order reference MUST be provided.
             'peppol_en16931_ubl_buyer_ref_po_ref':
                 "A buyer reference or purchase order reference must be provided." if self._check_required_fields(
@@ -457,9 +416,12 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                 # [NL-R-003] For suppliers in the Netherlands, the legal entity identifier MUST be either a
                 # KVK or OIN number (schemeID 0106 or 0190)
                 'nl_r_003': _(
-                    "The supplier %s must have a KVK or OIN number.",
+                    "%s should have a KVK or OIN number set in Company ID field or as Peppol e-address (EAS code 0106 or 0190).",
                     vals['supplier'].display_name
-                ) if 'l10n_nl_oin' not in vals['supplier']._fields or 'l10n_nl_kvk' not in vals['supplier']._fields else '',
+                ) if (
+                    not vals['supplier'].peppol_eas in ('0106', '0190') and
+                    (not vals['supplier'].company_registry or len(vals['supplier'].company_registry) not in (8, 9))
+                ) else '',
 
                 # [NL-R-007] For suppliers in the Netherlands, the supplier MUST provide a means of payment
                 # (cac:PaymentMeans) if the payment is from customer to supplier
@@ -478,9 +440,12 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                     # [NL-R-005] For suppliers in the Netherlands, if the customer is in the Netherlands,
                     # the customer’s legal entity identifier MUST be either a KVK or OIN number (schemeID 0106 or 0190)
                     'nl_r_005': _(
-                        "The customer %s must have a KVK or OIN number.",
+                        "%s should have a KVK or OIN number set in Company ID field or as Peppol e-address (EAS code 0106 or 0190).",
                         vals['customer'].display_name
-                    ) if 'l10n_nl_oin' not in vals['customer']._fields or 'l10n_nl_kvk' not in vals['customer']._fields else '',
+                    ) if (
+                        not vals['customer'].commercial_partner_id.peppol_eas in ('0106', '0190') and
+                        (not vals['customer'].commercial_partner_id.company_registry or len(vals['customer'].commercial_partner_id.company_registry) not in (8, 9))
+                    ) else '',
                 })
 
         if vals['supplier'].country_id.code == 'NO':
@@ -492,21 +457,20 @@ class AccountEdiXmlUBLBIS3(models.AbstractModel):
                 'no_r_001': _(
                     "The VAT number of the supplier does not seem to be valid. It should be of the form: NO179728982MVA."
                 ) if not mva.is_valid(vat) or len(vat) != 14 or vat[:2] != 'NO' or vat[-3:] != 'MVA' else "",
-
-                'no_supplier_bronnoysund': _(
-                    "The supplier %s must have a Bronnoysund company registry.",
-                    vals['supplier'].display_name
-                ) if 'l10n_no_bronnoysund_number' not in vals['supplier']._fields or not vals['supplier'].l10n_no_bronnoysund_number else "",
             })
-        if vals['customer'].country_id.code == 'NO':
-            constraints.update({
-                'no_customer_bronnoysund': _(
-                    "The customer %s must have a Bronnoysund company registry.",
-                    vals['customer'].commercial_partner_id.display_name
-                ) if (
-                    'l10n_no_bronnoysund_number' not in vals['customer']._fields
-                    or not vals['customer'].commercial_partner_id.l10n_no_bronnoysund_number
-                ) else "",
-            })
-
         return constraints
+
+    def _import_retrieve_partner_vals(self, tree, role):
+        # EXTENDS account.edi.xml.ubl_20
+        partner_vals = super()._import_retrieve_partner_vals(tree, role)
+        endpoint_node = tree.find(f'.//cac:Accounting{role}Party/cac:Party/cbc:EndpointID', UBL_NAMESPACES)
+        if endpoint_node is not None:
+            peppol_eas = endpoint_node.attrib.get('schemeID')
+            peppol_endpoint = endpoint_node.text
+            if peppol_eas and peppol_endpoint:
+                # include the EAS and endpoint in the search domain when retrieving the partner
+                partner_vals.update({
+                    'peppol_eas': peppol_eas,
+                    'peppol_endpoint': peppol_endpoint,
+                })
+        return partner_vals

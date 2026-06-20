@@ -1,9 +1,9 @@
 /** @odoo-module **/
-
-import fieldUtils from "web.field_utils";
-import {float_is_zero} from "web.utils";
+import {formatDate, parseDate} from "@web/core/l10n/dates";
+import {getCurrency} from "@web/core/currency";
+import {floatIsZero} from "@web/core/utils/numbers";
+import {formatMonetary} from "@web/views/fields/formatters";
 import {registry} from "@web/core/registry";
-import session from "web.session";
 import {useService} from "@web/core/utils/hooks";
 
 const {Component} = owl;
@@ -30,64 +30,45 @@ export class AccountReconcileDataWidget extends Component {
             return {lines: [], totals};
         }
         for (var line in data) {
-            data[line].amount_format = fieldUtils.format.monetary(
-                data[line].amount,
-                undefined,
-                {
-                    currency: session.get_currency(data[line].currency_id),
-                }
-            );
-            data[line].debit_format = fieldUtils.format.monetary(
-                data[line].debit,
-                undefined,
-                {
-                    currency: session.get_currency(data[line].currency_id),
-                }
-            );
-            data[line].credit_format = fieldUtils.format.monetary(
-                data[line].credit,
-                undefined,
-                {
-                    currency: session.get_currency(data[line].currency_id),
-                }
-            );
-            data[line].amount_currency_format = fieldUtils.format.monetary(
+            data[line].amount_format = formatMonetary(data[line].amount, {
+                currencyId: data[line].currency_id,
+            });
+            data[line].debit_format = formatMonetary(data[line].debit, {
+                currencyId: data[line].currency_id,
+            });
+            data[line].credit_format = formatMonetary(data[line].credit, {
+                currencyId: data[line].currency_id,
+            });
+            data[line].amount_currency_format = formatMonetary(
                 data[line].currency_amount,
-                undefined,
                 {
-                    currency: session.get_currency(data[line].line_currency_id),
+                    currencyId: data[line].line_currency_id,
                 }
             );
             if (data[line].original_amount) {
-                data[line].original_amount_format = fieldUtils.format.monetary(
+                data[line].original_amount_format = formatMonetary(
                     data[line].original_amount,
                     {
-                        currency: session.get_currency(data[line].currency_id),
+                        currencyId: data[line].currency_id,
                     }
                 );
             }
-            data[line].date_format = fieldUtils.format.date(
-                fieldUtils.parse.date(data[line].date, undefined, {isUTC: true})
+            data[line].date_format = formatDate(
+                parseDate(data[line].date, undefined, {isUTC: true})
             );
             totals.debit += data[line].debit || 0;
             totals.credit += data[line].credit || 0;
         }
         totals.balance = totals.debit - totals.credit;
-        const firstLine = Object.values(data)[0] || {};
-        const currency = session.get_currency(firstLine.currency_id);
+        const [firstLine = {}] = Object.values(data);
+        const currency = getCurrency(firstLine.currency_id);
         const decimals = currency.digits[1];
-        const hasOpenBalance = !float_is_zero(totals.balance, decimals);
-        let openDebitFmt = null;
-        let openCreditFmt = null;
-        if (totals.balance < 0) {
-            openDebitFmt = fieldUtils.format.monetary(Math.abs(totals.balance), {
-                currency: currency,
-            });
-        } else {
-            openCreditFmt = fieldUtils.format.monetary(totals.balance, {
-                currency: currency,
-            });
-        }
+        const hasOpenBalance = !floatIsZero(totals.balance, decimals);
+        const absoluteBalance = Math.abs(totals.balance);
+        const openDebitFmt =
+            totals.balance < 0 ? formatMonetary(absoluteBalance, {currency}) : null;
+        const openCreditFmt =
+            totals.balance > 0 ? formatMonetary(absoluteBalance, {currency}) : null;
         return {lines: data, hasOpenBalance, openDebitFmt, openCreditFmt};
     }
     onTrashLine(ev, line) {
@@ -121,6 +102,10 @@ export class AccountReconcileDataWidget extends Component {
 }
 AccountReconcileDataWidget.template = "account_reconcile_oca.ReconcileDataWidget";
 
+export const AccountReconcileDataWidgetField = {
+    component: AccountReconcileDataWidget,
+    supportedTypes: [],
+};
 registry
     .category("fields")
-    .add("account_reconcile_oca_data", AccountReconcileDataWidget);
+    .add("account_reconcile_oca_data", AccountReconcileDataWidgetField);

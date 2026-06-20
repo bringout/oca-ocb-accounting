@@ -11,6 +11,12 @@ _logger = logging.getLogger(__name__)
 
 DEFAULT_FACTURX_DATE_FORMAT = '%Y%m%d'
 
+# Imcomplete, full list on https://service.unece.org/trade/untdid/d16b/tred/tred4461.htm
+PAYMENT_MEAN_CODES = {
+    'Payment to bank account': 42,
+    'SEPA direct debit': 59
+}
+
 
 class AccountEdiXmlCII(models.AbstractModel):
     _name = "account.edi.xml.cii"
@@ -18,7 +24,9 @@ class AccountEdiXmlCII(models.AbstractModel):
     _description = "Factur-x/XRechnung CII 2.2.0"
 
     def _export_invoice_filename(self, invoice):
-        return "factur-x.xml"
+        if invoice.commercial_partner_id.country_code == 'DE':
+            return f"{invoice.name.replace('/', '_')}_zugferd.xml"
+        return f"{invoice.name.replace('/', '_')}_factur_x.xml"
 
     def _export_invoice_ecosio_schematrons(self):
         return {
@@ -92,7 +100,7 @@ class AccountEdiXmlCII(models.AbstractModel):
     def _get_scheduled_delivery_time(self, invoice):
         # don't create a bridge only to get line.sale_line_ids.order_id.picking_ids.date_done
         # line.sale_line_ids.order_id.picking_ids.scheduled_date or line.sale_line_ids.order_id.commitment_date
-        return invoice.invoice_date
+        return invoice.delivery_date or invoice.invoice_date
 
     def _get_invoicing_period(self, invoice):
         # get the Invoicing period (BG-14): a list of dates covered by the invoice
@@ -135,7 +143,7 @@ class AccountEdiXmlCII(models.AbstractModel):
         self._validate_taxes(invoice)
 
         # Create file content.
-        tax_details = invoice._prepare_edi_tax_details(grouping_key_generator=grouping_key_generator)
+        tax_details = invoice._prepare_invoice_aggregated_taxes(grouping_key_generator=grouping_key_generator)
 
         # Fixed Taxes: filter them on the document level, and adapt the totals
         # Fixed taxes are not supposed to be taxes in real live. However, this is the way in Odoo to manage recupel
@@ -184,6 +192,21 @@ class AccountEdiXmlCII(models.AbstractModel):
             line = line_vals['line']
             line_vals['unece_uom_code'] = self._get_uom_unece_code(line)
 
+            if line._fields.get('deferred_start_date') and (line.deferred_start_date or line.deferred_end_date):
+                line_vals['billing_start'] = line.deferred_start_date
+                line_vals['billing_end'] = line.deferred_end_date
+
+        # [BR - IC - 11] - In an Invoice with a VAT breakdown (BG-23) where the VAT category code (BT-118) is
+        # "Intra-community supply" the Actual delivery date (BT-72) or the Invoicing period (BG-14) shall not be blank.
+        billing_start_dates = [invoice.invoice_date] if invoice.invoice_date else []
+        billing_start_dates += [line_vals['billing_start'] for line_vals in template_values['invoice_line_vals_list'] if line_vals.get('billing_start')]
+        billing_end_dates = [invoice.invoice_date_due] if invoice.invoice_date_due else []
+        billing_end_dates += [line_vals['billing_end'] for line_vals in template_values['invoice_line_vals_list'] if line_vals.get('billing_end')]
+        if billing_start_dates:
+            template_values['billing_start'] = min(billing_start_dates)
+        if billing_end_dates:
+            template_values['billing_end'] = max(billing_end_dates)
+
         # data used for ApplicableHeaderTradeSettlement / ApplicableTradeTax (at the end of the xml)
         for tax_detail_vals in template_values['tax_details']['tax_details'].values():
             # /!\ -0.0 == 0.0 in python but not in XSLT, so it can raise a fatal error when validating the XML
@@ -193,12 +216,6 @@ class AccountEdiXmlCII(models.AbstractModel):
 
             if tax_detail_vals.get('tax_category_code') == 'K':
                 template_values['intracom_delivery'] = True
-            # [BR - IC - 11] - In an Invoice with a VAT breakdown (BG-23) where the VAT category code (BT-118) is
-            # "Intra-community supply" the Actual delivery date (BT-72) or the Invoicing period (BG-14) shall not be blank.
-            if tax_detail_vals.get('tax_category_code') == 'K' and not template_values['scheduled_delivery_time']:
-                date_range = self._get_invoicing_period(invoice)
-                template_values['billing_start'] = min(date_range)
-                template_values['billing_end'] = max(date_range)
 
         # Fixed taxes: add them as charges on the invoice lines
         for line_vals in template_values['invoice_line_vals_list']:
@@ -214,9 +231,22 @@ class AccountEdiXmlCII(models.AbstractModel):
             sum_fixed_taxes = sum(x['amount'] for x in line_vals['allowance_charge_vals_list'])
             line_vals['line_total_amount'] = line_vals['line'].price_subtotal + sum_fixed_taxes
 
+            line_vals['quantity'] = line_vals['line'].quantity #/!\ The quantity is the line.quantity since we keep the unece_uom_code!
+
+            # Invert the quantity and the gross_price_total_unit if a line has a negative price total
+            if line_vals['line'].currency_id.compare_amounts(line_vals['gross_price_total_unit'], 0) == -1:
+                line_vals['quantity'] *= -1
+                line_vals['gross_price_total_unit'] *= -1
+                line_vals['price_subtotal_unit'] *= -1
+
         # Fixed taxes: set the total adjusted amounts on the document level
         template_values['tax_basis_total_amount'] = tax_details['base_amount_currency']
         template_values['tax_total_amount'] = tax_details['tax_amount_currency']
+
+        if invoice._fields.get('sdd_mandate_id') and invoice.sdd_mandate_id:
+            template_values['payment_means_code'] = PAYMENT_MEAN_CODES['SEPA direct debit']
+        else:
+            template_values['payment_means_code'] = PAYMENT_MEAN_CODES['Payment to bank account']
 
         return template_values
 
@@ -230,11 +260,7 @@ class AccountEdiXmlCII(models.AbstractModel):
     # IMPORT
     # -------------------------------------------------------------------------
 
-    def _import_fill_invoice_form(self, journal, tree, invoice, qty_factor):
-
-        def _find_value(xpath, element=tree):
-            return self.env['account.edi.format']._find_value(xpath, element, tree.nsmap)
-
+    def _import_fill_invoice_form(self, invoice, tree, qty_factor):
         logs = []
 
         if qty_factor == -1:
@@ -244,7 +270,7 @@ class AccountEdiXmlCII(models.AbstractModel):
 
         role = invoice.journal_id.type == 'purchase' and 'SellerTradeParty' or 'BuyerTradeParty'
         name = self._find_value(f"//ram:{role}/ram:Name", tree)
-        mail = self._find_value(f"//ram:{role}//ram:URIID[@schemeID='SMTP']", tree)
+        mail = self._find_value(f"//ram:{role}//ram:URIID", tree)
         vat = self._find_value(f"//ram:{role}/ram:SpecifiedTaxRegistration/ram:ID[string-length(text()) > 5]", tree)
         phone = self._find_value(f"//ram:{role}/ram:DefinedTradeContact/ram:TelephoneUniversalCommunication/ram:CompleteNumber", tree)
         country_code = self._find_value(f'//ram:{role}/ram:PostalTradeAddress//ram:CountryID', tree)
@@ -263,7 +289,7 @@ class AccountEdiXmlCII(models.AbstractModel):
                 invoice.currency_id = currency
             else:
                 logs.append(_("Could not retrieve currency: %s. Did you enable the multicurrency option and "
-                              "activate the currency ?", currency_code_node.text))
+                              "activate the currency?", currency_code_node.text))
 
         # ==== Bank Details ====
 
@@ -272,6 +298,8 @@ class AccountEdiXmlCII(models.AbstractModel):
             bank_detail_node.findtext('{*}PayeePartyCreditorFinancialAccount/{*}IBANID')
             or bank_detail_node.findtext('{*}PayeePartyCreditorFinancialAccount/{*}ProprietaryID')
             for bank_detail_node in bank_detail_nodes
+            if bank_detail_node.findtext('{*}PayeePartyCreditorFinancialAccount/{*}IBANID')
+            or bank_detail_node.findtext('{*}PayeePartyCreditorFinancialAccount/{*}ProprietaryID')
         ]
 
         if bank_details:
@@ -285,7 +313,7 @@ class AccountEdiXmlCII(models.AbstractModel):
 
         # ==== Invoice origin ====
 
-        invoice_origin_node = tree.find('./{*}OrderReference/{*}ID')
+        invoice_origin_node = tree.find('.//{*}BuyerOrderReferencedDocument/{*}IssuerAssignedID')
         if invoice_origin_node is not None:
             invoice.invoice_origin = invoice_origin_node.text
 
@@ -304,7 +332,7 @@ class AccountEdiXmlCII(models.AbstractModel):
 
         # ==== payment_reference ====
 
-        payment_reference_node = tree.find('.//{*}BuyerOrderReferencedDocument/{*}IssuerAssignedID')
+        payment_reference_node = tree.find('./{*}SupplyChainTradeTransaction/{*}ApplicableHeaderTradeSettlement/{*}PaymentReference')
         if payment_reference_node is not None:
             invoice.payment_reference = payment_reference_node.text
 
@@ -326,7 +354,7 @@ class AccountEdiXmlCII(models.AbstractModel):
 
         # ==== invoice_line_ids: AllowanceCharge (document level) ====
 
-        logs += self._import_fill_invoice_allowance_charge(tree, invoice, journal, qty_factor)
+        logs += self._import_fill_invoice_allowance_charge(tree, invoice, qty_factor)
 
         # ==== Prepaid amount ====
 
@@ -339,8 +367,19 @@ class AccountEdiXmlCII(models.AbstractModel):
         line_nodes = tree.findall('./{*}SupplyChainTradeTransaction/{*}IncludedSupplyChainTradeLineItem')
         if line_nodes is not None:
             for invl_el in line_nodes:
+                # Avoid creating a line if its LineExtensionAmount is missing/empty/zero.
+                line_total_node = invl_el.find('./{*}SpecifiedLineTradeSettlement/{*}SpecifiedTradeSettlementLineMonetarySummation/{*}LineTotalAmount')
+                if line_total_node is None or not (line_total_node.text and line_total_node.text.strip()):
+                    continue
+                try:
+                    if float(line_total_node.text) == 0:
+                        continue
+                except (ValueError, TypeError):
+                    # If the value is not a valid number, skip creating the line.
+                    continue
+
                 invoice_line = invoice.invoice_line_ids.create({'move_id': invoice.id})
-                invl_logs = self._import_fill_invoice_line_form(journal, invl_el, invoice, invoice_line, qty_factor)
+                invl_logs = self._import_fill_invoice_line_form(invoice.journal_id, invl_el, invoice, invoice_line, qty_factor)
                 logs += invl_logs
 
         return logs
@@ -350,14 +389,24 @@ class AccountEdiXmlCII(models.AbstractModel):
 
         # Product.
         name = self._find_value('.//ram:SpecifiedTradeProduct/ram:Name', tree)
-        invoice_line.product_id = self.env['account.edi.format']._retrieve_product(
+        invoice_line.product_id = self.env['product.product']._retrieve_product(
             default_code=self._find_value('.//ram:SpecifiedTradeProduct/ram:SellerAssignedID', tree),
-            name=self._find_value('.//ram:SpecifiedTradeProduct/ram:Name', tree),
+            name=name,
             barcode=self._find_value('.//ram:SpecifiedTradeProduct/ram:GlobalID', tree)
         )
         # force original line description instead of the one copied from product's Sales Description
         if name:
             invoice_line.name = name
+
+        # Start and End date (enterprise fields)
+        if invoice_line._fields.get('deferred_start_date'):
+            billing_start = tree.find('./{*}SpecifiedLineTradeSettlement/{*}BillingSpecifiedPeriod/{*}StartDateTime/{*}DateTimeString')
+            billing_end = tree.find('./{*}SpecifiedLineTradeSettlement/{*}BillingSpecifiedPeriod/{*}EndDateTime/{*}DateTimeString')
+            if billing_start is not None and billing_end is not None:  # there is a constraint forcing none or the two to be set
+                invoice_line.write({
+                    'deferred_start_date': datetime.strptime(billing_start.text.strip(), DEFAULT_FACTURX_DATE_FORMAT),
+                    'deferred_end_date': datetime.strptime(billing_end.text.strip(), DEFAULT_FACTURX_DATE_FORMAT),
+                })
 
         xpath_dict = {
             'basis_qty': [
@@ -378,13 +427,13 @@ class AccountEdiXmlCII(models.AbstractModel):
         inv_line_vals = self._import_fill_invoice_line_values(tree, xpath_dict, invoice_line, qty_factor)
         # retrieve tax nodes
         tax_nodes = tree.findall('.//{*}ApplicableTradeTax/{*}RateApplicablePercent')
-        return self._import_fill_invoice_line_taxes(journal, tax_nodes, invoice_line, inv_line_vals, logs)
+        return self._import_fill_invoice_line_taxes(tax_nodes, invoice_line, inv_line_vals, logs)
 
     # -------------------------------------------------------------------------
     # IMPORT : helpers
     # -------------------------------------------------------------------------
 
-    def _get_import_document_amount_sign(self, filename, tree):
+    def _get_import_document_amount_sign(self, tree):
         """
         In factur-x, an invoice has code 380 and a credit note has code 381. However, a credit note can be expressed
         as an invoice with negative amounts. For this case, we need a factor to take the opposite of each quantity
@@ -394,10 +443,10 @@ class AccountEdiXmlCII(models.AbstractModel):
         if move_type_code is None:
             return None, None
         if move_type_code.text == '381':
-            return ('in_refund', 'out_refund'), 1
+            return 'refund', 1
         if move_type_code.text == '380':
             amount_node = tree.find('.//{*}SpecifiedTradeSettlementHeaderMonetarySummation/{*}TaxBasisTotalAmount')
             if amount_node is not None and float(amount_node.text) < 0:
-                return ('in_refund', 'out_refund'), -1
-            return ('in_invoice', 'out_invoice'), 1
+                return 'refund', -1
+            return 'invoice', 1
         return None, None

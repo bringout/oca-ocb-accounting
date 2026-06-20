@@ -1,23 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* account_edi_proxy_client
-# 
+#
 # Translators:
-# Larissa Manderfeld, 2023
-# Martin Trigaux, 2023
-# 
+# Wil Odoo, 2023
+# Larissa Manderfeld, 2025
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-14 05:51+0000\n"
-"PO-Revision-Date: 2022-09-22 05:44+0000\n"
-"Last-Translator: Martin Trigaux, 2023\n"
+"POT-Creation-Date: 2026-01-15 18:37+0000\n"
+"PO-Revision-Date: 2023-10-26 23:09+0000\n"
+"Last-Translator: Larissa Manderfeld, 2025\n"
 "Language-Team: German (https://app.transifex.com/odoo/teams/41243/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_edi_proxy_client
@@ -41,11 +41,6 @@ msgid "Active"
 msgstr "Aktiv"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_format_code
-msgid "Code"
-msgstr "Code"
-
-#. module: account_edi_proxy_client
 #: model:ir.model,name:account_edi_proxy_client.model_res_company
 msgid "Companies"
 msgstr "Unternehmen"
@@ -66,6 +61,11 @@ msgid "Created on"
 msgstr "Erstellt am"
 
 #. module: account_edi_proxy_client
+#: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__demo
+msgid "Demo mode"
+msgstr "Demo-Modus"
+
+#. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__display_name
 msgid "Display Name"
 msgstr "Anzeigename"
@@ -81,14 +81,9 @@ msgid "EDI Proxy Users"
 msgstr "EDI-Proxy-Benutzer"
 
 #. module: account_edi_proxy_client
-#: model:ir.model,name:account_edi_proxy_client.model_account_edi_format
-msgid "EDI format"
-msgstr "EDI-Format"
-
-#. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_format_id
-msgid "Edi Format"
-msgstr "EDI-Format"
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_mode
+msgid "EDI operating mode"
+msgstr "EDI-Betriebsmodus"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_identification
@@ -106,9 +101,22 @@ msgid "Id Client"
 msgstr "ID-Client"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user____last_update
-msgid "Last Modified on"
-msgstr "Letzte Änderung am"
+#. odoo-python
+#: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
+#, python-format
+msgid ""
+"Invalid signature for request. This might be due to another connection to "
+"odoo Access Point server. It can occur if you have duplicated your "
+"database. \n"
+"\n"
+"If you are not sure how to fix this, please contact our support."
+msgstr ""
+"Ungültige Signatur für die Anfrage. Dies kann an einer anderen Verbindung "
+"zum Zugangspunkt des Odoo-Servers liegen. Es kann vorkommen, wenn Sie Ihre "
+"Datenbank dupliziert haben.\n"
+"\n"
+"Wenn Sie nicht sicher sind, wie Sie dieses Problem beheben können, wenden "
+"Sie sich bitte an unseren Support."
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__write_uid
@@ -131,9 +139,24 @@ msgid "Private Key Filename"
 msgstr "Dateiname des privaten Schlüssels"
 
 #. module: account_edi_proxy_client
+#: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__prod
+msgid "Production mode"
+msgstr "Produktionsmodus"
+
+#. module: account_edi_proxy_client
+#: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__proxy_type
+msgid "Proxy Type"
+msgstr "Proxy-Typ"
+
+#. module: account_edi_proxy_client
 #: model:ir.model.fields,field_description:account_edi_proxy_client.field_account_edi_proxy_client_user__refresh_token
 msgid "Refresh Token"
 msgstr "Token aktualisieren"
+
+#. module: account_edi_proxy_client
+#: model:ir.model.fields.selection,name:account_edi_proxy_client.selection__account_edi_proxy_client_user__edi_mode__test
+msgid "Test mode"
+msgstr "Testmodus"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,help:account_edi_proxy_client.field_account_edi_proxy_client_user__private_key
@@ -142,12 +165,9 @@ msgstr "Der Schlüssel zur Verschlüsselung aller Benutzerdaten"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.fields,help:account_edi_proxy_client.field_account_edi_proxy_client_user__edi_identification
-msgid ""
-"The unique id that identifies this user for on the edi format, typically the"
-" vat"
+msgid "The unique id that identifies this user, typically the vat"
 msgstr ""
-"Die eindeutige ID, die diesen Benutzer im EDI-Format identifiziert, in der "
-"Regel die MwSt.-Nr."
+"Die eindeutige ID, die diesen Benutzer identifiziert, in der Regel die MwSt."
 
 #. module: account_edi_proxy_client
 #. odoo-python
@@ -182,11 +202,16 @@ msgstr ""
 "URL lautete %r"
 
 #. module: account_edi_proxy_client
-#: model:ir.model.constraint,message:account_edi_proxy_client.constraint_account_edi_proxy_client_user_unique_edi_identification_per_format
-msgid "This edi identification is already assigned to a user"
-msgstr "Diese EDI-Identifikation ist bereits einem Benutzer zugewiesen"
+#: model:ir.model.constraint,message:account_edi_proxy_client.constraint_account_edi_proxy_client_user_unique_active_company_proxy
+msgid "This company has an active user already created for this EDI type"
+msgstr ""
+"Dieses Unternehmen hat bereits einen aktiven Benutzer für diesen EDI-Typ "
+"erstellt"
 
 #. module: account_edi_proxy_client
 #: model:ir.model.constraint,message:account_edi_proxy_client.constraint_account_edi_proxy_client_user_unique_id_client
 msgid "This id_client is already used on another user."
 msgstr "Diese id_client wird bereits für einen anderen Kunden verwendet."
+
+#~ msgid "This edi identification is already assigned to an active user"
+#~ msgstr "Diese EDI-Id wurde bereits einem aktiven Benutzer zugewiesen"

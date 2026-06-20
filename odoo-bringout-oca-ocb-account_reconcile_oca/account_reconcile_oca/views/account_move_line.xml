@@ -8,14 +8,19 @@
         <field name="model">account.move.line</field>
         <field name="priority">99</field>
         <field name="arch" type="xml">
-            <tree js_class="reconcile_move_line">
+            <tree
+                js_class="reconcile_move_line"
+                create="0"
+                edit="0"
+                export_xlsx="false"
+            >
                 <field name="date" />
                 <field name="move_id" optional="show" />
                 <field name="date_maturity" optional="show" />
                 <field name="account_id" optional="show" />
                 <field name="partner_id" />
-                <field name="company_currency_id" invisible="1" />
-                <field name="currency_id" invisible="1" />
+                <field name="company_currency_id" column_invisible="1" />
+                <field name="currency_id" column_invisible="1" />
                 <field name="name" optional="show" />
                 <field name="amount_residual_currency" optional="hide" />
                 <field name="amount_residual" optional="show" />

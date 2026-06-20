@@ -17,7 +17,7 @@ class AccountTourUploadBill(models.TransientModel):
 
     selection = fields.Selection(
         selection=lambda self: self._selection_values(),
-        default="sample"
+        default=lambda self: 'sample' if self.env.ref('base.res_partner_2', raise_if_not_found=False) else 'upload'
     )
 
     preview_invoice = fields.Html(
@@ -47,12 +47,18 @@ class AccountTourUploadBill(models.TransientModel):
             record.preview_invoice = html
 
     def _selection_values(self):
-        journal_alias = self.env['account.journal'] \
-            .search([('type', '=', 'purchase'), ('company_id', '=', self.env.company.id)], limit=1)
+        journal_alias = self.env['account.journal'].search([
+            *self.env['account.journal']._check_company_domain(self.env.company),
+            ('type', '=', 'purchase'),
+        ], limit=1)
 
-        values = [('sample', _('Try a sample vendor bill')), ('upload', _('Upload your own bill'))]
+        # We don't want people putting demo data in their database if they didn't launch it in demo mode
+        values = [('sample', _('Try a sample vendor bill'))] if self.env.ref('base.res_partner_2', raise_if_not_found=False) else []
+        values.append(('upload', _('Upload your own bill')))
         if journal_alias.alias_name and journal_alias.alias_domain:
-            values.append(('email', _('Or send a bill to %s@%s', journal_alias.alias_name, journal_alias.alias_domain)))
+            values.append(('email', _('Send a bill to \n%s@%s', journal_alias.alias_name, journal_alias.alias_domain)))
+        else:
+            values.append(('email_no_alias', _('Send a bill by email')))
         return values
 
     def _action_list_view_bill(self, bill_ids=[]):
@@ -78,12 +84,7 @@ class AccountTourUploadBill(models.TransientModel):
             return purchase_journal.with_context(default_journal_id=purchase_journal.id, default_move_type='in_invoice').create_document_from_attachment(attachment_ids=self.attachment_ids.ids)
         elif self.selection == 'sample':
             invoice_date = fields.Date.today() - timedelta(days=12)
-            partner = self.env['res.partner'].search([('name', '=', 'Deco Addict')], limit=1)
-            if not partner:
-                partner = self.env['res.partner'].create({
-                    'name': 'Deco Addict',
-                    'is_company': True,
-                })
+            partner = self.env.ref('base.res_partner_2')
             bill = self.env['account.move'].create({
                 'move_type': 'in_invoice',
                 'partner_id': partner.id,
@@ -120,7 +121,10 @@ class AccountTourUploadBill(models.TransientModel):
 
             return self._action_list_view_bill(bill.ids)
         else:
-            email_alias = '%s@%s' % (purchase_journal.alias_name, purchase_journal.alias_domain)
+            if self.selection == 'email':
+                email_alias = '%s@%s' % (purchase_journal.alias_name, purchase_journal.alias_domain)
+            else:
+                email_alias = ''
             new_wizard = self.env['account.tour.upload.bill.email.confirm'].create({'email_alias': email_alias})
             view_id = self.env.ref('account.account_tour_upload_bill_email_confirm').id
 
